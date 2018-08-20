@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/edit_name"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:layout_gravity="center"
+  android:orientation="vertical">
+
+  <SearchView
+    android:background="@color/white"
+    android:id="@+id/search_brand"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+  </SearchView>
+  <View
+    android:layout_gravity="start|bottom"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/color_background_E5E5E5"/>
+  <android.support.v7.widget.RecyclerView
+    android:background="@color/white"
+    android:id="@+id/car_brands_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:listitem="@layout/spinner_brands_dropdown_item">
+  </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

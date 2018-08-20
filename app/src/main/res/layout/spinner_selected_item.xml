@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="@color/colorPrimary"
+  android:padding="1dp">
+  <!--android:background="@android:color/transparent"-->
+
+  <ImageView
+    android:scaleType="fitCenter"
+    android:id="@+id/icon"
+    android:layout_width="110dp"
+    android:layout_height="110dp"
+    android:src="@drawable/bmw_logo" />
+
+  <LinearLayout
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+      <TextView
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:id="@+id/tv_car_brand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:includeFontPadding="false"
+        android:text="Mercedens-Bens"
+        android:textColor="@color/white"
+        android:textSize="25dp" />
+
+      <TextView
+        android:fontFamily="sans-serif-medium"
+        android:textSize="14dp"
+        android:layout_marginStart="31dp"
+        android:id="@+id/tv_model"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:layout_gravity="bottom"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:text="X123456789"/>
+
+
+    <TextView
+      android:layout_marginStart="30dp"
+      android:layout_marginTop="6dp"
+      android:includeFontPadding="false"
+      android:layout_gravity="start"
+      android:textColor="@color/white"
+      android:id="@+id/tv_numbers"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:textSize="30dp"
+      android:text="35 DD 154" />
+
+    <!--<LinearLayout-->
+      <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="0dp"-->
+      <!--android:orientation="horizontal"-->
+      <!--android:layout_weight="0">-->
+      <!---->
+      <!--<TextView-->
+        <!--android:visibility="gone"-->
+        <!--android:textColor="@color/colorAccent"-->
+        <!--android:id="@+id/tv_year"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="2009"/>-->
+    <!--</LinearLayout>-->
+
+
+  </LinearLayout>
+
+
+</LinearLayout>
+
+<!--
+
+<TableLayout
+    android:gravity="center"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:stretchColumns="*"
+    android:background="@color/colorPrimary">
+    <TableRow
+      android:layout_margin="8dp">
+       <TextView
+        android:layout_span="3"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tv_car_brand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_gravity="start|center"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="BMW"
+         android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
+    </TableRow>
+
+    <TableRow
+      android:padding="2dp"
+      android:gravity="center"
+      android:background="@drawable/drop_shadow_reverse"
+      >
+      <TextView
+        android:layout_margin="2dp"
+        android:textSize="20sp"
+        android:maxLines="1"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tv_model"
+        android:gravity="center"
+        android:textColor="@color/colorAccent"
+        android:text="X6"/>
+
+      <TextView
+        android:background="@drawable/shape_small"
+        android:layout_margin="2dp"
+        android:textSize="20sp"
+        android:maxLines="1"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tv_numbers"
+        android:gravity="center"
+        android:textColor="@color/colorAccent"
+        android:text="00 XX 000"/>
+
+      <TextView
+        android:layout_margin="2dp"
+        android:textSize="20sp"
+        android:maxLines="1"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tv_year"
+        android:gravity="center"
+        android:textColor="@color/colorAccent"
+        android:text="1999"/>
+    </TableRow>
+
+  </TableLayout>
+-->

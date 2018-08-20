@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:animateLayoutChanges="true"
+  android:background="@android:color/white"
+  android:clickable="true"
+  android:orientation="vertical">
+
+    <!--<LinearLayout-->
+      <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="0dp"-->
+      <!--android:layout_weight="0.6"-->
+      <!--android:orientation="vertical"-->
+      <!--android:visibility="gone">-->
+        <!--<android.support.v7.widget.RecyclerView-->
+          <!--android:id="@+id/places_list_recycler_view"-->
+          <!--android:layout_width="match_parent"-->
+          <!--android:layout_height="match_parent"-->
+          <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+
+        <!--<TextView-->
+          <!--android:id="@+id/tv_no_data"-->
+          <!--android:textStyle="bold"-->
+          <!--android:layout_width="match_parent"-->
+          <!--android:layout_height="match_parent"-->
+          <!--android:layout_gravity="center"-->
+          <!--android:fillViewport="true"-->
+          <!--android:gravity="center"-->
+          <!--android:text="No Places Selected.."-->
+          <!--android:textSize="20sp"-->
+          <!--android:visibility="gone" />-->
+    <!--</LinearLayout>-->
+
+
+
+
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+      <!--android:id="@+id/fab_add_place"-->
+      <!--android:visibility="gone"-->
+      <!--android:layout_width="wrap_content"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:layout_margin="@dimen/fab_margin"-->
+      <!--android:clickable="true"-->
+      <!--android:layout_gravity="end"-->
+      <!--android:elevation="4dp"-->
+      <!--android:src="@drawable/ic_add_white_24dp"-->
+      <!--android:tint="@color/cardview_light_background"-->
+      <!--app:backgroundTint="@color/color_0099ff"-->
+      <!--app:fabSize="normal"-->
+      <!--tools:targetApi="lollipop" />-->
+
+</LinearLayout>

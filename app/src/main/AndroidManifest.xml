@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  package="am.gsoft.carserviceclient">
+
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <!-- <uses-permission android:name="android.permission.RECEIVE_SMS" /> -->
+  <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+  <!-- <uses-permission android:name="android.permission.READ_CONTACTS"/> -->
+  <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
+  <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+  <uses-permission
+    android:name="android.permission.BIND_ACCESSIBILITY_SERVICE"
+    tools:ignore="ProtectedPermissions" />
+
+  <application
+    android:allowBackup="false"
+    android:fullBackupContent="false"
+    android:icon="@drawable/icon_2"
+    android:key="@string/app_name"
+    android:largeHeap="true"
+    android:name=".app.App"
+    android:roundIcon="@drawable/icon_2"
+    android:supportsRtl="true"
+    tools:replace="android:allowBackup"
+    android:theme="@style/AppTheme">
+
+    <!-- <service -->
+    <!-- android:exported="true" -->
+    <!-- android:name=".service.NotificationIntentService" /> -->
+    <!-- <service -->
+    <!-- android:name=".alarms.background.OnBootUpNotificationSchedulerIntentService" -->
+    <!-- android:enabled="true" -->
+    <!-- android:exported="false"> -->
+    <!-- </service> -->
+
+    <meta-data
+      android:name="preloaded_fonts"
+      android:resource="@array/preloaded_fonts" />
+
+    <activity
+      android:configChanges="locale|layoutDirection|keyboardHidden|orientation|screenSize"
+      android:name=".ui.activity.SplashActivity"
+      android:screenOrientation="portrait"
+      android:theme="@style/SplashTheme">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity
+      android:name=".ui.activity.main.MainActivity"
+      android:screenOrientation="portrait"
+      android:theme="@style/MainTheme" />
+    <activity
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:launchMode="singleTask"
+      android:name=".ui.activity.LandingActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".ui.activity.CreateNewCarActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".ui.activity.GarageActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".ui.activity.CreateNewOilActivity"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="adjustPan" />
+    <activity
+      android:name=".ui.activity.EditCarActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".ui.activity.OilHistoryActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".ui.activity.EditOilActivity"
+      android:screenOrientation="portrait" />
+
+    <service
+      android:exported="false"
+      android:name=".service.NotificationReminderFirebaseJobService">
+      <intent-filter>
+        <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
+      </intent-filter>
+    </service>
+    <service
+      android:enabled="true"
+      android:exported="true"
+      android:name=".notification.OnBootUpNotificationSchedulerIntentService" />
+
+
+    <receiver
+      android:enabled="true"
+      android:exported="true"
+      android:name=".notification.OnBootUpReceiver">
+
+      <!-- android:process=":remote" -->
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <action android:name="android.intent.action.REBOOT" />
+        <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+        <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+        <action android:name="android.intent.action.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </receiver>
+    <receiver android:name=".notification.NotificationsReceiver" />
+
+    <activity
+      android:configChanges="orientation|keyboardHidden|screenSize"
+      android:name=".ui.activity.NextReminderActivity"
+      android:screenOrientation="portrait"
+      android:theme="@style/FullscreenTheme" />
+    <activity
+      android:name=".ui.activity.MileageActivity"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="adjustResize" />
+
+    <service
+      android:exported="false"
+      android:name=".notification.NotificationsIntentService" />
+  </application>
+
+</manifest>

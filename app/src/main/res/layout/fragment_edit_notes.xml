@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/edit_name"
+  style="@style/ItemCardViewStyle"
+  android:layout_margin="0dp"
+  android:layout_gravity="center"
+  android:orientation="vertical"
+  android:visibility="visible"
+  android:background="@color/white">
+
+  <LinearLayout
+    style="@style/Widget.CardContent"
+    android:paddingBottom="4dp">
+
+    <TableLayout
+      style="@style/ItemTableLayoutStyle">
+
+      <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp">
+
+        <TextView
+          android:text="@string/notes"
+          android:textColor="@color/colorAccent"
+          style="@style/ItemCardHeaderTextStyle"  />
+      </TableRow>
+      <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+          style="@style/ItemCardHeaderTextUnderLineStyle"
+          android:layout_span="0"/>
+      </TableRow>
+
+      <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="0dp">
+
+        <EditText
+          android:fontFamily="sans-serif-condensed"
+          android:id="@+id/et_notes_text"
+          android:scrollbarStyle="insideInset"
+          android:layout_width="match_parent"
+          android:layout_height="140dp"
+          android:padding="16dp"
+          android:background="@drawable/text_style_line"
+          android:gravity="start|top"
+          android:hint="@string/notes_text"
+          android:inputType="textMultiLine"
+          android:maxLength="220"
+          android:maxLines="4"
+          android:focusableInTouchMode="true"
+          android:focusable="true"
+          android:minLines="4"
+          android:scrollbars="vertical"
+          android:singleLine="false"
+          android:textColor="@color/colorPrimaryDark"
+          android:textColorHint="@color/colorPrimary"
+          android:textSize="18dp"
+          android:theme="@style/CreateNewOilActivityEditTextTheme" />
+
+
+        <!--android:imeOptions="actionDone"-->
+        <!--android:textIsSelectable="true"-->
+        <!--android:focusable="true"-->
+
+
+      </TableRow>
+    </TableLayout>
+  </LinearLayout>
+
+  <LinearLayout
+    android:background="@color/white"
+    android:gravity="end|bottom"
+    android:layout_width="match_parent"
+    android:layout_height="48dp">
+    <android.support.v7.widget.AppCompatButton
+      android:textSize="14dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/cancel_dlg_btn"
+      android:id="@+id/btn_cancel"
+      style="@style/Widget.AppCompat.Button.Borderless.Colored"
+      android:textColor="@color/colorAccent"
+      app:backgroundTint="@color/white"/>
+
+    <android.support.v7.widget.AppCompatButton
+      android:textSize="14dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/set_dlg_btn"
+      android:id="@+id/btn_set"
+      style="@style/Widget.AppCompat.Button.Borderless.Colored"
+      android:textColor="@color/colorAccent"
+      app:backgroundTint="@color/white"/>
+
+    <!--<Button-->
+      <!--android:textColor="@color/color_FF9900"-->
+      <!--android:id="@+id/btn_cancel"-->
+      <!--style="@style/Widget.AppCompat.Button.Borderless.Colored"-->
+      <!--android:text="@string/dlg_cancel"-->
+      <!--android:layout_width="wrap_content"-->
+      <!--android:layout_height="wrap_content" />-->
+
+    <!--<Button-->
+      <!--android:textColor="@color/color_FF9900"-->
+      <!--android:text="Set"-->
+      <!--android:id="@+id/btn_set"-->
+      <!--style="@style/Widget.AppCompat.Button.Borderless.Colored"-->
+      <!--android:layout_width="wrap_content"-->
+      <!--android:layout_height="wrap_content" />-->
+  </LinearLayout>
+</LinearLayout>

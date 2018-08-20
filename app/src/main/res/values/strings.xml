@@ -1,0 +1,585 @@
+<resources>
+  <string name="app_name">Car Service Client</string>
+
+  <!--Util-->
+  <string name="msg_network_connection_error">No Internet connection</string>
+  <string name="msg_page_not_found">404 Page not found</string>
+  <string name="msg_unknown_error">Unknown error</string>
+  <string name="msg_bad_request">Bad request</string>
+  <string name="msg_not_authorized">User not authorized</string>
+  <string name="msg_connection_error">Connection error</string>
+  <string name="msg_navigation_drawer_open">Open navigation drawer</string>
+  <string name="msg_navigation_drawer_close">Close navigation drawer</string>
+
+  <!--Auth screen strings-->
+  <string name="text_btn_auth_sign">Login</string>
+  <string name="text_welcome">Welcome to \'Boilerplate\' \nPlease, login with any fake credentials to proceed</string>
+
+  <!--Navigation drawer menu items-->
+  <string name="text_one">First item</string>
+  <string name="text_two">Second item</string>
+  <string name="text_three">Third item</string>
+  <string name="text_four">Fourth item</string>
+  <string name="text_five">Fifth item</string>
+  <string name="text_six">Logout</string>
+
+  <!--Auth screen edt hints-->
+  <string name="hint_tiet_auth_email">Email</string>
+  <string name="hint_tiet_auth_pass">Password</string>
+
+  <!--Edt errors-->
+  <string name="msg_edt_error_mail">Enter email</string>
+  <string name="msg_edt_pass_error">Enter password</string>
+
+  <!--Dialog-->
+  <string name="dlg_ok">OK</string>
+  <string name="cancel_dlg_btn">Cancel</string>
+  <string name="dlg_wait_please">Please, wait</string>
+  <string name="dlg_fail_send_msg">Errors occurred while sending msg! Please, try later</string>
+  <string name="dlg_fail_connection">Sorry, connection lost. Please check your network connection.</string>
+  <string name="dlg_internet_connection_error">Something went wrong. Please, verify your internet connection and try again</string>
+
+  <!--Languages-->
+  <string name="en">en</string>
+  <string name="de">de</string>
+  <string name="es">es</string>
+  <string name="fr">fr</string>
+
+  <string name="icon">Spinner - danielme.com</string>
+  <string name="none">none</string>
+  <string name="blogger">Blogger</string>
+  <string name="delicious">Delicious</string>
+  <string name="digg">Digg</string>
+  <string name="ebay">Ebay</string>
+  <string name="flickr">Flickr</string>
+  <string name="facebook">Facebook</string>
+  <string name="google">Google</string>
+  <string name="lastfm">Lastfm</string>
+  <string name="reddit">Reddit</string>
+  <string name="stumbleupon">StumbleUpon</string>
+  <string name="technorati">Technorati</string>
+  <string name="twitter">Twitter</string>
+  <string name="wordpress">Wordpress</string>
+  <string name="youtube">Youtube</string>
+  <string name="title">Choose the color</string>
+
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="options_1">Option 1</string>
+  <string name="options_2">Option 2</string>
+  <string name="options_3">Option 3</string>
+  <string name="options_4">Option 4</string>
+  <string name="action_about">About</string>
+  <string name="action_log_out">Log Out</string>
+
+  <string name="progress_dialog">PROGRESS DIALOG</string>
+  <string name="please_wait">Please, wait</string>
+  <string name="start_top">M 20.7 7 C 21.1 6.6 21.1 6 20.7 5.6 L 18.4 3.3 C 18 2.9 17.4 2.9 17 3.3 L 15.2 5.1 L 19 8.9</string>
+  <string name="end_top">M 19.6 8 C 20 7.6 20 7 19.6 6.6 L 17.3 4.3 C 16.9 3.9 16.3 3.9 15.9 4.3 L 14.1 6.1 L 17.9 9.9</string>
+
+  <string name="alarm_set_for">Notification set for %1$s from now.</string>
+  <string name="upcoming_alarm_dismissed">%1$s alarm dismissed.</string>
+  <string name="title_snoozing_until">Snoozing until %1$s</string>
+  <string name="large_text">
+        "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
+
+        "Bold, graphic, intentional.\n\n"
+
+        "The foundational elements of print based design typography, grids, space, scale, color, "
+        "and use of imagery guide visual treatments. These elements do far more than please the "
+        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
+        "imagery, large scale typography, and intentional white space create a bold and graphic "
+        "interface that immerse the user in the experience.\n"
+        "An emphasis on user actions makes core functionality immediately apparent and provides "
+        "waypoints for the user.\n\n"
+
+        "Motion provides meaning.\n\n"
+
+        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
+        "inflection points that initiate motion, transforming the whole design.\n"
+        "All action takes place in a single environment. Objects are presented to the user without "
+        "breaking the continuity of experience even as they transform and reorganize.\n"
+        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
+        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
+
+        "3D world.\n\n"
+
+        "The material environment is a 3D space, which means all objects have x, y, and z "
+        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
+        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
+        "position along the z-axis and has a standard 1dp thickness.\n"
+        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
+        "emulated by manipulating the y-axis.\n\n"
+
+        "Light and shadow.\n\n"
+
+        "Within the material environment, virtual lights illuminate the scene. Key lights create "
+        "directional shadows, while ambient light creates soft shadows from all angles.\n"
+        "Shadows in the material environment are cast by these two light sources. In Android "
+        "development, shadows occur when light sources are blocked by sheets of material at "
+        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
+        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
+
+        "Resting elevation.\n\n"
+
+        "All material objects, regardless of size, have a resting elevation, or default elevation "
+        "that does not change. If an object changes elevation, it should return to its resting "
+        "elevation as soon as possible.\n\n"
+
+        "Component elevations.\n\n"
+
+        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
+        "does not vary from 6dp in one app to 16dp in another app).\n"
+        "Components may have different resting elevations across platforms, depending on the depth "
+        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
+
+        "Responsive elevation and dynamic elevation offsets.\n\n"
+
+        "Some component types have responsive elevation, meaning they change elevation in response "
+        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
+        "changes are consistently implemented using dynamic elevation offsets.\n"
+        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
+        "to the component’s resting state. They ensure that elevation changes are consistent "
+        "across actions and component types. For example, all components that lift on press have "
+        "the same elevation change relative to their resting elevation.\n"
+        "Once the input event is completed or cancelled, the component will return to its resting "
+        "elevation.\n\n"
+
+        "Avoiding elevation interference.\n\n"
+
+        "Components with responsive elevations may encounter other components as they move between "
+        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
+        "through other material, components avoid interfering with one another any number of ways, "
+        "whether on a per component basis or using the entire app layout.\n"
+        "On a component level, components can move or be removed before they cause interference. "
+        "For example, a floating action button (FAB) can disappear or move off screen before a "
+        "user picks up a card, or it can move if a snackbar appears.\n"
+        "On the layout level, design your app layout to minimize opportunities for interference. "
+        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
+        "when a user tries to pick up one of cards.\n\n"
+    </string>
+
+  <string name="Xado">Xado</string>
+  <string name="Liqui_Moly">Liqui Moly</string>
+  <string name="MOBIL_1">MOBIL 1</string>
+  <string name="CASTROL">CASTROL</string>
+
+
+  <string name="oil_type_OW_20">OW-20</string>
+  <string name="oil_type_OW_30">OW-30</string>
+  <string name="oil_type_OW_40">OW-40</string>
+  <string name="oil_type_OW_50">OW-50</string>
+  <string name="oil_type_OW_60">OW-60</string>
+  <string name="oil_type_5W_20">5W-20</string>
+  <string name="oil_type_5W_30">5W-30</string>
+  <string name="oil_type_5W_40">5W-40</string>
+  <string name="oil_type_5W_50">5W-50</string>
+  <string name="oil_type_5W_60">5W-60</string>
+  <string name="oil_type_10W_20">10W-20</string>
+  <string name="oil_type_10W_30">10W-30</string>
+  <string name="oil_type_10W_40">10W-40</string>
+  <string name="oil_type_10W_50">10W-50</string>
+  <string name="oil_type_10W_60">10W-60</string>
+  <string name="oil_type_15W_20">15W-20</string>
+  <string name="oil_type_15W_30">15W-30</string>
+  <string name="oil_type_15W_40">15W-40</string>
+  <string name="oil_type_15W_50">15W-50</string>
+  <string name="oil_type_15W_60">15W-60</string>
+  <string name="oil_type_20W_20">20W-20</string>
+  <string name="oil_type_20W_30">20W-30</string>
+  <string name="oil_type_20W_40">20W-40</string>
+  <string name="oil_type_20W_50">20W-50</string>
+  <string name="oil_type_20W_60">20W-60</string>
+  <string name="oil_type_25W_20">25W-20</string>
+  <string name="oil_type_25W_30">25W-30</string>
+  <string name="oil_type_25W_40">25W-40</string>
+  <string name="oil_type_25W_50">25W-50</string>
+  <string name="oil_type_25W_60">25W-60</string>
+
+  <string name="SelectOne">Select One...</string>
+  <string name="Abadal">Abadal</string>
+  <string name="Abbott_detroit">Abbott Detroit</string>
+  <string name="Abt_sportsline">ABT Sportsline</string>
+  <string name="Ac">AC</string>
+  <string name="Acura">Acura</string>
+  <string name="Aixam">Aixam</string>
+  <string name="Alfa_romeo">Alfa Romeo</string>
+  <string name="Alpina">Alpina</string>
+  <string name="Alpine">Alpine</string>
+  <string name="Alta">Alta</string>
+  <string name="Alvis">Alvis</string>
+  <string name="American_motors">American Motors</string>
+  <string name="Amg">AMG</string>
+  <string name="Arash">Arash</string>
+  <string name="Ariel">Ariel</string>
+  <string name="Aro">ARO</string>
+  <string name="Arrinera">Arrinera</string>
+  <string name="Artega">Artega</string>
+  <string name="Ascari">Ascari</string>
+  <string name="Aston_martin">Aston Martin</string>
+  <string name="Auburn">Auburn</string>
+  <string name="Audi">Audi</string>
+  <string name="Austin">Austin</string>
+  <string name="Autobacs">Autobacs</string>
+  <string name="Autobianchi">Autobianchi</string>
+  <string name="Bac">Bac</string>
+  <string name="Bamotor">Baic Motor</string>
+  <string name="Baojun">Baojun</string>
+  <string name="Bentley">Bentley</string>
+  <string name="Berkeley">Berkeley</string>
+  <string name="Berliet">Berliet</string>
+  <string name="Bertone">Bertone</string>
+  <string name="Bitter">Bitter</string>
+  <string name="Bizzarrini">Bizzarrini</string>
+  <string name="Bmw">BMW</string>
+  <string name="Bmw_m">BMW M</string>
+  <string name="Borgward">Borgward</string>
+  <string name="Brabus">Brabus</string>
+  <string name="Brammo">Brammo</string>
+  <string name="Bridgestone">Bridgestone</string>
+  <string name="Brilliance">Brilliance</string>
+  <string name="Bristol_cars">Bristol Cars</string>
+  <string name="Bufori">Bufori</string>
+  <string name="Bugatti">Bugatti</string>
+  <string name="Buick">Buick</string>
+  <string name="Byd">BYD</string>
+  <string name="Cadillac">Cadillac</string>
+  <string name="Carlsson">Carlsson</string>
+  <string name="Caterham">Caterham</string>
+  <string name="Changan">Changan</string>
+  <string name="Changfeng">Changfeng</string>
+  <string name="Chery">Chery</string>
+  <string name="Chevrolet">Chevrolet</string>
+  <string name="Chrysler">Chrysler</string>
+  <string name="Cisitalia">Cisitalia</string>
+  <string name="Citroen">Citroen</string>
+  <string name="Cizeta">Cizeta</string>
+  <string name="Cole">Cole</string>
+  <string name="Continental">Continental</string>
+  <string name="Corre_la_licorne">Corre La Licorne</string>
+  <string name="Corvette">Corvette</string>
+  <string name="Dacia">Dacia</string>
+  <string name="Daewoo">Daewoo</string>
+  <string name="Daihatsu">Daihatsu</string>
+  <string name="Dartz">Dartz</string>
+  <string name="Datsun">Datsun</string>
+  <string name="Delage">Delage</string>
+  <string name="Detroit_electric">Detroit Electric</string>
+  <string name="Devel_sixteen">Devel Sixteen</string>
+  <string name="De_tomaso">De Tomaso</string>
+  <string name="Diatto">Diatto</string>
+  <string name="Dina">Dina</string>
+  <string name="Dkw">DKW</string>
+  <string name="Dmc">DMC</string>
+  <string name="Dodge">Dodge</string>
+  <string name="Dongfeng">Dongfeng</string>
+  <string name="Donkervoort">Donkervoort</string>
+  <string name="Ds">DS</string>
+  <string name="Dunlop">Dunlop</string>
+  <string name="Edag">Edag</string>
+  <string name="Edsel">Edsel</string>
+  <string name="Eicher">Eicher</string>
+  <string name="Elfin">Elfin</string>
+  <string name="Elva">Elva</string>
+  <string name="Englon">Englon</string>
+  <string name="Eterniti">Eterniti</string>
+  <string name="Facel_vega">Facel Vega</string>
+  <string name="Faw">FAW</string>
+  <string name="Ferrari">Ferrari</string>
+  <string name="Fiat">Fiat</string>
+  <string name="Fioravanti">Fioravanti</string>
+  <string name="Fisker">Fisker</string>
+  <string name="Force_motors">Force Motors</string>
+  <string name="Ford">Ford</string>
+  <string name="Foton">Foton</string>
+  <string name="Fpv">FPV</string>
+  <string name="Franklin">Franklin</string>
+  <string name="Gac">Gac</string>
+  <string name="Gaz">Gaz</string>
+  <string name="Geely">Geely</string>
+  <string name="General_motors">General Motors</string>
+  <string name="Genesis">Genesis</string>
+  <string name="Geo">GEO</string>
+  <string name="Gilbern">Gilbern</string>
+  <string name="Gillet">Gillet</string>
+  <string name="Ginetta">Ginetta</string>
+  <string name="Gmc">GMC</string>
+  <string name="Gonow">Gonow</string>
+  <string name="Goodyear">Goodyear</string>
+  <string name="Great_wall">Great Wall</string>
+  <string name="Gt_r">GT R</string>
+  <string name="Gumpert">Gumpert</string>
+  <string name="Hafei">Hafei</string>
+  <string name="Haima">Haima</string>
+  <string name="Haval">Haval</string>
+  <string name="Hawtai">Hawtai</string>
+  <string name="Hennessey">Hennessey</string>
+  <string name="Hillman">Hillman</string>
+  <string name="Hindustan_motors">Hindustan Motors</string>
+  <string name="Hino">Hino</string>
+  <string name="Hispano_suiza">Hispano Suiza</string>
+  <string name="Holden">Holden</string>
+  <string name="Hommell">Hommell</string>
+  <string name="Honda">Honda</string>
+  <string name="Horch">Horch</string>
+  <string name="Hsv">HSV</string>
+  <string name="Hudson">Hudson</string>
+  <string name="Hummer">Hummer</string>
+  <string name="Hupmobile">Hupmobile</string>
+  <string name="Hyundai">Hyundai</string>
+  <string name="Infiniti">Infiniti</string>
+  <string name="Innocenti">Innocenti</string>
+  <string name="Intermeccanica">Intermeccanica</string>
+  <string name="Iran_khodro">Iran Khodro</string>
+  <string name="Isdera">Isdera</string>
+  <string name="Iso">Iso</string>
+  <string name="Isuzu">Isuzu</string>
+  <string name="Iveco">Iveco</string>
+  <string name="Jaguar">Jaguar</string>
+  <string name="Jawa">Jawa</string>
+  <string name="Jeep">Jeep</string>
+  <string name="Jensen">Jensen</string>
+  <string name="Jiangling">Jiangling</string>
+  <string name="Kaiser">Kaiser</string>
+  <string name="Karma">Karma</string>
+  <string name="Kenworth">Kenworth</string>
+  <string name="Kia">KIA</string>
+  <string name="Koenigsegg">Koenigsegg</string>
+  <string name="Ktm">KTM</string>
+  <string name="Lada">Lada</string>
+  <string name="Lagonda">Lagonda</string>
+  <string name="Lamborghini">Lamborghini</string>
+  <string name="Lancia">Lancia</string>
+  <string name="Landwind">Landwind</string>
+  <string name="Land_rover">Land Rover</string>
+  <string name="Laraki">Laraki</string>
+  <string name="Lexus">Lexus</string>
+  <string name="Leyland">Leyland</string>
+  <string name="Ligier">Ligier</string>
+  <string name="Lincoln">Lincoln</string>
+  <string name="Lloyd">Lloyd</string>
+  <string name="Lobini">Lobini</string>
+  <string name="Lotus">Lotus</string>
+  <string name="Luxgen">Luxgen</string>
+  <string name="Mack">Mack</string>
+  <string name="Mahindra">Mahindra</string>
+  <string name="Man">MAN</string>
+  <string name="Marcos">Marcos</string>
+  <string name="Maserati">Maserati</string>
+  <string name="Mastretta">Mastretta</string>
+  <string name="Maxus">Maxus</string>
+  <string name="Maybach">Maybach</string>
+  <string name="Mazda">Mazda</string>
+  <string name="Mazzanti_automobili">Mazzanti</string>
+  <string name="Mclaren">Mclaren</string>
+  <string name="Melkus">Melkus</string>
+  <string name="Mercedes_benz">Mercedes Benz</string>
+  <string name="Mercury">Mercury</string>
+  <string name="Merkur">Merkur</string>
+  <string name="Mg">MG</string>
+  <string name="Michelin">Michelin</string>
+  <string name="Microcar">Microcar</string>
+  <string name="Mini">Mini</string>
+  <string name="Mitsubishi">Mitsubishi</string>
+  <string name="Mitsuoka">Mitsuoka</string>
+  <string name="Morgan">Morgan</string>
+  <string name="Morris">Morris</string>
+  <string name="Mosler">Mosler</string>
+  <string name="Mustang">Mustang</string>
+  <string name="Nissan">Nissan</string>
+  <string name="Noble">Noble</string>
+  <string name="Oldsmobile">Oldsmobile</string>
+  <string name="Oltcit">Oltcit</string>
+  <string name="Opel">Opel</string>
+  <string name="Osca">Osca</string>
+  <string name="Pagani">Pagani</string>
+  <string name="Panhard">Panhard</string>
+  <string name="Panoz">Panoz</string>
+  <string name="Perodua">Perodua</string>
+  <string name="Peterbilt">Peterbilt</string>
+  <string name="Peugeot">Peugeot</string>
+  <string name="Pgo">Pgo</string>
+  <string name="Pierce_arrow">Pierce Arrow</string>
+  <string name="Pininfarina">Pininfarina</string>
+  <string name="Pirelli">Pirelli</string>
+  <string name="Plymouth">Plymouth</string>
+  <string name="Polestar">Polestar</string>
+  <string name="Pontiac">Pontiac</string>
+  <string name="Porsche">Porsche</string>
+  <string name="Praga">Praga</string>
+  <string name="Premier">Premier</string>
+  <string name="Proton">Proton</string>
+  <string name="Qoros">Qoros</string>
+  <string name="Ram">RAM</string>
+  <string name="Rambler">Rambler</string>
+  <string name="Ranz">Ranz</string>
+  <string name="Renault">Renault</string>
+  <string name="Rezvani">Rezvani</string>
+  <string name="Riley">Riley</string>
+  <string name="Rimac">Rimac</string>
+  <string name="Rinspeed">Rinspeed</string>
+  <string name="Roewe">Roewe</string>
+  <string name="Rolls_royce">Rolls Royce</string>
+  <string name="Rossion">Rossion</string>
+  <string name="Rover">Rover</string>
+  <string name="Ruf">RUF</string>
+  <string name="Saab">SAAB</string>
+  <string name="Samotor">Saic Motor</string>
+  <string name="Saipa">Saipa</string>
+  <string name="Saleen">Saleen</string>
+  <string name="Saturn">Saturn</string>
+  <string name="Scion">Scion</string>
+  <string name="Seat">Seat</string>
+  <string name="Shelby">Shelby</string>
+  <string name="Simca">Simca</string>
+  <string name="Singer">Singer</string>
+  <string name="Skoda">Skoda</string>
+  <string name="Smart">Smart</string>
+  <string name="Soueast">Soueast</string>
+  <string name="Spirra">Spirra</string>
+  <string name="Spyker">Spyker</string>
+  <string name="Srt">SRT</string>
+  <string name="Ssangyong">Ssangyong</string>
+  <string name="Ssc">SSC</string>
+  <string name="Studebaker">Studebaker</string>
+  <string name="Subaru">Subaru</string>
+  <string name="Suzuki">Suzuki</string>
+  <string name="Talbot">Talbot</string>
+  <string name="Tata">Tata</string>
+  <string name="Tatra">Tatra</string>
+  <string name="Techart">Techart</string>
+  <string name="Tesla">Tesla</string>
+  <string name="Toyota">Toyota</string>
+  <string name="Trion">Trion</string>
+  <string name="Triumph">Triumph</string>
+  <string name="Troller">Troller</string>
+  <string name="Tvr">TVR</string>
+  <string name="Uaz">UAZ</string>
+  <string name="Vandenbrink">Vandenbrink</string>
+  <string name="Vauxhall">Vauxhall</string>
+  <string name="Vector_motors">Vector Motors</string>
+  <string name="Venturi">Venturi</string>
+  <string name="Viper">Viper</string>
+  <string name="Volkswagen">Volkswagen</string>
+  <string name="Volvo">Volvo</string>
+  <string name="Wanderer">Wanderer</string>
+  <string name="Wartburg">Wartburg</string>
+  <string name="Western_star">Western Star</string>
+  <string name="Westfield">Westfield</string>
+  <string name="Wiesmann">Wiesmann</string>
+  <string name="Willys_overland">Willys Overland</string>
+  <string name="Wuling">Wuling</string>
+  <string name="W_motors">W Motors</string>
+  <string name="Yulon">Yulon</string>
+  <string name="Zarooq_motors">Zarooq Motors</string>
+  <string name="Zastava">Zastava</string>
+  <string name="Zaz">ZAZ</string>
+  <string name="Zenvo">Zenvo</string>
+  <string name="Zotye">Zotye</string>
+
+  <string name="channel_name">Oil notifications</string>
+  <string name="channel_description">Oils check reminder notifications</string>
+
+  <string name="car_information">Car information</string>
+  <string name="car_brand">Brand</string>
+  <string name="car_model">Model</string>
+  <string name="name">Name</string>
+  <string name="car_year">Year</string>
+  <string name="car_distance_unit">Distance unit</string>
+  <string name="car_license_plate">Car license plate</string>
+  <string name="license_plate">License plate</string>
+  <string name="car_vin_code">Car VIN code</string>
+  <string name="enter_vin_code_optional">Enter vin code (optional)</string>
+  <string name="service_phone_number">Service Phone Number</string>
+  <string name="phone">Phone</string>
+  <string name="save_in_contacts">Save in contacts</string>
+  <string name="oil_information">Oil information</string>
+  <string name="oil_brand_name">Brand Name</string>
+  <string name="oil_type">Type</string>
+  <string name="oil_volume">Volume</string>
+  <string name="current">Current</string>
+  <string name="recomended">Recomended</string>
+  <string name="next">Next</string>
+  <string name="middle_month">Middle month</string>
+  <string name="km">Km</string>
+  <string name="middle_month_set_manually">Middle Month Km\nSet manually  </string>
+  <string name="date_information">Date information</string>
+  <string name="done_date">Done Date</string>
+  <string name="next_date">Next Date</string>
+  <string name="select_date">Select Date</string>
+  <string name="notes">Notes</string>
+  <string name="notes_text">Notes Text...</string>
+  <string name="delete_btn_text">DELETE</string>
+  <string name="edit_btn_text">EDIT</string>
+  <string name="add_btn_text">ADD</string>
+  <string name="welcome_title">KEEP YOUR OIL\nIMPORTANT\nINFORMATION</string>
+  <string name="sign_in">Sign in</string>
+  <string name="new_btn_text">NEW</string>
+  <string name="history_btn_text">HISTORY</string>
+  <string name="no_oil_text">There is no oil in a car engine!</string>
+  <string name="mileage_information">Mileage information</string>
+  <string name="garage_btn_text">GARAGE</string>
+  <string name="set_dlg_btn">Set</string>
+
+
+  <!-- ==================================== TOASTS ==================================== -->
+  <string name="day_hour_and_minute">1 day, 1 hour, and 1 minute</string>
+  <string name="days_hour_and_minute">%1$d days, 1 hour, and 1 minute</string>
+  <string name="days_hours_and_minute">%1$d days, %2$d hours, and 1 minute</string>
+  <string name="days_hour_and_minutes">%1$d days, 1 hours, and %3$d minutes</string>
+  <string name="days_hours_and_minutes">%1$d days, %2$d hours, and %3$d minutes</string>
+  <string name="day_hours_and_minute">1 day, %2$d hours, and 1 minute</string>
+  <string name="day_hours_and_minutes">1 day, %2$d hours, and %3$d minutes</string>
+  <string name="day_hour_and_minutes">1 day, 1 hour, and %3$d minutes</string>
+  <string name="day_and_hour">1 day and 1 hour</string>
+  <string name="days_and_hour">%1$d days and 1 hour</string>
+  <string name="day_and_hours">1 day and %2$d hours</string>
+  <string name="days_and_hours">%1$d days and %2$d hours</string>
+  <string name="day_and_minute">1 day and 1 minute</string>
+  <string name="days_and_minute">%1$d days and 1 minute</string>
+  <string name="day_and_minutes">1 day and %3$d minutes</string>
+  <string name="days_and_minutes">%1$d days and %3$d minutes</string>
+  <string name="hour_and_minute">1 hour and 1 minute</string>
+  <string name="hour_and_minutes">1 hour and %3$d minutes</string>
+  <string name="hours_and_minute">%2$d hours and 1 minute</string>
+  <string name="hours_and_minutes">%2$d hours and %3$d minutes</string>
+  <string name="day">1 day</string>
+  <string name="days">%1$d days</string>
+  <string name="hour">1 hour</string>
+  <string name="hours">%2$d hours</string>
+  <string name="minute">1 minute</string>
+  <string name="minutes">%3$d minutes</string>
+  <string name="less_than_one_minute">less than 1 minute</string>
+
+  <string name="abbrev_days_hours_and_minutes">%1$dd %2$dh %3$dm</string>
+  <string name="abbrev_days_and_hours">%1$dd %2$dh</string>
+  <string name="abbrev_days_and_minutes">%1$dd %3$dm</string>
+  <string name="abbrev_hours_and_minutes">%2$dh %3$dm</string>
+  <string name="abbrev_days">%1$dd</string>
+  <string name="abbrev_hours">%2$dh</string>
+  <string name="abbrev_minutes">%3$dm</string>
+  <string name="abbrev_less_than_one_minute">&lt;1m</string>
+  <!-- ======================================================================================= -->
+
+  <!-- ==================================== NOTIFICATIONS ==================================== -->
+  <string name="upcoming_alarm">Upcoming alarm</string>
+  <string name="alarm">Alarm</string>
+  <string name="missed_alarm">Missed alarm</string>
+
+  <string name="title_activity_fullscreen">FullscreenActivity</string>
+  <string name="date_button">Date</string>
+  <string name="time_button">Time</string>
+  <string name="dummy_content">Date of \n next reminder</string>
+
+</resources>

@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/edit_name"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_gravity="center"
+  android:orientation="vertical">
+
+  <EditText
+    android:visibility="gone"
+    android:padding="8dp"
+    android:id="@+id/txt_your_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Enter Km"
+    android:layout_marginBottom="20dp"/>
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+
+  </FrameLayout>
+
+  <android.support.v7.widget.GridLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    app:columnCount="6"
+    app:rowCount="3">
+
+
+    <!--1-->
+    <FrameLayout
+      android:id="@+id/inc_0"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="+"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+    </FrameLayout>
+    <FrameLayout
+      android:id="@+id/inc_1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="+"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+    </FrameLayout>
+    <FrameLayout
+      android:id="@+id/inc_2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="+"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+    </FrameLayout>
+    <FrameLayout
+      android:id="@+id/inc_3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="+"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+    </FrameLayout>
+    <FrameLayout
+      android:id="@+id/inc_4"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="+"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+    </FrameLayout>
+    <FrameLayout
+      android:id="@+id/inc_5"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="+"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+    </FrameLayout>
+
+    <!--2-->
+    <FrameLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:id="@+id/val_0"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="0"
+        android:padding="15dp"
+        android:textColor="@color/colorAccent2"
+        android:textSize="25sp" />
+    </FrameLayout>
+    <FrameLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:id="@+id/val_1"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="0"
+        android:padding="15dp"
+        android:textColor="@color/colorAccent2"
+        android:textSize="25sp" />
+    </FrameLayout>
+    <FrameLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:id="@+id/val_2"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="0"
+        android:padding="15dp"
+        android:textColor="@color/colorAccent2"
+        android:textSize="25sp" />
+    </FrameLayout>
+    <FrameLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:id="@+id/val_3"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="0"
+        android:padding="15dp"
+        android:textColor="@color/colorAccent2"
+        android:textSize="25sp" />
+    </FrameLayout>
+    <FrameLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:id="@+id/val_4"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="0"
+        android:padding="15dp"
+        android:textColor="@color/colorAccent2"
+        android:textSize="25sp" />
+    </FrameLayout>
+    <FrameLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:id="@+id/val_5"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="0"
+        android:padding="15dp"
+        android:textColor="@color/colorAccent2"
+        android:textSize="25sp" />
+    </FrameLayout>
+
+    <!--3-->
+    <FrameLayout
+      android:id="@+id/decr_0"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="-"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+    </FrameLayout>
+    <FrameLayout
+      android:id="@+id/decr_1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="-"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+    </FrameLayout>
+    <FrameLayout
+      android:id="@+id/decr_2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="-"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+    </FrameLayout>
+    <FrameLayout
+      android:id="@+id/decr_3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="-"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+    </FrameLayout>
+    <FrameLayout
+      android:id="@+id/decr_4"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="-"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+    </FrameLayout>
+    <FrameLayout
+      android:id="@+id/decr_5"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_columnWeight="1"
+      app:layout_gravity="fill">
+
+      <TextView
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="-"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+    </FrameLayout>
+
+  </android.support.v7.widget.GridLayout>
+  
+  <LinearLayout
+    android:gravity="end|bottom"
+    android:layout_width="match_parent"
+    android:layout_height="70dp">
+
+    <Button
+      android:textColor="@color/md_material_blue_600"
+      android:id="@+id/btn_cancel"
+      style="@style/Widget.AppCompat.Button.Borderless.Colored"
+      android:text="@string/cancel_dlg_btn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+
+    <Button
+      android:textColor="@color/md_material_blue_600"
+      android:text="Set"
+      android:id="@+id/btn_set"
+      style="@style/Widget.AppCompat.Button.Borderless.Colored"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+  </LinearLayout>
+</LinearLayout>

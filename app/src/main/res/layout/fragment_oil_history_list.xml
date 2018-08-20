@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:card_view="http://schemas.android.com/apk/res-auto"
+  xmlns:mask="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:clickable="true"
+  android:animateLayoutChanges="true"
+  android:orientation="vertical">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fitsSystemWindows="true"
+      android:orientation="vertical"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v4.widget.NestedScrollView
+          android:id="@+id/nscw"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:scrollbars="none"
+          app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <!-- your content here -->
+            <LinearLayout
+              android:id="@+id/ll"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:paddingTop="28dp"
+              android:orientation="vertical"
+              app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <android.support.v7.widget.RecyclerView
+                  app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                  android:id="@+id/oil_history_recycler_view"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:padding="16dp"
+                  android:clipToPadding="false"
+                  tools:listitem="@layout/item_oil_history" />
+
+
+                <Space
+                  android:layout_width="match_parent"
+                  android:layout_height="8dp" />
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

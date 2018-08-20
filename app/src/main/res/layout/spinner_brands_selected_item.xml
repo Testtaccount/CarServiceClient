@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+  <!--android:layout_width="wrap_content"-->
+  <!--android:layout_height="wrap_content">-->
+  <!--<TextView-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:id="@+id/tv_item_car_brand"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:paddingStart="8dp"-->
+    <!--android:paddingEnd="16dp"-->
+    <!--android:paddingRight="16dp"-->
+    <!--android:drawablePadding="16dp"-->
+    <!--android:drawableRight="@drawable/ic_arrow_drop_down_white_24dp"-->
+    <!--android:drawableTint="@color/color_0099FF"-->
+    <!--android:gravity="end|center"-->
+    <!--android:text="dddddd"-->
+    <!--android:textColor="@color/colorPrimary"-->
+    <!--android:textSize="18sp" />&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+<!--</LinearLayout>-->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/tv_item_car_brand"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:paddingStart="8dp"
+  android:paddingEnd="16dp"
+  android:paddingRight="16dp"
+  android:drawablePadding="16dp"
+  android:drawableRight="@drawable/ic_arrow_drop_down_white_24dp"
+  android:drawableTint="@color/colorAccent2"
+  android:gravity="end|center"
+  android:text="dddddd"
+  android:fontFamily="sans-serif-condensed"
+  android:singleLine="true"
+  android:textColor="@color/colorPrimary"
+  android:textSize="18dp" />

@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:card_view="http://schemas.android.com/apk/res-auto"
+  xmlns:mask="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:clickable="true"
+  android:background="@color/color_background_E5E5E5"
+  android:animateLayoutChanges="true"
+  android:orientation="vertical">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fitsSystemWindows="true"
+      android:orientation="vertical"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v4.widget.NestedScrollView
+          android:id="@+id/nscw"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:scrollbars="none"
+          app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <!-- your content here -->
+            <LinearLayout
+              android:id="@+id/ll"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:paddingTop="28dp"
+              android:orientation="vertical"
+              app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                <LinearLayout
+                  android:id="@+id/ll_content"
+                  android:visibility="visible"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical">
+
+                    <!--Date info-->
+                    <android.support.v7.widget.CardView
+                      android:id="@+id/cv_date_info"
+                      style="@style/ItemCardViewStyle"
+                      android:visibility="visible">
+
+                        <LinearLayout
+                          style="@style/Widget.CardContent">
+
+                            <TableLayout
+                              style="@style/ItemTableLayoutStyle">
+
+
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content">
+                                    <!--<TextView-->
+                                      <!--android:layout_width="0dp"-->
+                                      <!--android:layout_height="0dp"-->
+                                      <!--android:layout_gravity="start|center"-->
+                                      <!--android:textSize="0dp"-->
+                                      <!--android:visibility="gone"/>-->
+                                    <TextView
+                                      android:layout_span="2"
+                                      android:text="@string/date_information"
+                                      android:textColor="@color/colorAccent"
+                                      style="@style/ItemCardHeaderTextStyle" />
+                                </TableRow>
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content">
+
+                                    <View
+                                      style="@style/ItemCardHeaderTextUnderLineStyle" />
+                                </TableRow>
+
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="8dp"
+                                  android:layout_marginBottom="8dp">
+
+                                    <TextView
+                                      style="@style/ItemCardFieldTextStyle"
+                                      android:text="@string/done_date" />
+
+                                    <TextView
+                                      android:fontFamily="sans-serif-condensed"
+                                      android:id="@+id/tv_oil_service_done_date"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_gravity="end|center"
+                                      android:paddingEnd="16dp"
+                                      android:paddingRight="16dp"
+                                      android:clickable="true"
+                                      android:drawableEnd="@drawable/ic_today_black_24dp"
+                                      android:drawablePadding="16dp"
+                                      android:drawableRight="@drawable/ic_today_black_24dp"
+                                      android:drawableTint="@color/colorPrimary"
+                                      android:focusable="true"
+                                      android:gravity="start|center"
+                                      android:text="@string/select_date"
+                                      android:textStyle="bold"
+                                      android:textColor="@color/colorAccent"
+                                      android:textSize="18dp" />
+
+
+                                </TableRow>
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="8dp"
+                                  android:layout_marginBottom="8dp">
+
+                                    <TextView
+                                      style="@style/ItemCardFieldTextStyle"
+                                      android:text="@string/next_date"   />
+
+                                    <TextView
+                                      android:fontFamily="sans-serif-condensed"
+                                      android:id="@+id/tv_oil_service_next_date"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_gravity="end|center"
+                                      android:paddingEnd="16dp"
+                                      android:paddingRight="16dp"
+                                      android:clickable="true"
+                                      android:drawableEnd="@drawable/ic_event_black_24dp"
+                                      android:drawablePadding="16dp"
+                                      android:drawableRight="@drawable/ic_event_black_24dp"
+                                      android:drawableTint="@color/colorPrimary"
+                                      android:focusable="true"
+                                      android:textStyle="bold"
+                                      android:gravity="start|center"
+                                      android:text="@string/select_date"
+                                      android:textColor="@color/colorAccent"
+                                      android:textSize="18dp" />
+
+                                </TableRow>
+
+
+                            </TableLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <!--Oil info-->
+                    <android.support.v7.widget.CardView
+                      android:id="@+id/cv_oil_info"
+                      style="@style/ItemCardViewStyle"
+                      android:visibility="visible">
+
+                        <LinearLayout style="@style/Widget.CardContent">
+
+                            <TableLayout style="@style/ItemTableLayoutStyle">
+
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content">
+                                    <TextView
+                                      style="@style/ItemCardHeaderTextStyle"
+                                      android:text="@string/oil_information"
+                                      android:textColor="@color/colorAccent" />
+                                </TableRow>
+
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content">
+
+                                    <View style="@style/ItemCardHeaderTextUnderLineStyle" />
+                                </TableRow>
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="8dp">
+
+                                    <TextView
+                                      android:text="@string/oil_brand_name"
+                                      style="@style/ItemCardFieldTextStyle" />
+
+                                    <TextView
+                                      android:id="@+id/tv_oil_brand"
+                                      android:text="-"
+                                      style="@style/ItemCardFieldValueStyle" />
+
+                                </TableRow>
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="8dp">
+
+                                    <TextView
+                                      style="@style/ItemCardFieldTextStyle"
+                                      android:text="@string/oil_type" />
+
+                                    <TextView
+                                      android:id="@+id/tv_oil_type"
+                                      style="@style/ItemCardFieldValueStyle"
+                                      android:text="-"
+                                      />
+
+                                </TableRow>
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="8dp"
+                                  android:paddingBottom="8dp">
+
+                                    <TextView
+                                      style="@style/ItemCardFieldTextStyle"
+                                      android:text="@string/oil_volume" />
+
+                                    <RelativeLayout
+                                      android:layout_width="100dp"
+                                      android:layout_height="wrap_content"
+                                      android:layout_gravity="end|center">
+
+                                        <TextView
+                                          android:id="@+id/et_oil_volume"
+                                          android:layout_width="wrap_content"
+                                          android:layout_height="wrap_content"
+                                          android:layout_centerVertical="true"
+                                          android:layout_toLeftOf="@+id/tv_space_area"
+                                          android:gravity="end|center"
+                                          android:text="0.0"
+                                          android:textColor="@color/colorAccent"
+                                          android:fontFamily="sans-serif-condensed"
+                                          android:textStyle="bold"
+                                          android:textSize="18dp" />
+
+                                        <TextView
+                                          android:fontFamily="sans-serif-smallcaps"
+                                          android:id="@+id/tv_space_area"
+                                          android:layout_width="wrap_content"
+                                          android:layout_height="wrap_content"
+                                          android:layout_alignParentBottom="true"
+                                          android:layout_alignParentEnd="true"
+                                          android:layout_alignParentRight="true"
+                                          android:layout_centerVertical="true"
+                                          android:layout_gravity="end|center|bottom"
+                                          android:paddingStart="22dp"
+                                          android:paddingEnd="22dp"
+                                          android:paddingLeft="22dp"
+                                          android:paddingRight="22dp"
+                                          android:gravity="start|center"
+                                          android:singleLine="true"
+                                          android:text="L"
+                                          android:textColor="@color/black"
+                                          android:textSize="18dp" />
+
+                                    </RelativeLayout>
+
+                                </TableRow>
+
+                            </TableLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <!--Km info-->
+                    <android.support.v7.widget.CardView
+                      android:id="@+id/cv_km_info"
+                      style="@style/ItemCardViewStyle"
+                      android:visibility="visible">
+
+                        <LinearLayout
+                          style="@style/Widget.CardContent">
+
+                            <TableLayout
+                              style="@style/ItemTableLayoutStyle">
+
+
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="0dp">
+                                    <TextView
+                                      android:text="@string/mileage_information"
+                                      android:textColor="@color/colorAccent"
+                                      style="@style/ItemCardHeaderTextStyle" />
+                                </TableRow>
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content">
+
+                                    <View
+                                      style="@style/ItemCardHeaderTextUnderLineStyle" />
+                                </TableRow>
+
+
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="8dp"
+                                  android:paddingBottom="8dp">
+
+                                    <TextView
+                                      style="@style/ItemCardFieldTextStyle"
+                                      android:text="@string/current" />
+
+                                    <RelativeLayout
+                                      android:layout_width="100dp"
+                                      android:layout_height="wrap_content"
+                                      android:layout_gravity="end|center">
+
+                                        <TextView
+                                          android:id="@+id/tv_service_done_km"
+                                          android:layout_width="wrap_content"
+                                          android:layout_height="wrap_content"
+                                          android:layout_centerVertical="true"
+                                          android:layout_toLeftOf="@+id/tv_km1"
+                                          android:gravity="end|center"
+                                          android:text="0"
+                                          android:textColor="@color/colorAccent"
+                                          android:fontFamily="sans-serif-condensed"
+                                          android:textStyle="bold"
+                                          android:textSize="18dp" />
+
+                                        <TextView
+                                          android:textSize="18dp"
+                                          android:id="@+id/tv_km1"
+                                          android:layout_width="wrap_content"
+                                          android:layout_height="wrap_content"
+                                          android:layout_alignParentBottom="true"
+                                          android:layout_alignParentEnd="true"
+                                          android:layout_alignParentRight="true"
+                                          android:layout_centerVertical="true"
+                                          android:layout_gravity="end|center"
+                                          android:paddingStart="16dp"
+                                          android:paddingEnd="16dp"
+                                          android:paddingLeft="16dp"
+                                          android:paddingRight="16dp"
+                                          android:gravity="start|center"
+                                          android:singleLine="true"
+                                          android:text="@string/km"
+                                          android:textColor="@color/black"
+                                          android:fontFamily="sans-serif-condensed" />
+
+                                    </RelativeLayout>
+
+                                </TableRow>
+
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="8dp"
+                                  android:paddingBottom="8dp">
+
+                                    <TextView
+                                      style="@style/ItemCardFieldTextStyle"
+                                      android:text="@string/recomended"
+                                      />
+
+                                    <RelativeLayout
+                                      android:layout_width="100dp"
+                                      android:layout_height="wrap_content"
+                                      android:layout_gravity="end|center">
+
+                                        <TextView
+                                          android:id="@+id/tv_recomended_km"
+                                          android:layout_width="wrap_content"
+                                          android:layout_height="wrap_content"
+                                          android:layout_centerVertical="true"
+                                          android:layout_toLeftOf="@+id/tv_km"
+                                          android:gravity="end|center"
+                                          android:text="0"
+                                          android:textColor="@color/colorAccent"
+                                          android:fontFamily="sans-serif-condensed"
+                                          android:textStyle="bold"
+                                          android:textSize="18dp" />
+
+                                        <TextView
+                                          android:textSize="18dp"
+                                          android:id="@+id/tv_km"
+                                          android:layout_width="wrap_content"
+                                          android:layout_height="wrap_content"
+                                          android:layout_alignParentBottom="true"
+                                          android:layout_alignParentEnd="true"
+                                          android:layout_alignParentRight="true"
+                                          android:layout_centerVertical="true"
+                                          android:layout_gravity="end|center"
+                                          android:paddingStart="16dp"
+                                          android:paddingEnd="16dp"
+                                          android:paddingLeft="16dp"
+                                          android:paddingRight="16dp"
+                                          android:gravity="start|center"
+                                          android:singleLine="true"
+                                          android:text="@string/km"
+                                          android:textColor="@color/black"
+                                          android:fontFamily="sans-serif-condensed" />
+
+                                    </RelativeLayout>
+
+                                </TableRow>
+
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="8dp"
+                                  android:paddingBottom="8dp">
+
+                                    <TextView
+                                      style="@style/ItemCardFieldTextStyle"
+                                      android:text="@string/next"
+                                      />
+
+                                    <RelativeLayout
+                                      android:layout_width="100dp"
+                                      android:layout_height="wrap_content"
+                                      android:layout_gravity="end|center">
+
+                                        <TextView
+                                          android:id="@+id/tv_next_service_km"
+                                          android:layout_width="wrap_content"
+                                          android:layout_height="wrap_content"
+                                          android:layout_centerVertical="true"
+                                          android:layout_toLeftOf="@+id/tv_km3"
+                                          android:gravity="end|center"
+                                          android:text="0"
+                                          android:textColor="@color/colorAccent"
+                                          android:fontFamily="sans-serif-condensed"
+                                          android:textStyle="bold"
+                                          android:textSize="18dp"
+                                          android:theme="@style/CreateNewOilActivityEditTextTheme" />
+
+                                        <TextView
+                                          android:textSize="18dp"
+                                          android:id="@+id/tv_km3"
+                                          android:layout_width="wrap_content"
+                                          android:layout_height="wrap_content"
+                                          android:layout_alignParentBottom="true"
+                                          android:layout_alignParentEnd="true"
+                                          android:layout_alignParentRight="true"
+                                          android:layout_centerVertical="true"
+                                          android:layout_gravity="end|center"
+                                          android:paddingStart="16dp"
+                                          android:paddingEnd="16dp"
+                                          android:paddingLeft="16dp"
+                                          android:paddingRight="16dp"
+                                          android:gravity="start|center"
+                                          android:singleLine="true"
+                                          android:text="km"
+                                          android:textColor="@color/black"
+                                          android:fontFamily="sans-serif-condensed" />
+
+                                    </RelativeLayout>
+
+                                </TableRow>
+
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="8dp"
+                                  android:paddingBottom="8dp">
+
+                                    <TextView
+                                      style="@style/ItemCardFieldTextStyle"
+                                      android:text="@string/middle_month"
+                                      />
+
+                                    <RelativeLayout
+                                      android:layout_width="100dp"
+                                      android:layout_height="wrap_content"
+                                      android:layout_gravity="end|center">
+
+                                        <TextView
+                                          android:id="@+id/tv_middle_month_km"
+                                          android:layout_width="wrap_content"
+                                          android:layout_height="wrap_content"
+                                          android:layout_centerVertical="true"
+                                          android:layout_toLeftOf="@+id/tv_km4"
+                                          android:gravity="end|center"
+                                          android:text="0"
+                                          android:textColor="@color/colorAccent"
+                                          android:fontFamily="sans-serif-condensed"
+                                          android:textStyle="bold"
+                                          android:textSize="18dp"
+                                          android:theme="@style/CreateNewOilActivityEditTextTheme" />
+
+                                        <TextView
+                                          android:textSize="18dp"
+                                          android:id="@+id/tv_km4"
+                                          android:layout_width="wrap_content"
+                                          android:layout_height="wrap_content"
+                                          android:layout_alignParentBottom="true"
+                                          android:layout_alignParentEnd="true"
+                                          android:layout_alignParentRight="true"
+                                          android:layout_centerVertical="true"
+                                          android:layout_gravity="end|center"
+                                          android:paddingStart="16dp"
+                                          android:paddingEnd="16dp"
+                                          android:paddingLeft="16dp"
+                                          android:paddingRight="16dp"
+                                          android:gravity="start|center"
+                                          android:singleLine="true"
+                                          android:text="@string/km"
+                                          android:textColor="@color/black"
+                                          android:fontFamily="sans-serif-condensed" />
+
+                                    </RelativeLayout>
+
+                                </TableRow>
+
+                            </TableLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <!--Company id-->
+                    <android.support.v7.widget.CardView
+                      android:id="@+id/cv_company_id"
+                      style="@style/ItemCardViewStyle"
+                      android:visibility="visible">
+
+                        <LinearLayout
+                          style="@style/Widget.CardContent">
+
+                            <TableLayout
+                              style="@style/ItemTableLayoutStyle">
+
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="0dp">
+
+                                    <TextView
+                                      android:text="@string/service_phone_number"
+                                      android:textColor="@color/colorAccent"
+                                      style="@style/ItemCardHeaderTextStyle" />
+                                </TableRow>
+
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content">
+
+                                    <View
+                                      style="@style/ItemCardHeaderTextUnderLineStyle"
+                                      android:layout_span="0"/>
+                                </TableRow>
+                                <TableRow
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="0dp"
+                                  android:layout_marginBottom="0dp">
+
+                                    <LinearLayout
+
+                                      android:layout_width="match_parent"
+                                      android:layout_height="wrap_content"
+                                      android:gravity="center"
+                                      android:orientation="horizontal">
+                                        <ImageView
+                                          android:layout_width="wrap_content"
+                                          android:layout_height="wrap_content"
+                                          android:padding="16dp"
+                                          android:src="@drawable/ic_phone_white_24dp"
+                                          android:tint="@color/colorAccent" />
+                                        <TextView
+                                          android:id="@+id/tv_oil_company_id"
+                                          android:layout_width="match_parent"
+                                          android:layout_height="wrap_content"
+                                          android:maxLines="1"
+                                          android:text="-"
+                                          android:fontFamily="sans-serif-medium"
+                                          android:textColor="@color/colorPrimary"
+                                          android:textSize="18dp" />
+                                    </LinearLayout>
+
+
+                                </TableRow>
+                            </TableLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+
+                <Space
+                  android:layout_width="match_parent"
+                  android:layout_height="8dp" />
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

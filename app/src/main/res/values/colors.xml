@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!--<color name="colorPrimaryDark">#273138</color>-->
+  <!--<color name="colorPrimary">#465A65</color>-->
+  <!--<color name="colorAccent">#03BEA1</color>-->
+
+  <color name="colorPrimaryDark">#000000</color>
+  <color name="colorPrimary">#212121</color>
+  <color name="colorAccent">#ffa726</color>
+  <color name="colorAccent2">#1976d2</color>
+
+  <color name="white">#ffffff</color>
+  <color name="black">#000000</color>
+  <color name="red">#d32f2f</color>
+
+  <color name="color_484848">#484848</color>
+
+
+  <color name="color_background_E5E5E5">#E5E5E5</color>
+
+  <color name="black_overlay">#66000000</color>
+  <!--<color name="color_FF9900">#FF9900</color>-->
+  <!--<color name="color_1b5e20">#1b5e20</color>-->
+  <!--<color name="color_795548">#795548</color>-->
+  <!--<color name="color_0099FF">#0099ff</color>-->
+  <!--<color name="color_24A0AD">#24A0AD</color>-->
+  <!--<color name="color_1A314A">#1A314A</color>-->
+  <!--<color name="color_737373">#737373</color>-->
+  <!--<color name="color_427BE7">#427BE7</color>-->
+
+
+  <!--<color name="color_311b92">#311b92</color>-->
+  <!--<color name="color_0072be">#0072be</color>-->
+  <!--<color name="color_233944">#233944</color>-->
+  <!--<color name="color_e64f72">#e64f72</color>-->
+  <!--<color name="color_b9ffffff">#b9ffffff</color>-->
+
+
+  <!--<color name="background">#070a0f</color>-->
+  <!--<color name="fab">#ce2335</color>-->
+  <!--<color name="omfm_expanded_background_sample">#CCE9E9E9</color>-->
+
+
+  <!--<color name="dark_blue">#180065</color>-->
+  <!--<color name="light_blue">#334ee9ff</color>-->
+  <!--<color name="medium_green">#3d853e</color>-->
+  <!--<color name="light_green">#3c2ae668</color>-->
+
+  <!--<color name="color_white">#FFFFFF</color>-->
+  <!--<color name="color_cardinal">#C81431</color>-->
+  <!--<color name="color_nero">#2D2626</color>-->
+  <!--<color name="color_grey_suit">#89888D</color>-->
+
+
+</resources>

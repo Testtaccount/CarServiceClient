@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.journaldev.collapsingtoolbarlayout.ScrollingActivity">
+
+
+    <item
+        android:id="@+id/action_sort"
+        android:orderInCategory="200"
+        android:title="sort"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_sort_white_24dp"/>
+    
+</menu>
