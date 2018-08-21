@@ -336,9 +336,9 @@ public final class NotificationsController {
 //      public void run() {
 //        for (Car car : carList) {
 //
-//          Logger.d("testt", "car: " + car.toString());
+//          Logger.NotificationActionsFragment("testt", "car: " + car.toString());
 //          List<Oil> oilList = App.getAppSharedHelper().getSaveOilListByCarKey(car.getKey());
-//          Logger.d("testt", "oilList: " + oilList);
+//          Logger.NotificationActionsFragment("testt", "oilList: " + oilList);
 //
 //          if (oilList != null && oilList.size() > 0) {
 //            Oil oil = oilList.getAppNotification(oilList.size() - 1);
@@ -352,7 +352,7 @@ public final class NotificationsController {
 //                  public void onSuccess(List<Oil> oils) {
 //                    if (oils.size() > 0) {
 //                      Oil oil = oils.getAppNotification(oils.size() - 1);
-//                      Logger.d("testt", "oil: " + oil.toString());
+//                      Logger.NotificationActionsFragment("testt", "oil: " + oil.toString());
 //                      deletePreviusMonthlyNotificationAlarm(oil.getKey());
 //                    }
 //                  }

@@ -2,20 +2,19 @@ package am.gsoft.carserviceclient.notification;
 
 import static am.gsoft.carserviceclient.util.Constant.Action.ACTION_SEND_MONTH_NOTIFICATION;
 import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_NOTIFICATION_MESSAGE_ID;
-import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_NOTIFICATION_MESSAGE_CAR_ID;
 
 import am.gsoft.carserviceclient.R;
-import am.gsoft.carserviceclient.data.InjectorUtils;
-import am.gsoft.carserviceclient.data.ResultListener;
 import am.gsoft.carserviceclient.app.App;
 import am.gsoft.carserviceclient.app.AppExecutors;
+import am.gsoft.carserviceclient.data.InjectorUtils;
+import am.gsoft.carserviceclient.data.ResultListener;
 import am.gsoft.carserviceclient.data.database.AppDatabase;
+import am.gsoft.carserviceclient.data.database.entity.AppNotification;
 import am.gsoft.carserviceclient.data.database.entity.Car;
 import am.gsoft.carserviceclient.data.database.entity.Oil;
-import am.gsoft.carserviceclient.data.database.entity.AppNotification;
-import am.gsoft.carserviceclient.ui.activity.MileageActivity;
-import am.gsoft.carserviceclient.ui.activity.NextReminderActivity;
-import am.gsoft.carserviceclient.ui.activity.SplashActivity;
+import am.gsoft.carserviceclient.ui.activity.NotificationActionsActivity;
+import am.gsoft.carserviceclient.ui.fragment.MileageFragment;
+import am.gsoft.carserviceclient.ui.fragment.NextReminderFragment;
 import am.gsoft.carserviceclient.util.Constant.Action;
 import am.gsoft.carserviceclient.util.Constant.Extra;
 import android.app.IntentService;
@@ -166,37 +165,38 @@ public class NotificationsIntentService extends IntentService {
 
     Context context=getApplicationContext();
 
-    Intent notificationIntent = new Intent(context, SplashActivity.class);
+    Intent notificationIntent = new Intent(context, NotificationActionsActivity.class);
     notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-    notificationIntent.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, car.getId());
+//    notificationIntent.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, car.getId());
+    notificationIntent.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
 
     TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-    stackBuilder.addParentStack(SplashActivity.class);
+    stackBuilder.addParentStack(NotificationActionsActivity.class);
     stackBuilder.addNextIntent(notificationIntent);
 
     PendingIntent notificationPendingIntent = stackBuilder.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
 
     //////////////////////
 
-    Intent notificationIntent1 = new Intent(context, NextReminderActivity.class);
+    Intent notificationIntent1 = new Intent(context, NextReminderFragment.class);
     notificationIntent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
     notificationIntent1.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
 
     TaskStackBuilder stackBuilder1 = TaskStackBuilder.create(context);
-    stackBuilder1.addParentStack(NextReminderActivity.class);
+    stackBuilder1.addParentStack(NextReminderFragment.class);
     stackBuilder1.addNextIntent(notificationIntent1);
 
     PendingIntent notificationPendingIntent1 = stackBuilder1.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
 
     //////////////////////
 
-    Intent notificationIntent2 = new Intent(context, MileageActivity.class);
+    Intent notificationIntent2 = new Intent(context, MileageFragment.class);
     notificationIntent2.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
     notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
 //    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, car.getId());
 
     TaskStackBuilder stackBuilder2 = TaskStackBuilder.create(context);
-    stackBuilder2.addParentStack(MileageActivity.class);
+    stackBuilder2.addParentStack(MileageFragment.class);
     stackBuilder2.addNextIntent(notificationIntent2);
 
     PendingIntent notificationPendingIntent2 = stackBuilder2.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -212,17 +212,17 @@ public class NotificationsIntentService extends IntentService {
         .setColor(Color.YELLOW)
         .setPriority(Notification.PRIORITY_HIGH)
         .setContentTitle("Check your " + car.getCarBrand() + " engine oil")
-        .setContentText(noteText.equals("")?"Oil -  " + oil.getBrand() + " " + oil.getType():noteText )//        .setContentText("Oil -  " + oilBrand + " " + oilType)
+        .setContentText(noteText)//        .setContentText("Oil -  " + oilBrand + " " + oilType)
         .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400})
         .setSound(null)
         .setAutoCancel(true)
         .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND)
         .setWhen(System.currentTimeMillis())
         .setContentIntent(notificationPendingIntent)
-//        .addAction(R.drawable.ic_update_black_24dp,"Remind",notificationPendingIntent1)
-//        .addAction(R.drawable.ic_mode_edit_black_24dp,"Mileage",notificationPendingIntent2)
-        .addAction(R.drawable.ic_update_white_24dp,"Remind",notificationPendingIntent1)
-        .addAction(R.drawable.ic_mode_edit_white_24dp,"Mileage",notificationPendingIntent2)
+////        .addAction(R.drawable.ic_update_black_24dp,"Remind",notificationPendingIntent1)
+////        .addAction(R.drawable.ic_mode_edit_black_24dp,"Mileage",notificationPendingIntent2)
+//        .addAction(R.drawable.ic_update_white_24dp,"Remind",notificationPendingIntent1)
+//        .addAction(R.drawable.ic_mode_edit_white_24dp,"Mileage",notificationPendingIntent2)
         .build();
     nm.notify(TAG,  id, note);
   }
@@ -231,37 +231,38 @@ public class NotificationsIntentService extends IntentService {
 
     Context context=getApplicationContext();
 
-    Intent notificationIntent = new Intent(context, SplashActivity.class);
+    Intent notificationIntent = new Intent(context, NotificationActionsActivity.class);
     notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-    notificationIntent.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, car.getId());
+//    notificationIntent.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, car.getId());
+    notificationIntent.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
 
     TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-    stackBuilder.addParentStack(SplashActivity.class);
+    stackBuilder.addParentStack(NotificationActionsActivity.class);
     stackBuilder.addNextIntent(notificationIntent);
 
     PendingIntent notificationPendingIntent = stackBuilder.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
 
     //////////////////////
 
-    Intent notificationIntent1 = new Intent(context, NextReminderActivity.class);
+    Intent notificationIntent1 = new Intent(context, NextReminderFragment.class);
     notificationIntent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
     notificationIntent1.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
 
     TaskStackBuilder stackBuilder1 = TaskStackBuilder.create(context);
-    stackBuilder1.addParentStack(NextReminderActivity.class);
+    stackBuilder1.addParentStack(NextReminderFragment.class);
     stackBuilder1.addNextIntent(notificationIntent1);
 
     PendingIntent notificationPendingIntent1 = stackBuilder1.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
 
     //////////////////////
 
-    Intent notificationIntent2 = new Intent(context, MileageActivity.class);
+    Intent notificationIntent2 = new Intent(context, MileageFragment.class);
     notificationIntent2.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
     notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
 //    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, car.getId());
 
     TaskStackBuilder stackBuilder2 = TaskStackBuilder.create(context);
-    stackBuilder2.addParentStack(MileageActivity.class);
+    stackBuilder2.addParentStack(MileageFragment.class);
     stackBuilder2.addNextIntent(notificationIntent2);
 
     PendingIntent notificationPendingIntent2 = stackBuilder2.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -277,15 +278,17 @@ public class NotificationsIntentService extends IntentService {
         .setColor(Color.YELLOW)
         .setPriority(Notification.PRIORITY_HIGH)
         .setContentTitle("Check your " + car.getCarBrand() + " engine oil")
-        .setContentText(noteText.equals("")?"Oil -  " + oil.getBrand() + " " + oil.getType():noteText )//        .setContentText("Oil -  " + oilBrand + " " + oilType)
+        .setContentText(noteText)//        .setContentText("Oil -  " + oilBrand + " " + oilType)
         .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400})
         .setSound(null)
         .setAutoCancel(true)
         .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND)
         .setWhen(System.currentTimeMillis())
         .setContentIntent(notificationPendingIntent)
-        .addAction(R.drawable.ic_update_black_24dp,"Remind",notificationPendingIntent1)
-        .addAction(R.drawable.ic_mode_edit_black_24dp,"Mileage",notificationPendingIntent2)
+////        .addAction(R.drawable.ic_update_black_24dp,"Remind",notificationPendingIntent1)
+////        .addAction(R.drawable.ic_mode_edit_black_24dp,"Mileage",notificationPendingIntent2)
+//        .addAction(R.drawable.ic_update_white_24dp,"Remind",notificationPendingIntent1)
+//        .addAction(R.drawable.ic_mode_edit_white_24dp,"Mileage",notificationPendingIntent2)
         .build();
     nm.notify(TAG,  id, note);
 

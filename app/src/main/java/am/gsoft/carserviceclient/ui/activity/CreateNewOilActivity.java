@@ -1072,7 +1072,7 @@ public class CreateNewOilActivity extends BaseActivity implements View.OnClickLi
 //                stringToDate(oilServiveDoneDateTv.getText().toString(),
 //                    getDateFormat(DateType.DMY))))) {
 //
-//          d = (double) (kmDifference(firstOil.getServiceDoneKm(),
+//          NotificationActionsFragment = (double) (kmDifference(firstOil.getServiceDoneKm(),
 //              Long.valueOf(serviceDoneKmEt.getText().toString())))
 //              / (getDateDifferenceInDDMMYYYY(longToDate(firstOil.getServiceDoneDate()),
 //              stringToDate(oilServiveDoneDateTv.getText().toString(),

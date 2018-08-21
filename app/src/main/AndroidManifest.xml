@@ -25,8 +25,8 @@
     android:name=".app.App"
     android:roundIcon="@drawable/icon_2"
     android:supportsRtl="true"
-    tools:replace="android:allowBackup"
-    android:theme="@style/AppTheme">
+    android:theme="@style/AppTheme"
+    tools:replace="android:allowBackup">
 
     <!-- <service -->
     <!-- android:exported="true" -->
@@ -93,7 +93,6 @@
       android:exported="true"
       android:name=".notification.OnBootUpNotificationSchedulerIntentService" />
 
-
     <receiver
       android:enabled="true"
       android:exported="true"
@@ -114,17 +113,19 @@
 
     <activity
       android:configChanges="orientation|keyboardHidden|screenSize"
-      android:name=".ui.activity.NextReminderActivity"
+      android:name=".ui.fragment.NextReminderFragment"
       android:screenOrientation="portrait"
       android:theme="@style/FullscreenTheme" />
     <activity
-      android:name=".ui.activity.MileageActivity"
+      android:name=".ui.fragment.MileageFragment"
       android:screenOrientation="portrait"
       android:windowSoftInputMode="adjustResize" />
 
     <service
       android:exported="false"
       android:name=".notification.NotificationsIntentService" />
+
+    <activity android:name=".ui.activity.NotificationActionsActivity"></activity>
   </application>
 
 </manifest>

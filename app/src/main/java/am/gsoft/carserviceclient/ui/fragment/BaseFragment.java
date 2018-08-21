@@ -11,27 +11,7 @@ import am.gsoft.carserviceclient.ui.activity.base.BaseActivity;
 
 public abstract class BaseFragment extends Fragment {
 
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
-    private static final String LOG_TAG = BaseFragment.class.getSimpleName();
-
-    // ===========================================================
-    // Fields
-    // ===========================================================
-
-    // ===========================================================
-    // Constructors
-    // ===========================================================
-
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
-
-    // ===========================================================
-    // Methods for/from SuperClass
-    // ===========================================================
+    private static final String TAG = BaseFragment.class.getSimpleName();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,15 +26,7 @@ public abstract class BaseFragment extends Fragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    // ===========================================================
-    // Listeners, methods for/from Interfaces
-    // ===========================================================
-
-    // ===========================================================
-    // Methods
-    // ===========================================================
-
-    protected void hideActionBarIcon() {
+  protected void hideActionBarIcon() {
 //        ((BaseActivity) getActivity()).hideActionBarIcon();
     }
 
@@ -69,9 +41,5 @@ public abstract class BaseFragment extends Fragment {
     protected void setActionBarTitle(String actionBarTitle) {
         ((BaseActivity) getActivity()).setActionBarTitle(actionBarTitle);
     }
-
-    // ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
 
 }

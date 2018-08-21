@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:card_view="http://schemas.android.com/apk/res-auto"
+  xmlns:mask="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/root_create_new_oil"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/color_background_E5E5E5"
+  android:fitsSystemWindows="true"
+  android:orientation="vertical"
+  tools:context=".ui.activity.NotificationActionsActivity">
+
+  <!--190 , 250, 300-->
+  <android.support.design.widget.AppBarLayout
+    android:id="@+id/appBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <include layout="@layout/include_toolbar" />
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+      <!--<ImageView-->
+      <!--android:id="@+id/toolbarImage"-->
+      <!--android:layout_width="wrap_content"-->
+      <!--android:layout_height="100dp"-->
+      <!--android:layout_centerInParent="true"-->
+      <!--android:fitsSystemWindows="true"-->
+      <!--android:src="@drawable/icon_2" />-->
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@color/colorPrimary"
+        android:padding="1dp">
+        <!--android:background="@android:color/transparent"-->
+
+        <ImageView
+          android:scaleType="fitCenter"
+          android:id="@+id/car_icon"
+          android:layout_width="110dp"
+          android:layout_height="140dp"
+          android:src="@drawable/ic_mercedes_benz" />
+
+        <LinearLayout
+          android:layout_gravity="center"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical">
+
+          <TextView
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:id="@+id/tv_car_brand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:includeFontPadding="false"
+            android:text="Mercedens-Bens"
+            android:textColor="@color/white"
+            android:textSize="25dp" />
+
+          <TextView
+            android:fontFamily="sans-serif-medium"
+            android:textSize="14dp"
+            android:layout_marginStart="16dp"
+            android:id="@+id/tv_model"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:layout_gravity="bottom"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:text="X123456789"/>
+
+
+          <LinearLayout
+            android:layout_marginStart="36dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+              android:id="@+id/oil_icon"
+              android:layout_width="36dp"
+              android:layout_height="36dp"
+              android:layout_marginTop="6dp"
+              android:drawingCacheQuality="high"
+              android:scaleType="centerCrop"
+              android:src="@drawable/ic_oil_white_24dp"
+              android:tint="@color/colorAccent" />
+
+            <TextView
+              android:id="@+id/tv_item_oil_brand"
+              android:textStyle="bold"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:layout_marginStart="8dp"
+              android:fontFamily="sans-serif-condensed"
+              android:gravity="center_vertical"
+              android:includeFontPadding="false"
+              android:singleLine="true"
+              android:text="@string/oil_brand_name"
+              android:textColor="@color/colorAccent"
+              android:textSize="24dp" />
+
+
+          </LinearLayout>
+
+          <TextView
+            android:layout_marginStart="80dp"
+            android:id="@+id/tv_item_oil_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="0dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/oil_type"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp" />
+          <!--<LinearLayout-->
+          <!--android:layout_width="match_parent"-->
+          <!--android:layout_height="0dp"-->
+          <!--android:orientation="horizontal"-->
+          <!--android:layout_weight="0">-->
+          <!---->
+          <!--<TextView-->
+          <!--android:visibility="gone"-->
+          <!--android:textColor="@color/colorAccent"-->
+          <!--android:id="@+id/tv_year"-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:gravity="center"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:text="2009"/>-->
+          <!--</LinearLayout>-->
+
+
+        </LinearLayout>
+
+
+      </LinearLayout>
+
+    </RelativeLayout>
+
+  </android.support.design.widget.AppBarLayout>
+  <View
+    android:id="@+id/v_shadow"
+    android:layout_width="match_parent"
+    android:layout_height="36dp"
+    android:background="@drawable/drop_shadow_reverse"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+  <FrameLayout
+    android:id="@+id/fl_activity_notifications_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+
+</LinearLayout>

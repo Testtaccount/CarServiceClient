@@ -15,16 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainFragment extends BaseFragment implements View.OnClickListener {
 
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
-    private static final String LOG_TAG = MainFragment.class.getSimpleName();
-
-    // ===========================================================
-    // Fields
-    // ===========================================================
-
+    private static final String TAG = MainFragment.class.getSimpleName();
     private OnFragmentInteractionListener mListener;
 
     private Bundle mArgumentData;
@@ -35,10 +26,6 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
 
 
     private FirebaseUser firebaseUser;
-    // ===========================================================
-    // Constructors
-    // ===========================================================
-
     public static MainFragment newInstance() {
         return new MainFragment();
     }
@@ -49,20 +36,11 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         return fragment;
     }
 
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
-
-    // ===========================================================
-    // Methods for/from SuperClass
-    // ===========================================================
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 //        firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
-
     }
 
     @Nullable
@@ -114,9 +92,6 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         mListener = null;
     }
 
-    // ===========================================================
-    // Click Listeners
-    // ===========================================================
 
     @Override
     public void onClick(View v) {
@@ -127,14 +102,6 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
 //                break;
         }
     }
-
-    // ===========================================================
-    // Other Listeners, methods for/from Interfaces
-    // ===========================================================
-
-    // ===========================================================
-    // Methods
-    // ===========================================================
 
     private void setListeners() {
 //        addCarFab.setOnClickListener(this);
@@ -154,11 +121,6 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
 
     private void customizeActionBar() {
     }
-
-
-    // ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
 
     public interface OnFragmentInteractionListener {
 

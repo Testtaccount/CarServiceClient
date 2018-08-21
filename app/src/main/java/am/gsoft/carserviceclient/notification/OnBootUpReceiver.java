@@ -36,14 +36,14 @@ public class OnBootUpReceiver extends BroadcastReceiver {
 //      carList = App.getAppSharedHelper().getCarListToSave();
 //
 //      for (Car c:carList){
-//        Logger.d("testt","car: "+c.toString());
+//        Logger.NotificationActionsFragment("testt","car: "+c.toString());
 //        List<Oil> oilList = App.getAppSharedHelper().getSaveOilListByCarKey(c.getKey());
-//        Logger.d("testt","oilList: " + oilList);
+//        Logger.NotificationActionsFragment("testt","oilList: " + oilList);
 //
 //        if (oilList != null && oilList.size()>0) {
 //
 //          Oil o = oilList.getAppNotification(oilList.size() - 1);
-//          Logger.d("testt","o: " + o.toString());
+//          Logger.NotificationActionsFragment("testt","o: " + o.toString());
 //
 //          Intent intent = new Intent(context , NotificationIntentService.class);
 //
@@ -65,7 +65,7 @@ public class OnBootUpReceiver extends BroadcastReceiver {
 //            public void onSuccess(List<Oil> oils) {
 //              if (oils.size() > 0) {
 //                Oil o = oils.getAppNotification(oils.size() - 1);
-//                Logger.d("testt","o: " + o.toString());
+//                Logger.NotificationActionsFragment("testt","o: " + o.toString());
 //
 //                Intent intent = new Intent(context , NotificationIntentService.class);
 //

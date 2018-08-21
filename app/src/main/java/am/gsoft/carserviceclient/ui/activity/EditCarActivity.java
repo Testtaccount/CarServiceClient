@@ -607,9 +607,9 @@ public class EditCarActivity extends BaseActivity implements View.OnClickListene
 
 //            if(car!=null){
 
-//              Logger.d("testt", "car: " + car.toString());
+//              Logger.NotificationActionsFragment("testt", "car: " + car.toString());
 //              List<Oil> oilList = appSharedHelper.getSaveOilListByCarKey(currentCar.getKey());
-//              Logger.d("testt", "oilList: " + oilList);
+//              Logger.NotificationActionsFragment("testt", "oilList: " + oilList);
 
 //              if (oilList != null && oilList.size() > 0) {
 //                Oil oil = oilList.getAppNotification(oilList.size() - 1);
@@ -621,7 +621,7 @@ public class EditCarActivity extends BaseActivity implements View.OnClickListene
 //                      public void onSuccess(List<Oil> oils) {
 //                        if (oils.size() > 0) {
 //                          Oil oil = oils.getAppNotification(oils.size() - 1);
-//                          Logger.d("testt", "oil: " + oil.toString());
+//                          Logger.NotificationActionsFragment("testt", "oil: " + oil.toString());
 //                          mAlarmController.deletePreviusMonthlyNotificationAlarm(oil.getKey());
 //                        }
 //                      }

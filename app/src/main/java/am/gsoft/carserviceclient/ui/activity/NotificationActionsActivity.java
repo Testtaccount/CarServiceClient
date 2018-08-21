@@ -1,22 +1,28 @@
 package am.gsoft.carserviceclient.ui.activity;
 
-import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_NOTIFICATION_MESSAGE_ID;
 import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_NOTIFICATION_MESSAGE_CAR_ID;
+import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_NOTIFICATION_MESSAGE_ID;
 import static am.gsoft.carserviceclient.util.DateUtils.getDateFormat;
 
 import am.gsoft.carserviceclient.R;
 import am.gsoft.carserviceclient.app.App;
 import am.gsoft.carserviceclient.app.AppExecutors;
 import am.gsoft.carserviceclient.data.InjectorUtils;
-import am.gsoft.carserviceclient.data.database.entity.Oil;
-import am.gsoft.carserviceclient.notification.NotificationsIntentService;
-import am.gsoft.carserviceclient.notification.NotificationsRepository;
 import am.gsoft.carserviceclient.data.database.AppDatabase;
 import am.gsoft.carserviceclient.data.database.entity.AppNotification;
 import am.gsoft.carserviceclient.data.database.entity.Car;
+import am.gsoft.carserviceclient.data.database.entity.Oil;
+import am.gsoft.carserviceclient.notification.NotificationsIntentService;
+import am.gsoft.carserviceclient.notification.NotificationsRepository;
 import am.gsoft.carserviceclient.ui.activity.base.BaseActivity;
+import am.gsoft.carserviceclient.ui.fragment.MileageFragment;
+import am.gsoft.carserviceclient.ui.fragment.NextReminderFragment;
+import am.gsoft.carserviceclient.ui.fragment.NotificationActionsFragment;
 import am.gsoft.carserviceclient.util.DateUtils;
 import am.gsoft.carserviceclient.util.DateUtils.DateType;
+import am.gsoft.carserviceclient.util.ToastUtils;
+import am.gsoft.carserviceclient.util.manager.DialogManager;
+import am.gsoft.carserviceclient.util.manager.FragmentTransactionManager;
 import android.app.DatePickerDialog;
 import android.app.NotificationManager;
 import android.app.TimePickerDialog;
@@ -24,26 +30,30 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.DatePicker;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
-public class NextReminderActivity extends BaseActivity implements OnClickListener {
+public class NotificationActionsActivity extends BaseActivity implements View.OnClickListener,
+    NotificationActionsFragment.OnNotificationActionsFragmentInteractionListener,
+    NextReminderFragment.OnNextReminderFragmentInteractionListener,
+    MileageFragment.OnMileageFragmentInteractionListener {
 
-  private FrameLayout pickFlBtn;
-  private TextView reminderTxtTv;
-  private CardView reminderDateTxtCv;
-  private LinearLayout emptyInfoLl;
+  private static final String TAG = NotificationActionsActivity.class.getSimpleName();
+  private final long BEFORE_END_KM_MAX = 1000;
+  private final long BEFORE_END_KM_MIN = 500;
+  private final long DAYS_OF_MONTH = 30;
+  private final long DAY_TO_MILLISECONDS = 86400000L;
+
   private ImageView carIconIv;
   private TextView carBrandTv;
   private TextView carModelTv;
@@ -54,14 +64,11 @@ public class NextReminderActivity extends BaseActivity implements OnClickListene
   private AppNotification mAppNotification;
   private Car mCar;
   private Oil mOil;
+  private boolean appBarIsExpanded = true;
+
   private Calendar mSelectedDate = Calendar.getInstance();
   int count1 = 0;
   int count2 = 0;
-
-  @Override
-  protected int layoutResId() {
-    return R.layout.activity_next_reminder;
-  }
 
   DatePickerDialog.OnDateSetListener mOnDateSetListener = new DatePickerDialog.OnDateSetListener() {
 
@@ -98,19 +105,28 @@ public class NextReminderActivity extends BaseActivity implements OnClickListene
   };
 
   @Override
+  protected int layoutResId() {
+    return R.layout.activity_notification_actions;
+  }
+
+  @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     findViews();
     customizeActionBar();
     initFields();
     setListeners();
+
+    openScreen(NotificationActionsFragment.newInstance(), false);
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    DialogManager.getInstance().dismissPreloader(this.getClass());
   }
 
   private void findViews() {
-    pickFlBtn = findViewById(R.id.fl_pick_btn);
-    reminderTxtTv = findViewById(R.id.tv_reminder_txt);
-    reminderDateTxtCv = findViewById(R.id.cv_reminder_date_txt);
-    emptyInfoLl = findViewById(R.id.ll_empty_info);
 
     carIconIv = findViewById(R.id.car_icon);
     carBrandTv = findViewById(R.id.tv_car_brand);
@@ -121,7 +137,7 @@ public class NextReminderActivity extends BaseActivity implements OnClickListene
 
   private void customizeActionBar() {
     setActionBarUpButtonEnabled(true);
-    setActionBarTitle("Next Reminder");
+    setActionBarTitle(getResources().getString(R.string.app_name));
   }
 
   private void initFields() {
@@ -159,7 +175,7 @@ public class NextReminderActivity extends BaseActivity implements OnClickListene
               carModelTv.setVisibility(View.GONE);
               oilBrandTv.setVisibility(View.GONE);
               oilTypeTv.setVisibility(View.GONE);
-              Intent i = new Intent(NextReminderActivity.this, SplashActivity.class);
+              Intent i = new Intent(NotificationActionsActivity.this, SplashActivity.class);
               i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
               startActivity(i);
               finish();
@@ -177,13 +193,35 @@ public class NextReminderActivity extends BaseActivity implements OnClickListene
   }
 
   private void setListeners() {
-    pickFlBtn.setOnClickListener(this);
+
   }
 
   @Override
-  protected void onStart() {
-    super.onStart();
-//    openDatePicker();
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case android.R.id.home:
+        onBackPressed();
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
+
+  }
+
+  @Override
+  public void onBackPressed() {
+    int count = getSupportFragmentManager().getBackStackEntryCount();
+
+    if (count == 0) {
+      Intent i = new Intent(NotificationActionsActivity.this, SplashActivity.class);
+      i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+      i.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, mCar.getId());
+      startActivity(i);
+      finish();
+      super.onBackPressed();
+    } else {
+      customizeActionBar();
+      getSupportFragmentManager().popBackStack();
+    }
   }
 
   @Override
@@ -201,12 +239,21 @@ public class NextReminderActivity extends BaseActivity implements OnClickListene
   public void onClick(View v) {
     switch (v.getId()) {
       case R.id.fl_pick_btn:
-        openDatePicker();
         break;
-//      case R.id.btn_time:
-////        showDatePickerDialog(to_dateListener, DATE_PICKER_TO);
-//        break;
+      case R.id.fl_update_btn:
+        break;
+      default:
     }
+  }
+
+  private void openScreen(Fragment fragment, boolean mustAddToBackStack) {
+    FragmentTransactionManager.displayFragment(
+        getSupportFragmentManager(),
+        fragment,
+        R.id.fl_activity_notifications_container,
+        mustAddToBackStack
+
+    );
   }
 
   private void openDatePicker() {
@@ -221,6 +268,8 @@ public class NextReminderActivity extends BaseActivity implements OnClickListene
     dpd1.setOnCancelListener(new DialogInterface.OnCancelListener() {
       @Override
       public void onCancel(DialogInterface dialogInterface) {
+//        openScreen(NotificationActionsFragment.newInstance(),false);
+        onBackPressed();
         count1 = 0;
         count2 = 0;
       }
@@ -240,6 +289,8 @@ public class NextReminderActivity extends BaseActivity implements OnClickListene
     dpd1.setOnCancelListener(new DialogInterface.OnCancelListener() {
       @Override
       public void onCancel(DialogInterface dialogInterface) {
+//        openScreen(NotificationActionsFragment.newInstance(),false);
+        onBackPressed();
         count1 = 0;
         count2 = 0;
       }
@@ -249,53 +300,140 @@ public class NextReminderActivity extends BaseActivity implements OnClickListene
   }
 
   private void updateDateLabel() {
-    emptyInfoLl.setVisibility(View.GONE);
-    reminderDateTxtCv.setVisibility(View.VISIBLE);
+//    emptyInfoLl.setVisibility(View.GONE);
+//    reminderDateTxtCv.setVisibility(View.VISIBLE);
     long t = mSelectedDate.getTimeInMillis();
-    reminderTxtTv.setText(DateUtils.longToString(t, getDateFormat(DateType.DMY_HM)));
-    if (mAppNotification != null) {
-//      mAlarmController.updateAlarm(mAlarm.getId(),mSelectedDate.getTimeInMillis(),mAlarm);
-//      mAlarmController.deletePreviusMonthlyNotificationAlarm(mAlarm);
-//      mAlarmController.setupMonthlyNotificationsAlarmLong2(mSelectedDate.getTimeInMillis(),mAlarm);
-
-//      long id = mAppNotification.getId();
-//      long carId = mAppNotification.getCarId();
-//      long oilId = mAppNotification.getOilId();
-//
-//
-//
-//      AppExecutors.getInstance().diskIO().execute(new Runnable() {
-//        @Override
-//        public void run() {
-//          Car car=AppDatabase.getInstance(getApplicationContext()).mCarDao().get(carId);
-//          Oil oil=AppDatabase.getInstance(getApplicationContext()).mOilDao().get(oilId);
-      mNotificationsRepository.setReminderNotification(mCar, mOil, t);
-//        }
-//      });
-
+    NextReminderFragment fragment = (NextReminderFragment) getSupportFragmentManager()
+        .findFragmentByTag(NextReminderFragment.TAG);
+    if (fragment != null) {
+      fragment.setReminderText(DateUtils.longToString(t, getDateFormat(DateType.DMY_HM)));
     }
+    setNotification(AppNotification.TYPE_REMIND, t);
     count1 = 0;
     count2 = 0;
   }
 
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-//        finish();
-        onBackPressed();
-        return true;
+  private void updateMileage(String value) {
+//    ToastUtils.shortToast("Oil" + mOil);
+    if (!checkInputs(value)) {
+      return;
     }
-    return super.onOptionsItemSelected(item);
+
+    long enteredValue = Long.parseLong(value);
+    long recomendedKm = mOil.getRecomendedKm();//85
+
+//    if (recomendedKm > BEFORE_END_KM_MAX) {
+//      beforeEndKm = 1000;
+//    }else if (BEFORE_END_KM_MIN < recomendedKm && recomendedKm < BEFORE_END_KM_MAX) {
+//      beforeEndKm = 500;
+//    } else
+    long beforeEndKm;
+
+    long driven = enteredValue - mOil.getServiceDoneKm();
+    if (driven >= recomendedKm) {
+      ToastUtils.shortToast("Time To Change Oil");
+      return;
+    }
+
+    if (recomendedKm <= BEFORE_END_KM_MIN) {
+      beforeEndKm = recomendedKm / 2;
+    } else if (recomendedKm <= BEFORE_END_KM_MAX) {
+      beforeEndKm = 500;
+    } else {
+      beforeEndKm = 1000;
+    }
+
+//    long sum = App.getAppSharedHelper().getPreviusDrivenSum(mCar.getId(),mOil.getId());
+
+    long td = System.currentTimeMillis() - mOil.getServiceDoneDate();
+    long days = TimeUnit.MILLISECONDS.toDays(td);
+
+    long daysBefore = 10;
+    if (driven > 0 && days > 0) {
+//      sum += driven
+
+      long mid = driven / days;
+
+      daysBefore = beforeEndKm / mid;
+
+    }
+
+    long d = ((recomendedKm * DAYS_OF_MONTH) / driven) - daysBefore;
+
+    long t = System.currentTimeMillis() + d * DAY_TO_MILLISECONDS;
+
+    MileageFragment fragment = (MileageFragment) getSupportFragmentManager()
+        .findFragmentByTag(MileageFragment.TAG);
+    if (fragment != null) {
+      fragment.setReminderText(DateUtils.longToString(t, getDateFormat(DateType.DMY_HM)));
+    }
+    setNotification(AppNotification.TYPE_MILEAGE, t);
+
+  }
+
+  private boolean checkInputs(String enteredValue) {
+    DialogManager.getInstance().showPreloader(this);
+    MileageFragment fragment = (MileageFragment) getSupportFragmentManager()
+        .findFragmentByTag(MileageFragment.TAG);
+
+    if (TextUtils.isEmpty(enteredValue)) {
+      if (fragment != null) {
+        fragment.setError("Enter yor driven data");
+      }
+      DialogManager.getInstance().dismissPreloader(this.getClass());
+      return false;
+    }
+
+    if (Long.valueOf(enteredValue) <= mOil.getServiceDoneKm()) {
+      if (fragment != null) {
+        fragment.setError(
+            "Current " + mCar.getDistanceUnit() + " must be more than the previous (" + mOil
+                .getServiceDoneKm() + ") service " + mCar.getDistanceUnit() + " !");
+      }
+      DialogManager.getInstance().dismissPreloader(this.getClass());
+      return false;
+    }
+
+    DialogManager.getInstance().dismissPreloader(this.getClass());
+    return true;
+  }
+
+  private void setNotification(int notificationType, long t) {
+    if (mAppNotification != null) {
+      switch (notificationType) {
+        case AppNotification.TYPE_REMIND:
+          mNotificationsRepository.setReminderNotification(mCar, mOil, t);
+          break;
+        case AppNotification.TYPE_MILEAGE:
+          mNotificationsRepository.setMileageNotification(mCar, mOil, t);
+          break;
+      }
+    }
   }
 
   @Override
-  public void onBackPressed() {
-    Intent i = new Intent(NextReminderActivity.this, SplashActivity.class);
-    i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-    i.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, mCar.getId());
-    startActivity(i);
-    finish();
-    super.onBackPressed();
+  public void onUpdateCalendarClick() {
+    openDatePicker();
+  }
+
+  @Override
+  public void onSetMileageClick(String value) {
+    updateMileage(value);
+  }
+
+  @Override
+  public void onUpdateMileageClick() {
+
+  }
+
+  @Override
+  public void onCalendarClick() {
+    openDatePicker();
+    openScreen(NextReminderFragment.newInstance(), true);
+  }
+
+  @Override
+  public void onMileageClick() {
+    openScreen(MileageFragment.newInstance(mCar), true);
   }
 }

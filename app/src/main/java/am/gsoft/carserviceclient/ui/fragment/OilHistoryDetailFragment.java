@@ -173,6 +173,11 @@ public class OilHistoryDetailFragment extends BaseFragment implements View.OnCli
 //        super.onCreateOptionsMenu(menu,inflater);
 //    }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

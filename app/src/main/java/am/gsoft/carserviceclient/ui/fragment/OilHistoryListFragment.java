@@ -43,10 +43,6 @@ public class OilHistoryListFragment extends BaseFragment implements View.OnClick
     public boolean ascending = true;
     private OnOilHistoryFragmentInteractionListener mListener;
 
-    // ===========================================================
-    // Constructors
-    // ===========================================================
-
     public static OilHistoryListFragment newInstance() {
         return new OilHistoryListFragment();
     }
@@ -58,14 +54,6 @@ public class OilHistoryListFragment extends BaseFragment implements View.OnClick
         fragment.setArguments(args);
         return fragment;
     }
-
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
-
-    // ===========================================================
-    // Methods for/from SuperClass
-    // ===========================================================
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -205,6 +193,11 @@ public class OilHistoryListFragment extends BaseFragment implements View.OnClick
         mListener.onOilHistoryItemClickListener(oil);
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 
     @Override
     public void onAttach(Context context) {

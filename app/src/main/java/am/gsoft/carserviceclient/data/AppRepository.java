@@ -53,10 +53,10 @@ public class AppRepository {
 //        mExecutors.diskIO().execute(() -> {
 //          // Deletes old historical data
 //          AppRepository.this.deleteOldData();
-//          Log.d(LOG_TAG, "Old weather deleted");
+//          Log.NotificationActionsFragment(LOG_TAG, "Old weather deleted");
 //          // Insert our new weather data into Sunshine's appDatabase
 //          mAppDatabase.bulkInsert(newForecastsFromNetwork);
-//          Log.d(LOG_TAG, "New values inserted");
+//          Log.NotificationActionsFragment(LOG_TAG, "New values inserted");
 //        });
 //      }
 //    });

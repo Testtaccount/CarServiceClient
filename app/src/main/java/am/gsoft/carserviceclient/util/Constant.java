@@ -21,6 +21,8 @@ public class Constant {
         public static final String ARGUMENT_DATA = "ARGUMENT_DATA";
         public static final String ARGUMENT_OIL_HISTORY_LIST = "ARGUMENT_OIL_HISTORY_LIST";
         public static final String ARGUMENT_OIL_HISTORY = "ARGUMENT_OIL_HISTORY";
+        public static final String ARGUMENT_CAR = "ARGUMENT_CAR";
+        public static final String ARGUMENT_OIL = "ARGUMENT_OIL";
     }
 
     public class Extra {

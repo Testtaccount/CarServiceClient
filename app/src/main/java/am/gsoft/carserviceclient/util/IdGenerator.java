@@ -14,7 +14,7 @@ public abstract class IdGenerator {
 //      id = 0;
 //    }
 //    App.getAppSharedHelper().saveIntId(id);
-//    Logger.d("testt","getNextNotifId: " + id);
+//    Logger.NotificationActionsFragment("testt","getNextNotifId: " + id);
 //    return id;
 //  }
 
