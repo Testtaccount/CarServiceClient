@@ -21,6 +21,10 @@ import am.gsoft.carserviceclient.data.ResultListener;
 import am.gsoft.carserviceclient.data.database.entity.Car;
 import am.gsoft.carserviceclient.data.database.entity.Oil;
 import am.gsoft.carserviceclient.notification.NotificationsRepository;
+import am.gsoft.carserviceclient.phone.CountryInfo;
+import am.gsoft.carserviceclient.phone.CountryListSpinner;
+import am.gsoft.carserviceclient.phone.PhoneNumber;
+import am.gsoft.carserviceclient.phone.PhoneNumberUtils;
 import am.gsoft.carserviceclient.ui.activity.base.BaseActivity;
 import am.gsoft.carserviceclient.ui.activity.main.MainActivity;
 import am.gsoft.carserviceclient.ui.dialog.EditNotesDialogFragment;
@@ -28,7 +32,6 @@ import am.gsoft.carserviceclient.ui.dialog.EditNotesDialogFragment.EditNotesDial
 import am.gsoft.carserviceclient.util.AppUtil;
 import am.gsoft.carserviceclient.util.DateUtils.DateType;
 import am.gsoft.carserviceclient.util.Logger;
-import am.gsoft.carserviceclient.util.MaskEditText;
 import am.gsoft.carserviceclient.util.ToastUtils;
 import am.gsoft.carserviceclient.util.manager.DialogManager;
 import android.app.DatePickerDialog;
@@ -53,6 +56,7 @@ import android.provider.ContactsContract.CommonDataKinds;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -93,6 +97,7 @@ import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class EditOilActivity extends BaseActivity implements View.OnClickListener,
     EditNotesDialogListener, Spinner.OnItemSelectedListener, EditText.OnEditorActionListener {
@@ -107,7 +112,12 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
   private CoordinatorLayout root;
   private AppBarLayout mAppBarLayout;
   private NestedScrollView nestedScrollView;
-  private MaskEditText oilCompanyIdEt;
+//  private MaskEditText oilCompanyIdEt;
+
+  private CountryListSpinner mCountryListSpinner;
+  private EditText mPhoneEditText;
+  private TextView mErrorEditText;
+
   private TextView oilServiveDoneDateTv;
   private TextView oilServiveNextDateTv;
   private Spinner oilBrandSp;
@@ -198,7 +208,12 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
   private void findViews() {
 //    fabRevealLayoutMain = (FABRevealLayout) findViewById(R.id.fab_reveal_layout_main);
     root = (CoordinatorLayout) findViewById(R.id.root_create_new_oil);
-    oilCompanyIdEt = findViewById(R.id.et_oil_company_id);
+//    oilCompanyIdEt = findViewById(R.id.et_oil_company_id);
+
+    mCountryListSpinner = findViewById(R.id.country_list);
+    mPhoneEditText = findViewById(R.id.phone_number);
+    mErrorEditText = findViewById(R.id.phone_number_error);
+
     mAppBarLayout = (AppBarLayout) findViewById(R.id.appBar);
     nestedScrollView = findViewById(R.id.nscw);
 
@@ -602,7 +617,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
     oilBrandSp.setOnItemSelectedListener(this);
     oilTypeSp.setOnItemSelectedListener(this);
 
-    oilCompanyIdEt.setOnClickListener(this);
+    mPhoneEditText.setOnClickListener(this);
     oilServiveDoneDateTv.setOnClickListener(this);
     oilServiveNextDateTv.setOnClickListener(this);
 
@@ -688,7 +703,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 //    });
 
     // actionDone handle
-    oilCompanyIdEt.setOnEditorActionListener(this);
+    mPhoneEditText.setOnEditorActionListener(this);
     oilVolumeEt.setOnEditorActionListener(this);
     oilBrandEt.setOnEditorActionListener(this);
     serviceDoneKmEt.setOnEditorActionListener(this);
@@ -791,7 +806,10 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
   }
 
   private void setOilToUi(Oil uiOil) {
-    oilCompanyIdEt.setText(uiOil.getServiceCompanyId());
+    PhoneNumber phoneNumber = PhoneNumberUtils.getPhoneNumber(uiOil.getServiceCompanyId());
+    setPhoneNumber(phoneNumber);
+    setCountryCode(phoneNumber);
+//    oilCompanyIdEt.setText(uiOil.getServiceCompanyId());
     oilBrandEt.setText(uiOil.getBrand());
     oilBrandSp.setSelection(getSpinnerPosition(oilBrands, currentOil.getBrand()), true);
     oilTypeSp.setSelection(getSpinnerPosition(oilTypes, currentOil.getType()), true);
@@ -837,7 +855,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
       String displayName) { //Permitioni harcy lucel ... +
 //    final String displayName = getString(R.string.app_name);
 //    final String mobileNumber = "+37477889900";
-    Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_garage_bg);
+    Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_icoil2);
     final byte[] photoByteArray = getBytesFromBitmap(largeIcon); // initalized elsewhere
 
     ArrayList<ContentProviderOperation> ops = new ArrayList<>();
@@ -927,16 +945,16 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
   private void saveEditedOilData() {
     Oil oil = getEditedOil();
 
-    if (phoneNameSwitch.isChecked()) {
-      addPhoneNumberToContactList("+" + oil.getServiceCompanyId(),
-          phoneNameEt.getText().toString());
-    }
-
-
     mAppRepository.editOil(currentCar.getKey(), oil, new ResultListener<Oil>() {
       @Override
       public void onLoad(Oil oil) {
         if (oil != null) {
+
+          if (phoneNameSwitch.isChecked()) {
+            addPhoneNumberToContactList(oil.getServiceCompanyId(),
+                phoneNameEt.getText().toString());
+          }
+
           appSharedHelper
               .saveOilNotes(currentCar.getKey(), oil.getKey(), notesTv.getText().toString());
           setNotification(oil);
@@ -994,7 +1012,13 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 //    Oil oil=new Oil();
 //    oil.setKey(currentOil.getKey());
 //    oil.setId(currentOil.getId());
-    currentOil.setServiceCompanyId(oilCompanyIdEt.getRawText());
+    String phoneNumber = getPseudoValidPhoneNumber();
+//    if (phoneNumber == null) {
+//      mErrorEditText.setText(com.firebase.ui.auth.R.string.fui_invalid_phone_number);
+//    }
+
+//    oil.setServiceCompanyId(oilCompanyIdEt.getText().toString());
+    currentOil.setServiceCompanyId(phoneNumber);
     currentOil.setServiceDoneDate(serviceDoneDate);
     currentOil.setServiceNextDate(serviceNextDate);
     currentOil.setBrand(oilBrandEt.getText().toString());
@@ -1225,7 +1249,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 
 //            Snackbar.make(root, "Permission Denied, You cannot write contacts.", Snackbar.LENGTH_LONG).show();
 
-            oilCompanyIdEt.clearFocus();
+            mPhoneEditText.clearFocus();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
               if (shouldShowRequestPermissionRationale(WRITE_CONTACTS)) {
 
@@ -1288,6 +1312,32 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
     }
   }
 
+  private void setPhoneNumber(PhoneNumber phoneNumber) {
+    if (PhoneNumber.isValid(phoneNumber)) {
+      mPhoneEditText.setText(phoneNumber.getPhoneNumber());
+      mPhoneEditText.setSelection(phoneNumber.getPhoneNumber().length());
+    }
+  }
+
+  private void setCountryCode(PhoneNumber phoneNumber) {
+    if (PhoneNumber.isCountryValid(phoneNumber)) {
+      mCountryListSpinner.setSelectedForCountry(new Locale("", phoneNumber.getCountryIso()),
+          phoneNumber.getCountryCode());
+    }
+  }
+
+  @Nullable
+  private String getPseudoValidPhoneNumber() {
+    final CountryInfo countryInfo = (CountryInfo) mCountryListSpinner.getTag();
+    final String everythingElse = mPhoneEditText.getText().toString();
+
+    if (TextUtils.isEmpty(everythingElse)) {
+      return null;
+    }
+
+    return PhoneNumberUtils.formatPhoneNumber(everythingElse, countryInfo);
+  }
+
   private boolean checkInputs() {
 
 //    if (!checkPermission()) {
@@ -1297,15 +1347,6 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 //      return false;
 //    }
 
-    if (TextUtils.isEmpty(oilCompanyIdEt.getText())) {
-      focusOnView(nestedScrollView, oilCompanyIdEt);
-      oilCompanyIdEt.setError("Oil Company Id Can Not Be Empty!");
-//      DialogUtil.getInstance().dismissDialog();
-      DialogManager.getInstance().dismissPreloader(this.getClass());
-
-      return false;
-    }
-
 //    if(!oilCompanyIdEt.getRawText().startsWith("374")){
 //      focusOnView(nestedScrollView,oilCompanyIdEt);
 //      oilCompanyIdEt.setError("Phone number must start with 374... !");
@@ -1314,23 +1355,6 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 //
 //      return false;
 //    }
-
-    if (oilCompanyIdEt.getRawText().length() < 9) {
-      focusOnView(nestedScrollView, oilCompanyIdEt);
-      oilCompanyIdEt.setError("Incorrect Phone number length!");
-//      DialogUtil.getInstance().dismissDialog();
-      DialogManager.getInstance().dismissPreloader(this.getClass());
-      return false;
-    }
-
-    if (phoneNameSwitch.isChecked()) {
-      if (TextUtils.isEmpty(phoneNameEt.getText())) {
-        focusOnView(nestedScrollView, phoneNameEt);
-        phoneNameEt.setError("Name Can Not Be Empty!");
-        DialogManager.getInstance().dismissPreloader(this.getClass());
-        return false;
-      }
-    }
 
     if (TextUtils.isEmpty(oilBrandEt.getText())) {
       focusOnView(nestedScrollView, oilBrandEt);
@@ -1402,6 +1426,30 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
       DialogManager.getInstance().dismissPreloader(this.getClass());
 
       return false;
+    }
+
+    String phoneNumber = getPseudoValidPhoneNumber();
+    if (phoneNumber == null) {
+      focusOnView(nestedScrollView, mPhoneEditText);
+      mErrorEditText.setText(com.firebase.ui.auth.R.string.fui_invalid_phone_number);
+      DialogManager.getInstance().dismissPreloader(this.getClass());
+      return false;
+    }
+
+    if (mPhoneEditText.getText().toString().length() > 10) {
+      focusOnView(nestedScrollView, mPhoneEditText);
+      mErrorEditText.setText("Incorrect Phone number length!");
+      DialogManager.getInstance().dismissPreloader(this.getClass());
+      return false;
+    }
+
+    if (phoneNameSwitch.isChecked()) {
+      if (TextUtils.isEmpty(phoneNameEt.getText())) {
+        focusOnView(nestedScrollView, phoneNameEt);
+        phoneNameEt.setError("Name Can Not Be Empty!");
+        DialogManager.getInstance().dismissPreloader(this.getClass());
+        return false;
+      }
     }
 
     return true;

@@ -26,8 +26,6 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         if (VersionUtils.isAfter21() ) {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.white));
         }

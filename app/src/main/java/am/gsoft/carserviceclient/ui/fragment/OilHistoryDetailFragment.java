@@ -5,6 +5,8 @@ import static am.gsoft.carserviceclient.util.DateUtils.longToString;
 
 import am.gsoft.carserviceclient.R;
 import am.gsoft.carserviceclient.data.database.entity.Oil;
+import am.gsoft.carserviceclient.phone.PhoneNumber;
+import am.gsoft.carserviceclient.phone.PhoneNumberUtils;
 import am.gsoft.carserviceclient.util.Constant.Argument;
 import am.gsoft.carserviceclient.util.DateUtils.DateType;
 import android.content.Context;
@@ -209,8 +211,14 @@ public class OilHistoryDetailFragment extends BaseFragment implements View.OnCli
                 oilServiveNextDateTv.setText(uiOil.getServiceNextDate() == 0 ? "-"
                     : longToString(uiOil.getServiceNextDate(), getDateFormat(DateType.DMY)));
 
-                oilCompanyIdTv.setText(String.format("(%s) %s", uiOil.getServiceCompanyId().substring(0, 3),
-                            uiOil.getServiceCompanyId().substring(3,uiOil.getServiceCompanyId().length())));
+                PhoneNumber phoneNumber = PhoneNumberUtils.getPhoneNumber(uiOil.getServiceCompanyId());
+
+                if (!uiOil.getServiceCompanyId().equals("-") && PhoneNumber.isCountryValid(phoneNumber) && PhoneNumber.isValid(phoneNumber)) {
+                    oilCompanyIdTv.setText(String.format("+%s %s", phoneNumber.getCountryCode(), phoneNumber.getPhoneNumber()));
+                } else {
+                    oilCompanyIdTv.setText("-");
+                }
+
 
 
 

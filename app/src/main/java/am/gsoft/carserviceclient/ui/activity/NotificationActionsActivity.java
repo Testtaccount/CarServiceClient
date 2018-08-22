@@ -86,7 +86,6 @@ public class NotificationActionsActivity extends BaseActivity implements View.On
       }
     }
 
-
   };
 
   TimePickerDialog.OnTimeSetListener mOnTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
@@ -351,11 +350,11 @@ public class NotificationActionsActivity extends BaseActivity implements View.On
     long daysBefore = 10;
     if (driven > 0 && days > 0) {
 //      sum += driven
-
       long mid = driven / days;
 
-      daysBefore = beforeEndKm / mid;
-
+      if (mid > 0) {
+        daysBefore = beforeEndKm / mid;
+      }
     }
 
     long d = ((recomendedKm * DAYS_OF_MONTH) / driven) - daysBefore;

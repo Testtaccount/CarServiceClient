@@ -18,6 +18,8 @@ import am.gsoft.carserviceclient.data.database.AppDatabase;
 import am.gsoft.carserviceclient.data.database.entity.Car;
 import am.gsoft.carserviceclient.data.database.entity.Oil;
 import am.gsoft.carserviceclient.firebase.FirebaseAuthHelper;
+import am.gsoft.carserviceclient.phone.PhoneNumber;
+import am.gsoft.carserviceclient.phone.PhoneNumberUtils;
 import am.gsoft.carserviceclient.ui.activity.CreateNewOilActivity;
 import am.gsoft.carserviceclient.ui.activity.EditOilActivity;
 import am.gsoft.carserviceclient.ui.activity.GarageActivity;
@@ -404,13 +406,14 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
   @Override
   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 //    if (showProgress) {
-      contentLl.setVisibility(View.GONE);
-      progressRl.setVisibility(View.VISIBLE);
+    contentLl.setVisibility(View.GONE);
+    progressRl.setVisibility(View.VISIBLE);
 //    }
     this.currentCar = (Car) parent.getItemAtPosition(position);
     myCarSpinnerAdapter.setSelection(position);
 
-    mOilLiveData = AppDatabase.getInstance(getApplicationContext()).mOilDao().getAllByCarId(currentCar.getId());
+    mOilLiveData = AppDatabase.getInstance(getApplicationContext()).mOilDao()
+        .getAllByCarId(currentCar.getId());
     mOilLiveData.observe(this, new Observer<List<Oil>>() {
       @Override
       public void onChanged(@Nullable List<Oil> oilList) {
@@ -459,16 +462,16 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
         appSharedHelper.saveSpinnerPosition(currentCar.getId());
 
 //        if (showProgress) {
-          new Handler().postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
 
-            @Override
-            public void run() {
+          @Override
+          public void run() {
 //          DialogUtil.getInstance().dismissDialog();
-              contentLl.setVisibility(View.VISIBLE);
-              progressRl.setVisibility(View.GONE);
-            }
+            contentLl.setVisibility(View.VISIBLE);
+            progressRl.setVisibility(View.GONE);
+          }
 
-          }, 500);
+        }, 500);
 //        }
       }
     });
@@ -503,41 +506,44 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
 //      @Override
 //      public void run() {
 
-        oilBrandTv.setText(uiOil.getBrand());
-        oilTypeTv.setText(uiOil.getType());
-        oilVolumeTv.setText(String.valueOf(uiOil.getVolume()));
-        serviceDoneKmTv.setText(String.valueOf(uiOil.getServiceDoneKm()));
-        nextServiceKmTv.setText(String.valueOf(uiOil.getServiceNextKm()));
-        recomendedKmTv.setText(String.valueOf(uiOil.getRecomendedKm()));
-        middleMonthKmTv.setText(String.valueOf(uiOil.getMiddleMonthKm()));
-        oilServiveDoneDateTv.setText(uiOil.getServiceDoneDate() == 0 ? "-"
-            : longToString(uiOil.getServiceDoneDate(), getDateFormat(DateType.DMY)));
-        oilServiveNextDateTv.setText(uiOil.getServiceNextDate() == 0 ? "-"
-            : longToString(uiOil.getServiceNextDate(), getDateFormat(DateType.DMY)));
-        if (!uiOil.getServiceCompanyId().equals("-")) {
-          findViewById(R.id.cv_company_id).setVisibility(View.VISIBLE);
+    oilBrandTv.setText(uiOil.getBrand());
+    oilTypeTv.setText(uiOil.getType());
+    oilVolumeTv.setText(String.valueOf(uiOil.getVolume()));
+    serviceDoneKmTv.setText(String.valueOf(uiOil.getServiceDoneKm()));
+    nextServiceKmTv.setText(String.valueOf(uiOil.getServiceNextKm()));
+    recomendedKmTv.setText(String.valueOf(uiOil.getRecomendedKm()));
+    middleMonthKmTv.setText(String.valueOf(uiOil.getMiddleMonthKm()));
+    oilServiveDoneDateTv.setText(uiOil.getServiceDoneDate() == 0 ? "-"
+        : longToString(uiOil.getServiceDoneDate(), getDateFormat(DateType.DMY)));
+    oilServiveNextDateTv.setText(uiOil.getServiceNextDate() == 0 ? "-"
+        : longToString(uiOil.getServiceNextDate(), getDateFormat(DateType.DMY)));
+    PhoneNumber phoneNumber = PhoneNumberUtils.getPhoneNumber(uiOil.getServiceCompanyId());
+
+    if (!uiOil.getServiceCompanyId().equals("-") && PhoneNumber.isCountryValid(phoneNumber)
+        && PhoneNumber.isValid(phoneNumber)) {
+      findViewById(R.id.cv_company_id).setVisibility(View.VISIBLE);
 //          oilCompanyIdTv.setText(uiOil.getServiceCompanyId());
-          oilCompanyIdTv.setText(String.format("(%s) %s", uiOil.getServiceCompanyId().substring(0, 3),
-                  uiOil.getServiceCompanyId().substring(3, uiOil.getServiceCompanyId().length())));
-        } else {
-          findViewById(R.id.cv_company_id).setVisibility(View.GONE);
-        }
+      oilCompanyIdTv.setText(
+          String.format("+%s %s", phoneNumber.getCountryCode(), phoneNumber.getPhoneNumber()));
+    } else {
+      findViewById(R.id.cv_company_id).setVisibility(View.GONE);
+    }
 
-        String notesText = appSharedHelper.getOilNotes(currentCar.getKey(), uiOil.getKey());
-        Logger.d("testt", "id: " + currentCar.getId() + "_" + uiOil.getId());
-        Logger.d("testt", "notesText: " + notesText);
+    String notesText = appSharedHelper.getOilNotes(currentCar.getKey(), uiOil.getKey());
+    Logger.d("testt", "id: " + currentCar.getId() + "_" + uiOil.getId());
+    Logger.d("testt", "notesText: " + notesText);
 
-        if (notesText != null && !notesText.equals("")) {
-          findViewById(R.id.cv_notes).setVisibility(View.VISIBLE);
-          notesTextTv.setText(notesText);
-        } else if (notesText == null || notesText.equals("")) {
-          findViewById(R.id.cv_notes).setVisibility(View.GONE);
-        }
+    if (notesText != null && !notesText.equals("")) {
+      findViewById(R.id.cv_notes).setVisibility(View.VISIBLE);
+      notesTextTv.setText(notesText);
+    } else if (notesText == null || notesText.equals("")) {
+      findViewById(R.id.cv_notes).setVisibility(View.GONE);
+    }
 
-        km1Tv.setText(currentCar.getDistanceUnit());
-        km2Tv.setText(currentCar.getDistanceUnit());
-        km3Tv.setText(currentCar.getDistanceUnit());
-        km4Tv.setText(currentCar.getDistanceUnit());
+    km1Tv.setText(currentCar.getDistanceUnit());
+    km2Tv.setText(currentCar.getDistanceUnit());
+    km3Tv.setText(currentCar.getDistanceUnit());
+    km4Tv.setText(currentCar.getDistanceUnit());
 
 //        showProgress = true;
 //      }

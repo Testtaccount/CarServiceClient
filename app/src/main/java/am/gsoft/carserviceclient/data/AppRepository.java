@@ -665,6 +665,7 @@ public class AppRepository {
         @Override
         public void run() {
           notificationsRepository.deleteAllNotificationsByCarId(c.getId());
+          App.getAppSharedHelper().clearAll();
           mAppDatabase.mCarDao().delete(c);
         }
       });
