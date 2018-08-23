@@ -11,6 +11,7 @@ import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_FIRST_OIL;
 import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_INDEX_OF_CURRENT_OIL;
 import static am.gsoft.carserviceclient.util.DateUtils.getDateFormat;
 import static am.gsoft.carserviceclient.util.DateUtils.longToString;
+import static android.Manifest.permission.CALL_PHONE;
 
 import am.gsoft.carserviceclient.R;
 import am.gsoft.carserviceclient.data.InjectorUtils;
@@ -29,18 +30,28 @@ import am.gsoft.carserviceclient.ui.activity.base.BaseActivity;
 import am.gsoft.carserviceclient.ui.adapter.MyCarSpinnerAdapter;
 import am.gsoft.carserviceclient.util.DateUtils.DateType;
 import am.gsoft.carserviceclient.util.Logger;
+import am.gsoft.carserviceclient.util.VersionUtils;
 import am.gsoft.carserviceclient.util.manager.DialogManager;
 import am.gsoft.carserviceclient.util.manager.FragmentTransactionManager;
+import am.gsoft.carserviceclient.util.manager.SnackBarManager;
+import android.Manifest.permission;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.CardView;
 import android.view.Menu;
@@ -51,6 +62,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Space;
@@ -65,6 +77,7 @@ import java.util.List;
 public class MainActivity extends BaseActivity implements OnClickListener, OnItemSelectedListener {
 
   private static final String TAG = MainActivity.class.getSimpleName();
+  private static final int REQUEST_READ_PHONE_STATE = 7788;
 
   private TextView oilCompanyIdTv;
   private TextView oilServiveDoneDateTv;
@@ -95,6 +108,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
   private TextView garageActionTxtTv;
   private LinearLayout emptyInfoLl;
   private LinearLayout mainContentLl;
+  private ImageView callBtnIv;
   private CardView oilInfoCv;
   private CardView kmInfoCv;
   private CardView dateInfoCv;
@@ -198,6 +212,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
     middleMonthKmTv = (TextView) findViewById(R.id.tv_middle_month_km);
     notesTextTv = (TextView) findViewById(R.id.tv_notes);
     mainContentLl = (LinearLayout) findViewById(R.id.ll_main_content);
+    callBtnIv = (ImageView) findViewById(R.id.iv_call_btn);
     km1Tv = (TextView) findViewById(R.id.tv_km1);
     km2Tv = (TextView) findViewById(R.id.tv_km);
     km3Tv = (TextView) findViewById(R.id.tv_km3);
@@ -247,6 +262,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
     editOilBtnLl.setOnClickListener(this);
     oilHistoryBtnLl.setOnClickListener(this);
     garageActionBtnFl.setOnClickListener(this);
+    callBtnIv.setOnClickListener(this);
     spinner.setOnItemSelectedListener(this);
 
     findViewById(R.id.scroll).setOnTouchListener(new View.OnTouchListener() {
@@ -338,6 +354,10 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
         overridePendingTransition(R.anim.down_slide_enter, R.anim.up_slide_exit);
         break;
       }
+      case R.id.iv_call_btn: {
+        showCallDialog();
+      }
+      break;
     }
   }
 
@@ -550,6 +570,118 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
 //    }, showProgress ? 1500 : 0);
 
   }
+
+  private boolean checkPermission() {
+    int result = ContextCompat.checkSelfPermission(getApplicationContext(), CALL_PHONE);
+//    int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA);
+
+    return result
+        == PackageManager.PERMISSION_GRANTED;//&& result1 == PackageManager.PERMISSION_GRANTED;
+  }
+
+  private void requestPermission() {
+
+    ActivityCompat.requestPermissions(this, new String[]{CALL_PHONE}, REQUEST_READ_PHONE_STATE);
+
+  }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, String permissions[],
+      int[] grantResults) {
+    switch (requestCode) {
+      case REQUEST_READ_PHONE_STATE:
+        if (grantResults.length > 0) {
+
+          boolean writeContactsAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+          if (!writeContactsAccepted) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+              if (shouldShowRequestPermissionRationale(CALL_PHONE)) {
+
+                return;
+              } else {
+                SnackBarManager
+                    .showWithAction(this, findViewById(R.id.root_main_activity),
+                        "Permission Denied, You cannot call",
+                        Snackbar.LENGTH_LONG, "ALLOW", new View.OnClickListener() {
+                          @Override
+                          public void onClick(View view) {
+                            if (VersionUtils.isAfter23()) {
+                              Intent intent = new Intent();
+                              intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                              Uri uri = Uri.fromParts("package", getPackageName(), null);
+                              intent.setData(uri);
+                              startActivity(intent);
+//                          finish();
+                            }
+                          }
+                        });
+              }
+            }
+
+          } else {
+            if (currentOil != null) {
+              Intent callIntent = new Intent(Intent.ACTION_CALL);
+              callIntent.setData(Uri.parse("tel:" + currentOil.getServiceCompanyId()));
+              if (ActivityCompat.checkSelfPermission(this, permission.CALL_PHONE)
+                  != PackageManager.PERMISSION_GRANTED) {
+                return;
+              }
+              startActivity(callIntent);
+            }
+//            phoneNameSwitch.setChecked(true);
+          }
+        }
+
+        break;
+    }
+  }
+
+
+  private void showCallDialog() {
+    new MaterialDialog.Builder(this)
+        .title("Make call?")
+        .neutralText("Cancel")
+        .negativeText("Call via")
+        .positiveText("Call")
+        .neutralColor(getResources().getColor(R.color.colorAccent))
+        .negativeColor(getResources().getColor(R.color.color_484848))
+        .positiveColor(getResources().getColor(R.color.color_484848))
+        .onNeutral(new SingleButtonCallback() {
+          @Override
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            dialog.dismiss();
+          }
+        })
+        .onNegative(new SingleButtonCallback() {
+          @Override
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            if (currentOil != null) {
+              startActivity(
+                  new Intent(Intent.ACTION_DIAL,
+                      Uri.parse("tel:" + currentOil.getServiceCompanyId())));
+            }
+          }
+        })
+        .onPositive(new SingleButtonCallback() {
+          @Override
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            if (!checkPermission()) {
+              requestPermission();
+            } else {
+              if (currentOil != null) {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + currentOil.getServiceCompanyId()));
+                startActivity(callIntent);
+              }
+            }
+          }
+        })
+
+        .show();
+  }
+
 
   private void openScreen(Fragment fragment, boolean addToBackStack) {
     FragmentTransactionManager.displayFragment(

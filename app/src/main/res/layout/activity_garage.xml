@@ -265,6 +265,7 @@
                 android:layout_marginTop="8dp">
 
                 <TextView
+                  android:textIsSelectable="true"
                   android:id="@+id/tv_vin_code"
                   android:text="-"
                   style="@style/ItemCardFieldTextStyle"

@@ -502,7 +502,7 @@
   <string name="car_vin_code">Car VIN code</string>
   <string name="enter_vin_code_optional">Enter vin code (optional)</string>
   <string name="service_phone_number">Service Phone Number</string>
-  <string name="phone">Phone Number</string>
+  <string name="phone_number">Phone Number</string>
   <string name="save_in_contacts">Save in contacts</string>
   <string name="oil_information">Oil information</string>
   <string name="oil_brand_name">Brand Name</string>

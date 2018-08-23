@@ -1355,25 +1355,30 @@
 
                       <!--app:backgroundTint="@color/colorAccent"-->
                       <am.gsoft.carserviceclient.phone.CountryListSpinner
-                        android:layout_marginStart="10dp"
                         android:id="@+id/country_list"
+                        style="@style/FirebaseUI.CountrySpinner"
                         android:layout_marginTop="8dp"
-                        style="@style/FirebaseUI.CountrySpinner" />
+                        android:layout_marginStart="10dp"
+                        android:textSize="18dp"
+                        android:fontFamily="sans-serif-condensed"
+                        />
 
                       <EditText
                         android:id="@+id/phone_number"
                         style="@style/FirebaseUI.TextInputEditText.PhoneField"
-                        android:layout_toEndOf="@id/country_list"
-                        android:layout_toRightOf="@id/country_list"
                         android:layout_alignBaseline="@id/country_list"
                         android:layout_gravity="end"
+                        android:layout_toEndOf="@id/country_list"
+                        android:layout_toRightOf="@id/country_list"
+                        android:hint="@string/phone_number"
                         android:imeOptions="actionDone"
-                        android:hint="@string/phone"
                         android:inputType="number"
                         android:maxLines="1"
                         android:textColor="@color/colorPrimary"
                         android:textColorHint="@color/color_background_E5E5E5"
-                        android:theme="@style/CreateNewOilActivityEditTextTheme"/>
+                        android:textSize="18dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:theme="@style/CreateNewOilActivityEditTextTheme" />
 
                       <TextView
                         android:id="@+id/phone_number_error"
