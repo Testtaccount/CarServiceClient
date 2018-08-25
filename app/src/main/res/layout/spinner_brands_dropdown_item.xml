@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="55dp"
+  xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/item_brand_root"
   android:orientation="vertical">
 
@@ -29,7 +30,7 @@
       android:drawableRight="@drawable/ic_arrow_drop_down_white_24dp"
       android:drawableTint="@android:color/transparent"
       android:gravity="end|center"
-      android:text="dddddd"
+      tools:text="dddddd"
       android:singleLine="true"
       android:layout_marginBottom="1dp"
       android:textColor="@color/colorPrimary"

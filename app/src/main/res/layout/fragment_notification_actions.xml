@@ -43,7 +43,7 @@
               android:layout_span="2"
               android:fontFamily="sans-serif-medium"
               android:gravity="center"
-              android:text="Choose your action"
+              android:text="@string/choose_your_action"
               android:textColor="@color/colorPrimaryDark"
               android:textSize="20dp"
               android:visibility="visible" />
@@ -67,7 +67,7 @@
       <FrameLayout
         android:id="@+id/fl_pick_btn"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/main_button_height"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
@@ -92,17 +92,17 @@
           android:drawingCacheQuality="high"
           android:fontFamily="sans-serif-medium"
           android:gravity="center"
-          android:text="@string/select_date"
+          android:text="@string/select_reminder_date_btn_text"
           android:textAllCaps="true"
           android:textColor="@color/white"
-          android:textSize="14dp" />
+          android:textSize="@dimen/main_button_textsize" />
 
       </FrameLayout>
 
       <FrameLayout
         android:id="@+id/fl_update_btn"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/main_button_height"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="36dp"
         android:layout_marginLeft="16dp"
@@ -127,9 +127,9 @@
           android:drawingCacheQuality="high"
           android:fontFamily="sans-serif-medium"
           android:gravity="center"
-          android:text="SET MILEAGE"
+          android:text="@string/set_mileage_btn_text"
           android:textColor="@color/white"
-          android:textSize="14dp" />
+          android:textSize="@dimen/main_button_textsize" />
 
       </FrameLayout>
 

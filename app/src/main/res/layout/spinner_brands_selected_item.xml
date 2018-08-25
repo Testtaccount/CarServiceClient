@@ -19,6 +19,7 @@
     <!--android:textSize="18sp" />&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
 <!--</LinearLayout>-->
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/tv_item_car_brand"
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
@@ -29,7 +30,7 @@
   android:drawableRight="@drawable/ic_arrow_drop_down_white_24dp"
   android:drawableTint="@color/colorAccent2"
   android:gravity="end|center"
-  android:text="dddddd"
+  tools:text="dddddd"
   android:fontFamily="sans-serif-condensed"
   android:singleLine="true"
   android:textColor="@color/colorPrimary"

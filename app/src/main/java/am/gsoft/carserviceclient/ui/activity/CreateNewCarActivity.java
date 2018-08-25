@@ -66,7 +66,7 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
   private FloatingActionButton saveCarFab;
   private CarBrandsSpinnerAdapter brandsSpinnerAdapter;
   private String[] carYears;
-  private String[] carDencityUnits = {"Km", "Mil"};
+  private String[] carDencityUnits = {getString(R.string.km), getString(R.string.km)};
 
   private ImageView colorPickerImg;
   private int colorId;
@@ -281,7 +281,7 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
         break;
       case R.id.rl_color_picker_background:
         ColorChooserDialog dialog = new ColorChooserDialog(this);
-        dialog.setTitle(R.string.title);
+        dialog.setTitle("Choose the color");
         dialog.setColorListener(new ColorListener() {
           @Override
           public void OnColorClick(View v, int color) {
@@ -418,9 +418,9 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
       this.doubleBackToExitPressedOnce = true;
       if (appSharedHelper.getCarListToSave() != null
           && appSharedHelper.getCarListToSave().size() != 0) {
-        ToastUtils.shortToast("Please click BACK again to exit");
+        ToastUtils.shortToast(R.string.click_again_txt);
       } else {
-        ToastUtils.shortToast("Add new car, or click BACK again to exit");
+        ToastUtils.shortToast(R.string.click_again_or_add_car_txt);
       }
 
       new Handler().postDelayed(new Runnable() {
@@ -476,7 +476,7 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
           @Override
           public void run() {
             if(car!=null){
-              ToastUtils.shortToast("Car created!");
+              ToastUtils.shortToast(R.string.msg_car_created);
               Intent intent = null;
               if (getIntent().getAction().equals(ACTION_MAIN_ACTIVITY_INTENT)) {
                 intent = new Intent(CreateNewCarActivity.this, MainActivity.class);
@@ -495,7 +495,7 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
               }
             }else {
               DialogManager.getInstance().dismissPreloader(this.getClass());
-              ToastUtils.shortToast("Car not created!");
+              ToastUtils.shortToast(R.string.msg_car_not_created);
             }
           }
         });
@@ -506,7 +506,7 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
 
       @Override
       public void onFail(String e) {
-        ToastUtils.shortToast("Car not created!");
+        ToastUtils.shortToast(R.string.msg_car_not_created);
       }
     });
 //    CarDataDbHalper.getInstance().saveCar(user.getKey(), car, new ResultListener<Car>() {
@@ -529,28 +529,28 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
 
     if (carBrandsSpinner.getSelectedItemPosition() == 0) {
       focusOnView(nestedScrollView, carBrandsSpinner);
-      ((TextView) carBrandsSpinner.getChildAt(0)).setError("Not Selected");
+      ((TextView) carBrandsSpinner.getChildAt(0)).setError(getString(R.string.err_msg_not_selected));
       DialogManager.getInstance().dismissPreloader(this.getClass());
       return false;
     }
 
     if (TextUtils.isEmpty(modelEt.getText())) {
       focusOnView(nestedScrollView, modelEt);
-      modelEt.setError("Car Model Can Not Be Empty!");
+      modelEt.setError(getString(R.string.err_msg_empty));
       DialogManager.getInstance().dismissPreloader(this.getClass());
       return false;
     }
 
     if (carYearsSpinner.getSelectedItemPosition() == 0) {
       focusOnView(nestedScrollView, carYearsSpinner);
-      ((TextView) carYearsSpinner.getChildAt(0)).setError("Not Selected");
+      ((TextView) carYearsSpinner.getChildAt(0)).setError(getString(R.string.err_msg_not_selected));
       DialogManager.getInstance().dismissPreloader(this.getClass());
       return false;
     }
 
     if (TextUtils.isEmpty(numbersEt.getText())) {
       focusOnView(nestedScrollView, numbersEt);
-      numbersEt.setError("Car Numbers Can Not Be Empty!");
+      numbersEt.setError(getString(R.string.err_msg_empty));
       DialogManager.getInstance().dismissPreloader(this.getClass());
       return false;
     }

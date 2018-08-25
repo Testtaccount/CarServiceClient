@@ -112,16 +112,6 @@
     </receiver>
     <receiver android:name=".notification.NotificationsReceiver" />
 
-    <activity
-      android:configChanges="orientation|keyboardHidden|screenSize"
-      android:name=".ui.fragment.NextReminderFragment"
-      android:screenOrientation="portrait"
-      android:theme="@style/FullscreenTheme" />
-    <activity
-      android:name=".ui.fragment.MileageFragment"
-      android:screenOrientation="portrait"
-      android:windowSoftInputMode="adjustResize" />
-
     <service
       android:exported="false"
       android:name=".notification.NotificationsIntentService" />

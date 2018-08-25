@@ -14,7 +14,7 @@
   <android.support.design.widget.AppBarLayout
     android:id="@+id/appBar"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_height="@dimen/app_bar_layout_height"
     android:fitsSystemWindows="true"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:elevation="0dp">
@@ -29,7 +29,7 @@
       app:expandedTitleMarginStart="48dp"
       app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
       app:layout_scrollFlags="scroll|exitUntilCollapsed"
-      app:title="Edit Current Oil">
+      app:title="@string/edit_oil_activity_title">
 
       <ImageView
         android:id="@+id/toolbarImage"
@@ -49,7 +49,7 @@
   <View
     android:id="@+id/v_shadow"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
+    android:layout_height="@dimen/shadow_view_height_big"
     android:background="@drawable/drop_shadow_reverse"
     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
@@ -91,7 +91,7 @@
                 <TextView
                   android:layout_span="2"
                   style="@style/ItemCardHeaderTextStyle"
-                  android:text="Fill Oil Information"
+                  android:text="@string/fill_oil_information"
                   android:textColor="@color/colorAccent" />
               </TableRow>
 
@@ -378,7 +378,7 @@
                   <!--android:visibility="gone"/>-->
                 <TextView
                   android:layout_span="2"
-                  android:text="Fill Mileage Information"
+                  android:text="@string/fill_mileage_information"
                   android:textColor="@color/colorAccent"
                   style="@style/ItemCardHeaderTextStyle" />
               </TableRow>
@@ -487,7 +487,7 @@
                     android:layout_marginStart="10dp"
                     android:paddingEnd="16dp"
                     android:paddingRight="16dp"
-                    android:hint="@string/recomended"
+                    android:hint="@string/recommended"
                     android:textColorHint="@color/colorPrimary"
                     app:hintAnimationEnabled="false"
                     app:hintTextAppearance="@style/MyHintText">
@@ -705,7 +705,7 @@
                 <TextView
                   android:id="@+id/tv_mid_manual"
                   style="@style/ItemCardFieldTextStyle"
-                  android:text="@string/middle_month_set_manually"
+                  android:text="@string/middle_month_set_manually_km"
                   android:textSize="16dp" />
 
                 <RelativeLayout
@@ -760,7 +760,7 @@
                   <!--android:visibility="gone"/>-->
                 <TextView
                   android:layout_span="2"
-                  android:text="Select Date"
+                  android:text="@string/select_date"
                   android:textColor="@color/colorAccent"
                   style="@style/ItemCardHeaderTextStyle" />
               </TableRow>
@@ -987,7 +987,7 @@
                     android:paddingEnd="16dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="16dp"
-                    android:hint="@string/name"
+                    android:hint="@string/contact_name"
                     android:textColorHint="@color/colorPrimary"
                     app:hintAnimationEnabled="false"
                     app:hintTextAppearance="@style/MyHintText">
@@ -1150,7 +1150,7 @@
 
         <Space
           android:layout_width="match_parent"
-          android:layout_height="6dp" />
+          android:layout_height="@dimen/space_height_small" />
 
       </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

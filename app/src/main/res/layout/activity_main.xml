@@ -65,7 +65,7 @@
       android:layout_height="wrap_content"
       android:layout_gravity="top"
       android:background="@color/colorPrimary"
-      android:elevation="8dp"
+      android:elevation="@dimen/main_spinner_elevation"
       android:fitsSystemWindows="true"
       android:orientation="vertical"
       app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -106,7 +106,7 @@
 
         <View
           android:layout_width="match_parent"
-          android:layout_height="8dp"
+          android:layout_height="@dimen/shadow_view_height_small"
           android:background="@drawable/drop_shadow_reverse"
           android:visibility="visible" />
 
@@ -147,7 +147,7 @@
                   android:gravity="center"
                   android:text="@string/no_oil_text"
                   android:textColor="@android:color/darker_gray"
-                  android:textSize="20dp"
+                  android:textSize="@dimen/content_textsize_medium"
                   android:visibility="visible" />
 
 
@@ -168,7 +168,7 @@
           <FrameLayout
             android:id="@+id/fl_btns"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/main_button_height"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="16dp"
@@ -213,7 +213,7 @@
                   android:src="@drawable/ic_oil_white_24dp" />
 
                 <TextView
-                  android:textSize="14dp"
+                  android:textSize="@dimen/main_button_textsize"
                   android:id="@+id/tv_new_oil_txt"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
@@ -250,7 +250,7 @@
                   android:clickable="false"
                   android:foreground="?attr/selectableItemBackground">
                   <TextView
-                    android:textSize="14dp"
+                    android:textSize="@dimen/main_button_textsize"
                     android:id="@+id/tv_edit_oil_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -282,7 +282,7 @@
                 android:visibility="gone">
 
                 <TextView
-                  android:textSize="14dp"
+                  android:textSize="@dimen/main_button_textsize"
                   android:id="@+id/tv_oil_history_txt"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
@@ -503,7 +503,7 @@
 
                   <TextView
                     style="@style/ItemCardFieldTextStyle"
-                    android:text="@string/recomended"
+                    android:text="@string/recommended"
                     />
 
                   <RelativeLayout
@@ -719,7 +719,7 @@
                     android:drawableTint="@color/colorPrimary"
                     android:focusable="true"
                     android:gravity="start|center"
-                    android:text="@string/select_date"
+                    android:text="-"
                     android:textStyle="bold"
                     android:textColor="@color/colorAccent"
                     android:textSize="18dp" />
@@ -752,7 +752,7 @@
                     android:focusable="true"
                     android:textStyle="bold"
                     android:gravity="start|center"
-                    android:text="@string/select_date"
+                    android:text="-"
                     android:textColor="@color/colorAccent"
                     android:textSize="18dp" />
 
@@ -885,7 +885,7 @@
                       android:padding="16dp"
                       android:background="@drawable/text_style_line"
                       android:gravity="start|top"
-                      android:hint="Notes Text..."
+                      android:hint="@string/notes_text"
                       android:scrollbars="vertical"
                       android:singleLine="false"
                       android:textAppearance="@android:style/TextAppearance"
@@ -1036,7 +1036,7 @@
           <FrameLayout
             android:id="@+id/fl_garage_action_btn"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/main_button_height"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="16dp"
@@ -1051,7 +1051,7 @@
 
             <TextView
               android:fontFamily="sans-serif-medium"
-              android:textSize="14dp"
+              android:textSize="@dimen/main_button_textsize"
               android:id="@+id/tv_garage_action_txt"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
@@ -1105,7 +1105,7 @@
         <Space
           android:id="@+id/space"
           android:layout_width="match_parent"
-          android:layout_height="6dp"
+          android:layout_height="@dimen/space_height_small"
           android:focusable="true" />
 
       </LinearLayout>

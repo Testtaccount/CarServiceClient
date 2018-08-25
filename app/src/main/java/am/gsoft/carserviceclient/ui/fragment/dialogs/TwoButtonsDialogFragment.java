@@ -112,7 +112,7 @@ public class TwoButtonsDialogFragment extends DialogFragment {
         if (!TextUtils.isEmpty(negativeText)) {
             builder.negativeText(negativeText);
         } else {
-            builder.negativeText(R.string.cancel_dlg_btn);
+            builder.negativeText(R.string.dlg_cancel);
         }
 
         if (!TextUtils.isEmpty(content)) {

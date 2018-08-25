@@ -55,7 +55,7 @@ public class SplashActivity extends BaseActivity {
                       runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                          ToastUtils.shortToast("Yo Don't Have Cars");
+                          ToastUtils.shortToast(R.string.msg_no_cars);
                         }
                       });
                         Intent intent = new Intent(SplashActivity.this, CreateNewCarActivity.class);

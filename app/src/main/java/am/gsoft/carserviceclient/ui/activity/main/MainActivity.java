@@ -70,6 +70,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.MaterialDialog.Builder;
 import com.afollestad.materialdialogs.MaterialDialog.SingleButtonCallback;
 import java.util.ArrayList;
 import java.util.List;
@@ -390,10 +391,10 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
 
   private void showLogOutDialog() {
 
-    new MaterialDialog.Builder(this)
-        .title("Are you sure you want to log out?")
-        .positiveText("Yes")
-        .negativeText("No")
+    new Builder(this)
+        .title(R.string.dlg_logout_title)
+        .positiveText(R.string.dlg_yes)
+        .negativeText(R.string.dlg_cancel)
         .positiveColor(getResources().getColor(R.color.color_484848))
         .negativeColor(getResources().getColor(R.color.colorAccent))
         .onPositive(new SingleButtonCallback() {
@@ -603,8 +604,8 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
               } else {
                 SnackBarManager
                     .showWithAction(this, findViewById(R.id.root_main_activity),
-                        "Permission Denied, You cannot call",
-                        Snackbar.LENGTH_LONG, "ALLOW", new View.OnClickListener() {
+                        getString(R.string.permission_denided),
+                        Snackbar.LENGTH_LONG, getString(R.string.snake_bar_action_msg_allow), new View.OnClickListener() {
                           @Override
                           public void onClick(View view) {
                             if (VersionUtils.isAfter23()) {
@@ -641,10 +642,10 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
 
   private void showCallDialog() {
     new MaterialDialog.Builder(this)
-        .title("Make call?")
-        .neutralText("Cancel")
-        .negativeText("Call via")
-        .positiveText("Call")
+        .title(R.string.dlg_make_call_title)
+        .neutralText(R.string.dlg_cancel)
+        .negativeText(R.string.dlg_call_via)
+        .positiveText(R.string.dlg_call)
         .neutralColor(getResources().getColor(R.color.colorAccent))
         .negativeColor(getResources().getColor(R.color.color_484848))
         .positiveColor(getResources().getColor(R.color.color_484848))

@@ -375,10 +375,10 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
     km3Tv.setText(currentCar.getDistanceUnit());
     km4Tv.setText(currentCar.getDistanceUnit());
 
-    if (currentCar.getDistanceUnit().equals("Km")) {
-      midManualTv.setText("Middle Month Km\nSet manually  ");
+    if (currentCar.getDistanceUnit().equals(getString(R.string.km))) {
+      midManualTv.setText(getString(R.string.middle_month_set_manually_km));
     } else {
-      midManualTv.setText("Middle Month Mil\nSet manually  ");
+      midManualTv.setText(getString(R.string.middle_month_set_manually_mil));
     }
 
     midMonthSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -779,16 +779,16 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 
         break;
       case R.id.img_i1:
-        showInfoDialog("img_i1");
+        showInfoDialog(getString(R.string.dlg_info_content_for_current));
         break;
       case R.id.img_i2:
-        showInfoDialog("img_i2");
+        showInfoDialog(getString(R.string.dlg_info_content_for_recommended));
         break;
       case R.id.img_i3:
-        showInfoDialog("img_i3");
+        showInfoDialog(getString(R.string.dlg_info_content_for_next));
         break;
       case R.id.img_i4:
-        showInfoDialog("img_i4");
+        showInfoDialog(getString(R.string.dlg_info_content_for_middle));
         break;
       default:
     }
@@ -959,7 +959,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
               .saveOilNotes(currentCar.getKey(), oil.getKey(), notesTv.getText().toString());
           setNotification(oil);
 
-          ToastUtils.shortToast("Oil changed!");
+          ToastUtils.shortToast(R.string.msg_oil_changed);
           Intent intent = new Intent(EditOilActivity.this, MainActivity.class);
 //        intent.setAction(ACTION_EDIT_OIL_ACTIVITY_INTENT);
           startActivity(intent);
@@ -969,7 +969,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
         } else {
           DialogManager.getInstance().dismissPreloader(this.getClass());
 
-          ToastUtils.shortToast("Oil not changed!");
+          ToastUtils.shortToast(R.string.msg_oil_not_changed);
         }
       }
 
@@ -977,7 +977,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
       public void onFail(String e) {
         DialogManager.getInstance().dismissPreloader(this.getClass());
 
-        ToastUtils.shortToast("Oil not changed!");
+        ToastUtils.shortToast(R.string.msg_oil_not_changed);
       }
 
     });
@@ -1207,9 +1207,9 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
   private void showInfoDialog(String content) {
 
     new MaterialDialog.Builder(this)
-        .title("Info")
+        .title(R.string.dlg_info_title)
         .content(content)
-        .positiveText("OK")
+        .positiveText(R.string.dlg_ok)
         .positiveColor(getResources().getColor(R.color.colorAccent))
         .onPositive(new SingleButtonCallback() {
           @Override
@@ -1283,9 +1283,9 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
                 return;
               } else {
                 Snackbar snackbar = Snackbar
-                    .make(root, "Permission Denied, You cannot write contacts",
+                    .make(root, R.string.permission_denided,
                         Snackbar.LENGTH_LONG)
-                    .setAction("ALLOW", new View.OnClickListener() {
+                    .setAction(R.string.snake_bar_action_msg_allow, new View.OnClickListener() {
                       @Override
                       public void onClick(View view) {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -1358,7 +1358,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 
     if (TextUtils.isEmpty(oilBrandEt.getText())) {
       focusOnView(nestedScrollView, oilBrandEt);
-      oilBrandEt.setError("Oil Brand Can Not Be Empty!");
+      oilBrandEt.setError(getString(R.string.err_msg_empty));
 //      DialogUtil.getInstance().dismissDialog();
       DialogManager.getInstance().dismissPreloader(this.getClass());
 
@@ -1367,7 +1367,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 
     if (oilTypeSp.getSelectedItemPosition() == 0) {
       focusOnView(nestedScrollView, oilTypeSp);
-      ((TextView) oilTypeSp.getChildAt(0)).setError("Not Selected");
+      ((TextView) oilTypeSp.getChildAt(0)).setError(getString(R.string.err_msg_not_selected));
 //      DialogUtil.getInstance().dismissDialog();
       DialogManager.getInstance().dismissPreloader(this.getClass());
 
@@ -1376,7 +1376,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 
     if (TextUtils.isEmpty(oilServiveDoneDateTv.getText())) {
       focusOnView(nestedScrollView, oilServiveDoneDateTv);
-      oilServiveDoneDateTv.setError("Oil Service Done Date Can Not Be Empty!");
+      oilServiveDoneDateTv.setError(getString(R.string.err_msg_empty));
 //      DialogUtil.getInstance().dismissDialog();
       DialogManager.getInstance().dismissPreloader(this.getClass());
 
@@ -1385,7 +1385,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 
     if (TextUtils.isEmpty(oilServiveNextDateTv.getText())) {
       focusOnView(nestedScrollView, oilServiveNextDateTv);
-      oilServiveNextDateTv.setError("Oil Service Next Date Can Not Be Empty!");
+      oilServiveNextDateTv.setError(getString(R.string.err_msg_empty));
 //      DialogUtil.getInstance().dismissDialog();
       DialogManager.getInstance().dismissPreloader(this.getClass());
 
@@ -1394,7 +1394,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 
     if (TextUtils.isEmpty(serviceDoneKmEt.getText())) {
       focusOnView(nestedScrollView, serviceDoneKmEt);
-      serviceDoneKmEt.setError("Service Done Km Can Not Be Empty!");
+      serviceDoneKmEt.setError(getString(R.string.err_msg_empty));
 //      DialogUtil.getInstance().dismissDialog();
       DialogManager.getInstance().dismissPreloader(this.getClass());
 
@@ -1403,7 +1403,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 
     if (Long.valueOf(serviceDoneKmEt.getText().toString()) < currentOil.getServiceDoneKm()) {
       focusOnView(nestedScrollView, serviceDoneKmEt);
-      serviceDoneKmEt.setError("Curent Km must be more than the previous service km !");
+      serviceDoneKmEt.setError(getString(R.string.err_msg_must_be_more));
 //      DialogUtil.getInstance().dismissDialog();
       DialogManager.getInstance().dismissPreloader(this.getClass());
 
@@ -1412,7 +1412,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 
     if (TextUtils.isEmpty(nextServiceKmEt.getText())) {
       focusOnView(nestedScrollView, nextServiceKmEt);
-      nextServiceKmEt.setError("Service Next Km Can Not Be Empty!");
+      nextServiceKmEt.setError(getString(R.string.err_msg_empty));
 //      DialogUtil.getInstance().dismissDialog();
       DialogManager.getInstance().dismissPreloader(this.getClass());
 
@@ -1421,7 +1421,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 
     if (TextUtils.isEmpty(recomendedKmEt.getText())) {
       focusOnView(nestedScrollView, recomendedKmEt);
-      recomendedKmEt.setError("Recomended Km Can Not Be Empty!");
+      recomendedKmEt.setError(getString(R.string.err_msg_empty));
 //      DialogUtil.getInstance().dismissDialog();
       DialogManager.getInstance().dismissPreloader(this.getClass());
 
@@ -1431,14 +1431,14 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
     String phoneNumber = getPseudoValidPhoneNumber();
     if (phoneNumber == null) {
       focusOnView(nestedScrollView, mPhoneEditText);
-      mErrorEditText.setText(com.firebase.ui.auth.R.string.fui_invalid_phone_number);
+      mErrorEditText.setText(R.string.err_msg_enter_valid_phone_number);
       DialogManager.getInstance().dismissPreloader(this.getClass());
       return false;
     }
 
     if (mPhoneEditText.getText().toString().length() > 10) {
       focusOnView(nestedScrollView, mPhoneEditText);
-      mErrorEditText.setText("Incorrect Phone number length!");
+      mErrorEditText.setText(getString(R.string.err_msg_empty));
       DialogManager.getInstance().dismissPreloader(this.getClass());
       return false;
     }
@@ -1446,7 +1446,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
     if (phoneNameSwitch.isChecked()) {
       if (TextUtils.isEmpty(phoneNameEt.getText())) {
         focusOnView(nestedScrollView, phoneNameEt);
-        phoneNameEt.setError("Name Can Not Be Empty!");
+        phoneNameEt.setError(getString(R.string.err_msg_empty));
         DialogManager.getInstance().dismissPreloader(this.getClass());
         return false;
       }

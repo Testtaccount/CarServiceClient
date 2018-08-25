@@ -47,6 +47,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.MaterialDialog.Builder;
 import com.afollestad.materialdialogs.MaterialDialog.SingleButtonCallback;
 import com.turkialkhateeb.materialcolorpicker.ColorChooserDialog;
 import com.turkialkhateeb.materialcolorpicker.ColorListener;
@@ -65,7 +66,7 @@ public class EditCarActivity extends BaseActivity implements View.OnClickListene
   private Spinner carYearsSpinner;
   private Spinner carDencityUnitSpinner;
   private String[] carYears;
-  private String[] carDencityUnits = {"Km", "Mil"};
+  private String[] carDencityUnits = {getString(R.string.km), getString(R.string.km)};
   private CarBrandsSpinnerAdapter brandsSpinnerAdapter;
   private ImageView colorPickerImg;
   private int backgroundColor= -256;
@@ -314,12 +315,12 @@ public class EditCarActivity extends BaseActivity implements View.OnClickListene
         break;
         case R.id.fl_delete_car_btn:
           if (checkNetworkAvailableWithError()) {
-            showDeleteDialog("Are you sure you want to delete this car?");
+            showDeleteDialog();
           }
         break;
       case R.id.rl_color_picker_background:
         ColorChooserDialog dialog = new ColorChooserDialog(this);
-        dialog.setTitle(R.string.title);
+        dialog.setTitle("Choose color");
         dialog.setColorListener(new ColorListener() {
           @Override
           public void OnColorClick(View v, int color) {
@@ -341,12 +342,12 @@ public class EditCarActivity extends BaseActivity implements View.OnClickListene
     dialogFragment.show(fm, "fragment_car_brands");
   }
 
-  private void showDeleteDialog(String title) {
+  private void showDeleteDialog() {
 
-    new MaterialDialog.Builder(this)
-        .title(title)
-        .positiveText("Delete")
-        .negativeText("Cancel")
+    new Builder(this)
+        .title(R.string.dlg_delete_car_title)
+        .positiveText(R.string.dlg_delete)
+        .negativeText(R.string.dlg_cancel)
         .positiveColor(getResources().getColor(R.color.color_484848))
         .negativeColor(getResources().getColor(R.color.colorAccent2))
         .onPositive(new SingleButtonCallback() {
@@ -548,7 +549,7 @@ public class EditCarActivity extends BaseActivity implements View.OnClickListene
           @Override
           public void run() {
             if (car != null) {
-              ToastUtils.shortToast("Car edited!");
+              ToastUtils.shortToast(R.string.msg_car_edited);
               Intent i = new Intent(EditCarActivity.this, GarageActivity.class);
 //        i.setAction(ACTION_EDIT_CAR_ACTIVITY_INTENT);
               startActivity(i);
@@ -557,7 +558,7 @@ public class EditCarActivity extends BaseActivity implements View.OnClickListene
               overridePendingTransition(R.anim.up_slide_enter, R.anim.down_slide_exit);
             } else {
               DialogManager.getInstance().dismissPreloader(this.getClass());
-              ToastUtils.shortToast("Car not edited!");
+              ToastUtils.shortToast(R.string.msg_car_not_edited);
             }
           }
 
@@ -567,7 +568,7 @@ public class EditCarActivity extends BaseActivity implements View.OnClickListene
 
       @Override
       public void onFail(String e) {
-
+        ToastUtils.shortToast(R.string.msg_car_not_edited);
       }
     });
 //    CarDataDbHalper.getInstance().editCar(user.getKey(),editedCar,new ResultListener<Car>() {
@@ -633,7 +634,7 @@ public class EditCarActivity extends BaseActivity implements View.OnClickListene
 //                    });
 //              }
 
-              ToastUtils.shortToast("Car deleted!");
+              ToastUtils.shortToast(R.string.msg_car_deleted);
               Intent i = new Intent(EditCarActivity.this, GarageActivity.class);
 //        i.setAction(ACTION_EDIT_CAR_ACTIVITY_INTENT);
               i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -653,7 +654,7 @@ public class EditCarActivity extends BaseActivity implements View.OnClickListene
 
       @Override
       public void onFail(String e) {
-        ToastUtils.shortToast("Car not deleted!");
+        ToastUtils.shortToast(R.string.msg_car_not_deleted);
       }
     });
 
@@ -663,28 +664,28 @@ public class EditCarActivity extends BaseActivity implements View.OnClickListene
 
     if(carBrandsSpinner.getSelectedItemPosition()==0){
       focusOnView(nestedScrollView,carBrandsSpinner);
-      ((TextView)carBrandsSpinner.getChildAt(0)).setError("Not Selected");
+      ((TextView)carBrandsSpinner.getChildAt(0)).setError(getString(R.string.err_msg_not_selected));
       DialogManager.getInstance().dismissPreloader(this.getClass());
       return false;
     }
 
     if(TextUtils.isEmpty(modelEt.getText())){
       focusOnView(nestedScrollView,modelEt);
-      modelEt.setError("Car Model Can Not Be Empty!");
+      modelEt.setError(getString(R.string.err_msg_empty));
       DialogManager.getInstance().dismissPreloader(this.getClass());
       return false;
     }
 
     if(carYearsSpinner.getSelectedItemPosition()==0){
       focusOnView(nestedScrollView,carYearsSpinner);
-      ((TextView)carYearsSpinner.getChildAt(0)).setError("Not Selected");
+      ((TextView)carYearsSpinner.getChildAt(0)).setError(getString(R.string.err_msg_not_selected));
       DialogManager.getInstance().dismissPreloader(this.getClass());
       return false;
     }
 
     if(TextUtils.isEmpty(numbersEt.getText())){
       focusOnView(nestedScrollView,numbersEt);
-      numbersEt.setError("Car Numbers Can Not Be Empty!");
+      numbersEt.setError(getString(R.string.err_msg_empty));
       DialogManager.getInstance().dismissPreloader(this.getClass());
       return false;
     }

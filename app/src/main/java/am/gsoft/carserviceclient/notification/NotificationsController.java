@@ -67,21 +67,21 @@ public final class NotificationsController {
 //    long endTime =31_557_600_000L + ringTempAt;//365*24*60*60*1000;
 
     if (ringTempAt <= endTime) {
-//        final PendingIntent alarmIntent = alarmIntent(alarm, false);
-      final PendingIntent alarmIntent = notificationPendingIntent(notification);
+//        final PendingIntent notificationIntent = notificationIntent(alarm, false);
+      final PendingIntent notificationIntent = notificationPendingIntent(notification);
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        am.setExact(AlarmManager.RTC_WAKEUP, ringTempAt, alarmIntent);
-//          am.setRepeating(AlarmManager.RTC_WAKEUP,ringTempAt,3 * 60000, alarmIntent);
+        am.setExact(AlarmManager.RTC_WAKEUP, ringTempAt, notificationIntent);
+//          am.setRepeating(AlarmManager.RTC_WAKEUP,ringTempAt,3 * 60000, notificationIntent);
       } else {
-        am.set(AlarmManager.RTC_WAKEUP, ringTempAt, alarmIntent);
+        am.set(AlarmManager.RTC_WAKEUP, ringTempAt, notificationIntent);
       }
     } else {
-      final PendingIntent alarmIntent = notificationPendingIntent(notification);
+      final PendingIntent notificationIntent = notificationPendingIntent(notification);
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        am.setExact(AlarmManager.RTC_WAKEUP, endTime, alarmIntent);
-//          am.setRepeating(AlarmManager.RTC_WAKEUP,ringTempAt,3 * 60000, alarmIntent);
+        am.setExact(AlarmManager.RTC_WAKEUP, endTime, notificationIntent);
+//          am.setRepeating(AlarmManager.RTC_WAKEUP,ringTempAt,3 * 60000, notificationIntent);
       } else {
-        am.set(AlarmManager.RTC_WAKEUP, endTime, alarmIntent);
+        am.set(AlarmManager.RTC_WAKEUP, endTime, notificationIntent);
       }
 //      AppExecutors.getInstance().mainThread().execute(new Runnable() {
 //        @Override
@@ -96,7 +96,7 @@ public final class NotificationsController {
     AppExecutors.getInstance().mainThread().execute(new Runnable() {
       @Override
       public void run() {
-        String message = context.getString(R.string.alarm_set_for, DurationUtils.toString(context, notification.ringsIn() , false/*abbreviate*/));
+        String message = context.getString(R.string.notification_set_for, DurationUtils.toString(context, notification.ringsIn() , false/*abbreviate*/));
         ToastUtils.shortToast(message);
       }
     });
@@ -106,7 +106,7 @@ public final class NotificationsController {
   }
 
   public void cancelNotification(AppNotification appNotification) {
-    Log.d(TAG, "Cancelling alarm " + appNotification);
+    Log.d(TAG, "Cancelling notification " + appNotification);
 
     PendingIntent pi = notificationPendingIntent(appNotification);
     if (pi != null) {

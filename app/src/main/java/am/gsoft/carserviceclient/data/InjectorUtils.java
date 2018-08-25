@@ -22,8 +22,8 @@ public class InjectorUtils {
     public static NotificationsRepository provideNotificationRepository(Context context) {
         AppDatabase database = AppDatabase.getInstance(context.getApplicationContext());
         AppExecutors executors = AppExecutors.getInstance();
-        NotificationsController alarmController=new NotificationsController(context);
-        return NotificationsRepository.getInstance(database, executors,alarmController);
+        NotificationsController notificationsController=new NotificationsController(context);
+        return NotificationsRepository.getInstance(database, executors,notificationsController);
     }
 
 }

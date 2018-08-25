@@ -64,7 +64,7 @@ public class NotificationReminderFirebaseJobService extends JobService {
         .setChannelId("1")
         .setDefaults(
             Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND)
-        .setContentText(App.getInstance().getString(R.string.text_welcome))
+        .setContentText(App.getInstance().getString(R.string.welcome_title))
         .setContentIntent(notificationPendingIntent);
 
     // Dismiss notification once the user touches it.

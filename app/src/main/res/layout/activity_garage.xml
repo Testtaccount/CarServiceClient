@@ -6,43 +6,45 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="@color/color_background_E5E5E5"
-  android:fitsSystemWindows="true">
+  android:fitsSystemWindows="true"
+  tools:context=".ui.activity.GarageActivity">
 
   <android.support.design.widget.AppBarLayout
     android:id="@+id/appBar"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_height="@dimen/app_bar_layout_height"
     android:background="@color/colorPrimary"
     android:fitsSystemWindows="true"
-    app:layout_behavior="am.gsoft.carserviceclient.util.FixAppBarLayoutBehavior"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    app:elevation="0dp">
+    app:elevation="0dp"
+    app:layout_behavior="am.gsoft.carserviceclient.util.FixAppBarLayoutBehavior">
 
     <android.support.design.widget.CollapsingToolbarLayout
       android:id="@+id/collapsing_toolbar"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:fitsSystemWindows="true"
-      app:contentScrim="?attr/colorPrimary"
       android:minHeight="?actionBarSize"
-      app:titleEnabled="false"
-    app:expandedTitleMarginEnd="64dp"
-    app:expandedTitleMarginStart="48dp"
-    app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
-    app:layout_scrollFlags="scroll|exitUntilCollapsed">
+      app:contentScrim="?attr/colorPrimary"
+      app:expandedTitleMarginEnd="64dp"
+      app:expandedTitleMarginStart="48dp"
+      app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
+      app:layout_scrollFlags="scroll|exitUntilCollapsed"
+      app:titleEnabled="false">
       <!--app:expandedTitleMarginEnd="64dp"-->
       <!--app:expandedTitleMarginStart="48dp"-->
       <!--app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"-->
       <!--app:title="My Garage"-->
       <!--enterAlwaysCollapsed-->
+
       <!--<ImageView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--android:src="@drawable/ic_garage_bg"-->
-        <!--android:visibility="visible"-->
-        <!--app:layout_collapseMode="parallax"-->
-        <!--app:layout_collapseParallaxMultiplier="0.7" />-->
+      <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="match_parent"-->
+      <!--android:scaleType="centerCrop"-->
+      <!--android:src="@drawable/ic_garage_bg"-->
+      <!--android:visibility="visible"-->
+      <!--app:layout_collapseMode="parallax"-->
+      <!--app:layout_collapseParallaxMultiplier="0.7" />-->
 
       <include layout="@layout/include_toolbar" />
 
@@ -64,7 +66,7 @@
       android:layout_height="wrap_content"
       android:layout_gravity="top"
       android:background="@color/colorPrimary"
-      android:elevation="8dp"
+      android:elevation="@dimen/main_spinner_elevation"
       android:fitsSystemWindows="true"
       android:orientation="vertical"
       app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -102,182 +104,182 @@
 
         <View
           android:layout_width="match_parent"
-          android:layout_height="8dp"
+          android:layout_height="@dimen/shadow_view_height_small"
           android:background="@drawable/drop_shadow_reverse" />
 
-      <LinearLayout
-        android:id="@+id/ll_content"
-        android:visibility="visible"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <!--Car info-->
-        <android.support.v7.widget.CardView
-          style="@style/ItemCardViewStyle"
+        <LinearLayout
+          android:id="@+id/ll_content"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
           android:visibility="visible">
 
-          <LinearLayout style="@style/Widget.CardContent">
+          <!--Car info-->
+          <android.support.v7.widget.CardView
+            style="@style/ItemCardViewStyle"
+            android:visibility="visible">
 
-            <TableLayout style="@style/ItemTableLayoutStyle">
+            <LinearLayout style="@style/Widget.CardContent">
 
-              <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                  style="@style/ItemCardHeaderTextStyle"
-                  android:text="@string/car_information"
-                  android:textColor="@color/colorAccent2" />
-              </TableRow>
+              <TableLayout style="@style/ItemTableLayoutStyle">
 
-              <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                <TableRow
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+                  <TextView
+                    style="@style/ItemCardHeaderTextStyle"
+                    android:text="@string/car_information"
+                    android:textColor="@color/colorAccent2" />
+                </TableRow>
 
-                <View style="@style/ItemCardHeaderTextUnderLineStyle" />
-              </TableRow>
+                <TableRow
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
 
-              <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                  <View style="@style/ItemCardHeaderTextUnderLineStyle" />
+                </TableRow>
 
-
-                <TextView
-                  android:text="@string/car_brand"
-                  style="@style/ItemCardFieldTextStyle" />
-
-                <TextView
-                  android:id="@+id/tv_car_brand"
-                  android:text="-"
-                  style="@style/ItemCardFieldValueStyle"
-                  android:textColor="@color/colorAccent2"/>
-
-              </TableRow>
-              <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
-
-                <TextView
-                  android:text="@string/car_model"
-                  style="@style/ItemCardFieldTextStyle" />
-
-                <TextView
-                  android:id="@+id/tv_model"
-                  android:text="-"
-                  style="@style/ItemCardFieldValueStyle"
-                  android:textColor="@color/colorAccent2"/>
-
-              </TableRow>
-              <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingBottom="8dp">
-
-                <TextView
-                  android:text="@string/car_year"
-                  style="@style/ItemCardFieldTextStyle" />
-
-                <TextView
-                  android:id="@+id/tv_year"
-                  android:text="-"
-                  style="@style/ItemCardFieldValueStyle"
-                  android:textColor="@color/colorAccent2"/>
-
-              </TableRow>
-
-            </TableLayout>
-          </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <!--Car numbers-->
-        <android.support.v7.widget.CardView
-          android:visibility="visible"
-          style="@style/ItemCardViewStyle">
-
-          <LinearLayout style="@style/Widget.CardContent">
-
-            <TableLayout style="@style/ItemTableLayoutStyle">
-
-              <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                  style="@style/ItemCardHeaderTextStyle"
-                  android:text="@string/car_license_plate"
-                  android:textColor="@color/colorAccent2" />
-              </TableRow>
-
-              <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <View style="@style/ItemCardHeaderTextUnderLineStyle" />
-              </TableRow>
-              <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="0dp"
-                android:layout_marginTop="8dp">
+                <TableRow
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="8dp">
 
 
-                <TextView
-                  android:id="@+id/tv_numbers"
-                  android:text="@string/license_plate"
-                  style="@style/ItemCardFieldTextStyle"
-                  android:textColor="@color/colorPrimary"/>
+                  <TextView
+                    style="@style/ItemCardFieldTextStyle"
+                    android:text="@string/car_brand" />
 
-              </TableRow>
-            </TableLayout>
-          </LinearLayout>
-        </android.support.v7.widget.CardView>
+                  <TextView
+                    android:id="@+id/tv_car_brand"
+                    style="@style/ItemCardFieldValueStyle"
+                    android:text="-"
+                    android:textColor="@color/colorAccent2" />
 
-        <!--Vin code-->
-        <android.support.v7.widget.CardView
-          android:visibility="visible"
-          style="@style/ItemCardViewStyle">
+                </TableRow>
+                <TableRow
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="8dp">
 
-          <LinearLayout style="@style/Widget.CardContent">
+                  <TextView
+                    style="@style/ItemCardFieldTextStyle"
+                    android:text="@string/car_model" />
 
-            <TableLayout style="@style/ItemTableLayoutStyle">
+                  <TextView
+                    android:id="@+id/tv_model"
+                    style="@style/ItemCardFieldValueStyle"
+                    android:text="-"
+                    android:textColor="@color/colorAccent2" />
 
-              <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                  style="@style/ItemCardHeaderTextStyle"
-                  android:text="@string/car_vin_code"
-                  android:textColor="@color/colorAccent2" />
-              </TableRow>
+                </TableRow>
+                <TableRow
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="8dp"
+                  android:paddingBottom="8dp">
 
-              <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                  <TextView
+                    style="@style/ItemCardFieldTextStyle"
+                    android:text="@string/car_year" />
 
-                <View style="@style/ItemCardHeaderTextUnderLineStyle" />
-              </TableRow>
-              <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+                  <TextView
+                    android:id="@+id/tv_year"
+                    style="@style/ItemCardFieldValueStyle"
+                    android:text="-"
+                    android:textColor="@color/colorAccent2" />
 
-                <TextView
-                  android:textIsSelectable="true"
-                  android:id="@+id/tv_vin_code"
-                  android:text="-"
-                  style="@style/ItemCardFieldTextStyle"
-                  android:textColor="@color/colorPrimary"/>
+                </TableRow>
 
-              </TableRow>
-            </TableLayout>
-          </LinearLayout>
-        </android.support.v7.widget.CardView>
+              </TableLayout>
+            </LinearLayout>
+          </android.support.v7.widget.CardView>
 
-        <!--&lt;!&ndash;Buttons&ndash;&gt;-->
-        <!--<android.support.v7.widget.CardView-->
+          <!--Car numbers-->
+          <android.support.v7.widget.CardView
+            style="@style/ItemCardViewStyle"
+            android:visibility="visible">
+
+            <LinearLayout style="@style/Widget.CardContent">
+
+              <TableLayout style="@style/ItemTableLayoutStyle">
+
+                <TableRow
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+                  <TextView
+                    style="@style/ItemCardHeaderTextStyle"
+                    android:text="@string/car_license_plate"
+                    android:textColor="@color/colorAccent2" />
+                </TableRow>
+
+                <TableRow
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+
+                  <View style="@style/ItemCardHeaderTextUnderLineStyle" />
+                </TableRow>
+                <TableRow
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="8dp"
+                  android:layout_marginBottom="0dp">
+
+
+                  <TextView
+                    android:id="@+id/tv_numbers"
+                    style="@style/ItemCardFieldTextStyle"
+                    android:text="@string/license_plate"
+                    android:textColor="@color/colorPrimary" />
+
+                </TableRow>
+              </TableLayout>
+            </LinearLayout>
+          </android.support.v7.widget.CardView>
+
+          <!--Vin code-->
+          <android.support.v7.widget.CardView
+            style="@style/ItemCardViewStyle"
+            android:visibility="visible">
+
+            <LinearLayout style="@style/Widget.CardContent">
+
+              <TableLayout style="@style/ItemTableLayoutStyle">
+
+                <TableRow
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+                  <TextView
+                    style="@style/ItemCardHeaderTextStyle"
+                    android:text="@string/car_vin_code"
+                    android:textColor="@color/colorAccent2" />
+                </TableRow>
+
+                <TableRow
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+
+                  <View style="@style/ItemCardHeaderTextUnderLineStyle" />
+                </TableRow>
+                <TableRow
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="8dp"
+                  android:layout_marginBottom="8dp">
+
+                  <TextView
+                    android:id="@+id/tv_vin_code"
+                    style="@style/ItemCardFieldTextStyle"
+                    android:text="-"
+                    android:textColor="@color/colorPrimary"
+                    android:textIsSelectable="true" />
+
+                </TableRow>
+              </TableLayout>
+            </LinearLayout>
+          </android.support.v7.widget.CardView>
+
+          <!--&lt;!&ndash;Buttons&ndash;&gt;-->
+          <!--<android.support.v7.widget.CardView-->
           <!--android:layout_gravity="bottom"-->
           <!--android:id="@+id/cv_buttons"-->
           <!--android:focusable="false"-->
@@ -293,129 +295,129 @@
           <!--android:orientation="horizontal"-->
           <!--android:visibility="visible">-->
 
-        <!---->
+          <!---->
 
-        <!--</android.support.v7.widget.CardView>-->
+          <!--</android.support.v7.widget.CardView>-->
 
-        <FrameLayout
-          android:focusable="false"
-          android:focusableInTouchMode="false"
-          android:id="@+id/fl_btns"
-          android:layout_width="match_parent"
-          android:layout_height="48dp"
-          android:layout_marginTop="6dp"
-          android:layout_marginBottom="10dp"
-          android:layout_marginLeft="16dp"
-          android:layout_marginRight="16dp"
-          android:layout_gravity="center"
-          android:background="@drawable/shape_c"
-          android:clickable="true"
-          android:elevation="2dp"
-          android:foreground="?selectableItemBackground">
-
-          <LinearLayout
-            android:focusable="false"
+          <FrameLayout
+            android:id="@+id/fl_btns"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:padding="0dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_c"
+            android:clickable="true"
+            android:elevation="2dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:foreground="?selectableItemBackground">
 
-            <!--edit-->
             <LinearLayout
-              android:padding="4dp"
-              android:focusableInTouchMode="false"
+              android:layout_width="match_parent"
+              android:layout_height="48dp"
+              android:padding="0dp"
               android:focusable="false"
-              android:id="@+id/ll_edit_car_btn"
-              android:layout_width="0dp"
-              android:layout_height="match_parent"
-              android:layout_weight="1"
-              android:layout_gravity="center"
-              android:background="?attr/selectableItemBackground"
               android:gravity="center"
-              android:orientation="vertical">
+              android:orientation="horizontal">
 
-              <FrameLayout
-                android:focusable="false"
-                android:layout_width="match_parent"
+              <!--edit-->
+              <LinearLayout
+                android:id="@+id/ll_edit_car_btn"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/shape_right_line"
-                android:foreground="?attr/selectableItemBackground">
-                <TextView
-                  android:fontFamily="sans-serif-medium"
-                  android:textSize="14dp"
-                  android:clickable="false"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:padding="4dp"
+                android:background="?attr/selectableItemBackground"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <FrameLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@drawable/shape_right_line"
                   android:focusable="false"
-                  android:id="@+id/tv_edit_doil_txt"
+                  android:foreground="?attr/selectableItemBackground">
+                  <TextView
+                    android:id="@+id/tv_edit_doil_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="false"
+                    android:drawableLeft="@drawable/ic_mode_edit_white_24dp"
+                    android:drawablePadding="4dp"
+                    android:drawableTint="@color/white"
+                    android:drawingCacheQuality="high"
+                    android:focusable="false"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:text="@string/edit_btn_text"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
+                </FrameLayout>
+
+              </LinearLayout>
+
+              <!--add-->
+              <LinearLayout
+                android:id="@+id/ll_add_car_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="?attr/selectableItemBackground"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                  android:id="@+id/tv_select_date_txt"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_gravity="center"
-                  android:drawableLeft="@drawable/ic_mode_edit_white_24dp"
+                  android:clickable="false"
+                  android:drawableLeft="@drawable/ic_add_white_24dp"
                   android:drawablePadding="4dp"
                   android:drawableTint="@color/white"
                   android:drawingCacheQuality="high"
+                  android:focusable="false"
+                  android:fontFamily="sans-serif-medium"
                   android:gravity="center"
-                  android:text="@string/edit_btn_text"
-                  android:textColor="@color/white" />
-              </FrameLayout>
+                  android:text="@string/add_btn_text"
+                  android:textColor="@color/white"
+                  android:textSize="14dp" />
+
+              </LinearLayout>
 
             </LinearLayout>
 
-            <!--add-->
-            <LinearLayout
-              android:focusableInTouchMode="false"
-              android:focusable="false"
-              android:id="@+id/ll_add_car_btn"
-              android:layout_width="0dp"
-              android:layout_height="match_parent"
-              android:layout_weight="1"
-              android:layout_gravity="center"
-              android:background="?attr/selectableItemBackground"
-              android:gravity="center"
-              android:orientation="vertical">
+          </FrameLayout>
 
-              <TextView
-                android:fontFamily="sans-serif-medium"
-                android:textSize="14dp"
-                android:clickable="false"
-                android:focusable="false"
-                android:id="@+id/tv_select_date_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:drawableLeft="@drawable/ic_add_white_24dp"
-                android:drawablePadding="4dp"
-                android:drawableTint="@color/white"
-                android:drawingCacheQuality="high"
-                android:gravity="center"
-                android:text="@string/add_btn_text"
-                android:textColor="@color/white" />
-
-            </LinearLayout>
-
-          </LinearLayout>
-
-        </FrameLayout>
-
-      </LinearLayout>
+        </LinearLayout>
 
         <RelativeLayout
-          android:visibility="gone"
-          android:layout_marginTop="16dp"
-          android:layout_gravity="center"
           android:id="@+id/rl_progress"
-          android:gravity="center"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:orientation="vertical">
+          android:layout_marginTop="16dp"
+          android:layout_gravity="center"
+          android:gravity="center"
+          android:orientation="vertical"
+          android:visibility="gone">
 
           <ProgressBar
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
             android:id="@+id/progress_bar"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center" />
 
 
         </RelativeLayout>
@@ -495,12 +497,11 @@
         <!--</android.support.v7.widget.CardView>-->
 
 
-
         <Space
           android:id="@+id/space"
-          android:focusable="true"
           android:layout_width="match_parent"
-          android:layout_height="6dp" />
+          android:layout_height="6dp"
+          android:focusable="true" />
 
       </LinearLayout>
 
@@ -509,709 +510,232 @@
   </LinearLayout>
 
   <!--<LinearLayout-->
-    <!--android:id="@+id/ll_garage_action_btn"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="48dp"-->
-    <!--android:layout_gravity="bottom"-->
-    <!--android:background="@color/color_795548"-->
-    <!--android:focusable="false"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="horizontal">-->
+  <!--android:id="@+id/ll_garage_action_btn"-->
+  <!--android:layout_width="match_parent"-->
+  <!--android:layout_height="48dp"-->
+  <!--android:layout_gravity="bottom"-->
+  <!--android:background="@color/color_795548"-->
+  <!--android:focusable="false"-->
+  <!--android:gravity="center"-->
+  <!--android:orientation="horizontal">-->
 
-    <!--<LinearLayout-->
-      <!--android:focusable="false"-->
-      <!--android:layout_width="match_parent"-->
-      <!--android:layout_height="match_parent"-->
-      <!--android:padding="4dp"-->
-      <!--android:gravity="center"-->
-      <!--android:clickable="true"-->
-      <!--android:orientation="horizontal">-->
+  <!--<LinearLayout-->
+  <!--android:focusable="false"-->
+  <!--android:layout_width="match_parent"-->
+  <!--android:layout_height="match_parent"-->
+  <!--android:padding="4dp"-->
+  <!--android:gravity="center"-->
+  <!--android:clickable="true"-->
+  <!--android:orientation="horizontal">-->
 
 
+  <!--&lt;!&ndash;edit&ndash;&gt;-->
+  <!--<LinearLayout-->
+  <!--android:focusable="false"-->
+  <!--android:clickable="true"-->
+  <!--android:id="@+id/ll_edit_car_btn"-->
+  <!--android:layout_width="0dp"-->
+  <!--android:layout_height="match_parent"-->
+  <!--android:layout_weight="1"-->
+  <!--android:layout_gravity="center"-->
+  <!--android:background="?attr/selectableItemBackground"-->
+  <!--android:gravity="center"-->
+  <!--android:orientation="vertical">-->
 
-      <!--&lt;!&ndash;edit&ndash;&gt;-->
-      <!--<LinearLayout-->
-        <!--android:focusable="false"-->
-        <!--android:clickable="true"-->
-        <!--android:id="@+id/ll_edit_car_btn"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:background="?attr/selectableItemBackground"-->
-        <!--android:gravity="center"-->
-        <!--android:orientation="vertical">-->
+  <!--<FrameLayout-->
+  <!--android:focusable="false"-->
+  <!--android:layout_width="match_parent"-->
+  <!--android:layout_height="match_parent"-->
+  <!--android:background="@drawable/shape_right_line"-->
+  <!--android:foreground="?attr/selectableItemBackground">-->
+  <!--<TextView-->
+  <!--android:focusable="false"-->
+  <!--android:id="@+id/tv_edit_doil_txt"-->
+  <!--android:layout_width="wrap_content"-->
+  <!--android:layout_height="wrap_content"-->
+  <!--android:layout_gravity="center"-->
+  <!--android:drawableLeft="@drawable/ic_mode_edit_white_24dp"-->
+  <!--android:drawablePadding="4dp"-->
+  <!--android:drawableTint="@color/white"-->
+  <!--android:drawingCacheQuality="high"-->
+  <!--android:gravity="center"-->
+  <!--android:text="Edit"-->
+  <!--android:textColor="@color/white" />-->
+  <!--</FrameLayout>-->
 
-        <!--<FrameLayout-->
-          <!--android:focusable="false"-->
-          <!--android:layout_width="match_parent"-->
-          <!--android:layout_height="match_parent"-->
-          <!--android:background="@drawable/shape_right_line"-->
-          <!--android:foreground="?attr/selectableItemBackground">-->
-          <!--<TextView-->
-            <!--android:focusable="false"-->
-            <!--android:id="@+id/tv_edit_doil_txt"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:drawableLeft="@drawable/ic_mode_edit_white_24dp"-->
-            <!--android:drawablePadding="4dp"-->
-            <!--android:drawableTint="@color/white"-->
-            <!--android:drawingCacheQuality="high"-->
-            <!--android:gravity="center"-->
-            <!--android:text="Edit"-->
-            <!--android:textColor="@color/white" />-->
-        <!--</FrameLayout>-->
+  <!--</LinearLayout>-->
 
-      <!--</LinearLayout>-->
+  <!--&lt;!&ndash;add&ndash;&gt;-->
+  <!--<LinearLayout-->
+  <!--android:focusable="false"-->
+  <!--android:clickable="true"-->
+  <!--android:id="@+id/ll_add_car_btn"-->
+  <!--android:layout_width="0dp"-->
+  <!--android:layout_height="match_parent"-->
+  <!--android:layout_weight="1"-->
+  <!--android:layout_gravity="center"-->
+  <!--android:background="?attr/selectableItemBackground"-->
+  <!--android:gravity="center"-->
+  <!--android:orientation="vertical">-->
 
-      <!--&lt;!&ndash;add&ndash;&gt;-->
-      <!--<LinearLayout-->
-        <!--android:focusable="false"-->
-        <!--android:clickable="true"-->
-        <!--android:id="@+id/ll_add_car_btn"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:background="?attr/selectableItemBackground"-->
-        <!--android:gravity="center"-->
-        <!--android:orientation="vertical">-->
+  <!--<TextView-->
+  <!--android:id="@+id/tv_oil_history_dtxt"-->
+  <!--android:layout_width="wrap_content"-->
+  <!--android:layout_height="wrap_content"-->
+  <!--android:layout_gravity="center"-->
+  <!--android:drawableLeft="@drawable/ic_add_white_24dp"-->
+  <!--android:drawablePadding="4dp"-->
+  <!--android:drawableTint="@color/white"-->
+  <!--android:drawingCacheQuality="high"-->
+  <!--android:gravity="center"-->
+  <!--android:text="ADD CAR"-->
+  <!--android:textColor="@color/white" />-->
+  <!--</LinearLayout>-->
 
-        <!--<TextView-->
-          <!--android:id="@+id/tv_oil_history_dtxt"-->
-          <!--android:layout_width="wrap_content"-->
-          <!--android:layout_height="wrap_content"-->
-          <!--android:layout_gravity="center"-->
-          <!--android:drawableLeft="@drawable/ic_add_white_24dp"-->
-          <!--android:drawablePadding="4dp"-->
-          <!--android:drawableTint="@color/white"-->
-          <!--android:drawingCacheQuality="high"-->
-          <!--android:gravity="center"-->
-          <!--android:text="ADD CAR"-->
-          <!--android:textColor="@color/white" />-->
-      <!--</LinearLayout>-->
-
-    <!--</LinearLayout>-->
+  <!--</LinearLayout>-->
 
 
   <!--</LinearLayout>-->
 
 
-
 </android.support.design.widget.CoordinatorLayout>
 
 
-<!--llmain-->
-<!--<LinearLayout android:layout_width="match_parent"-->
-  <!--android:layout_height="wrap_content"-->
-  <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-  <!--xmlns:tools="http://schemas.android.com/tools"-->
-  <!--android:layout_gravity="top"-->
-  <!--android:background="@color/colorPrimary"-->
-  <!--android:fitsSystemWindows="true"-->
-  <!--android:orientation="vertical"-->
-  <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-  <!--app:layout_collapseMode="parallax"-->
-  <!--app:layout_scrollFlags="scroll|snap"-->
-  <!--xmlns:android="http://schemas.android.com/apk/res/android">-->
-<!--&lt;!&ndash;app:layout_collapseParallaxMultiplier="0.7">&ndash;&gt;-->
-<!--&lt;!&ndash;app:layout_behavior="@string/appbar_scrolling_view_behavior">&ndash;&gt;-->
-
-<!--<android.support.v7.widget.AppCompatSpinner-->
-  <!--android:id="@+id/spinner"-->
-  <!--style="@style/spinner_style"-->
-  <!--android:fitsSystemWindows="true"-->
-  <!--android:spinnerMode="dialog"-->
-  <!--app:backgroundTint="@color/white"-->
-  <!--app:layout_collapseMode="pin"-->
-  <!--tools:listitem="@layout/spinner_selected_item" />-->
-
-<!--<LinearLayout-->
-  <!--android:layout_width="match_parent"-->
-  <!--android:layout_height="wrap_content"-->
-  <!--android:background="@color/color_E5E5E5">-->
-  <!--<android.support.v4.widget.NestedScrollView-->
-    <!--android:id="@+id/nsvw"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:scrollbars="none"-->
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
-
-    <!--&lt;!&ndash; your content here &ndash;&gt;-->
-    <!--<LinearLayout-->
-      <!--android:id="@+id/ll"-->
-      <!--android:layout_width="match_parent"-->
-      <!--android:layout_height="match_parent"-->
-      <!--android:paddingTop="0dp"-->
-      <!--android:orientation="vertical"-->
-      <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
-
-      <!--&lt;!&ndash;Oil info&ndash;&gt;-->
-      <!--<android.support.v7.widget.CardView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginBottom="10dp"-->
-        <!--android:layout_marginLeft="16dp"-->
-        <!--android:layout_marginRight="16dp"-->
-        <!--card_view:cardBackgroundColor="@color/white">-->
-
-        <!--<LinearLayout-->
-          <!--style="@style/Widget.CardContent"-->
-          <!--android:layout_width="match_parent"-->
-          <!--android:layout_height="wrap_content">-->
-
-          <!--<TableLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:stretchColumns="*">-->
-
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginTop="0dp">-->
-
-              <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:gravity="center"-->
-                <!--android:text="Oil information"-->
-                <!--android:textColor="@color/colorAccent"-->
-                <!--android:textSize="14sp" />-->
-            <!--</TableRow>-->
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content">-->
-
-              <!--<View-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_span="2"-->
-                <!--android:background="#aaa" />-->
-            <!--</TableRow>-->
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginTop="8dp">-->
-
-              <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start|center"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:text="Brand"-->
-                <!--android:textColor="@android:color/black"-->
-                <!--android:textSize="18sp" />-->
-
-              <!--<TextView-->
-                <!--android:id="@+id/tv_oil_brand"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="end|center"-->
-                <!--android:paddingEnd="10dp"-->
-                <!--android:paddingRight="10dp"-->
-                <!--android:gravity="start|center"-->
-                <!--android:singleLine="true"-->
-                <!--android:text="N/A"-->
-                <!--android:textColor="@color/colorPrimaryDark"-->
-                <!--android:textSize="22sp" />-->
-
-            <!--</TableRow>-->
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginTop="8dp">-->
-
-              <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start|center"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:text="Type"-->
-                <!--android:textColor="@android:color/black"-->
-                <!--android:textSize="18sp" />-->
-
-              <!--<TextView-->
-                <!--android:id="@+id/tv_oil_type"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="end|center"-->
-                <!--android:paddingEnd="10dp"-->
-                <!--android:paddingRight="10dp"-->
-                <!--android:gravity="start|center"-->
-                <!--android:singleLine="true"-->
-                <!--android:text="N/A"-->
-                <!--android:textColor="@color/colorPrimaryDark"-->
-                <!--android:textSize="22sp" />-->
-
-
-            <!--</TableRow>-->
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginTop="8dp"-->
-              <!--android:paddingBottom="8dp">-->
-
-              <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start|center"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:text="Volume"-->
-
-                <!--android:textColor="@android:color/black"-->
-                <!--android:textSize="18sp" />-->
-
-              <!--<TextView-->
-                <!--android:id="@+id/tv_oil_volume"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="end|center"-->
-                <!--android:paddingEnd="10dp"-->
-                <!--android:paddingRight="10dp"-->
-                <!--android:gravity="start|center"-->
-                <!--android:singleLine="true"-->
-                <!--android:text="N/A"-->
-                <!--android:textColor="@color/colorPrimaryDark"-->
-                <!--android:textSize="22sp" />-->
-
-
-            <!--</TableRow>-->
-
-          <!--</TableLayout>-->
-        <!--</LinearLayout>-->
-      <!--</android.support.v7.widget.CardView>-->
-
-      <!--&lt;!&ndash;Middle monthKm&ndash;&gt;-->
-      <!--<android.support.v7.widget.CardView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginBottom="10dp"-->
-        <!--android:layout_marginLeft="16dp"-->
-        <!--android:layout_marginRight="16dp"-->
-        <!--card_view:cardBackgroundColor="@color/white">-->
-
-        <!--<LinearLayout-->
-          <!--style="@style/Widget.CardContent"-->
-          <!--android:layout_width="match_parent"-->
-          <!--android:layout_height="wrap_content">-->
-
-          <!--<TableLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:stretchColumns="*">-->
-
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginTop="0dp">-->
-
-              <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:gravity="center"-->
-                <!--android:text="Middle Month Km"-->
-                <!--android:textColor="@color/colorAccent"-->
-                <!--android:textSize="14sp" />-->
-            <!--</TableRow>-->
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content">-->
-
-              <!--<View-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_span="2"-->
-                <!--android:background="#aaa" />-->
-            <!--</TableRow>-->
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginTop="4dp"-->
-              <!--android:layout_marginBottom="8dp">-->
-
-              <!--<TextView-->
-                <!--android:id="@+id/tv_middle_month_km"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:padding="10dp"-->
-                <!--android:maxLines="1"-->
-                <!--android:text="0"-->
-                <!--android:textColor="@color/colorPrimaryDark"-->
-                <!--android:textColorHint="@color/colorPrimary"-->
-                <!--android:textSize="22sp"-->
-                <!--android:theme="@style/MyEditText" />-->
-            <!--</TableRow>-->
-          <!--</TableLayout>-->
-        <!--</LinearLayout>-->
-      <!--</android.support.v7.widget.CardView>-->
-
-      <!--&lt;!&ndash;Km info&ndash;&gt;-->
-      <!--<android.support.v7.widget.CardView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginBottom="10dp"-->
-        <!--android:layout_marginLeft="16dp"-->
-        <!--android:layout_marginRight="16dp"-->
-        <!--card_view:cardBackgroundColor="@color/white">-->
-
-        <!--<LinearLayout-->
-          <!--style="@style/Widget.CardContent"-->
-          <!--android:layout_width="match_parent"-->
-          <!--android:layout_height="wrap_content">-->
-
-          <!--<TableLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:stretchColumns="0,1">-->
-
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginTop="0dp">-->
-
-              <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:gravity="center"-->
-                <!--android:text="Km information"-->
-                <!--android:textColor="@color/colorAccent"-->
-                <!--android:textSize="14sp" />-->
-            <!--</TableRow>-->
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content">-->
-
-              <!--<View-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_span="3"-->
-                <!--android:background="#aaa" />-->
-            <!--</TableRow>-->
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginTop="8dp">-->
-
-              <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start|center"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:text="Service Done Km"-->
-                <!--android:textColor="@android:color/black"-->
-                <!--android:textSize="18sp" />-->
-
-              <!--<TextView-->
-                <!--android:id="@+id/tv_service_done_km"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="end|center"-->
-                <!--android:gravity="start|center"-->
-                <!--android:singleLine="true"-->
-                <!--android:text="N/A"-->
-                <!--android:textColor="@color/colorPrimaryDark"-->
-                <!--android:textSize="22sp" />-->
-
-              <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start|center"-->
-                <!--android:paddingStart="4dp"-->
-                <!--android:paddingEnd="10dp"-->
-                <!--android:paddingLeft="4dp"-->
-                <!--android:paddingRight="10dp"-->
-                <!--android:gravity="start"-->
-                <!--android:text="Km"-->
-                <!--android:textColor="@android:color/black"-->
-                <!--android:textSize="18sp" />-->
-            <!--</TableRow>-->
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginTop="8dp">-->
-
-              <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start|center"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:text="Recomended Km"-->
-                <!--android:textColor="@android:color/black"-->
-                <!--android:textSize="18sp" />-->
-
-              <!--<TextView-->
-                <!--android:id="@+id/tv_recomended_km"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="end|center"-->
-                <!--android:gravity="start|center"-->
-                <!--android:singleLine="true"-->
-                <!--android:text="N/A"-->
-                <!--android:textColor="@color/colorPrimaryDark"-->
-                <!--android:textSize="22sp" />-->
-
-              <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start|center"-->
-                <!--android:paddingStart="4dp"-->
-                <!--android:paddingEnd="10dp"-->
-                <!--android:paddingLeft="4dp"-->
-                <!--android:paddingRight="10dp"-->
-                <!--android:gravity="start"-->
-                <!--android:text="Km"-->
-                <!--android:textColor="@android:color/black"-->
-                <!--android:textSize="18sp" />-->
-            <!--</TableRow>-->
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginTop="8dp"-->
-              <!--android:paddingBottom="8dp">-->
-
-              <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start|center"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:text="Service Next Km"-->
-                <!--android:textColor="@android:color/black"-->
-                <!--android:textSize="18sp" />-->
-
-              <!--<TextView-->
-                <!--android:id="@+id/tv_next_service_km"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="end|center"-->
-                <!--android:gravity="start|center"-->
-                <!--android:singleLine="true"-->
-                <!--android:text="N/A"-->
-                <!--android:textColor="@color/colorPrimaryDark"-->
-                <!--android:textSize="22sp" />-->
-
-              <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start|center"-->
-                <!--android:paddingStart="4dp"-->
-                <!--android:paddingEnd="10dp"-->
-                <!--android:paddingLeft="4dp"-->
-                <!--android:paddingRight="10dp"-->
-                <!--android:gravity="start"-->
-                <!--android:text="Km"-->
-                <!--android:textColor="@android:color/black"-->
-                <!--android:textSize="18sp" />-->
-            <!--</TableRow>-->
-
-          <!--</TableLayout>-->
-        <!--</LinearLayout>-->
-      <!--</android.support.v7.widget.CardView>-->
-
-      <!--&lt;!&ndash;Date info&ndash;&gt;-->
-      <!--<android.support.v7.widget.CardView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginBottom="10dp"-->
-        <!--android:layout_marginLeft="16dp"-->
-        <!--android:layout_marginRight="16dp"-->
-        <!--card_view:cardBackgroundColor="@color/white">-->
-
-        <!--<LinearLayout-->
-          <!--style="@style/Widget.CardContent"-->
-          <!--android:layout_width="match_parent"-->
-          <!--android:layout_height="wrap_content">-->
-
-          <!--<TableLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:stretchColumns="*">-->
-
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginTop="0dp">-->
-
-              <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:gravity="center"-->
-                <!--android:text="Date information"-->
-                <!--android:textColor="@color/colorAccent"-->
-                <!--android:textSize="14sp" />-->
-            <!--</TableRow>-->
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content">-->
-
-              <!--<View-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_span="2"-->
-                <!--android:background="#aaa" />-->
-            <!--</TableRow>-->
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginTop="8dp">-->
-
-              <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start|center"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:text="Service DoneDate"-->
-                <!--android:textColor="@android:color/black"-->
-                <!--android:textSize="18sp" />-->
-
-              <!--<TextView-->
-                <!--android:id="@+id/tv_oil_service_done_date"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="end|center"-->
-                <!--android:paddingEnd="10dp"-->
-                <!--android:paddingRight="10dp"-->
-                <!--android:clickable="true"-->
-                <!--android:drawableEnd="@drawable/ic_today_black_24dp"-->
-                <!--android:drawablePadding="4dp"-->
-                <!--android:drawableRight="@drawable/ic_today_black_24dp"-->
-                <!--android:focusable="true"-->
-                <!--android:gravity="start|center"-->
-                <!--android:text="Select Date"-->
-                <!--android:textColor="@color/background"-->
-                <!--android:textSize="18sp" />-->
-
-            <!--</TableRow>-->
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginTop="16dp"-->
-              <!--android:layout_marginBottom="8dp">-->
-
-              <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start|center"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:text="Service NextDate"-->
-                <!--android:textColor="@android:color/black"-->
-                <!--android:textSize="18sp" />-->
-
-              <!--<TextView-->
-                <!--android:id="@+id/tv_oil_service_next_date"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="end|center"-->
-                <!--android:paddingEnd="10dp"-->
-                <!--android:paddingRight="10dp"-->
-                <!--android:clickable="true"-->
-                <!--android:drawableEnd="@drawable/ic_event_black_24dp"-->
-                <!--android:drawablePadding="4dp"-->
-                <!--android:drawableRight="@drawable/ic_event_black_24dp"-->
-                <!--android:focusable="true"-->
-                <!--android:gravity="start|center"-->
-                <!--android:text="Select Date"-->
-                <!--android:textColor="@color/background"-->
-                <!--android:textSize="18sp" />-->
-            <!--</TableRow>-->
-
-
-          <!--</TableLayout>-->
-        <!--</LinearLayout>-->
-      <!--</android.support.v7.widget.CardView>-->
-
-      <!--&lt;!&ndash;Company id&ndash;&gt;-->
-      <!--<android.support.v7.widget.CardView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginBottom="10dp"-->
-        <!--android:layout_marginLeft="16dp"-->
-        <!--android:layout_marginRight="16dp"-->
-        <!--card_view:cardBackgroundColor="@color/white">-->
-
-        <!--<LinearLayout-->
-          <!--style="@style/Widget.CardContent"-->
-          <!--android:layout_width="match_parent"-->
-          <!--android:layout_height="wrap_content">-->
-
-          <!--<TableLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:stretchColumns="*">-->
-
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginTop="0dp">-->
-
-              <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="start"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:gravity="center"-->
-                <!--android:text="Company ID"-->
-                <!--android:textColor="@color/colorAccent"-->
-                <!--android:textSize="14sp" />-->
-            <!--</TableRow>-->
-
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content">-->
-
-              <!--<View-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_span="2"-->
-                <!--android:background="#aaa" />-->
-            <!--</TableRow>-->
-            <!--<TableRow-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginTop="4dp"-->
-              <!--android:layout_marginBottom="8dp">-->
-
-              <!--<TextView-->
-                <!--android:id="@+id/tv_oil_company_id"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:padding="10dp"-->
-                <!--android:maxLines="1"-->
-                <!--android:text="(374) XX XX XX"-->
-                <!--android:textColor="@color/colorPrimaryDark"-->
-                <!--android:textColorHint="@color/colorPrimary"-->
-                <!--android:textSize="22sp"-->
-                <!--android:theme="@style/MyEditText" />-->
-            <!--</TableRow>-->
-          <!--</TableLayout>-->
-        <!--</LinearLayout>-->
-      <!--</android.support.v7.widget.CardView>-->
-
-      <!--<Space-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="56dp" />-->
-
-    <!--</LinearLayout>-->
-
-  <!--</android.support.v4.widget.NestedScrollView>-->
-<!--</LinearLayout>-->
-
-<!--</LinearLayout>-->
+  <!--llmain--><!--<LinearLayout android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--xmlns:app="http://schemas.android.com/apk/res-auto"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_gravity="top"--><!--android:background="@color/colorPrimary"--><!--android:fitsSystemWindows="true"--><!--android:orientation="vertical"--><!--app:layout_behavior="@string/appbar_scrolling_view_behavior"--><!--app:layout_collapseMode="parallax"--><!--app:layout_scrollFlags="scroll|snap"--><!--xmlns:android="http://schemas.android.com/apk/res/android">--><!--&lt;!&ndash;app:layout_collapseParallaxMultiplier="0.7">&ndash;&gt;--><!--&lt;!&ndash;app:layout_behavior="@string/appbar_scrolling_view_behavior">&ndash;&gt;-->
+
+  <!--<android.support.v7.widget.AppCompatSpinner--><!--android:id="@+id/spinner"--><!--style="@style/spinner_style"--><!--android:fitsSystemWindows="true"--><!--android:spinnerMode="dialog"--><!--app:backgroundTint="@color/white"--><!--app:layout_collapseMode="pin"--><!--tools:listitem="@layout/spinner_selected_item" />-->
+
+  <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:background="@color/color_E5E5E5">--><!--<android.support.v4.widget.NestedScrollView--><!--android:id="@+id/nsvw"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:scrollbars="none"--><!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+  <!--&lt;!&ndash; your content here &ndash;&gt;--><!--<LinearLayout--><!--android:id="@+id/ll"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:paddingTop="0dp"--><!--android:orientation="vertical"--><!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+  <!--&lt;!&ndash;Oil info&ndash;&gt;--><!--<android.support.v7.widget.CardView--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="16dp"--><!--android:layout_marginBottom="10dp"--><!--android:layout_marginLeft="16dp"--><!--android:layout_marginRight="16dp"--><!--card_view:cardBackgroundColor="@color/white">-->
+
+  <!--<LinearLayout--><!--style="@style/Widget.CardContent"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">-->
+
+  <!--<TableLayout--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:stretchColumns="*">-->
+
+  <!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="0dp">-->
+
+  <!--<TextView--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start"--><!--android:paddingLeft="10dp"--><!--android:gravity="center"--><!--android:text="Oil information"--><!--android:textColor="@color/colorAccent"--><!--android:textSize="14sp" />--><!--</TableRow>--><!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">-->
+
+  <!--<View--><!--android:layout_width="wrap_content"--><!--android:layout_height="1dp"--><!--android:layout_marginBottom="10dp"--><!--android:layout_span="2"--><!--android:background="#aaa" />--><!--</TableRow>--><!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="8dp">-->
+
+  <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start|center"--><!--android:paddingLeft="10dp"--><!--android:text="Brand"--><!--android:textColor="@android:color/black"--><!--android:textSize="18sp" />-->
+
+  <!--<TextView--><!--android:id="@+id/tv_oil_brand"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="end|center"--><!--android:paddingEnd="10dp"--><!--android:paddingRight="10dp"--><!--android:gravity="start|center"--><!--android:singleLine="true"--><!--android:text="N/A"--><!--android:textColor="@color/colorPrimaryDark"--><!--android:textSize="22sp" />-->
+
+  <!--</TableRow>--><!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="8dp">-->
+
+  <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start|center"--><!--android:paddingLeft="10dp"--><!--android:text="Type"--><!--android:textColor="@android:color/black"--><!--android:textSize="18sp" />-->
+
+  <!--<TextView--><!--android:id="@+id/tv_oil_type"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="end|center"--><!--android:paddingEnd="10dp"--><!--android:paddingRight="10dp"--><!--android:gravity="start|center"--><!--android:singleLine="true"--><!--android:text="N/A"--><!--android:textColor="@color/colorPrimaryDark"--><!--android:textSize="22sp" />-->
+
+
+  <!--</TableRow>--><!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="8dp"--><!--android:paddingBottom="8dp">-->
+
+  <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start|center"--><!--android:paddingLeft="10dp"--><!--android:text="Volume"-->
+
+  <!--android:textColor="@android:color/black"--><!--android:textSize="18sp" />-->
+
+  <!--<TextView--><!--android:id="@+id/tv_oil_volume"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="end|center"--><!--android:paddingEnd="10dp"--><!--android:paddingRight="10dp"--><!--android:gravity="start|center"--><!--android:singleLine="true"--><!--android:text="N/A"--><!--android:textColor="@color/colorPrimaryDark"--><!--android:textSize="22sp" />-->
+
+
+  <!--</TableRow>-->
+
+  <!--</TableLayout>--><!--</LinearLayout>--><!--</android.support.v7.widget.CardView>-->
+
+  <!--&lt;!&ndash;Middle monthKm&ndash;&gt;--><!--<android.support.v7.widget.CardView--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="16dp"--><!--android:layout_marginBottom="10dp"--><!--android:layout_marginLeft="16dp"--><!--android:layout_marginRight="16dp"--><!--card_view:cardBackgroundColor="@color/white">-->
+
+  <!--<LinearLayout--><!--style="@style/Widget.CardContent"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">-->
+
+  <!--<TableLayout--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:stretchColumns="*">-->
+
+  <!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="0dp">-->
+
+  <!--<TextView--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start"--><!--android:paddingLeft="10dp"--><!--android:gravity="center"--><!--android:text="Middle Month Km"--><!--android:textColor="@color/colorAccent"--><!--android:textSize="14sp" />--><!--</TableRow>--><!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">-->
+
+  <!--<View--><!--android:layout_width="wrap_content"--><!--android:layout_height="1dp"--><!--android:layout_marginBottom="10dp"--><!--android:layout_span="2"--><!--android:background="#aaa" />--><!--</TableRow>--><!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="4dp"--><!--android:layout_marginBottom="8dp">-->
+
+  <!--<TextView--><!--android:id="@+id/tv_middle_month_km"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:padding="10dp"--><!--android:maxLines="1"--><!--android:text="0"--><!--android:textColor="@color/colorPrimaryDark"--><!--android:textColorHint="@color/colorPrimary"--><!--android:textSize="22sp"--><!--android:theme="@style/MyEditText" />--><!--</TableRow>--><!--</TableLayout>--><!--</LinearLayout>--><!--</android.support.v7.widget.CardView>-->
+
+  <!--&lt;!&ndash;Km info&ndash;&gt;--><!--<android.support.v7.widget.CardView--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="16dp"--><!--android:layout_marginBottom="10dp"--><!--android:layout_marginLeft="16dp"--><!--android:layout_marginRight="16dp"--><!--card_view:cardBackgroundColor="@color/white">-->
+
+  <!--<LinearLayout--><!--style="@style/Widget.CardContent"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">-->
+
+  <!--<TableLayout--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:stretchColumns="0,1">-->
+
+  <!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="0dp">-->
+
+  <!--<TextView--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start"--><!--android:paddingLeft="10dp"--><!--android:gravity="center"--><!--android:text="Km information"--><!--android:textColor="@color/colorAccent"--><!--android:textSize="14sp" />--><!--</TableRow>--><!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">-->
+
+  <!--<View--><!--android:layout_width="wrap_content"--><!--android:layout_height="1dp"--><!--android:layout_marginBottom="10dp"--><!--android:layout_span="3"--><!--android:background="#aaa" />--><!--</TableRow>--><!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="8dp">-->
+
+  <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start|center"--><!--android:paddingLeft="10dp"--><!--android:text="Service Done Km"--><!--android:textColor="@android:color/black"--><!--android:textSize="18sp" />-->
+
+  <!--<TextView--><!--android:id="@+id/tv_service_done_km"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="end|center"--><!--android:gravity="start|center"--><!--android:singleLine="true"--><!--android:text="N/A"--><!--android:textColor="@color/colorPrimaryDark"--><!--android:textSize="22sp" />-->
+
+  <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start|center"--><!--android:paddingStart="4dp"--><!--android:paddingEnd="10dp"--><!--android:paddingLeft="4dp"--><!--android:paddingRight="10dp"--><!--android:gravity="start"--><!--android:text="Km"--><!--android:textColor="@android:color/black"--><!--android:textSize="18sp" />--><!--</TableRow>--><!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="8dp">-->
+
+  <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start|center"--><!--android:paddingLeft="10dp"--><!--android:text="Recomended Km"--><!--android:textColor="@android:color/black"--><!--android:textSize="18sp" />-->
+
+  <!--<TextView--><!--android:id="@+id/tv_recomended_km"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="end|center"--><!--android:gravity="start|center"--><!--android:singleLine="true"--><!--android:text="N/A"--><!--android:textColor="@color/colorPrimaryDark"--><!--android:textSize="22sp" />-->
+
+  <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start|center"--><!--android:paddingStart="4dp"--><!--android:paddingEnd="10dp"--><!--android:paddingLeft="4dp"--><!--android:paddingRight="10dp"--><!--android:gravity="start"--><!--android:text="Km"--><!--android:textColor="@android:color/black"--><!--android:textSize="18sp" />--><!--</TableRow>--><!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="8dp"--><!--android:paddingBottom="8dp">-->
+
+  <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start|center"--><!--android:paddingLeft="10dp"--><!--android:text="Service Next Km"--><!--android:textColor="@android:color/black"--><!--android:textSize="18sp" />-->
+
+  <!--<TextView--><!--android:id="@+id/tv_next_service_km"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="end|center"--><!--android:gravity="start|center"--><!--android:singleLine="true"--><!--android:text="N/A"--><!--android:textColor="@color/colorPrimaryDark"--><!--android:textSize="22sp" />-->
+
+  <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start|center"--><!--android:paddingStart="4dp"--><!--android:paddingEnd="10dp"--><!--android:paddingLeft="4dp"--><!--android:paddingRight="10dp"--><!--android:gravity="start"--><!--android:text="Km"--><!--android:textColor="@android:color/black"--><!--android:textSize="18sp" />--><!--</TableRow>-->
+
+  <!--</TableLayout>--><!--</LinearLayout>--><!--</android.support.v7.widget.CardView>-->
+
+  <!--&lt;!&ndash;Date info&ndash;&gt;--><!--<android.support.v7.widget.CardView--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="16dp"--><!--android:layout_marginBottom="10dp"--><!--android:layout_marginLeft="16dp"--><!--android:layout_marginRight="16dp"--><!--card_view:cardBackgroundColor="@color/white">-->
+
+  <!--<LinearLayout--><!--style="@style/Widget.CardContent"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">-->
+
+  <!--<TableLayout--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:stretchColumns="*">-->
+
+  <!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="0dp">-->
+
+  <!--<TextView--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start"--><!--android:paddingLeft="10dp"--><!--android:gravity="center"--><!--android:text="Date information"--><!--android:textColor="@color/colorAccent"--><!--android:textSize="14sp" />--><!--</TableRow>--><!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">-->
+
+  <!--<View--><!--android:layout_width="wrap_content"--><!--android:layout_height="1dp"--><!--android:layout_marginBottom="10dp"--><!--android:layout_span="2"--><!--android:background="#aaa" />--><!--</TableRow>--><!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="8dp">-->
+
+  <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start|center"--><!--android:paddingLeft="10dp"--><!--android:text="Service DoneDate"--><!--android:textColor="@android:color/black"--><!--android:textSize="18sp" />-->
+
+  <!--<TextView--><!--android:id="@+id/tv_oil_service_done_date"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="end|center"--><!--android:paddingEnd="10dp"--><!--android:paddingRight="10dp"--><!--android:clickable="true"--><!--android:drawableEnd="@drawable/ic_today_black_24dp"--><!--android:drawablePadding="4dp"--><!--android:drawableRight="@drawable/ic_today_black_24dp"--><!--android:focusable="true"--><!--android:gravity="start|center"--><!--android:text="Select Date"--><!--android:textColor="@color/background"--><!--android:textSize="18sp" />-->
+
+  <!--</TableRow>--><!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="16dp"--><!--android:layout_marginBottom="8dp">-->
+
+  <!--<TextView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start|center"--><!--android:paddingLeft="10dp"--><!--android:text="Service NextDate"--><!--android:textColor="@android:color/black"--><!--android:textSize="18sp" />-->
+
+  <!--<TextView--><!--android:id="@+id/tv_oil_service_next_date"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="end|center"--><!--android:paddingEnd="10dp"--><!--android:paddingRight="10dp"--><!--android:clickable="true"--><!--android:drawableEnd="@drawable/ic_event_black_24dp"--><!--android:drawablePadding="4dp"--><!--android:drawableRight="@drawable/ic_event_black_24dp"--><!--android:focusable="true"--><!--android:gravity="start|center"--><!--android:text="Select Date"--><!--android:textColor="@color/background"--><!--android:textSize="18sp" />--><!--</TableRow>-->
+
+
+  <!--</TableLayout>--><!--</LinearLayout>--><!--</android.support.v7.widget.CardView>-->
+
+  <!--&lt;!&ndash;Company id&ndash;&gt;--><!--<android.support.v7.widget.CardView--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="16dp"--><!--android:layout_marginBottom="10dp"--><!--android:layout_marginLeft="16dp"--><!--android:layout_marginRight="16dp"--><!--card_view:cardBackgroundColor="@color/white">-->
+
+  <!--<LinearLayout--><!--style="@style/Widget.CardContent"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">-->
+
+  <!--<TableLayout--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:stretchColumns="*">-->
+
+  <!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="0dp">-->
+
+  <!--<TextView--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="start"--><!--android:paddingLeft="10dp"--><!--android:gravity="center"--><!--android:text="Company ID"--><!--android:textColor="@color/colorAccent"--><!--android:textSize="14sp" />--><!--</TableRow>-->
+
+  <!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">-->
+
+  <!--<View--><!--android:layout_width="wrap_content"--><!--android:layout_height="1dp"--><!--android:layout_marginBottom="10dp"--><!--android:layout_span="2"--><!--android:background="#aaa" />--><!--</TableRow>--><!--<TableRow--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginTop="4dp"--><!--android:layout_marginBottom="8dp">-->
+
+  <!--<TextView--><!--android:id="@+id/tv_oil_company_id"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:padding="10dp"--><!--android:maxLines="1"--><!--android:text="(374) XX XX XX"--><!--android:textColor="@color/colorPrimaryDark"--><!--android:textColorHint="@color/colorPrimary"--><!--android:textSize="22sp"--><!--android:theme="@style/MyEditText" />--><!--</TableRow>--><!--</TableLayout>--><!--</LinearLayout>--><!--</android.support.v7.widget.CardView>-->
+
+  <!--<Space--><!--android:layout_width="match_parent"--><!--android:layout_height="56dp" />-->
+
+  <!--</LinearLayout>-->
+
+  <!--</android.support.v4.widget.NestedScrollView>--><!--</LinearLayout>-->
+
+  <!--</LinearLayout>-->

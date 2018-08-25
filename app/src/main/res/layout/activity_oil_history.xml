@@ -14,7 +14,7 @@
   <android.support.design.widget.AppBarLayout
     android:id="@+id/appBar"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_height="@dimen/app_bar_layout_height"
     android:fitsSystemWindows="true"
     app:layout_behavior="am.gsoft.carserviceclient.util.FixAppBarLayoutBehavior"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -29,7 +29,7 @@
       app:expandedTitleMarginStart="48dp"
       app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
       app:layout_scrollFlags="scroll|exitUntilCollapsed"
-      app:title="Oil History">
+      app:title="@string/oil_history_activity_title">
       <!--app:layout_scrollFlags="scroll|enterAlways"-->
 
       <ImageView
@@ -51,7 +51,7 @@
   <View
     android:id="@+id/v_shadow"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
+    android:layout_height="@dimen/shadow_view_height_big"
     android:background="@drawable/drop_shadow_reverse"
     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 

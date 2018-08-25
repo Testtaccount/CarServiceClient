@@ -16,7 +16,7 @@
   <android.support.design.widget.AppBarLayout
     android:id="@+id/appBar"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/app_bar_layout_height"
     android:fitsSystemWindows="true"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
     <include layout="@layout/include_toolbar" />
@@ -43,7 +43,7 @@
           android:id="@+id/car_icon"
           android:layout_width="110dp"
           android:layout_height="140dp"
-          android:src="@drawable/ic_mercedes_benz" />
+          tools:src="@drawable/ic_mercedes_benz" />
 
         <LinearLayout
           android:layout_gravity="center"
@@ -61,7 +61,7 @@
             android:gravity="center_vertical"
             android:singleLine="true"
             android:includeFontPadding="false"
-            android:text="Mercedens-Bens"
+            tools:text="Mercedens-Bens"
             android:textColor="@color/white"
             android:textSize="25dp" />
 
@@ -76,7 +76,7 @@
             android:layout_gravity="bottom"
             android:textColor="@color/white"
             android:layout_height="wrap_content"
-            android:text="X123456789"/>
+            tools:text="X123456789"/>
 
 
           <LinearLayout
@@ -105,7 +105,7 @@
               android:gravity="center_vertical"
               android:includeFontPadding="false"
               android:singleLine="true"
-              android:text="@string/oil_brand_name"
+              tools:text="@string/oil_brand_name"
               android:textColor="@color/colorAccent"
               android:textSize="24dp" />
 
@@ -122,7 +122,7 @@
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="@string/oil_type"
+            tools:text="@string/oil_type"
             android:textColor="@color/colorAccent"
             android:textSize="16dp" />
           <!--<LinearLayout-->
@@ -153,7 +153,7 @@
   <View
     android:id="@+id/v_shadow"
     android:layout_width="match_parent"
-    android:layout_height="36dp"
+    android:layout_height="@dimen/shadow_height_medium"
     android:background="@drawable/drop_shadow_reverse"
     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 

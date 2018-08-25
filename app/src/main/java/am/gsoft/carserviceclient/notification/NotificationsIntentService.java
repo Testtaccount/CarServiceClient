@@ -13,8 +13,6 @@ import am.gsoft.carserviceclient.data.database.entity.AppNotification;
 import am.gsoft.carserviceclient.data.database.entity.Car;
 import am.gsoft.carserviceclient.data.database.entity.Oil;
 import am.gsoft.carserviceclient.ui.activity.NotificationActionsActivity;
-import am.gsoft.carserviceclient.ui.fragment.MileageFragment;
-import am.gsoft.carserviceclient.ui.fragment.NextReminderFragment;
 import am.gsoft.carserviceclient.util.Constant.Action;
 import am.gsoft.carserviceclient.util.Constant.Extra;
 import android.app.IntentService;
@@ -32,9 +30,6 @@ import android.support.v4.app.TaskStackBuilder;
 public class NotificationsIntentService extends IntentService {
 
   public static final String TAG = NotificationsIntentService.class.getSimpleName();
-
-  private static final String ACTION_BAZ = "am.gsoft.carserviceclient.data.action.BAZ";
-
 
   public NotificationsIntentService() {
     super(NotificationsIntentService.class.getName());
@@ -178,28 +173,28 @@ public class NotificationsIntentService extends IntentService {
 
     //////////////////////
 
-    Intent notificationIntent1 = new Intent(context, NextReminderFragment.class);
-    notificationIntent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-    notificationIntent1.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
-
-    TaskStackBuilder stackBuilder1 = TaskStackBuilder.create(context);
-    stackBuilder1.addParentStack(NextReminderFragment.class);
-    stackBuilder1.addNextIntent(notificationIntent1);
-
-    PendingIntent notificationPendingIntent1 = stackBuilder1.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
+//    Intent notificationIntent1 = new Intent(context, NextReminderFragment.class);
+//    notificationIntent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//    notificationIntent1.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
+//
+//    TaskStackBuilder stackBuilder1 = TaskStackBuilder.create(context);
+//    stackBuilder1.addParentStack(NextReminderFragment.class);
+//    stackBuilder1.addNextIntent(notificationIntent1);
+//
+//    PendingIntent notificationPendingIntent1 = stackBuilder1.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
 
     //////////////////////
 
-    Intent notificationIntent2 = new Intent(context, MileageFragment.class);
-    notificationIntent2.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
-//    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, car.getId());
-
-    TaskStackBuilder stackBuilder2 = TaskStackBuilder.create(context);
-    stackBuilder2.addParentStack(MileageFragment.class);
-    stackBuilder2.addNextIntent(notificationIntent2);
-
-    PendingIntent notificationPendingIntent2 = stackBuilder2.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
+//    Intent notificationIntent2 = new Intent(context, MileageFragment.class);
+//    notificationIntent2.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
+////    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, car.getId());
+//
+//    TaskStackBuilder stackBuilder2 = TaskStackBuilder.create(context);
+//    stackBuilder2.addParentStack(MileageFragment.class);
+//    stackBuilder2.addNextIntent(notificationIntent2);
+//
+//    PendingIntent notificationPendingIntent2 = stackBuilder2.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
 
@@ -244,28 +239,28 @@ public class NotificationsIntentService extends IntentService {
 
     //////////////////////
 
-    Intent notificationIntent1 = new Intent(context, NextReminderFragment.class);
-    notificationIntent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-    notificationIntent1.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
-
-    TaskStackBuilder stackBuilder1 = TaskStackBuilder.create(context);
-    stackBuilder1.addParentStack(NextReminderFragment.class);
-    stackBuilder1.addNextIntent(notificationIntent1);
-
-    PendingIntent notificationPendingIntent1 = stackBuilder1.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
+//    Intent notificationIntent1 = new Intent(context, NextReminderFragment.class);
+//    notificationIntent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//    notificationIntent1.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
+//
+//    TaskStackBuilder stackBuilder1 = TaskStackBuilder.create(context);
+//    stackBuilder1.addParentStack(NextReminderFragment.class);
+//    stackBuilder1.addNextIntent(notificationIntent1);
+//
+//    PendingIntent notificationPendingIntent1 = stackBuilder1.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
 
     //////////////////////
 
-    Intent notificationIntent2 = new Intent(context, MileageFragment.class);
-    notificationIntent2.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
-//    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, car.getId());
-
-    TaskStackBuilder stackBuilder2 = TaskStackBuilder.create(context);
-    stackBuilder2.addParentStack(MileageFragment.class);
-    stackBuilder2.addNextIntent(notificationIntent2);
-
-    PendingIntent notificationPendingIntent2 = stackBuilder2.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
+//    Intent notificationIntent2 = new Intent(context, MileageFragment.class);
+//    notificationIntent2.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
+////    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, car.getId());
+//
+//    TaskStackBuilder stackBuilder2 = TaskStackBuilder.create(context);
+//    stackBuilder2.addParentStack(MileageFragment.class);
+//    stackBuilder2.addNextIntent(notificationIntent2);
+//
+//    PendingIntent notificationPendingIntent2 = stackBuilder2.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
 

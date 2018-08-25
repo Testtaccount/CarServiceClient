@@ -330,7 +330,7 @@ public class NotificationActionsActivity extends BaseActivity implements View.On
 
     long driven = enteredValue - mOil.getServiceDoneKm();
     if (driven >= recomendedKm) {
-      ToastUtils.shortToast("Time To Change Oil");
+      ToastUtils.shortToast(R.string.msg_time_to_change_oil);
       return;
     }
 

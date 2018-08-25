@@ -213,8 +213,6 @@
     <item>@string/en</item>
   </array>
 
-
-
   <string-array name="oil_brands">
     <item>@string/SelectOne</item>
     <item>@string/Xado</item>

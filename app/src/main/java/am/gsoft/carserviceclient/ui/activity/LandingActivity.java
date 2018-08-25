@@ -458,7 +458,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
           } else {
 
-            ToastUtils.shortToast("Yo Don't Have Cars");
+            ToastUtils.shortToast(R.string.msg_no_cars);
 //            Intent intent = new Intent(LandingActivity.this, CreateNewCarActivity.class);
 //            intent.setAction(ACTION_MAIN_ACTIVITY_INTENT);
 //            startActivity(intent);
@@ -498,7 +498,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onFail(String e) {
-      ToastUtils.shortToast("Something wrong");
+      ToastUtils.shortToast(R.string.msg_something_wrong);
       System.out.println(e);
     }
   }

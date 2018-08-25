@@ -124,7 +124,7 @@ public class GarageActivity extends BaseActivity implements OnClickListener,Spin
   }
 
   private void customizeActionBar() {
-    setActionBarTitle("My Garage");
+    setActionBarTitle(R.string.garage_activity_title);
     setActionBarUpButtonEnabled(true);
     appBarLayout.setExpanded(false);
   }

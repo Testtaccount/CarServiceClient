@@ -27,7 +27,7 @@
       app:expandedTitleMarginStart="48dp"
       app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
       app:layout_scrollFlags="scroll|exitUntilCollapsed"
-      app:title="Edit Car">
+      app:title="@string/edit_car_activity_title">
 
       <ImageView
         android:id="@+id/toolbarImage"
@@ -147,7 +147,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/tv_space_area"
                     android:gravity="end|center"
-                    android:hint="@string/name"
+                    android:hint="@string/car_model_name"
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:maxLength="10"
@@ -522,7 +522,7 @@
           android:focusableInTouchMode="false"
           android:id="@+id/fl_delete_car_btn"
           android:layout_width="match_parent"
-          android:layout_height="48dp"
+          android:layout_height="@dimen/main_button_height"
           android:layout_marginTop="6dp"
           android:layout_marginBottom="10dp"
           android:layout_marginLeft="16dp"
@@ -536,7 +536,7 @@
 
           <TextView
             android:fontFamily="sans-serif-medium"
-            android:textSize="14dp"
+            android:textSize="@dimen/main_button_textsize"
             android:id="@+id/tv_select_date_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -555,7 +555,7 @@
           android:focusableInTouchMode="true"
           android:focusable="true"
           android:layout_width="match_parent"
-          android:layout_height="6dp" />
+          android:layout_height="@dimen/space_height_small" />
 
       </LinearLayout>
 

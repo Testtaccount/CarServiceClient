@@ -1,7 +1,115 @@
 <resources>
   <string name="app_name">Car Service Client</string>
 
+  <!-- ==================================== MENU ==================================== -->
+
+  <string name="action_about">About</string>
+  <string name="action_log_out">Logout</string>
+
+  <!-- ==================================== MAIN ACTIVITY ==================================== -->
+  <string name="welcome_title">KEEP YOUR OIL\nIMPORTANT\nINFORMATION</string>
+  <string name="sign_in">Sign in</string>
+
+  <string name="no_oil_text">There is no oil in a car engine!</string>
+  <string name="new_btn_text">NEW</string>
+  <string name="edit_btn_text">EDIT</string>
+  <string name="history_btn_text">HISTORY</string>
+
+  <string name="oil_information">Oil information</string>
+  <string name="oil_brand_name">Brand name</string>
+  <string name="oil_type">Type</string>
+  <string name="oil_volume">Volume</string>
+
+  <string name="mileage_information">Mileage information</string>
+  <string name="km">Km</string>
+  <string name="mil">Mil</string>
+  <string name="current">Current</string>
+  <string name="recommended">Recommended</string>
+  <string name="next">Next</string>
+  <string name="middle_month">Middle month</string>
+
+  <string name="date_information">Date information</string>
+  <string name="done_date">Replace Date</string>
+  <string name="next_date">Next Date</string>
+
+  <string name="service_phone_number">Service phone number</string>
+
+  <string name="notes">Notes</string>
+  <string name="notes_text">Notes Text…</string>
+
+  <string name="garage_btn_text">GARAGE</string>
+  <string name="delete_btn_text">DELETE</string>
+  <string name="add_btn_text">ADD</string>
+
+  <!-- ==================================== OIL ACTIVITY ==================================== -->
+  <string name="create_new_oil_activity_title">New Engine Oil</string>
+  <string name="edit_oil_activity_title">Edit Current Oil</string>
+  <string name="oil_history_activity_title">Oil History</string>
+
+  <string name="fill_oil_information">Fill oil information</string>
+  <string name="fill_mileage_information">Fill mileage information</string>
+  <string name="middle_month_set_manually_km">Middle month Km\nset manually  </string>
+  <string name="middle_month_set_manually_mil">Middle month Mil\nset manually  </string>
+  <string name="select_date">Select date</string>
+  <string name="phone_number">Phone number</string>
+  <string name="save_in_contacts">Save in contacts</string>
+  <string name="contact_name">Name</string>
+
+  <!-- ==================================== GARAGE ACTIVITY ==================================== -->
+  <string name="garage_activity_title">My Garage</string>
+  <string name="edit_car_activity_title">Edit Car</string>
+  <string name="add_new_car_activity_title">Add New Car</string>
+
+  <string name="car_information">Car information</string>
+  <string name="car_brand">Brand</string>
+  <string name="car_model">Model</string>
+  <string name="car_year">Year</string>
+
+  <string name="car_license_plate">Car license plate</string>
+  <string name="license_plate">License plate</string>
+  <string name="car_vin_code">Car VIN code</string>
+  <string name="car_model_name">name</string>
+  <string name="car_distance_unit">Distance unit</string>
+  <string name="enter_vin_code_optional">Enter vin code (optional)</string>
+
+  <!-- ==================================== NOTIFICATION ACTIONS ACTIVITY ==================================== -->
+  <string name="choose_your_action">Choose your action \nfor notification</string>
+  <string name="select_reminder_date_btn_text">SELECT REMINDER DATE</string>
+  <string name="set_mileage_btn_text">SET MILEAGE</string>
+
+  <string name="current_mileage">Current Mileage</string>
+  <string name="the_next_reminder_date_is_set">The next reminder date is set</string>
+
+  <!--Dialog-->
+  <string name="dlg_logout_title">Are you sure you want to log out?</string>
+  <string name="dlg_make_call_title">Make call?</string>
+  <string name="dlg_ok">OK</string>
+  <string name="dlg_yes">Yes</string>
+  <string name="dlg_set">Set</string>
+  <string name="dlg_call_via">Call via</string>
+  <string name="dlg_call">Call</string>
+  <string name="dlg_cancel">Cancel</string>
+  <string name="dlg_enable_autostart_title">Enable AutoStart</string>
+  <string name="dlg_pls_allow">Please allow</string>
+  <string name="dlg_pls_allow_txt">to always run in the background,else our services can\'t be accessed.</string>
+  <string name="dlg_info_title">Info</string>
+  <string name="dlg_delete_car_title">Are you sure you want to delete this car?</string>
+  <string name="dlg_delete">Delete</string>
+
+  <string name="dlg_wait_please">Please, wait</string>
+  <string name="dlg_fail_connection">Sorry, connection lost. Please check your network connection.</string>
+  <string name="dlg_internet_connection_error">Something went wrong. Please, verify your internet connection and try again</string>
+  <string name="permission_denided">Permission Denied, You cannot call</string>
+  <string name="snake_bar_action_msg_allow">ALLOW</string>
+
+  <string name="dlg_info_content_for_current">current km info here</string>
+  <string name="dlg_info_content_for_recommended">recommended km info here</string>
+  <string name="dlg_info_content_for_next">next km info here</string>
+  <string name="dlg_info_content_for_middle">middle month km info here</string>
+
   <!--Util-->
+  <string name="channel_name">Oil notifications</string>
+  <string name="channel_description">Oils check reminder notifications</string>
   <string name="msg_network_connection_error">No Internet connection</string>
   <string name="msg_page_not_found">404 Page not found</string>
   <string name="msg_unknown_error">Unknown error</string>
@@ -10,34 +118,27 @@
   <string name="msg_connection_error">Connection error</string>
   <string name="msg_navigation_drawer_open">Open navigation drawer</string>
   <string name="msg_navigation_drawer_close">Close navigation drawer</string>
+  <string name="msg_car_created">Car created!</string>
+  <string name="msg_car_not_created">Car not created!</string>
+  <string name="err_msg_not_selected">Not Selected</string>
+  <string name="err_msg_empty">Can Not Be Empty!</string>
+  <string name="err_msg_current_less">Curent Km must be more than the previous service km !</string>
+  <string name="err_msg_incorrect_number_lenght">Incorrect Phone number length!</string>
+  <string name="err_msg_enter_valid_phone_number">Enter valid phone number</string>
+  <string name="err_msg_must_be_more">Curent Km must be more than the previous service km !</string>
+  <string name="msg_permission_denided_phone">Permission Denied, You cannot write contacts</string>
+  <string name="msg_car_edited">Car edited!</string>
+  <string name="msg_car_not_edited">Car not edited!</string>
+  <string name="msg_car_deleted">Car deleted!</string>
+  <string name="msg_car_not_deleted">Car not deleted!</string>
+  <string name="msg_no_cars">Yo Don\'t Have Cars</string>
+  <string name="msg_something_wrong">Something wrong</string>
+  <string name="msg_time_to_change_oil">Time To Change Oil</string>
+  <string name="msg_oil_changed">Oil changed!</string>
+  <string name="msg_oil_not_changed">Oil not changed!</string>
 
-  <!--Auth screen strings-->
-  <string name="text_btn_auth_sign">Login</string>
-  <string name="text_welcome">Welcome to \'Boilerplate\' \nPlease, login with any fake credentials to proceed</string>
-
-  <!--Navigation drawer menu items-->
-  <string name="text_one">First item</string>
-  <string name="text_two">Second item</string>
-  <string name="text_three">Third item</string>
-  <string name="text_four">Fourth item</string>
-  <string name="text_five">Fifth item</string>
-  <string name="text_six">Logout</string>
-
-  <!--Auth screen edt hints-->
-  <string name="hint_tiet_auth_email">Email</string>
-  <string name="hint_tiet_auth_pass">Password</string>
-
-  <!--Edt errors-->
-  <string name="msg_edt_error_mail">Enter email</string>
-  <string name="msg_edt_pass_error">Enter password</string>
-
-  <!--Dialog-->
-  <string name="dlg_ok">OK</string>
-  <string name="cancel_dlg_btn">Cancel</string>
-  <string name="dlg_wait_please">Please, wait</string>
-  <string name="dlg_fail_send_msg">Errors occurred while sending msg! Please, try later</string>
-  <string name="dlg_fail_connection">Sorry, connection lost. Please check your network connection.</string>
-  <string name="dlg_internet_connection_error">Something went wrong. Please, verify your internet connection and try again</string>
+  <string name="start_top">M 20.7 7 C 21.1 6.6 21.1 6 20.7 5.6 L 18.4 3.3 C 18 2.9 17.4 2.9 17 3.3 L 15.2 5.1 L 19 8.9</string>
+  <string name="end_top">M 19.6 8 C 20 7.6 20 7 19.6 6.6 L 17.3 4.3 C 16.9 3.9 16.3 3.9 15.9 4.3 L 14.1 6.1 L 17.9 9.9</string>
 
   <!--Languages-->
   <string name="en">en</string>
@@ -45,137 +146,13 @@
   <string name="es">es</string>
   <string name="fr">fr</string>
 
-  <string name="icon">Spinner - danielme.com</string>
-  <string name="none">none</string>
-  <string name="blogger">Blogger</string>
-  <string name="delicious">Delicious</string>
-  <string name="digg">Digg</string>
-  <string name="ebay">Ebay</string>
-  <string name="flickr">Flickr</string>
-  <string name="facebook">Facebook</string>
-  <string name="google">Google</string>
-  <string name="lastfm">Lastfm</string>
-  <string name="reddit">Reddit</string>
-  <string name="stumbleupon">StumbleUpon</string>
-  <string name="technorati">Technorati</string>
-  <string name="twitter">Twitter</string>
-  <string name="wordpress">Wordpress</string>
-  <string name="youtube">Youtube</string>
-  <string name="title">Choose the color</string>
-
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
-  <string name="options_1">Option 1</string>
-  <string name="options_2">Option 2</string>
-  <string name="options_3">Option 3</string>
-  <string name="options_4">Option 4</string>
-  <string name="action_about">About</string>
-  <string name="action_log_out">Log Out</string>
-
-  <string name="progress_dialog">PROGRESS DIALOG</string>
-  <string name="please_wait">Please, wait</string>
-  <string name="start_top">M 20.7 7 C 21.1 6.6 21.1 6 20.7 5.6 L 18.4 3.3 C 18 2.9 17.4 2.9 17 3.3 L 15.2 5.1 L 19 8.9</string>
-  <string name="end_top">M 19.6 8 C 20 7.6 20 7 19.6 6.6 L 17.3 4.3 C 16.9 3.9 16.3 3.9 15.9 4.3 L 14.1 6.1 L 17.9 9.9</string>
-
-  <string name="alarm_set_for">Notification set for %1$s from now.</string>
-  <string name="upcoming_alarm_dismissed">%1$s alarm dismissed.</string>
-  <string name="title_snoozing_until">Snoozing until %1$s</string>
-  <string name="large_text">
-        "Material is the metaphor.\n\n"
-
-        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
-        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
-        "technologically advanced and open to imagination and magic.\n"
-        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
-        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
-        "flexibility of the material creates new affordances that supercede those in the physical "
-        "world, without breaking the rules of physics.\n"
-        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
-        "interact, and exist in space and in relation to each other. Realistic lighting shows "
-        "seams, divides space, and indicates moving parts.\n\n"
-
-        "Bold, graphic, intentional.\n\n"
-
-        "The foundational elements of print based design typography, grids, space, scale, color, "
-        "and use of imagery guide visual treatments. These elements do far more than please the "
-        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
-        "imagery, large scale typography, and intentional white space create a bold and graphic "
-        "interface that immerse the user in the experience.\n"
-        "An emphasis on user actions makes core functionality immediately apparent and provides "
-        "waypoints for the user.\n\n"
-
-        "Motion provides meaning.\n\n"
-
-        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
-        "inflection points that initiate motion, transforming the whole design.\n"
-        "All action takes place in a single environment. Objects are presented to the user without "
-        "breaking the continuity of experience even as they transform and reorganize.\n"
-        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
-        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
-
-        "3D world.\n\n"
-
-        "The material environment is a 3D space, which means all objects have x, y, and z "
-        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
-        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
-        "position along the z-axis and has a standard 1dp thickness.\n"
-        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
-        "emulated by manipulating the y-axis.\n\n"
-
-        "Light and shadow.\n\n"
-
-        "Within the material environment, virtual lights illuminate the scene. Key lights create "
-        "directional shadows, while ambient light creates soft shadows from all angles.\n"
-        "Shadows in the material environment are cast by these two light sources. In Android "
-        "development, shadows occur when light sources are blocked by sheets of material at "
-        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
-        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
-
-        "Resting elevation.\n\n"
-
-        "All material objects, regardless of size, have a resting elevation, or default elevation "
-        "that does not change. If an object changes elevation, it should return to its resting "
-        "elevation as soon as possible.\n\n"
-
-        "Component elevations.\n\n"
-
-        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
-        "does not vary from 6dp in one app to 16dp in another app).\n"
-        "Components may have different resting elevations across platforms, depending on the depth "
-        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
-
-        "Responsive elevation and dynamic elevation offsets.\n\n"
-
-        "Some component types have responsive elevation, meaning they change elevation in response "
-        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
-        "changes are consistently implemented using dynamic elevation offsets.\n"
-        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
-        "to the component’s resting state. They ensure that elevation changes are consistent "
-        "across actions and component types. For example, all components that lift on press have "
-        "the same elevation change relative to their resting elevation.\n"
-        "Once the input event is completed or cancelled, the component will return to its resting "
-        "elevation.\n\n"
-
-        "Avoiding elevation interference.\n\n"
-
-        "Components with responsive elevations may encounter other components as they move between "
-        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
-        "through other material, components avoid interfering with one another any number of ways, "
-        "whether on a per component basis or using the entire app layout.\n"
-        "On a component level, components can move or be removed before they cause interference. "
-        "For example, a floating action button (FAB) can disappear or move off screen before a "
-        "user picks up a card, or it can move if a snackbar appears.\n"
-        "On the layout level, design your app layout to minimize opportunities for interference. "
-        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
-        "when a user tries to pick up one of cards.\n\n"
-    </string>
-
+  <!--oil brands-->
   <string name="Xado">Xado</string>
   <string name="Liqui_Moly">Liqui Moly</string>
   <string name="MOBIL_1">MOBIL 1</string>
   <string name="CASTROL">CASTROL</string>
 
-
+  <!--oil types-->
   <string name="oil_type_OW_20">OW-20</string>
   <string name="oil_type_OW_30">OW-30</string>
   <string name="oil_type_OW_40">OW-40</string>
@@ -207,7 +184,8 @@
   <string name="oil_type_25W_50">25W-50</string>
   <string name="oil_type_25W_60">25W-60</string>
 
-  <string name="SelectOne">Select One...</string>
+  <!--car brands-->
+  <string name="SelectOne">Select One…</string>
   <string name="Abadal">Abadal</string>
   <string name="Abbott_detroit">Abbott Detroit</string>
   <string name="Abt_sportsline">ABT Sportsline</string>
@@ -488,52 +466,8 @@
   <string name="Zenvo">Zenvo</string>
   <string name="Zotye">Zotye</string>
 
-  <string name="channel_name">Oil notifications</string>
-  <string name="channel_description">Oils check reminder notifications</string>
-
-  <string name="car_information">Car information</string>
-  <string name="car_brand">Brand</string>
-  <string name="car_model">Model</string>
-  <string name="name">Name</string>
-  <string name="car_year">Year</string>
-  <string name="car_distance_unit">Distance unit</string>
-  <string name="car_license_plate">Car license plate</string>
-  <string name="license_plate">License plate</string>
-  <string name="car_vin_code">Car VIN code</string>
-  <string name="enter_vin_code_optional">Enter vin code (optional)</string>
-  <string name="service_phone_number">Service Phone Number</string>
-  <string name="phone_number">Phone Number</string>
-  <string name="save_in_contacts">Save in contacts</string>
-  <string name="oil_information">Oil information</string>
-  <string name="oil_brand_name">Brand Name</string>
-  <string name="oil_type">Type</string>
-  <string name="oil_volume">Volume</string>
-  <string name="current">Current</string>
-  <string name="recomended">Recomended</string>
-  <string name="next">Next</string>
-  <string name="middle_month">Middle month</string>
-  <string name="km">Km</string>
-  <string name="middle_month_set_manually">Middle Month Km\nSet manually  </string>
-  <string name="date_information">Date information</string>
-  <string name="done_date">Done Date</string>
-  <string name="next_date">Next Date</string>
-  <string name="select_date">Select Date</string>
-  <string name="notes">Notes</string>
-  <string name="notes_text">Notes Text...</string>
-  <string name="delete_btn_text">DELETE</string>
-  <string name="edit_btn_text">EDIT</string>
-  <string name="add_btn_text">ADD</string>
-  <string name="welcome_title">KEEP YOUR OIL\nIMPORTANT\nINFORMATION</string>
-  <string name="sign_in">Sign in</string>
-  <string name="new_btn_text">NEW</string>
-  <string name="history_btn_text">HISTORY</string>
-  <string name="no_oil_text">There is no oil in a car engine!</string>
-  <string name="mileage_information">Mileage information</string>
-  <string name="garage_btn_text">GARAGE</string>
-  <string name="set_dlg_btn">Set</string>
-
-
   <!-- ==================================== TOASTS ==================================== -->
+  <string name="notification_set_for">Notification set for %1$s from now.</string>
   <string name="day_hour_and_minute">1 day, 1 hour, and 1 minute</string>
   <string name="days_hour_and_minute">%1$d days, 1 hour, and 1 minute</string>
   <string name="days_hours_and_minute">%1$d days, %2$d hours, and 1 minute</string>
@@ -570,16 +504,98 @@
   <string name="abbrev_hours">%2$dh</string>
   <string name="abbrev_minutes">%3$dm</string>
   <string name="abbrev_less_than_one_minute">&lt;1m</string>
+
+  <string name="click_again_txt">Please click BACK again to exit</string>
+  <string name="click_again_or_add_car_txt">Add new car, or click BACK again to exit</string>
   <!-- ======================================================================================= -->
+  <string name="large_text">
+        "Material is the metaphor.\n\n"
 
-  <!-- ==================================== NOTIFICATIONS ==================================== -->
-  <string name="upcoming_alarm">Upcoming alarm</string>
-  <string name="alarm">Alarm</string>
-  <string name="missed_alarm">Missed alarm</string>
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
 
-  <string name="title_activity_fullscreen">FullscreenActivity</string>
-  <string name="date_button">Date</string>
-  <string name="time_button">Time</string>
-  <string name="dummy_content">Date of \n next reminder</string>
+        "Bold, graphic, intentional.\n\n"
+
+        "The foundational elements of print based design typography, grids, space, scale, color, "
+        "and use of imagery guide visual treatments. These elements do far more than please the "
+        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
+        "imagery, large scale typography, and intentional white space create a bold and graphic "
+        "interface that immerse the user in the experience.\n"
+        "An emphasis on user actions makes core functionality immediately apparent and provides "
+        "waypoints for the user.\n\n"
+
+        "Motion provides meaning.\n\n"
+
+        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
+        "inflection points that initiate motion, transforming the whole design.\n"
+        "All action takes place in a single environment. Objects are presented to the user without "
+        "breaking the continuity of experience even as they transform and reorganize.\n"
+        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
+        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
+
+        "3D world.\n\n"
+
+        "The material environment is a 3D space, which means all objects have x, y, and z "
+        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
+        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
+        "position along the z-axis and has a standard 1dp thickness.\n"
+        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
+        "emulated by manipulating the y-axis.\n\n"
+
+        "Light and shadow.\n\n"
+
+        "Within the material environment, virtual lights illuminate the scene. Key lights create "
+        "directional shadows, while ambient light creates soft shadows from all angles.\n"
+        "Shadows in the material environment are cast by these two light sources. In Android "
+        "development, shadows occur when light sources are blocked by sheets of material at "
+        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
+        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
+
+        "Resting elevation.\n\n"
+
+        "All material objects, regardless of size, have a resting elevation, or default elevation "
+        "that does not change. If an object changes elevation, it should return to its resting "
+        "elevation as soon as possible.\n\n"
+
+        "Component elevations.\n\n"
+
+        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
+        "does not vary from 6dp in one app to 16dp in another app).\n"
+        "Components may have different resting elevations across platforms, depending on the depth "
+        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
+
+        "Responsive elevation and dynamic elevation offsets.\n\n"
+
+        "Some component types have responsive elevation, meaning they change elevation in response "
+        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
+        "changes are consistently implemented using dynamic elevation offsets.\n"
+        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
+        "to the component’s resting state. They ensure that elevation changes are consistent "
+        "across actions and component types. For example, all components that lift on press have "
+        "the same elevation change relative to their resting elevation.\n"
+        "Once the input event is completed or cancelled, the component will return to its resting "
+        "elevation.\n\n"
+
+        "Avoiding elevation interference.\n\n"
+
+        "Components with responsive elevations may encounter other components as they move between "
+        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
+        "through other material, components avoid interfering with one another any number of ways, "
+        "whether on a per component basis or using the entire app layout.\n"
+        "On a component level, components can move or be removed before they cause interference. "
+        "For example, a floating action button (FAB) can disappear or move off screen before a "
+        "user picks up a card, or it can move if a snackbar appears.\n"
+        "On the layout level, design your app layout to minimize opportunities for interference. "
+        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
+        "when a user tries to pick up one of cards.\n\n"
+    </string>
 
 </resources>

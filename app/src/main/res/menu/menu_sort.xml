@@ -7,7 +7,7 @@
     <item
         android:id="@+id/action_sort"
         android:orderInCategory="200"
-        android:title="sort"
+        android:title="Sort"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_sort_white_24dp"/>
     

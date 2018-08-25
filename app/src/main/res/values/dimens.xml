@@ -6,7 +6,13 @@
   <dimen name="fab_reveal_height">145dp</dimen>
   <dimen name="fab_size">56dp</dimen>
 
-  <dimen name="default_spacing_small">4dp</dimen>
-  <dimen name="default_spacing_medium">8dp</dimen>
-  <dimen name="default_spacing_huge">128dp</dimen>
+  <dimen name="main_spinner_elevation">8dp</dimen>
+  <dimen name="space_height_small">6dp</dimen>
+  <dimen name="shadow_view_height_small">8dp</dimen>
+  <dimen name="shadow_height_medium">36dp</dimen>
+  <dimen name="shadow_view_height_big">72dp</dimen>
+  <dimen name="content_textsize_medium">18dp</dimen>
+  <dimen name="main_button_textsize">14dp</dimen>
+  <dimen name="main_button_height">48dp</dimen>
+  <dimen name="app_bar_layout_height">220dp</dimen>
 </resources>

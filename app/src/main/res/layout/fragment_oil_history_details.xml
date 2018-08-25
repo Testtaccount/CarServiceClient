@@ -101,7 +101,7 @@
                                       android:drawableTint="@color/colorPrimary"
                                       android:focusable="true"
                                       android:gravity="start|center"
-                                      android:text="@string/select_date"
+                                      android:text="-"
                                       android:textStyle="bold"
                                       android:textColor="@color/colorAccent"
                                       android:textSize="18dp" />
@@ -134,7 +134,7 @@
                                       android:focusable="true"
                                       android:textStyle="bold"
                                       android:gravity="start|center"
-                                      android:text="@string/select_date"
+                                      android:text="-"
                                       android:textColor="@color/colorAccent"
                                       android:textSize="18dp" />
 
@@ -348,7 +348,7 @@
 
                                     <TextView
                                       style="@style/ItemCardFieldTextStyle"
-                                      android:text="@string/recomended"
+                                      android:text="@string/recommended"
                                       />
 
                                     <RelativeLayout
@@ -575,7 +575,7 @@
 
                 <Space
                   android:layout_width="match_parent"
-                  android:layout_height="8dp" />
+                  android:layout_height="@dimen/space_height_small" />
 
             </LinearLayout>
 
