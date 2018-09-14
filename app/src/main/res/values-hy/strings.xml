@@ -1,0 +1,547 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="app_name">Car Service Client</string>
+
+  <!-- ==================================== MENU ==================================== -->
+
+  <string name="action_about">About</string>
+  <string name="action_settings">Կարգավորումներ</string>
+  <string name="action_log_out">Ելք</string>
+
+  <!-- ==================================== MAIN ACTIVITY ==================================== -->
+  <string name="welcome_title">ՊԱՀՊԱՆԵՔ ՁԵՐ ՄԵՔԵՆԱՅԻ ՇԱՐԺԻՉԻ\nՅՈՒՂԻ ՏՎՅԱԼՆԵՐԸ</string>
+  <string name="sign_in">Մուտք</string>
+
+  <string name="no_oil_text">Տվյալ մեքենայ համարն դեռ յուղի փոխման գրանցում չկա</string>
+  <string name="new_btn_text">Փոխել նոր</string>
+  <string name="edit_btn_text">խմբագրել</string>
+  <string name="history_btn_text">Պատմություն</string>
+
+  <string name="oil_information">Շարժիչի յուղի տվյալներ</string>
+  <string name="oil_brand_name">Յուղի բրենդը</string>
+  <string name="oil_type">Յուղի տեսակը</string>
+  <string name="oil_volume">Քանակը յուղը փոխելուց</string>
+
+  <string name="mileage_information">Վազքի տվյալներ</string>
+  <string name="km">Կմ</string>
+  <string name="mil">Միլ</string>
+  <string name="current">Սկզբնական վազք</string>
+  <string name="recommended">Թույլատրելի վազք</string>
+  <string name="next">Վերջնական վազք</string>
+  <string name="middle_month">Միջին ամսեկան վազք</string>
+
+  <string name="date_information">Յուղի փոխման ամսաթվեր</string>
+  <string name="done_date">Յուղի փոխման ամսաթիվ</string>
+  <string name="next_date">Յուղի փոխելու վերջնաժամկետ</string>
+
+  <string name="service_phone_number">Սպասարկման կետի հեռախոսահամար</string>
+
+  <string name="notes">Նշումներ</string>
+  <string name="notes_text">Նշումների տեքստային դաշտ…</string>
+
+  <string name="garage_btn_text">ԱՎՏՈՄԵՔԵՆԱՆԵՐ</string>
+  <string name="delete_btn_text">Հեռացնել</string>
+  <string name="add_btn_text">Ավելացնել</string>
+
+  <!-- ==================================== OIL ACTIVITY ==================================== -->
+  <string name="create_new_oil_activity_title">Նոր շարժիչային յուղ</string>
+  <string name="edit_oil_activity_title">Խմբագրել ընթացիկ յուղը</string>
+  <string name="oil_history_activity_title">Յուղի պատմություն</string>
+
+  <string name="fill_oil_information">Լրացրեք յուղի փոխման տվյալները</string>
+  <string name="fill_mileage_information">Լրացրեք վազքի տվյալները</string>
+  <string name="middle_month_set_manually_km">Միջին ամսեկան վազք կ/մ </string>
+  <string name="middle_month_set_manually_mil">Միջին ամսեկան վազք միլ </string>
+  <string name="select_date">Ամսաթվերի նշումներ</string>
+  <string name="phone_number">Հեռախոսի համար</string>
+  <string name="save_in_contacts">Հիշել հեռախոսի բլոկնոտում</string>
+  <string name="contact_name">Անուն</string>
+
+  <!-- ==================================== GARAGE ACTIVITY ==================================== -->
+  <string name="garage_activity_title">Ավտոմեքենաների Ցանկ</string>
+  <string name="edit_car_activity_title">Խմբագրել մեքենայի տվյալները</string>
+  <string name="add_new_car_activity_title">Ավելացնել նոր ավտոմեքենա</string>
+
+  <string name="car_information">Ավտոմեքենայի տվյալներ</string>
+  <string name="car_brand">Արտադրող</string>
+  <string name="car_model">Մոդել</string>
+  <string name="car_year">Արտադրման տարեթիվ</string>
+
+  <string name="car_license_plate">Ավտոմեքենայի պետ համարանիշ</string>
+  <string name="license_plate">Պետ համարանիշ</string>
+  <string name="car_vin_code">Ավտոմեքենայի արտադրողի կոդ /վին/</string>
+  <string name="car_model_name">Անվանում</string>
+  <string name="car_distance_unit">Չափման միավոր</string>
+  <string name="enter_vin_code_optional">Մուտքագրեք վին կոդը</string>
+
+  <!-- ==================================== NOTIFICATION ACTIONS ACTIVITY ==================================== -->
+  <string name="choose_your_action">Choose your action \nfor notification</string>
+  <string name="select_reminder_date_btn_text">SELECT REMINDER DATE</string>
+  <string name="set_mileage_btn_text">SET MILEAGE</string>
+
+  <string name="current_mileage">Current Mileage</string>
+  <string name="the_next_reminder_date_is_set">The next reminder date is set</string>
+
+  <!--Dialog-->
+  <string name="dlg_logout_title">Are you sure you want to log out?</string>
+  <string name="dlg_make_call_title">Make call?</string>
+  <string name="dlg_ok">OK</string>
+  <string name="dlg_yes">Yes</string>
+  <string name="dlg_set">Set</string>
+  <string name="dlg_call_via">Call via</string>
+  <string name="dlg_call">Call</string>
+  <string name="dlg_cancel">Cancel</string>
+  <string name="dlg_enable_autostart_title">Enable AutoStart</string>
+  <string name="dlg_pls_allow">Please allow</string>
+  <string name="dlg_pls_allow_txt">to always run in the background,else our services can\'t be accessed.</string>
+  <string name="dlg_info_title">Info</string>
+  <string name="dlg_delete_car_title">Are you sure you want to delete this car?</string>
+  <string name="dlg_delete">Delete</string>
+
+  <string name="dlg_wait_please">Please, wait</string>
+  <string name="dlg_fail_connection">Sorry, connection lost. Please check your network connection.</string>
+  <string name="dlg_internet_connection_error">Something went wrong. Please, verify your internet connection and try again</string>
+  <string name="permission_denided">Permission Denied, You cannot call</string>
+  <string name="snake_bar_action_msg_allow">ALLOW</string>
+
+  <string name="dlg_info_content_for_current">current km info here</string>
+  <string name="dlg_info_content_for_recommended">recommended km info here</string>
+  <string name="dlg_info_content_for_next">next km info here</string>
+  <string name="dlg_info_content_for_middle">middle month km info here</string>
+
+  <!--Util-->
+  <string name="channel_name">Oil notifications</string>
+  <string name="channel_description">Oils check reminder notifications</string>
+  <string name="click_again_txt">Please click BACK again to exit</string>
+  <string name="click_again_or_add_car_txt">Add new car, or click BACK again to exit</string>
+  <string name="msg_network_connection_error">No Internet connection</string>
+  <string name="msg_page_not_found">404 Page not found</string>
+  <string name="msg_unknown_error">Unknown error</string>
+  <string name="msg_bad_request">Bad request</string>
+  <string name="msg_not_authorized">User not authorized</string>
+  <string name="msg_connection_error">Connection error</string>
+  <string name="msg_navigation_drawer_open">Open navigation drawer</string>
+  <string name="msg_navigation_drawer_close">Close navigation drawer</string>
+  <string name="msg_car_created">Car created!</string>
+  <string name="msg_car_not_created">Car not created!</string>
+  <string name="err_msg_not_selected">Not Selected</string>
+  <string name="err_msg_empty">Can Not Be Empty!</string>
+  <string name="err_msg_current_less">Curent Km must be more than the previous service km !</string>
+  <string name="err_msg_incorrect_number_lenght">Incorrect Phone number length!</string>
+  <string name="err_msg_enter_valid_phone_number">Enter valid phone number</string>
+  <string name="err_msg_must_be_more">Curent Km must be more than the previous service km !</string>
+  <string name="msg_permission_denided_phone">Permission Denied, You cannot write contacts</string>
+  <string name="msg_car_edited">Car edited!</string>
+  <string name="msg_car_not_edited">Car not edited!</string>
+  <string name="msg_car_deleted">Car deleted!</string>
+  <string name="msg_car_not_deleted">Car not deleted!</string>
+  <string name="msg_no_cars">Yo Don\'t Have Cars</string>
+  <string name="msg_something_wrong">Something wrong</string>
+  <string name="msg_time_to_change_oil">Time To Change Oil</string>
+  <string name="msg_oil_changed">Oil changed!</string>
+  <string name="msg_oil_not_changed">Oil not changed!</string>
+  <string name="msg_check">Check your %s engine oil</string>
+
+  <string name="start_top">M 20.7 7 C 21.1 6.6 21.1 6 20.7 5.6 L 18.4 3.3 C 18 2.9 17.4 2.9 17 3.3 L 15.2 5.1 L 19 8.9</string>
+  <string name="end_top">M 19.6 8 C 20 7.6 20 7 19.6 6.6 L 17.3 4.3 C 16.9 3.9 16.3 3.9 15.9 4.3 L 14.1 6.1 L 17.9 9.9</string>
+
+  <!--Languages-->
+  <string name="en">en</string>
+  <string name="de">de</string>
+  <string name="es">es</string>
+  <string name="fr">fr</string>
+
+  <!--oil brands-->
+  <string name="Xado">XADO</string>
+  <string name="Liqui_Moly">LIQUI MOLY</string>
+  <string name="MOBIL_1">MOBIL 1</string>
+  <string name="CASTROL">CASTROL</string>
+
+  <!--oil types-->
+  <string name="oil_type_OW_20">OW-20</string>
+  <string name="oil_type_OW_30">OW-30</string>
+  <string name="oil_type_OW_40">OW-40</string>
+  <string name="oil_type_OW_50">OW-50</string>
+  <string name="oil_type_OW_60">OW-60</string>
+  <string name="oil_type_5W_20">5W-20</string>
+  <string name="oil_type_5W_30">5W-30</string>
+  <string name="oil_type_5W_40">5W-40</string>
+  <string name="oil_type_5W_50">5W-50</string>
+  <string name="oil_type_5W_60">5W-60</string>
+  <string name="oil_type_10W_20">10W-20</string>
+  <string name="oil_type_10W_30">10W-30</string>
+  <string name="oil_type_10W_40">10W-40</string>
+  <string name="oil_type_10W_50">10W-50</string>
+  <string name="oil_type_10W_60">10W-60</string>
+  <string name="oil_type_15W_20">15W-20</string>
+  <string name="oil_type_15W_30">15W-30</string>
+  <string name="oil_type_15W_40">15W-40</string>
+  <string name="oil_type_15W_50">15W-50</string>
+  <string name="oil_type_15W_60">15W-60</string>
+  <string name="oil_type_20W_20">20W-20</string>
+  <string name="oil_type_20W_30">20W-30</string>
+  <string name="oil_type_20W_40">20W-40</string>
+  <string name="oil_type_20W_50">20W-50</string>
+  <string name="oil_type_20W_60">20W-60</string>
+  <string name="oil_type_25W_20">25W-20</string>
+  <string name="oil_type_25W_30">25W-30</string>
+  <string name="oil_type_25W_40">25W-40</string>
+  <string name="oil_type_25W_50">25W-50</string>
+  <string name="oil_type_25W_60">25W-60</string>
+
+  <!--car brands-->
+  <string name="selectOne">Ընտրիր մեկը…</string>
+  <string name="Abadal">Abadal</string>
+  <string name="Abbott_detroit">Abbott Detroit</string>
+  <string name="Abt_sportsline">ABT Sportsline</string>
+  <string name="Ac">AC</string>
+  <string name="Acura">Acura</string>
+  <string name="Aixam">Aixam</string>
+  <string name="Alfa_romeo">Alfa Romeo</string>
+  <string name="Alpina">Alpina</string>
+  <string name="Alpine">Alpine</string>
+  <string name="Alta">Alta</string>
+  <string name="Alvis">Alvis</string>
+  <string name="American_motors">American Motors</string>
+  <string name="Amg">AMG</string>
+  <string name="Arash">Arash</string>
+  <string name="Ariel">Ariel</string>
+  <string name="Aro">ARO</string>
+  <string name="Arrinera">Arrinera</string>
+  <string name="Artega">Artega</string>
+  <string name="Ascari">Ascari</string>
+  <string name="Aston_martin">Aston Martin</string>
+  <string name="Auburn">Auburn</string>
+  <string name="Audi">Audi</string>
+  <string name="Austin">Austin</string>
+  <string name="Autobacs">Autobacs</string>
+  <string name="Autobianchi">Autobianchi</string>
+  <string name="Bac">Bac</string>
+  <string name="Bamotor">Baic Motor</string>
+  <string name="Baojun">Baojun</string>
+  <string name="Bentley">Bentley</string>
+  <string name="Berkeley">Berkeley</string>
+  <string name="Berliet">Berliet</string>
+  <string name="Bertone">Bertone</string>
+  <string name="Bitter">Bitter</string>
+  <string name="Bizzarrini">Bizzarrini</string>
+  <string name="Bmw">BMW</string>
+  <string name="Bmw_m">BMW M</string>
+  <string name="Borgward">Borgward</string>
+  <string name="Brabus">Brabus</string>
+  <string name="Brammo">Brammo</string>
+  <string name="Bridgestone">Bridgestone</string>
+  <string name="Brilliance">Brilliance</string>
+  <string name="Bristol_cars">Bristol Cars</string>
+  <string name="Bufori">Bufori</string>
+  <string name="Bugatti">Bugatti</string>
+  <string name="Buick">Buick</string>
+  <string name="Byd">BYD</string>
+  <string name="Cadillac">Cadillac</string>
+  <string name="Carlsson">Carlsson</string>
+  <string name="Caterham">Caterham</string>
+  <string name="Changan">Changan</string>
+  <string name="Changfeng">Changfeng</string>
+  <string name="Chery">Chery</string>
+  <string name="Chevrolet">Chevrolet</string>
+  <string name="Chrysler">Chrysler</string>
+  <string name="Cisitalia">Cisitalia</string>
+  <string name="Citroen">Citroen</string>
+  <string name="Cizeta">Cizeta</string>
+  <string name="Cole">Cole</string>
+  <string name="Continental">Continental</string>
+  <string name="Corre_la_licorne">Corre La Licorne</string>
+  <string name="Corvette">Corvette</string>
+  <string name="Dacia">Dacia</string>
+  <string name="Daewoo">Daewoo</string>
+  <string name="Daihatsu">Daihatsu</string>
+  <string name="Dartz">Dartz</string>
+  <string name="Datsun">Datsun</string>
+  <string name="Delage">Delage</string>
+  <string name="Detroit_electric">Detroit Electric</string>
+  <string name="Devel_sixteen">Devel Sixteen</string>
+  <string name="De_tomaso">De Tomaso</string>
+  <string name="Diatto">Diatto</string>
+  <string name="Dina">Dina</string>
+  <string name="Dkw">DKW</string>
+  <string name="Dmc">DMC</string>
+  <string name="Dodge">Dodge</string>
+  <string name="Dongfeng">Dongfeng</string>
+  <string name="Donkervoort">Donkervoort</string>
+  <string name="Ds">DS</string>
+  <string name="Dunlop">Dunlop</string>
+  <string name="Edag">Edag</string>
+  <string name="Edsel">Edsel</string>
+  <string name="Eicher">Eicher</string>
+  <string name="Elfin">Elfin</string>
+  <string name="Elva">Elva</string>
+  <string name="Englon">Englon</string>
+  <string name="Eterniti">Eterniti</string>
+  <string name="Facel_vega">Facel Vega</string>
+  <string name="Faw">FAW</string>
+  <string name="Ferrari">Ferrari</string>
+  <string name="Fiat">Fiat</string>
+  <string name="Fioravanti">Fioravanti</string>
+  <string name="Fisker">Fisker</string>
+  <string name="Force_motors">Force Motors</string>
+  <string name="Ford">Ford</string>
+  <string name="Foton">Foton</string>
+  <string name="Fpv">FPV</string>
+  <string name="Franklin">Franklin</string>
+  <string name="Gac">Gac</string>
+  <string name="Gaz">Gaz</string>
+  <string name="Geely">Geely</string>
+  <string name="General_motors">General Motors</string>
+  <string name="Genesis">Genesis</string>
+  <string name="Geo">GEO</string>
+  <string name="Gilbern">Gilbern</string>
+  <string name="Gillet">Gillet</string>
+  <string name="Ginetta">Ginetta</string>
+  <string name="Gmc">GMC</string>
+  <string name="Gonow">Gonow</string>
+  <string name="Goodyear">Goodyear</string>
+  <string name="Great_wall">Great Wall</string>
+  <string name="Gt_r">GT R</string>
+  <string name="Gumpert">Gumpert</string>
+  <string name="Hafei">Hafei</string>
+  <string name="Haima">Haima</string>
+  <string name="Haval">Haval</string>
+  <string name="Hawtai">Hawtai</string>
+  <string name="Hennessey">Hennessey</string>
+  <string name="Hillman">Hillman</string>
+  <string name="Hindustan_motors">Hindustan Motors</string>
+  <string name="Hino">Hino</string>
+  <string name="Hispano_suiza">Hispano Suiza</string>
+  <string name="Holden">Holden</string>
+  <string name="Hommell">Hommell</string>
+  <string name="Honda">Honda</string>
+  <string name="Horch">Horch</string>
+  <string name="Hsv">HSV</string>
+  <string name="Hudson">Hudson</string>
+  <string name="Hummer">Hummer</string>
+  <string name="Hupmobile">Hupmobile</string>
+  <string name="Hyundai">Hyundai</string>
+  <string name="Infiniti">Infiniti</string>
+  <string name="Innocenti">Innocenti</string>
+  <string name="Intermeccanica">Intermeccanica</string>
+  <string name="Iran_khodro">Iran Khodro</string>
+  <string name="Isdera">Isdera</string>
+  <string name="Iso">Iso</string>
+  <string name="Isuzu">Isuzu</string>
+  <string name="Iveco">Iveco</string>
+  <string name="Jaguar">Jaguar</string>
+  <string name="Jawa">Jawa</string>
+  <string name="Jeep">Jeep</string>
+  <string name="Jensen">Jensen</string>
+  <string name="Jiangling">Jiangling</string>
+  <string name="Kaiser">Kaiser</string>
+  <string name="Karma">Karma</string>
+  <string name="Kenworth">Kenworth</string>
+  <string name="Kia">KIA</string>
+  <string name="Koenigsegg">Koenigsegg</string>
+  <string name="Ktm">KTM</string>
+  <string name="Lada">Lada</string>
+  <string name="Lagonda">Lagonda</string>
+  <string name="Lamborghini">Lamborghini</string>
+  <string name="Lancia">Lancia</string>
+  <string name="Landwind">Landwind</string>
+  <string name="Land_rover">Land Rover</string>
+  <string name="Laraki">Laraki</string>
+  <string name="Lexus">Lexus</string>
+  <string name="Leyland">Leyland</string>
+  <string name="Ligier">Ligier</string>
+  <string name="Lincoln">Lincoln</string>
+  <string name="Lloyd">Lloyd</string>
+  <string name="Lobini">Lobini</string>
+  <string name="Lotus">Lotus</string>
+  <string name="Luxgen">Luxgen</string>
+  <string name="Mack">Mack</string>
+  <string name="Mahindra">Mahindra</string>
+  <string name="Man">MAN</string>
+  <string name="Marcos">Marcos</string>
+  <string name="Maserati">Maserati</string>
+  <string name="Mastretta">Mastretta</string>
+  <string name="Maxus">Maxus</string>
+  <string name="Maybach">Maybach</string>
+  <string name="Mazda">Mazda</string>
+  <string name="Mazzanti_automobili">Mazzanti</string>
+  <string name="Mclaren">Mclaren</string>
+  <string name="Melkus">Melkus</string>
+  <string name="Mercedes_benz">Mercedes Benz</string>
+  <string name="Mercury">Mercury</string>
+  <string name="Merkur">Merkur</string>
+  <string name="Mg">MG</string>
+  <string name="Michelin">Michelin</string>
+  <string name="Microcar">Microcar</string>
+  <string name="Mini">Mini</string>
+  <string name="Mitsubishi">Mitsubishi</string>
+  <string name="Mitsuoka">Mitsuoka</string>
+  <string name="Morgan">Morgan</string>
+  <string name="Morris">Morris</string>
+  <string name="Mosler">Mosler</string>
+  <string name="Mustang">Mustang</string>
+  <string name="Nissan">Nissan</string>
+  <string name="Noble">Noble</string>
+  <string name="Oldsmobile">Oldsmobile</string>
+  <string name="Oltcit">Oltcit</string>
+  <string name="Opel">Opel</string>
+  <string name="Osca">Osca</string>
+  <string name="Pagani">Pagani</string>
+  <string name="Panhard">Panhard</string>
+  <string name="Panoz">Panoz</string>
+  <string name="Perodua">Perodua</string>
+  <string name="Peterbilt">Peterbilt</string>
+  <string name="Peugeot">Peugeot</string>
+  <string name="Pgo">Pgo</string>
+  <string name="Pierce_arrow">Pierce Arrow</string>
+  <string name="Pininfarina">Pininfarina</string>
+  <string name="Pirelli">Pirelli</string>
+  <string name="Plymouth">Plymouth</string>
+  <string name="Polestar">Polestar</string>
+  <string name="Pontiac">Pontiac</string>
+  <string name="Porsche">Porsche</string>
+  <string name="Praga">Praga</string>
+  <string name="Premier">Premier</string>
+  <string name="Proton">Proton</string>
+  <string name="Qoros">Qoros</string>
+  <string name="Ram">RAM</string>
+  <string name="Rambler">Rambler</string>
+  <string name="Ranz">Ranz</string>
+  <string name="Renault">Renault</string>
+  <string name="Rezvani">Rezvani</string>
+  <string name="Riley">Riley</string>
+  <string name="Rimac">Rimac</string>
+  <string name="Rinspeed">Rinspeed</string>
+  <string name="Roewe">Roewe</string>
+  <string name="Rolls_royce">Rolls Royce</string>
+  <string name="Rossion">Rossion</string>
+  <string name="Rover">Rover</string>
+  <string name="Ruf">RUF</string>
+  <string name="Saab">SAAB</string>
+  <string name="Samotor">Saic Motor</string>
+  <string name="Saipa">Saipa</string>
+  <string name="Saleen">Saleen</string>
+  <string name="Saturn">Saturn</string>
+  <string name="Scion">Scion</string>
+  <string name="Seat">Seat</string>
+  <string name="Shelby">Shelby</string>
+  <string name="Simca">Simca</string>
+  <string name="Singer">Singer</string>
+  <string name="Skoda">Skoda</string>
+  <string name="Smart">Smart</string>
+  <string name="Soueast">Soueast</string>
+  <string name="Spirra">Spirra</string>
+  <string name="Spyker">Spyker</string>
+  <string name="Srt">SRT</string>
+  <string name="Ssangyong">Ssangyong</string>
+  <string name="Ssc">SSC</string>
+  <string name="Studebaker">Studebaker</string>
+  <string name="Subaru">Subaru</string>
+  <string name="Suzuki">Suzuki</string>
+  <string name="Talbot">Talbot</string>
+  <string name="Tata">Tata</string>
+  <string name="Tatra">Tatra</string>
+  <string name="Techart">Techart</string>
+  <string name="Tesla">Tesla</string>
+  <string name="Toyota">Toyota</string>
+  <string name="Trion">Trion</string>
+  <string name="Triumph">Triumph</string>
+  <string name="Troller">Troller</string>
+  <string name="Tvr">TVR</string>
+  <string name="Uaz">UAZ</string>
+  <string name="Vandenbrink">Vandenbrink</string>
+  <string name="Vauxhall">Vauxhall</string>
+  <string name="Vector_motors">Vector Motors</string>
+  <string name="Venturi">Venturi</string>
+  <string name="Viper">Viper</string>
+  <string name="Volkswagen">Volkswagen</string>
+  <string name="Volvo">Volvo</string>
+  <string name="Wanderer">Wanderer</string>
+  <string name="Wartburg">Wartburg</string>
+  <string name="Western_star">Western Star</string>
+  <string name="Westfield">Westfield</string>
+  <string name="Wiesmann">Wiesmann</string>
+  <string name="Willys_overland">Willys Overland</string>
+  <string name="Wuling">Wuling</string>
+  <string name="W_motors">W Motors</string>
+  <string name="Yulon">Yulon</string>
+  <string name="Zarooq_motors">Zarooq Motors</string>
+  <string name="Zastava">Zastava</string>
+  <string name="Zaz">ZAZ</string>
+  <string name="Zenvo">Zenvo</string>
+  <string name="Zotye">Zotye</string>
+
+  <!-- ==================================== TOASTS ==================================== -->
+  <string name="notification_set_for">Notification set for %1$s from now.</string>
+  <string name="day_hour_and_minute">1 day, 1 hour, and 1 minute</string>
+  <string name="days_hour_and_minute">%1$d days, 1 hour, and 1 minute</string>
+  <string name="days_hours_and_minute">%1$d days, %2$d hours, and 1 minute</string>
+  <string name="days_hour_and_minutes">%1$d days, 1 hours, and %3$d minutes</string>
+  <string name="days_hours_and_minutes">%1$d days, %2$d hours, and %3$d minutes</string>
+  <string name="day_hours_and_minute">1 day, %2$d hours, and 1 minute</string>
+  <string name="day_hours_and_minutes">1 day, %2$d hours, and %3$d minutes</string>
+  <string name="day_hour_and_minutes">1 day, 1 hour, and %3$d minutes</string>
+  <string name="day_and_hour">1 day and 1 hour</string>
+  <string name="days_and_hour">%1$d days and 1 hour</string>
+  <string name="day_and_hours">1 day and %2$d hours</string>
+  <string name="days_and_hours">%1$d days and %2$d hours</string>
+  <string name="day_and_minute">1 day and 1 minute</string>
+  <string name="days_and_minute">%1$d days and 1 minute</string>
+  <string name="day_and_minutes">1 day and %3$d minutes</string>
+  <string name="days_and_minutes">%1$d days and %3$d minutes</string>
+  <string name="hour_and_minute">1 hour and 1 minute</string>
+  <string name="hour_and_minutes">1 hour and %3$d minutes</string>
+  <string name="hours_and_minute">%2$d hours and 1 minute</string>
+  <string name="hours_and_minutes">%2$d hours and %3$d minutes</string>
+  <string name="day">1 day</string>
+  <string name="days">%1$d days</string>
+  <string name="hour">1 hour</string>
+  <string name="hours">%2$d hours</string>
+  <string name="minute">1 minute</string>
+  <string name="minutes">%3$d minutes</string>
+  <string name="less_than_one_minute">less than 1 minute</string>
+
+  <string name="abbrev_days_hours_and_minutes">%1$dd %2$dh %3$dm</string>
+  <string name="abbrev_days_and_hours">%1$dd %2$dh</string>
+  <string name="abbrev_days_and_minutes">%1$dd %3$dm</string>
+  <string name="abbrev_hours_and_minutes">%2$dh %3$dm</string>
+  <string name="abbrev_days">%1$dd</string>
+  <string name="abbrev_hours">%2$dh</string>
+  <string name="abbrev_minutes">%3$dm</string>
+  <string name="abbrev_less_than_one_minute">&lt;1m</string>
+
+  <!-- ======================================================================================= -->
+
+  <!-- Phone number auth -->
+  <string name="fui_verify_phone_number_title" translation_description="Phone number entry form title">Enter your phone number</string>
+  <string name="fui_invalid_phone_number" translation_description="Inline error when phone number entered is invalid">Enter a valid phone number</string>
+  <string name="fui_enter_confirmation_code" translation_description="Phone number verification code entry form title">Enter the 6-digit code we sent to</string>
+  <string name="fui_resend_code_in" translation_description="Countdown timer text that the user needs to wait for before attempting to resend verification sms">Resend code in 0:%02d</string>
+  <string name="fui_verify_your_phone_title" translation_description="Button text to complete phone number verification">Verify your phone number</string>
+  <string name="fui_verifying" translation_description="Progress dialog text while phone number is being verified">Verifying…</string>
+  <string name="fui_incorrect_code_dialog_body" translation_description="Inline error when incorrect sms verification code is being used to verify">Wrong code. Try again.</string>
+  <string name="fui_error_too_many_attempts" translation_description="Error message when the phone number has been used too many times">This phone number has been used too many times</string>
+  <string name="fui_error_quota_exceeded" translation_description="Error message when the Firebase project's quota has been exceeded.">There was a problem verifying your phone number</string>
+  <string name="fui_error_session_expired" translation_description="Error message when SMS confirmation code has expired.">This code is no longer valid</string>
+  <string name="fui_sign_in_with_phone_number" translation_description="Label for phone number input form">Sign in with phone number</string>
+  <string name="fui_auto_verified" translation_description="Popup informing the user that their phone number was automatically verified">Phone number automatically verified</string>
+  <string name="fui_resend_code" translation_description="Link text to resend verification sms">Resend Code</string>
+  <string name="fui_verify_phone_number" translation_description="Button text to submit confirmation code and complete phone verification">Verify Phone Number</string>
+  <string name="fui_continue_phone_login" translation_description="Button text to submit phone number and send sms">Continue</string>
+  <string name="fui_sms_terms_of_service" translation_description="Fine print warning displayed below Verify Phone Number button">By tapping “%1$s”, an SMS may be sent. Message &amp; data rates may apply.</string>
+  <string name="fui_sms_terms_of_service_and_privacy_policy_extended" translation_description="Fine print warning displayed below Verify Phone Number button">By tapping “%1$s”, you are indicating that you accept our <xliff:g example="https://google.com/terms" id="tos" translation_description="">%2$s</xliff:g> and <xliff:g example="https://google.com/privacy" id="pp" translation_description="">%3$s</xliff:g>. An SMS may be sent. Message &amp; data rates may apply.</string>
+
+  <!-- Label for the  preference -->
+  <string name="pref_language_label">Language</string>
+
+  <!-- Label for preference -->
+  <string name="pref_language_label_en">English</string>
+  <string name="pref_language_label_ru">Russian</string>
+  <string name="pref_language_label_hy">Armenian</string>
+
+  <string name="pref_language_key" translatable="false">language</string>
+
+  <!-- Value in SharedPreferences -->
+  <string name="pref_language_en_value" translatable="false">en</string>
+  <string name="pref_language_ru_value" translatable="false">ru</string>
+  <string name="pref_language_hy_value" translatable="false">hy</string>
+</resources>

@@ -4,9 +4,11 @@ import am.gsoft.carserviceclient.app.AppExecutors;
 import am.gsoft.carserviceclient.data.database.AppDatabase;
 import am.gsoft.carserviceclient.data.network.ApiFactory;
 import am.gsoft.carserviceclient.data.network.AppNetworkService;
+import am.gsoft.carserviceclient.data.viewmodel.ViewModelFactory;
 import am.gsoft.carserviceclient.firebase.FirebaseApi;
 import am.gsoft.carserviceclient.notification.NotificationsController;
 import am.gsoft.carserviceclient.notification.NotificationsRepository;
+import am.gsoft.carserviceclient.util.helpers.SharedHelper;
 import android.content.Context;
 
 public class InjectorUtils {
@@ -16,7 +18,8 @@ public class InjectorUtils {
         AppExecutors executors = AppExecutors.getInstance();
         AppNetworkService appNetworkService =  ApiFactory.getAppNetworkService();
         FirebaseApi firebaseApi=FirebaseApi.getInstance();
-        return AppRepository.getInstance(database, appNetworkService, executors,firebaseApi);
+        SharedHelper appSharedHelper=SharedHelper.getInstance();
+        return AppRepository.getInstance(database, appNetworkService, executors,firebaseApi,appSharedHelper);
     }
 
     public static NotificationsRepository provideNotificationRepository(Context context) {
@@ -26,4 +29,8 @@ public class InjectorUtils {
         return NotificationsRepository.getInstance(database, executors,notificationsController);
     }
 
+    public static ViewModelFactory provideViewModelFactory(Context context) {
+        AppRepository repository = provideRepository(context.getApplicationContext());
+        return new ViewModelFactory(repository);
+    }
 }

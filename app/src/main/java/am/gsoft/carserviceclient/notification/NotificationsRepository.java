@@ -4,7 +4,6 @@ import am.gsoft.carserviceclient.app.AppExecutors;
 import am.gsoft.carserviceclient.data.ResultListener;
 import am.gsoft.carserviceclient.data.database.AppDatabase;
 import am.gsoft.carserviceclient.data.database.entity.AppNotification;
-import am.gsoft.carserviceclient.data.database.entity.Car;
 import am.gsoft.carserviceclient.data.database.entity.Oil;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
@@ -60,7 +59,7 @@ public class NotificationsRepository {
     return sInstance;
   }
 
-  public void setMonthlyNotification(Car car, Oil currentOil, Oil newOil) {
+  public void setMonthlyNotification(Oil currentOil, Oil newOil) {
     long date = newOil.getServiceDoneDate();
 
     Calendar calendar = Calendar.getInstance();
@@ -78,7 +77,7 @@ public class NotificationsRepository {
       public void run() {
         if (currentOil != null) {
           AppNotification previusAppNotification = mAppDatabase.mAppNotificationDao()
-              .get(car.getId(), currentOil.getId(), AppNotification.TYPE_MONTHLY);
+              .get(currentOil.getCarKey(), currentOil.getKey(), AppNotification.TYPE_MONTHLY);
           if (previusAppNotification != null) {
             mNotificationsController.cancelNotification(previusAppNotification);
             mAppDatabase.mAppNotificationDao().delete(previusAppNotification.getId());
@@ -88,8 +87,8 @@ public class NotificationsRepository {
 
         }
 
-        final AppNotification newAppNotification = new AppNotification(year, month + 1, day, hour,
-            minute, newOil.getServiceNextDate(), car.getId(), newOil.getId(), "MONTHLY REMINDER",
+        AppNotification newAppNotification = new AppNotification(year, month + 1, day, hour,
+            minute, newOil.getServiceNextDate(), newOil.getCarKey(), newOil.getKey(), "MONTHLY REMINDER",
             AppNotification.TYPE_MONTHLY, true);
         long id = mAppDatabase.mAppNotificationDao().insert(newAppNotification);
         newAppNotification.setId((int) id);
@@ -115,8 +114,8 @@ public class NotificationsRepository {
 
   }
 
-  public void deleteAllNotificationsByCarId(long id) {
-    LiveData<List<AppNotification>> liveData = mAppDatabase.mAppNotificationDao().getAllNotificationsByCarId(id);
+  public void deleteAllNotificationsByCarKey(String key) {
+    LiveData<List<AppNotification>> liveData = mAppDatabase.mAppNotificationDao().getAllNotificationsByCarKey(key);
     liveData.observeForever(new Observer<List<AppNotification>>() {
       @Override
       public void onChanged(@Nullable List<AppNotification> appNotifications) {
@@ -143,7 +142,7 @@ public class NotificationsRepository {
 
   //////////////////////
 
-  public void setReminderNotification(Car car, Oil oil, long reminderTime) {
+  public void setReminderNotification(Oil oil, long reminderTime) {
 //    long date = oil.getServiceDoneDate();
     Calendar calendar = Calendar.getInstance();
     calendar.setTimeInMillis(reminderTime);
@@ -159,7 +158,7 @@ public class NotificationsRepository {
       @Override
       public void run() {
         AppNotification previusAppNotification = mAppDatabase.mAppNotificationDao()
-            .get(car.getId(), oil.getId(), AppNotification.TYPE_REMIND);
+            .get(oil.getCarKey(), oil.getKey(), AppNotification.TYPE_REMIND);
         if (previusAppNotification != null) {
           mNotificationsController.cancelNotification(previusAppNotification);
           mNotificationsController.removeUpcomingNotificationFromBar(previusAppNotification);
@@ -169,7 +168,7 @@ public class NotificationsRepository {
         }
 
         AppNotification newAppNotification = new AppNotification(year, month + 1, day, hour, minute,
-            oil.getServiceNextDate(), car.getId(), oil.getId(), "REMINDER NOTIFICATION",
+            oil.getServiceNextDate(), oil.getCarKey(), oil.getKey(), "REMINDER NOTIFICATION",
             AppNotification.TYPE_REMIND, true);
         long id = mAppDatabase.mAppNotificationDao().insert(newAppNotification);
         newAppNotification.setId((int) id);
@@ -180,11 +179,11 @@ public class NotificationsRepository {
 
   }
 
-  public void cancelPreviusReminderNotification(Car car, Oil oil) {
+  public void cancelPreviusReminderNotification(Oil oil) {
     mExecutors.diskIO().execute(new Runnable() {
       @Override
       public void run() {
-        AppNotification previusAppNotification = mAppDatabase.mAppNotificationDao() .get(car.getId(), oil.getId(), AppNotification.TYPE_REMIND);
+        AppNotification previusAppNotification = mAppDatabase.mAppNotificationDao() .get(oil.getCarKey(), oil.getKey(), AppNotification.TYPE_REMIND);
         if (previusAppNotification != null) {
           mNotificationsController.cancelNotification(previusAppNotification);
           mNotificationsController.removeUpcomingNotificationFromBar(previusAppNotification);
@@ -197,7 +196,7 @@ public class NotificationsRepository {
 
   ///////////////////////
 
-  public void setMileageNotification(Car car, Oil oil, long reminderTime) {
+  public void setMileageNotification(Oil oil, long reminderTime) {
 //    long date = oil.getServiceDoneDate();
     Calendar calendar = Calendar.getInstance();
     calendar.setTimeInMillis(reminderTime);
@@ -213,7 +212,7 @@ public class NotificationsRepository {
       @Override
       public void run() {
         AppNotification previusAppNotification = mAppDatabase.mAppNotificationDao()
-            .get(car.getId(), oil.getId(), AppNotification.TYPE_MILEAGE);
+            .get(oil.getCarKey(), oil.getKey(), AppNotification.TYPE_MILEAGE);
         if (previusAppNotification != null) {
           mNotificationsController.cancelNotification(previusAppNotification);
           mNotificationsController.removeUpcomingNotificationFromBar(previusAppNotification);
@@ -221,7 +220,7 @@ public class NotificationsRepository {
         }
 
         AppNotification newAppNotification = new AppNotification(year, month + 1, day, hour, minute,
-            oil.getServiceNextDate(), car.getId(), oil.getId(), "MILEAGE NOTIFICATION",
+            oil.getServiceNextDate(), oil.getCarKey(), oil.getKey(), "MILEAGE NOTIFICATION",
             AppNotification.TYPE_MILEAGE, true);
         long id = mAppDatabase.mAppNotificationDao().insert(newAppNotification);
         newAppNotification.setId((int) id);
@@ -232,12 +231,12 @@ public class NotificationsRepository {
 
   }
 
-  public void cancelPreviusMileageNotification(Car car, Oil oil) {
+  public void cancelPreviusMileageNotification(Oil oil) {
     mExecutors.diskIO().execute(new Runnable() {
       @Override
       public void run() {
         AppNotification previusAppNotification = mAppDatabase.mAppNotificationDao()
-            .get(car.getId(), oil.getId(), AppNotification.TYPE_MILEAGE);
+            .get(oil.getCarKey(), oil.getKey(), AppNotification.TYPE_MILEAGE);
         if (previusAppNotification != null) {
           mNotificationsController.cancelNotification(previusAppNotification);
           mNotificationsController.removeUpcomingNotificationFromBar(previusAppNotification);

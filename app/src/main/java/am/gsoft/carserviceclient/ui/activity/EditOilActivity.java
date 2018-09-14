@@ -3,7 +3,7 @@ package am.gsoft.carserviceclient.ui.activity;
 import static am.gsoft.carserviceclient.util.AppUtil.getDouble;
 import static am.gsoft.carserviceclient.util.AppUtil.setTextViewDrawableColor;
 import static am.gsoft.carserviceclient.util.Constant.Action.ACTION_EDIT_OIL_ACTIVITY_INTENT;
-import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_CURRENT_CAR;
+import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_CURRENT_CAR_KEY;
 import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_CURRENT_OIL;
 import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_FIRST_OIL;
 import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_INDEX_OF_CURRENT_OIL;
@@ -15,17 +15,16 @@ import static android.Manifest.permission.WRITE_CONTACTS;
 
 import am.gsoft.carserviceclient.R;
 import am.gsoft.carserviceclient.app.App;
-import am.gsoft.carserviceclient.data.AppRepository;
 import am.gsoft.carserviceclient.data.InjectorUtils;
-import am.gsoft.carserviceclient.data.ResultListener;
 import am.gsoft.carserviceclient.data.database.entity.Car;
 import am.gsoft.carserviceclient.data.database.entity.Oil;
+import am.gsoft.carserviceclient.data.viewmodel.EditOilActivityViewModel;
+import am.gsoft.carserviceclient.data.viewmodel.ViewModelFactory;
 import am.gsoft.carserviceclient.notification.NotificationsRepository;
 import am.gsoft.carserviceclient.phone.CountryInfo;
 import am.gsoft.carserviceclient.phone.CountryListSpinner;
 import am.gsoft.carserviceclient.phone.PhoneNumber;
 import am.gsoft.carserviceclient.phone.PhoneNumberUtils;
-import am.gsoft.carserviceclient.ui.activity.base.BaseActivity;
 import am.gsoft.carserviceclient.ui.activity.main.MainActivity;
 import am.gsoft.carserviceclient.ui.dialog.EditNotesDialogFragment;
 import am.gsoft.carserviceclient.ui.dialog.EditNotesDialogFragment.EditNotesDialogListener;
@@ -36,6 +35,7 @@ import am.gsoft.carserviceclient.util.ToastUtils;
 import am.gsoft.carserviceclient.util.manager.DialogManager;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.ContentProviderOperation;
 import android.content.ContentProviderResult;
 import android.content.ContentResolver;
@@ -82,6 +82,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -96,6 +97,7 @@ import com.afollestad.materialdialogs.MaterialDialog.SingleButtonCallback;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -130,7 +132,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
   private TextView midManualTv;
   //  private Spinner oilVolumeSp;
 ///  private TextView serviceDoneKmTv;
-  private EditText oilBrandEt;
+  private AutoCompleteTextView oilBrandEt;
   private EditText phoneNameEt;
   private EditText serviceDoneKmEt;
   private EditText nextServiceKmEt;
@@ -163,7 +165,8 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
   private DatePickerDialog.OnDateSetListener from_dateListener;
   private DatePickerDialog.OnDateSetListener to_dateListener;
   private NotificationsRepository mNotificationsRepository;
-  private AppRepository mAppRepository;
+//  private AppRepository mAppRepository;
+private EditOilActivityViewModel mViewModel;
 
   private Car currentCar;
   private Oil firstOil;
@@ -194,6 +197,8 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+    ViewModelFactory factory = InjectorUtils.provideViewModelFactory(getApplicationContext());
+    mViewModel = ViewModelProviders.of(this, factory).get(EditOilActivityViewModel.class);
 
     findViews();
     customizeActionBar();
@@ -224,7 +229,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
     oilVolumeEt = (EditText) findViewById(R.id.et_oil_volume);
 //    oilVolumeSp=(Spinner) findViewById(R.id.spinner_oil_volume);
 //    serviceDoneKmTv=(TextView) findViewById(R.id.et_service_done_km);
-    oilBrandEt = (EditText) findViewById(R.id.et_oil_brand);
+    oilBrandEt = (AutoCompleteTextView) findViewById(R.id.et_oil_brand);
     phoneNameEt = (EditText) findViewById(R.id.et_phone_name);
     serviceDoneKmEt = (EditText) findViewById(R.id.et_service_done_km);
     nextServiceKmEt = (EditText) findViewById(R.id.et_next_service_km);
@@ -273,10 +278,10 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
   }
 
   private void initFields() {
-    mAppRepository = InjectorUtils.provideRepository(getApplicationContext());
+//    mAppRepository = InjectorUtils.provideRepository(getApplicationContext());
     mNotificationsRepository = InjectorUtils.provideNotificationRepository(getApplicationContext());
 
-    currentCar = getIntent().getParcelableExtra(EXTRA_CURRENT_CAR);
+    currentCar = getIntent().getParcelableExtra(EXTRA_CURRENT_CAR_KEY);
     firstOil = getIntent().getParcelableExtra(EXTRA_FIRST_OIL);
     currentOil = getIntent().getParcelableExtra(EXTRA_CURRENT_OIL);
     indexOfCurrentOil = getIntent().getIntExtra(EXTRA_INDEX_OF_CURRENT_OIL, -1);
@@ -370,16 +375,29 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 ////    t.setErrorEnabled(true);
 //    serviceDoneKmEt.setHint("0");
 //    t.setError(currentOil!=null?" ":" ");
-    km1Tv.setText(currentCar.getDistanceUnit());
-    km2Tv.setText(currentCar.getDistanceUnit());
-    km3Tv.setText(currentCar.getDistanceUnit());
-    km4Tv.setText(currentCar.getDistanceUnit());
 
-    if (currentCar.getDistanceUnit().equals(getString(R.string.km))) {
-      midManualTv.setText(getString(R.string.middle_month_set_manually_km));
-    } else {
-      midManualTv.setText(getString(R.string.middle_month_set_manually_mil));
+
+    switch (currentCar.getDistanceUnit()){
+      case "Km":
+        km1Tv.setText(getString(R.string.km));
+        km2Tv.setText(getString(R.string.km));
+        km3Tv.setText(getString(R.string.km));
+        km4Tv.setText(getString(R.string.km));
+        midManualTv.setText(getString(R.string.middle_month_set_manually_km));
+        break;
+      case "Mil":
+        km1Tv.setText(getString(R.string.mil));
+        km2Tv.setText(getString(R.string.mil));
+        km3Tv.setText(getString(R.string.mil));
+        km4Tv.setText(getString(R.string.mil));
+        midManualTv.setText(getString(R.string.middle_month_set_manually_mil));
+        break;
     }
+
+    String[] strings = getResources().getStringArray(R.array.oil_brands);
+    String[] oilBrands = Arrays.copyOfRange(strings, 1, strings.length);
+    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, oilBrands);
+    oilBrandEt.setAdapter(adapter);
 
     midMonthSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
       public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -402,10 +420,9 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 
         } else {
           if (isChecked) {
-            phoneNameTr.setVisibility(View.VISIBLE);
+//            phoneNameTr.setVisibility(View.VISIBLE);
           } else {
-//          middleMonthKmEt.setText("");
-            phoneNameTr.setVisibility(View.GONE);
+//            phoneNameTr.setVisibility(View.GONE);
           }
         }
       }
@@ -446,8 +463,8 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
         }
         /////////////ed//////////////
 
-//        n = (c + r) < 0 ? 0 : (c + r);
-//        r = (n - c) < 0 ? 0 : (n - c);
+//        n = (carCount + r) < 0 ? 0 : (carCount + r);
+//        r = (n - carCount) < 0 ? 0 : (n - carCount);
 
 //        recomendedKmEt.setText(r == 0 ? "" : String.valueOf(r));
 //        nextServiceKmEt.setText(n == 0 ? "" : String.valueOf(n));
@@ -489,8 +506,8 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
         } else {
           nextServiceKmEt.setText("");
         }
-//        c = (n - r) < 0 ? 0 : (n - r);
-//        serviceDoneKmEt.setText(c == 0 ? "" : String.valueOf(c));
+//        carCount = (n - r) < 0 ? 0 : (n - r);
+//        serviceDoneKmEt.setText(carCount == 0 ? "" : String.valueOf(carCount));
         serviceDoneKmEt.addTextChangedListener(t1);
         nextServiceKmEt.addTextChangedListener(t3);
 
@@ -520,7 +537,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
         n = Long.parseLong(string);
 
         r = (n - c) < 0 ? 0 : (n - c);
-//        c = (n - r) < 0 ? 0 : (n - r);
+//        carCount = (n - r) < 0 ? 0 : (n - r);
 
         if (n > 0) {
           recomendedKmEt.setText(r == 0 ? "" : String.valueOf(r));
@@ -528,7 +545,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
           recomendedKmEt.setText("");
         }
 
-//        serviceDoneKmEt.setText(c == 0 ? "" : String.valueOf(c));
+//        serviceDoneKmEt.setText(carCount == 0 ? "" : String.valueOf(carCount));
         serviceDoneKmEt.addTextChangedListener(t1);
         recomendedKmEt.addTextChangedListener(t2);
       }
@@ -810,6 +827,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
     setPhoneNumber(phoneNumber);
     setCountryCode(phoneNumber);
 //    oilCompanyIdEt.setText(uiOil.getServiceCompanyId());
+    phoneNameEt.setText(uiOil.getServiceOwnerName());
     oilBrandEt.setText(uiOil.getBrand());
     oilBrandSp.setSelection(getSpinnerPosition(oilBrands, currentOil.getBrand()), true);
     oilTypeSp.setSelection(getSpinnerPosition(oilTypes, currentOil.getType()), true);
@@ -945,42 +963,68 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
   private void saveEditedOilData() {
     Oil oil = getEditedOil();
 
-    mAppRepository.editOil(currentCar.getKey(), oil, new ResultListener<Oil>() {
-      @Override
-      public void onLoad(Oil oil) {
-        if (oil != null) {
+    mViewModel.editOil(oil);
+    if (phoneNameSwitch.isChecked()) {
+      addPhoneNumberToContactList(oil.getServiceCompanyId(),
+          phoneNameEt.getText().toString());
+    }
 
-          if (phoneNameSwitch.isChecked()) {
-            addPhoneNumberToContactList(oil.getServiceCompanyId(),
-                phoneNameEt.getText().toString());
-          }
+    appSharedHelper.saveOilNotes(currentCar.getKey(), oil.getKey(), notesTv.getText().toString());
+    setNotification(oil);
 
-          appSharedHelper
-              .saveOilNotes(currentCar.getKey(), oil.getKey(), notesTv.getText().toString());
-          setNotification(oil);
 
-          ToastUtils.shortToast(R.string.msg_oil_changed);
-          Intent intent = new Intent(EditOilActivity.this, MainActivity.class);
+
+    appSharedHelper.saveOilNotes(currentCar.getKey(), oil.getKey(), notesTv.getText().toString());
+    setNotification(oil);
+
+    ToastUtils.shortToast(R.string.msg_oil_changed);
+    Intent intent = new Intent(EditOilActivity.this, MainActivity.class);
 //        intent.setAction(ACTION_EDIT_OIL_ACTIVITY_INTENT);
-          startActivity(intent);
-          finish();
+    startActivity(intent);
+    finish();
 //    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
-          overridePendingTransition(R.anim.up_slide_enter, R.anim.down_slide_exit);
-        } else {
-          DialogManager.getInstance().dismissPreloader(this.getClass());
+    overridePendingTransition(R.anim.up_slide_enter, R.anim.down_slide_exit);
+//    mAppRepository.editOil(  oil, new ResultListener<Oil>() {
+//      @Override
+//      public void onLoad(Oil oil) {
+//        runOnUiThread(new Runnable() {
+//          @Override
+//          public void run() {
+//            if (oil != null) {
+//
+//              if (phoneNameSwitch.isChecked()) {
+//                addPhoneNumberToContactList(oil.getServiceCompanyId(),
+//                    phoneNameEt.getText().toString());
+//              }
+//
+//              appSharedHelper.saveOilNotes(currentCar.getKey(), oil.getKey(), notesTv.getText().toString());
+//              setNotification(oil);
+//
+//              ToastUtils.shortToast(R.string.msg_oil_changed);
+//              Intent intent = new Intent(EditOilActivity.this, MainActivity.class);
+////        intent.setAction(ACTION_EDIT_OIL_ACTIVITY_INTENT);
+//              startActivity(intent);
+//              finish();
+////    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
+//              overridePendingTransition(R.anim.up_slide_enter, R.anim.down_slide_exit);
+//            } else {
+//              DialogManager.getInstance().dismissPreloader(this.getClass());
+//
+//              ToastUtils.shortToast(R.string.msg_oil_not_changed);
+//            }
+//          }
+//        });
 
-          ToastUtils.shortToast(R.string.msg_oil_not_changed);
-        }
-      }
-
-      @Override
-      public void onFail(String e) {
-        DialogManager.getInstance().dismissPreloader(this.getClass());
-
-        ToastUtils.shortToast(R.string.msg_oil_not_changed);
-      }
-
-    });
+//      }
+//
+//      @Override
+//      public void onFail(String e) {
+//        DialogManager.getInstance().dismissPreloader(this.getClass());
+//
+//        ToastUtils.shortToast(R.string.msg_oil_not_changed);
+//      }
+//
+//    });
 
 //    OilDataDbHelper.getInstance().editOil(currentCar.getKey(),indexOfCurrentOil,oil,new ResultListener<Oil>() {
 //      @Override
@@ -1010,7 +1054,8 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 
   private Oil getEditedOil() {
 //    Oil oil=new Oil();
-//    oil.setKey(currentOil.getKey());
+    currentOil.setKey(currentOil.getKey());
+    currentOil.setCarKey(currentOil.getCarKey());
 //    oil.setId(currentOil.getId());
     String phoneNumber = getPseudoValidPhoneNumber();
 //    if (phoneNumber == null) {
@@ -1019,6 +1064,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 
 //    oil.setServiceCompanyId(oilCompanyIdEt.getText().toString());
     currentOil.setServiceCompanyId(phoneNumber);
+    currentOil.setServiceOwnerName(phoneNameEt.getText()==null?"":phoneNameEt.getText().toString());
     currentOil.setServiceDoneDate(serviceDoneDate);
     currentOil.setServiceNextDate(serviceNextDate);
     currentOil.setBrand(oilBrandEt.getText().toString());
@@ -1054,7 +1100,7 @@ public class EditOilActivity extends BaseActivity implements View.OnClickListene
 
   public void setNotification(Oil editedOil) {
 //    mNotificationsRepository.deletPreviusMonthNotification(car,currentOil);
-    mNotificationsRepository.setMonthlyNotification(currentCar, currentOil, editedOil);
+    mNotificationsRepository.setMonthlyNotification(currentOil, editedOil);
   }
 
   public static boolean infinity(double numer, double denom) {

@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import am.gsoft.carserviceclient.ui.activity.base.BaseActivity;
+import am.gsoft.carserviceclient.ui.activity.BaseActivity;
 
 public abstract class BaseFragment extends Fragment {
 

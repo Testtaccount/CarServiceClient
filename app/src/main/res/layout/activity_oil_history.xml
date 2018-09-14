@@ -8,7 +8,8 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="@color/color_background_E5E5E5"
-  android:fitsSystemWindows="true">
+  android:fitsSystemWindows="true"
+  tools:context=".ui.activity.OilHistoryActivity">
 
   <!--190 , 250, 300-->
   <android.support.design.widget.AppBarLayout

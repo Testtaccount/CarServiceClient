@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+  <array name="languages">
+    <item>@string/en</item>
+  </array>
+
+  <!-- Label ordering must match values -->
+  <array name="pref_color_option_labels">
+    <item>@string/pref_language_label_en</item>
+    <item>@string/pref_language_label_ru</item>
+    <item>@string/pref_language_label_hy</item>
+  </array>
+
+  <array name="pref_color_option_values">
+    <item>@string/pref_language_en_value</item>
+    <item>@string/pref_language_ru_value</item>
+    <item>@string/pref_language_hy_value</item>
+  </array>
+
+
   <string-array name="CountryCodes">
     <item>93,AF</item>
     <item>355,AL</item>
@@ -209,12 +228,8 @@
     <item>263,ZW</item>
   </string-array>
 
-  <array name="languages">
-    <item>@string/en</item>
-  </array>
-
   <string-array name="oil_brands">
-    <item>@string/SelectOne</item>
+    <item>@string/selectOne</item>
     <item>@string/Xado</item>
     <item>@string/Liqui_Moly</item>
     <item>@string/MOBIL_1</item>
@@ -222,7 +237,7 @@
   </string-array>
 
   <string-array name="oil_types">
-    <item>@string/SelectOne</item>
+    <item>@string/selectOne</item>
     <item>@string/oil_type_OW_20</item>
     <item>@string/oil_type_OW_30</item>
     <item>@string/oil_type_OW_40</item>
@@ -256,7 +271,7 @@
   </string-array>
 
   <string-array name="years">
-    <item>Select One...</item>
+    <item>@string/selectOne</item>
     <item>2018</item>
     <item>2017</item>
     <item>2016</item>
@@ -380,7 +395,7 @@
   </string-array>
 
   <string-array name="car_brands">
-    <item>@string/SelectOne</item>
+    <item>@string/selectOne</item>
     <item>@string/Abadal</item>
     <item>@string/Abbott_detroit</item>
     <item>@string/Abt_sportsline</item>

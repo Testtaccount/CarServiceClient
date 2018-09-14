@@ -16,13 +16,13 @@ public interface OilDao {
   @Query("SELECT * FROM oil")
   LiveData<List<Oil>> getAll();
 
-  @Query("SELECT * FROM oil WHERE id=:id")
-  Oil get(long id);
+  @Query("SELECT * FROM oil WHERE `key`=:key")
+  Oil get(String key);
 
-  @Query("SELECT * FROM oil WHERE carId=:carId")
-  LiveData<List<Oil>> getAllByCarId(long carId);
+  @Query("SELECT * FROM oil WHERE carKey=:carKey")
+  LiveData<List<Oil>> getAllByCarKey(String carKey);
 
-  @Insert
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
   long insert(Oil oil);
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -34,6 +34,6 @@ public interface OilDao {
   @Delete
   void delete(Oil oil);
 
-  @Query("DELETE FROM oil WHERE id=:id")
-  void delete(long id);
+  @Query("DELETE FROM oil WHERE `key`=:key")
+  void delete(String key);
 }

@@ -25,6 +25,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.app.TaskStackBuilder;
 
 public class NotificationsIntentService extends IntentService {
@@ -79,15 +80,15 @@ public class NotificationsIntentService extends IntentService {
       @Override
       public void onLoad(AppNotification notification) {
         int id = notification.getId();
-        long carId = notification.getCarId();
-        long oilId = notification.getOilId();
+        String carKey = notification.getCarKey();
+        String oilKey = notification.getOilKey();
 
 
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
           @Override
           public void run() {
-            Car car=AppDatabase.getInstance(getApplicationContext()).mCarDao().get(carId);
-            Oil oil=AppDatabase.getInstance(getApplicationContext()).mOilDao().get(oilId);
+            Car car=AppDatabase.getInstance(getApplicationContext()).mCarDao().get(carKey);
+            Oil oil=AppDatabase.getInstance(getApplicationContext()).mOilDao().get(oilKey);
 
             String text = notification.getNote();
 
@@ -162,7 +163,7 @@ public class NotificationsIntentService extends IntentService {
 
     Intent notificationIntent = new Intent(context, NotificationActionsActivity.class);
     notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//    notificationIntent.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, car.getId());
+//    notificationIntent.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_KEY, car.getId());
     notificationIntent.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
 
     TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
@@ -188,7 +189,7 @@ public class NotificationsIntentService extends IntentService {
 //    Intent notificationIntent2 = new Intent(context, MileageFragment.class);
 //    notificationIntent2.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 //    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
-////    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, car.getId());
+////    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_KEY, car.getId());
 //
 //    TaskStackBuilder stackBuilder2 = TaskStackBuilder.create(context);
 //    stackBuilder2.addParentStack(MileageFragment.class);
@@ -198,7 +199,7 @@ public class NotificationsIntentService extends IntentService {
 
 
 
-    Notification note = new NotificationCompat.Builder(context)
+    Notification note = new Builder(context)
 //        .setStyle(new NotificationCompat.BigTextStyle()
 //            .bigText(noteText==null?"Oil -  " + oil.getBrand() + " " + oil.getType():noteText ))
         .setSmallIcon(R.drawable.icon_2)
@@ -206,7 +207,7 @@ public class NotificationsIntentService extends IntentService {
             .decodeResource(App.getInstance().getApplicationContext().getResources(), car.getIcon()))
         .setColor(Color.YELLOW)
         .setPriority(Notification.PRIORITY_HIGH)
-        .setContentTitle("Check your " + car.getCarBrand() + " engine oil")
+        .setContentTitle(String.format(getString(R.string.msg_check), car.getCarBrand()))
         .setContentText(noteText)//        .setContentText("Oil -  " + oilBrand + " " + oilType)
         .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400})
         .setSound(null)
@@ -228,7 +229,7 @@ public class NotificationsIntentService extends IntentService {
 
     Intent notificationIntent = new Intent(context, NotificationActionsActivity.class);
     notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//    notificationIntent.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, car.getId());
+//    notificationIntent.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_KEY, car.getId());
     notificationIntent.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
 
     TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
@@ -254,7 +255,7 @@ public class NotificationsIntentService extends IntentService {
 //    Intent notificationIntent2 = new Intent(context, MileageFragment.class);
 //    notificationIntent2.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 //    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_ID, id);
-////    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, car.getId());
+////    notificationIntent2.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_KEY, car.getId());
 //
 //    TaskStackBuilder stackBuilder2 = TaskStackBuilder.create(context);
 //    stackBuilder2.addParentStack(MileageFragment.class);

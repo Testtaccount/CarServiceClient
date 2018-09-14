@@ -16,10 +16,13 @@ public interface CarDao {
   @Query("SELECT * FROM car")
   LiveData<List<Car>> getAll();
 
-  @Query("SELECT * FROM car WHERE id=:id")
-  Car get(long id);
+  @Query("SELECT * FROM car WHERE `key`=:key")
+  Car get(String key);
 
-  @Insert
+  @Query("SELECT * FROM car WHERE `key`=:key")
+  LiveData<Car> getCar(String key);
+
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
   long insert(Car car);
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -31,9 +34,13 @@ public interface CarDao {
   @Delete
   void delete(Car car);
 
-  @Query("DELETE FROM car WHERE id=:id")
-  void delete(long id);
+  @Query("DELETE FROM car WHERE `key`=:key")
+  void delete(String key);
 
   @Query("SELECT count(*) FROM car")
   int getCount();
+
+  @Query("SELECT count(*) FROM car")
+  LiveData<Integer> getCountL();
+
 }

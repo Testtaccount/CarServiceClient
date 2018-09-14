@@ -1,14 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.journaldev.collapsingtoolbarlayout.ScrollingActivity">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:context="com.journaldev.collapsingtoolbarlayout.ScrollingActivity">
 
 
-    <item
-        android:id="@+id/action_done"
-        android:orderInCategory="200"
-        android:title="Done"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_check_circle_white_24dp"/>
-    
+  <item
+    android:id="@+id/action_done"
+     android:icon="@drawable/ic_check_circle_green_700_24dp"
+    android:orderInCategory="200"
+    android:title="Done"
+    app:showAsAction="ifRoom" />
+
 </menu>

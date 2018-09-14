@@ -1,6 +1,6 @@
 package am.gsoft.carserviceclient.ui.activity;
 
-import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_NOTIFICATION_MESSAGE_CAR_ID;
+import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_NOTIFICATION_MESSAGE_CAR_KEY;
 import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_NOTIFICATION_MESSAGE_ID;
 import static am.gsoft.carserviceclient.util.DateUtils.getDateFormat;
 
@@ -14,7 +14,6 @@ import am.gsoft.carserviceclient.data.database.entity.Car;
 import am.gsoft.carserviceclient.data.database.entity.Oil;
 import am.gsoft.carserviceclient.notification.NotificationsIntentService;
 import am.gsoft.carserviceclient.notification.NotificationsRepository;
-import am.gsoft.carserviceclient.ui.activity.base.BaseActivity;
 import am.gsoft.carserviceclient.ui.fragment.MileageFragment;
 import am.gsoft.carserviceclient.ui.fragment.NextReminderFragment;
 import am.gsoft.carserviceclient.ui.fragment.NotificationActionsFragment;
@@ -158,26 +157,38 @@ public class NotificationActionsActivity extends BaseActivity implements View.On
               long id = mAppNotification.getId();
 
               mCar = AppDatabase.getInstance(getApplicationContext()).mCarDao()
-                  .get(mAppNotification.getCarId());
+                  .get(mAppNotification.getCarKey());
               mOil = AppDatabase.getInstance(getApplicationContext()).mOilDao()
-                  .get(mAppNotification.getOilId());
+                  .get(mAppNotification.getOilKey());
 
-              carIconIv.setImageDrawable(ContextCompat.getDrawable(App.getInstance(),
-                  mCar.getIcon()));//setBackgroundResource(carBrandsList.getAppNotification(position).getIcon());
-              carBrandTv.setText(mCar.getCarBrand());
-              carModelTv.setText(mCar.getModel());
-              oilBrandTv.setText(mOil.getBrand());
-              oilTypeTv.setText(mOil.getType());
+              runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                  carIconIv.setImageDrawable(ContextCompat.getDrawable(App.getInstance(),
+                      mCar.getIcon()));//setBackgroundResource(carBrandsList.getAppNotification(position).getIcon());
+                  carBrandTv.setText(mCar.getCarBrand());
+                  carModelTv.setText(mCar.getModel());
+                  oilBrandTv.setText(mOil.getBrand());
+                  oilTypeTv.setText(mOil.getType());
+                }
+              });
+
             } else {
-              carIconIv.setVisibility(View.GONE);
-              carBrandTv.setVisibility(View.GONE);
-              carModelTv.setVisibility(View.GONE);
-              oilBrandTv.setVisibility(View.GONE);
-              oilTypeTv.setVisibility(View.GONE);
-              Intent i = new Intent(NotificationActionsActivity.this, SplashActivity.class);
-              i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-              startActivity(i);
-              finish();
+              runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                  carIconIv.setVisibility(View.GONE);
+                  carBrandTv.setVisibility(View.GONE);
+                  carModelTv.setVisibility(View.GONE);
+                  oilBrandTv.setVisibility(View.GONE);
+                  oilTypeTv.setVisibility(View.GONE);
+                  Intent i = new Intent(NotificationActionsActivity.this, SplashActivity.class);
+                  i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                  startActivity(i);
+                  finish();
+                }
+              });
+
             }
 
           }
@@ -213,7 +224,7 @@ public class NotificationActionsActivity extends BaseActivity implements View.On
     if (count == 0) {
       Intent i = new Intent(NotificationActionsActivity.this, SplashActivity.class);
       i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-      i.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_ID, mCar.getId());
+      i.putExtra(EXTRA_NOTIFICATION_MESSAGE_CAR_KEY, mCar.getKey());
       startActivity(i);
       finish();
       super.onBackPressed();
@@ -401,10 +412,10 @@ public class NotificationActionsActivity extends BaseActivity implements View.On
     if (mAppNotification != null) {
       switch (notificationType) {
         case AppNotification.TYPE_REMIND:
-          mNotificationsRepository.setReminderNotification(mCar, mOil, t);
+          mNotificationsRepository.setReminderNotification( mOil, t);
           break;
         case AppNotification.TYPE_MILEAGE:
-          mNotificationsRepository.setMileageNotification(mCar, mOil, t);
+          mNotificationsRepository.setMileageNotification( mOil, t);
           break;
       }
     }

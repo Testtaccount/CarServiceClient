@@ -470,7 +470,7 @@
     android:tint="@color/white"
     app:layout_anchor="@id/appBar"
     app:layout_anchorGravity="bottom|right|end"
-    app:backgroundTint="@color/colorAccent2"
+    app:backgroundTint="@color/green_700"
     app:fabSize="normal"
     tools:targetApi="lollipop" />
 

@@ -8,20 +8,24 @@ import am.gsoft.carserviceclient.R;
 import am.gsoft.carserviceclient.app.App;
 import am.gsoft.carserviceclient.data.AppRepository;
 import am.gsoft.carserviceclient.data.InjectorUtils;
+import am.gsoft.carserviceclient.data.Resource;
+import am.gsoft.carserviceclient.data.ResultListener;
+import am.gsoft.carserviceclient.data.database.AppDatabase;
 import am.gsoft.carserviceclient.data.database.entity.Car;
 import am.gsoft.carserviceclient.data.database.entity.Oil;
-import am.gsoft.carserviceclient.notification.NotificationsRepository;
-import am.gsoft.carserviceclient.data.ResultListener;
 import am.gsoft.carserviceclient.data.database.entity.User;
-import am.gsoft.carserviceclient.ui.activity.base.BaseActivity;
+import am.gsoft.carserviceclient.data.viewmodel.LandingActivityViewModel;
+import am.gsoft.carserviceclient.data.viewmodel.ViewModelFactory;
+import am.gsoft.carserviceclient.firebase.FirebaseAuthHelper;
+import am.gsoft.carserviceclient.notification.NotificationsRepository;
 import am.gsoft.carserviceclient.ui.activity.main.MainActivity;
-import am.gsoft.carserviceclient.util.IdGenerator;
 import am.gsoft.carserviceclient.util.Logger;
 import am.gsoft.carserviceclient.util.ToastUtils;
-import am.gsoft.carserviceclient.firebase.FirebaseAuthHelper;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -30,6 +34,7 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
@@ -47,7 +52,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import java.util.List;
 
-public class LandingActivity extends BaseActivity implements View.OnClickListener{
+public class LandingActivity extends BaseActivity implements View.OnClickListener {
 
   private static String TAG = LandingActivity.class.getSimpleName();
 
@@ -67,6 +72,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
   private FirebaseAuthCallback firebaseAuthCallback;
   private GetUsersCars mGetUserCars;
   private GetCarOils mGetCarOils;
+  private LandingActivityViewModel mViewModel;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -77,9 +83,14 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
       window.setStatusBarColor(getResources().getColor(R.color.black));
     }
 
+    ViewModelFactory factory = InjectorUtils.provideViewModelFactory(getApplicationContext());
+    mViewModel = ViewModelProviders.of(this, factory).get(LandingActivityViewModel.class);
+
     findViews();
     initFields();
     setListeners();
+
+
   }
 
   @Override
@@ -318,15 +329,17 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
   private User createUser() {
     User user = new User();
     if (App.getInstance().isSimulator) {
-      String phoneNumber = "+37477939777";;//firebaseUser.getPhoneNumber(); //"+37477939733";  //firebaseUser.getPhoneNumber()    //Phone number
+      String phoneNumber = "+37477939777";
+      ;//firebaseUser.getPhoneNumber(); //"+37477939733";  //firebaseUser.getPhoneNumber()    //Phone number
 
       phoneNumber = phoneNumber.replace("+", "");
       phoneNumber = phoneNumber.replace(" ", "");
 
       // FirebaseDbUtil.getmFirebaseDb().getReference(USERS).push().getKey();
 
-      user.setKey("YwCS7MYdvwR2eXmCihCxcWjb2Xm1");//(F5gYIqvaHJDaklUr3I56H9H15t5)//setKey(firebaseUser.getUid());//setKey("YwCS7MYdvwR2eXmCihCxcWjb2Xm1");//setKey(firebaseUser.getUid());
-      user.setId(IdGenerator.getId()); // TODO increment id
+      user.setKey(
+          "YwCS7MYdvwR2eXmCihCxcWjb2Xm1");//(F5gYIqvaHJDaklUr3I56H9H15t5)//setKey(firebaseUser.getUid());//setKey("YwCS7MYdvwR2eXmCihCxcWjb2Xm1");//setKey(firebaseUser.getUid());
+//      user.setId(IdGenerator.getId()); // TODO increment id
       user.setFirstName("fName");
       user.setLastName("lName");
       user.setMail("eMail");//setMail(firebaseUser.getUid());
@@ -335,19 +348,21 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
       return user;
     } else {
-     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-      String phoneNumber = firebaseUser.getPhoneNumber(); //"+37477939733";  //firebaseUser.getPhoneNumber()    //Phone number
+      FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+      String phoneNumber = firebaseUser
+          .getPhoneNumber(); //"+37477939733";  //firebaseUser.getPhoneNumber()    //Phone number
       phoneNumber = phoneNumber.replace("+", "");
       phoneNumber = phoneNumber.replace(" ", "");
 
       // FirebaseDbUtil.getmFirebaseDb().getReference(USERS).push().getKey();
-      user.setKey(firebaseUser.getUid());//setKey("YwCS7MYdvwR2eXmCihCxcWjb2Xm1");//setKey(firebaseUser.getUid());
-      user.setId(IdGenerator.getId()); // TODO increment id
+      user.setKey(firebaseUser
+          .getUid());//setKey("YwCS7MYdvwR2eXmCihCxcWjb2Xm1");//setKey(firebaseUser.getUid());
+//     user.setId(IdGenerator.getId()); // TODO increment id
       user.setFirstName("fName");
       user.setLastName("lName");
       user.setMail("eMail");//setMail(firebaseUser.getUid());
       user.setPhoneNumber(phoneNumber);//setPhoneNumber(firebaseUser.getPhoneNumber());
-//        user.setUserCars(new ArrayList<Car>());
+//       user.setUserCars(new ArrayList<Car>());
 
       return user;
     }
@@ -355,31 +370,167 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
   }
 
   private void performLoginSuccessAction() {
-    repository.getCars(this,mGetUserCars);
-    // send analytics data
+//    repository.getCars(this,mGetUserCars);
+
+    mViewModel.getCars().observe(this, new Observer<Resource<List<Car>>>() {
+      @Override
+      public void onChanged(@Nullable Resource<List<Car>> listResource) {
+        List<Car> cars = null;
+        if (listResource != null) {
+          switch (listResource.status) {
+            case LOADING:
+//                  ToastUtils.shortToast("LOADING !!");
+              break;
+            case SUCCESS:
+              cars = listResource.data;
+              if (cars != null && cars.size() != 0) {
+                loadCarsOils(cars);
+
+                //    runOnUiThread(new Runnable() {
+//      @Override
+//      public void run() {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                  revealButton();
+                  fadeOutProgressDialog();
+                  new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                      Intent intent = new Intent(LandingActivity.this, MainActivity.class);
+                      startActivity(intent);
+                      finish();
+                    }
+                  }, 200);
+                } else {
+                  fadeOutProgressDialog();
+                  // add reset here if needed !!!
+                  new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                      Intent intent = new Intent(LandingActivity.this, MainActivity.class);
+                      startActivity(intent);
+                      finish();
+                    }
+                  }, 200);
+                }
+//      }
+//    });
+
+              } else {
+
+                ToastUtils.shortToast(R.string.msg_no_cars);
+//            Intent intent = new Intent(LandingActivity.this, CreateNewCarActivity.class);
+//            intent.setAction(ACTION_MAIN_ACTIVITY_INTENT);
+//            startActivity(intent);
+//            finish();
+//            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                  revealButton();
+                  fadeOutProgressDialog();
+                  new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                      Intent intent = new Intent(LandingActivity.this, CreateNewCarActivity.class);
+                      intent.setAction(ACTION_MAIN_ACTIVITY_INTENT);
+                      startActivity(intent);
+                      finish();
+                    }
+                  }, 200);
+                } else {
+                  fadeOutProgressDialog();
+                  // add reset here if needed !!!
+                  new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                      Intent intent = new Intent(LandingActivity.this, CreateNewCarActivity.class);
+                      intent.setAction(ACTION_MAIN_ACTIVITY_INTENT);
+                      startActivity(intent);
+                      finish();
+                    }
+                  }, 200);
+                }
+              }
+              // send analytics data
 //        GoogleAnalyticsHelper.pushAnalyticsData(this, user, "User Sign In");
 //        FlurryAnalyticsHelper.pushAnalyticsData(this);
+              break;
+            case ERROR:
+              ToastUtils.shortToast("ERROR !!");
+              break;
+          }
+        }
+
+      }
+    });
+
   }
 
   private void loadCarsOils(List<Car> cars) {
-    if(cars!=null) {
-      for (Car c:cars) {
-//        carDBHelp.getCarssOilss(c,this);
-        repository.getOils(c, this, new ResultListener<List<Oil>>() {
-          @Override
-          public void onLoad(List<Oil> oils) {
-            if (oils != null && oils.size() > 0) {
-              Oil oil = oils.get(oils.size() - 1);
-              notificationsRepository.setMonthlyNotification(c,null,oil);
-              Logger.d("oil", oil.toString());
-            }
-          }
+    if (cars != null) {
 
+      for (Car c : cars) {
+        //foroilcheck
+        AppDatabase.getInstance(getApplicationContext()).mOilDao()
+            .getAll().observeForever(new Observer<List<Oil>>() {
           @Override
-          public void onFail(String e) {
-            ToastUtils.shortToast("onFail !!");
+          public void onChanged(@Nullable List<Oil> oils) {
+            if (oils!=null) {
+//              ToastUtils.shortToast("OILS: " + oils.size());
+              Logger.d("loadFromDb","OILS SIZE: "+oils.size());
+            }
+
           }
         });
+//        repository.getOils(c, this, new ResultListener<List<Oil>>() {
+//          @Override
+//          public void onLoad(List<Oil> oils) {
+//            if (oils != null && oils.size() > 0) {
+//              Oil oil = oils.get(oils.size() - 1);
+//              notificationsRepository.setMonthlyNotification(c,null,oil);
+//              Logger.d("oil", oil.toString());
+//            }
+//          }
+//
+//          @Override
+//          public void onFail(String e) {
+//            ToastUtils.shortToast("onFail !!");
+//          }
+//        });
+
+
+        mViewModel.getCarOils(c.getKey()).observeForever( new Observer<Resource<List<Oil>>>() {
+          @Override
+          public void onChanged(@Nullable Resource<List<Oil>> listResource) {
+            //        mOilLiveData = appSharedHelper.getSaveOilListByCarKey(currentCar.getKey());
+            if (listResource != null) {
+              switch (listResource.status) {
+                case LOADING:
+//                  ToastUtils.shortToast("LOADING !!");
+                  break;
+                case SUCCESS:
+                  mViewModel.getCarOils(c.getKey()).removeObserver(this::onChanged);
+                  List<Oil> oils= listResource.data;
+                  if (oils != null && oils.size() > 0) {
+                    Oil oil = oils.get(oils.size() - 1);
+                    if(oil.getCarKey().equals(c.getKey())) {
+                      notificationsRepository.setMonthlyNotification(null,oil);
+                      Logger.d("loadFromDb"," N: "+c.toString() +" : "+ oil.toString());
+                    }
+                    Logger.d("oil", oil.toString());
+                    return;
+                  }
+
+                   break;
+                case ERROR:
+                  ToastUtils.shortToast("ERROR !!");
+                  break;
+              }
+            }
+          }
+        });
+
+
+
       }
     }
   }
@@ -399,7 +550,12 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
           appSharedHelper.saveFirstAuth(false);
           appSharedHelper.saveSavedRememberMe(true);
 
-          performLoginSuccessAction();
+          runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+              performLoginSuccessAction();
+            }
+          });
 
         }
 
@@ -425,7 +581,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
       runOnUiThread(new Runnable() {
         @Override
         public void run() {
-          if(cars != null && cars.size() != 0){
+          if (cars != null && cars.size() != 0) {
             loadCarsOils(cars);
             //    runOnUiThread(new Runnable() {
 //      @Override

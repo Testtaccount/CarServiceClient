@@ -1,7 +1,11 @@
-package am.gsoft.carserviceclient.ui.activity.base;
+package am.gsoft.carserviceclient.ui.activity;
+
+import static am.gsoft.carserviceclient.app.AppContextWrapper.getLanguage;
+import static am.gsoft.carserviceclient.app.AppContextWrapper.saveLanguage;
 
 import am.gsoft.carserviceclient.R;
 import am.gsoft.carserviceclient.app.App;
+import am.gsoft.carserviceclient.app.AppContextWrapper;
 import am.gsoft.carserviceclient.ui.fragment.dialogs.ProgressDialogFragment;
 import am.gsoft.carserviceclient.util.NetworkUtil;
 import am.gsoft.carserviceclient.util.ToastUtils;
@@ -9,6 +13,10 @@ import am.gsoft.carserviceclient.util.bridges.ActionBarBridge;
 import am.gsoft.carserviceclient.util.bridges.ConnectionBridge;
 import am.gsoft.carserviceclient.util.bridges.LoadingBridge;
 import am.gsoft.carserviceclient.util.helpers.SharedHelper;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,7 +26,9 @@ import android.support.annotation.StringRes;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,9 +36,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
+import java.util.Locale;
 
 public abstract class BaseActivity extends AppCompatActivity implements ActionBarBridge,
-    ConnectionBridge, LoadingBridge {
+    ConnectionBridge, LoadingBridge,
+    SharedPreferences.OnSharedPreferenceChangeListener {
 
   private static final String TAG = BaseActivity.class.getSimpleName();
 
@@ -42,6 +54,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ActionBa
   private ActionBar actionBar;
   private TextView mToolbarTitleTv;
   private TextView mToolbarSubTitleTv;
+  SharedPreferences sharedPreferences;
 
 
 
@@ -64,6 +77,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ActionBa
     initFields();
 
     initActionBar();
+    setupSharedPreferences();
   }
 
   private void findViews() {
@@ -306,6 +320,48 @@ public abstract class BaseActivity extends AppCompatActivity implements ActionBa
 //                });
 //            }
 //        });
+  }
+
+  @Override
+  protected void attachBaseContext(Context newBase) {
+    Locale myLocale = new Locale(getLanguage(newBase));
+    setLanguage(newBase,myLocale);
+    super.attachBaseContext(AppContextWrapper.wrap(newBase, myLocale));
+  }
+
+  public void setLanguage(Context newBase, Locale myLocale) {
+    Configuration config = newBase.getResources().getConfiguration();
+    if (!"".equals(getLanguage(newBase)) && !config.locale.getLanguage().equals(getLanguage(newBase))) {
+      Resources res = newBase.getResources();
+      DisplayMetrics dm = res.getDisplayMetrics();
+      Configuration conf = res.getConfiguration();
+      conf.locale = myLocale;
+      res.updateConfiguration(conf, dm);
+    }
+  }
+
+  @Override
+  public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+    if (key.equals(getString(R.string.pref_language_key))) {
+      changeLanguages(sharedPreferences);
+    }
+  }
+
+  private void changeLanguages(SharedPreferences sharedPreferences) {
+    String sLocale = sharedPreferences.getString(getString(R.string.pref_language_key), getString(R.string.pref_language_en_value));
+//    setLanguage(sLocale);
+    saveLanguage(this, sLocale);
+    recreate();
+  }
+
+  private void setupSharedPreferences() {
+    // Get all of the values from shared preferences to set it up
+    if(sharedPreferences==null) {
+      sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+      sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+//      changeLanguages(sharedPreferences);
+    // Register the listener
   }
 
 }

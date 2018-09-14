@@ -3,19 +3,26 @@
   xmlns:tools="http://schemas.android.com/tools"
   package="am.gsoft.carserviceclient">
 
+  <uses-permission
+    android:name="android.permission.BIND_ACCESSIBILITY_SERVICE"
+    tools:ignore="ProtectedPermissions" />
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
   <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+  <uses-permission android:name="android.permission.CALL_PHONE" />
   <!-- <uses-permission android:name="android.permission.RECEIVE_SMS" /> -->
   <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
   <!-- <uses-permission android:name="android.permission.READ_CONTACTS"/> -->
   <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
-  <uses-permission android:name="android.permission.WRITE_CONTACTS" />
-  <uses-permission android:name="android.permission.CALL_PHONE" />
-  <uses-permission
-    android:name="android.permission.BIND_ACCESSIBILITY_SERVICE"
-    tools:ignore="ProtectedPermissions" />
+
+  <supports-screens
+    android:smallScreens="true"
+    android:normalScreens="true"
+    android:largeScreens="true"
+    android:anyDensity="true"
+    />
 
   <application
     android:allowBackup="false"
@@ -27,7 +34,8 @@
     android:roundIcon="@drawable/icon_2"
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
-    tools:replace="android:allowBackup">
+    tools:replace="android:allowBackup"
+    tools:ignore="ManifestResource">
 
     <!-- <service -->
     <!-- android:exported="true" -->
@@ -54,34 +62,60 @@
       </intent-filter>
     </activity>
     <activity
+      android:configChanges="locale|layoutDirection|keyboardHidden|orientation|screenSize"
       android:name=".ui.activity.main.MainActivity"
       android:screenOrientation="portrait"
+      android:launchMode="singleTop"
       android:theme="@style/MainTheme" />
     <activity
-      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:configChanges="layoutDirection|locale|keyboardHidden|orientation|screenSize"
       android:launchMode="singleTask"
       android:name=".ui.activity.LandingActivity"
       android:screenOrientation="portrait" />
     <activity
+      android:configChanges="layoutDirection|locale"
       android:name=".ui.activity.CreateNewCarActivity"
-      android:screenOrientation="portrait" />
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="adjustPan" />
     <activity
       android:name=".ui.activity.GarageActivity"
       android:screenOrientation="portrait" />
     <activity
+      android:configChanges="layoutDirection|locale"
       android:name=".ui.activity.CreateNewOilActivity"
       android:screenOrientation="portrait"
       android:windowSoftInputMode="adjustPan" />
     <activity
+      android:configChanges="layoutDirection|locale"
       android:name=".ui.activity.EditCarActivity"
-      android:screenOrientation="portrait" />
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="adjustPan" />
     <activity
+      android:configChanges="layoutDirection|locale"
       android:name=".ui.activity.OilHistoryActivity"
       android:screenOrientation="portrait" />
     <activity
+      android:configChanges="layoutDirection|locale"
       android:name=".ui.activity.EditOilActivity"
-      android:screenOrientation="portrait" />
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="adjustPan" />
+    <activity
+      android:configChanges="layoutDirection|locale"
+      android:screenOrientation="portrait"
+      android:name=".ui.activity.NotificationActionsActivity" />
+    <activity
+      android:configChanges="layoutDirection|locale"
+      android:name=".ui.activity.setting.SettingsActivity"
+      android:label="@string/action_settings"
+      android:parentActivityName=".ui.activity.main.MainActivity">
+      <meta-data
+        android:name="android.support.PARENT_ACTIVITY"
+        android:value=".ui.activity.main.MainActivity" />
+    </activity>
 
+    <service
+      android:exported="false"
+      android:name=".notification.NotificationsIntentService" />
     <service
       android:exported="false"
       android:name=".service.NotificationReminderFirebaseJobService">
@@ -94,11 +128,11 @@
       android:exported="true"
       android:name=".notification.OnBootUpNotificationSchedulerIntentService" />
 
+    <receiver android:name=".notification.NotificationsReceiver" />
     <receiver
       android:enabled="true"
       android:exported="true"
       android:name=".notification.OnBootUpReceiver">
-
       <!-- android:process=":remote" -->
       <intent-filter>
         <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -110,13 +144,13 @@
         <category android:name="android.intent.category.DEFAULT" />
       </intent-filter>
     </receiver>
-    <receiver android:name=".notification.NotificationsReceiver" />
 
-    <service
-      android:exported="false"
-      android:name=".notification.NotificationsIntentService" />
-
-    <activity android:name=".ui.activity.NotificationActionsActivity"></activity>
+    <activity android:name=".ui.activity.main.Main2Activity">
+      <!-- <intent-filter> -->
+      <!-- <action android:name="android.intent.action.MAIN" /> -->
+      <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+      <!-- </intent-filter> -->
+    </activity>
   </application>
 
 </manifest>

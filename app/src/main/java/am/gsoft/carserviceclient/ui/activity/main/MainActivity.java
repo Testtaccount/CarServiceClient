@@ -1,10 +1,7 @@
 package am.gsoft.carserviceclient.ui.activity.main;
 
-import static am.gsoft.carserviceclient.util.AppUtil.setTextViewDrawableColor;
-import static am.gsoft.carserviceclient.util.Constant.Action.ACTION_CREATE_NEW_OIL_ACTIVITY_INTENT;
-import static am.gsoft.carserviceclient.util.Constant.Action.ACTION_EDIT_OIL_ACTIVITY_INTENT;
-import static am.gsoft.carserviceclient.util.Constant.Action.ACTION_OIL_HISTORY_ACTIVITY_INTENT;
-import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_CURRENT_CAR;
+ import static am.gsoft.carserviceclient.util.AppUtil.setTextViewDrawableColor;
+import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_CURRENT_CAR_KEY;
 import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_CURRENT_OIL;
 import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_CURRENT_OIL_LIST;
 import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_FIRST_OIL;
@@ -15,21 +12,26 @@ import static android.Manifest.permission.CALL_PHONE;
 
 import am.gsoft.carserviceclient.R;
 import am.gsoft.carserviceclient.data.InjectorUtils;
+import am.gsoft.carserviceclient.data.Resource;
 import am.gsoft.carserviceclient.data.database.AppDatabase;
 import am.gsoft.carserviceclient.data.database.entity.Car;
 import am.gsoft.carserviceclient.data.database.entity.Oil;
+import am.gsoft.carserviceclient.data.viewmodel.MainActivityViewModel;
+import am.gsoft.carserviceclient.data.viewmodel.ViewModelFactory;
 import am.gsoft.carserviceclient.firebase.FirebaseAuthHelper;
 import am.gsoft.carserviceclient.phone.PhoneNumber;
 import am.gsoft.carserviceclient.phone.PhoneNumberUtils;
+import am.gsoft.carserviceclient.ui.activity.BaseActivity;
 import am.gsoft.carserviceclient.ui.activity.CreateNewOilActivity;
 import am.gsoft.carserviceclient.ui.activity.EditOilActivity;
 import am.gsoft.carserviceclient.ui.activity.GarageActivity;
 import am.gsoft.carserviceclient.ui.activity.OilHistoryActivity;
 import am.gsoft.carserviceclient.ui.activity.SplashActivity;
-import am.gsoft.carserviceclient.ui.activity.base.BaseActivity;
+import am.gsoft.carserviceclient.ui.activity.setting.SettingsActivity;
 import am.gsoft.carserviceclient.ui.adapter.MyCarSpinnerAdapter;
 import am.gsoft.carserviceclient.util.DateUtils.DateType;
 import am.gsoft.carserviceclient.util.Logger;
+import am.gsoft.carserviceclient.util.ToastUtils;
 import am.gsoft.carserviceclient.util.VersionUtils;
 import am.gsoft.carserviceclient.util.manager.DialogManager;
 import am.gsoft.carserviceclient.util.manager.FragmentTransactionManager;
@@ -37,6 +39,7 @@ import am.gsoft.carserviceclient.util.manager.SnackBarManager;
 import android.Manifest.permission;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
@@ -54,7 +57,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.CardView;
-import android.view.Menu;
+ import android.text.TextUtils;
+ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -81,6 +85,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
   private static final int REQUEST_READ_PHONE_STATE = 7788;
 
   private TextView oilCompanyIdTv;
+  private TextView oilCompanyOwnerNameTv;
   private TextView oilServiveDoneDateTv;
   private TextView oilServiveNextDateTv;
   private TextView oilBrandTv;
@@ -114,7 +119,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
   private CardView kmInfoCv;
   private CardView dateInfoCv;
 
-  private LiveData<List<Car>> mCarLiveData;
+  //  private LiveData<List<Car>> mCarLiveData;
   private List<Car> mCarList;
   private LiveData<List<Oil>> mOilLiveData;
   private List<Oil> mOilList;
@@ -124,6 +129,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
   private Oil currentOil;
   private Oil firstOil;
   private boolean showProgress;
+  private MainActivityViewModel mViewModel;
 
 
   @Override
@@ -134,56 +140,82 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    ViewModelFactory factory = InjectorUtils.provideViewModelFactory(getApplicationContext());
+    mViewModel = ViewModelProviders.of(this, factory).get(MainActivityViewModel.class);
 
     findViews();
     customizeActionBar();
     initFields();
 
-    mCarLiveData = AppDatabase.getInstance(getApplicationContext()).mCarDao().getAll();
-    mCarLiveData.observe(this, new Observer<List<Car>>() {
+//    mCarLiveData = AppDatabase.getInstance(getApplicationContext()).mCarDao().getAll();
+//    mCarLiveData.observe(this, new Observer<List<Car>>() {
+//      @Override
+//      public void onChanged(@Nullable List<Car> cars) {
+//        if (cars != null && cars.size() != 0) {
+//          mCarList = cars;
+//          initSpinner(cars);
+//          setListeners();
+//          spinner.setSelection(getPosition(cars, appSharedHelper.getSpinnerPosition()), true);
+//
+////          progressRl.setVisibility(View.GONE);
+////          contentLl.setVisibility(View.VISIBLE);
+//
+//          if (getIntent() != null && getIntent().getAction() != null) {
+//            if (getIntent().getAction().equals(ACTION_OIL_HISTORY_ACTIVITY_INTENT)
+//                || getIntent().getAction().equals(ACTION_CREATE_NEW_OIL_ACTIVITY_INTENT)
+//                || getIntent().getAction().equals(ACTION_EDIT_OIL_ACTIVITY_INTENT)) {
+////          appBarLayout.setExpanded(false);
+////          scrollToView(nestedScrollView, spaceView);
+////          focusOnView(nestedScrollView, spaceView);
+//
+//            }
+//          }
+//        } else {
+//
+////          ToastUtils.shortToast("Yo Don't Have Cars");
+////          Intent intent = new Intent(MainActivity.this, SplashActivity.class);
+////          intent.setAction(ACTION_MAIN_ACTIVITY_INTENT);
+////          startActivity(intent);
+////          finish();
+////          overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//
+//        }
+//      }
+//    });
+
+    mViewModel.getCars().observe(this, new Observer<Resource<List<Car>>>() {
       @Override
-      public void onChanged(@Nullable List<Car> cars) {
-        if (cars != null && cars.size() != 0) {
-          mCarList = cars;
-          initSpinner(cars);
-          setListeners();
-          spinner.setSelection(getPosition(cars, appSharedHelper.getSpinnerPosition()), true);
-
-//          progressRl.setVisibility(View.GONE);
-//          contentLl.setVisibility(View.VISIBLE);
-
-          if (getIntent() != null && getIntent().getAction() != null) {
-            if (getIntent().getAction().equals(ACTION_OIL_HISTORY_ACTIVITY_INTENT)
-                || getIntent().getAction().equals(ACTION_CREATE_NEW_OIL_ACTIVITY_INTENT)
-                || getIntent().getAction().equals(ACTION_EDIT_OIL_ACTIVITY_INTENT)) {
-//          appBarLayout.setExpanded(false);
-//          scrollToView(nestedScrollView, spaceView);
-//          focusOnView(nestedScrollView, spaceView);
-
-            }
-          }
-        } else {
-
-//          ToastUtils.shortToast("Yo Don't Have Cars");
-//          Intent intent = new Intent(MainActivity.this, SplashActivity.class);
-//          intent.setAction(ACTION_MAIN_ACTIVITY_INTENT);
-//          startActivity(intent);
-//          finish();
-//          overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
+      public void onChanged(@Nullable Resource<List<Car>> listResource) {
+        switch (listResource.status) {
+          case LOADING:
+//            ToastUtils.shortToast("LOADING !!");
+            break;
+          case SUCCESS:
+            mCarList = listResource.data;
+            initSpinner(mCarList);
+            setListeners();
+            spinner.setSelection(getPosition(mCarList, appSharedHelper.getSpinnerPositionForCar()),
+                true);
+            break;
+          case ERROR:
+            ToastUtils.shortToast("ERROR !!");
+            break;
         }
       }
     });
 
-//    LiveData<List<Oil>> m=AppDatabase.getInstance(getApplicationContext()).mOilDao().getAll();
-//    m.observeForever(new Observer<List<Oil>>() {
-//      @Override
-//      public void onChanged(@Nullable List<Oil> oils) {
-//        ToastUtils.shortToast(""+oils.size());
-//
-//      }
-//    });
+//foroilcheck
+    AppDatabase.getInstance(getApplicationContext()).mOilDao()
+        .getAll().observeForever(new Observer<List<Oil>>() {
+      @Override
+      public void onChanged(@Nullable List<Oil> oils) {
+        if (oils != null) {
+//          ToastUtils.shortToast("OILS: " + oils.size());
+          Logger.d("loadFromDb", "Main OILS SIZE: " + oils.size());
+        }
 
+      }
+    });
   }
 
   private void findViews() {
@@ -202,6 +234,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
     garageActionTxtTv = (TextView) findViewById(R.id.tv_garage_action_txt);
 
     oilCompanyIdTv = (TextView) findViewById(R.id.tv_oil_company_id);
+    oilCompanyOwnerNameTv = (TextView) findViewById(R.id.tv_oil_company_owner_name);
     oilServiveDoneDateTv = (TextView) findViewById(R.id.tv_oil_service_done_date);
     oilServiveNextDateTv = (TextView) findViewById(R.id.tv_oil_service_next_date);
     oilBrandTv = (TextView) findViewById(R.id.tv_oil_brand);
@@ -276,10 +309,10 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
 
   }
 
-  private int getPosition(List<Car> cars, long carId) {
+  private int getPosition(List<Car> cars, String carKey) {
     int position = 0;
     for (int i = 0; i < cars.size(); i++) {
-      if (cars.get(i).getId() == carId) {
+      if (cars.get(i).getKey().equals(carKey)) {
         position = i;
         break;
       }
@@ -323,7 +356,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
       }
       case R.id.ll_new_oil_btn: {
         Intent i = new Intent(MainActivity.this, CreateNewOilActivity.class);
-        i.putExtra(EXTRA_CURRENT_CAR, currentCar);
+        i.putExtra(EXTRA_CURRENT_CAR_KEY, currentCar);
         i.putExtra(EXTRA_FIRST_OIL, firstOil);
         i.putExtra(EXTRA_CURRENT_OIL, currentOil);
 //        i.putExtra("indexOfCurrentCar", mCarList.indexOf(currentCar));// chack list size
@@ -335,7 +368,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
       }
       case R.id.ll_edit_oil_btn: {
         Intent i = new Intent(MainActivity.this, EditOilActivity.class);
-        i.putExtra(EXTRA_CURRENT_CAR, currentCar);
+        i.putExtra(EXTRA_CURRENT_CAR_KEY, currentCar);
         i.putExtra(EXTRA_FIRST_OIL, firstOil);
         i.putExtra(EXTRA_CURRENT_OIL, currentOil);
         i.putExtra(EXTRA_INDEX_OF_CURRENT_OIL, mOilList.indexOf(currentOil));
@@ -379,6 +412,10 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
     switch (item.getItemId()) {
       case R.id.action_about:
         return true;
+      case R.id.action_settings:
+        Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
+        startActivity(startSettingsActivity);
+        return true;
       case R.id.action_log_out:
         if (checkNetworkAvailableWithError()) {
           showLogOutDialog();
@@ -415,7 +452,10 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
   }
 
   private void logOut() {
-//    AppSession.getSession().closeAndClear();
+
+    findViewById(R.id.ll_main_content).setVisibility(View.GONE);
+
+
     appSharedHelper.saveSavedRememberMe(false);
     new FirebaseAuthHelper().logout();
     InjectorUtils.provideRepository(getApplicationContext()).removeDataAndNotifications(mCarList);
@@ -433,70 +473,131 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
     this.currentCar = (Car) parent.getItemAtPosition(position);
     myCarSpinnerAdapter.setSelection(position);
 
-    mOilLiveData = AppDatabase.getInstance(getApplicationContext()).mOilDao()
-        .getAllByCarId(currentCar.getId());
-    mOilLiveData.observe(this, new Observer<List<Oil>>() {
+    //foroilcheck
+//   AppDatabase.getInstance(getApplicationContext()).mOilDao()
+//          .getAll().observeForever(new Observer<List<Oil>>() {
+//        @Override
+//        public void onChanged(@Nullable List<Oil> oils) {
+//          ToastUtils.shortToast("" + oils.size());
+//        }
+//      });
+
+//    mOilLiveData = AppDatabase.getInstance(getApplicationContext()).mOilDao()
+//        .getAllByCarKey(currentCar.getKey());
+//    mOilLiveData.observe(this, new Observer<List<Oil>>() {
+//      @Override
+//      public void onChanged(@Nullable List<Oil> oilList) {
+//
+////        mOilLiveData = appSharedHelper.getSaveOilListByCarKey(currentCar.getKey());
+//
+//        if (oilList != null) {
+//          mOilList = oilList;
+//          if (oilList.size() == 0) {
+//            currentOil = new Oil();
+////                firstOil=currentOil;
+//            setOilToUi(currentOil, true);
+//          } else {
+//            currentOil = oilList.get(oilList.size() - 1);
+//            firstOil = oilList.get(0);
+//            setOilToUi(currentOil, false);
+//          }
+//        } else {
+//          mOilList.clear();
+////          OilDataDbHelper.getInstance()
+////              .getCarOils(currentCar.getKey(), new ResultListener<List<Oil>>() {
+////                @Override
+////                public void onSuccess(List<Oil> oils) {
+////                  if (oils.size() == 0) {
+////                    currentOil = new Oil();
+//////                            firstOil=currentOil;
+////                    setOilToUi(currentOil, true);
+////                  } else {
+////                    mOilLiveData = oils;
+////                    currentOil = mOilLiveData.getAppNotification(mOilLiveData.size() - 1);
+////                    firstOil = mOilLiveData.getAppNotification(0);
+////                    setOilToUi(currentOil, false);
+////                  }
+////                }
+////
+////                @Override
+////                public void onFail(Exception e) {
+////                  ToastUtils.shortToast("onFail !!");
+////                }
+////              });
+//
+//        }
+//
+////    hideProgress();
+////    DialogUtil.getInstance().dismissDialog();
+//        appSharedHelper.saveSpinnerPositionForCar(currentCar.getKey());
+//
+////        if (showProgress) {
+//        new Handler().postDelayed(new Runnable() {
+//
+//          @Override
+//          public void run() {
+////          DialogUtil.getInstance().dismissDialog();
+//            contentLl.setVisibility(View.VISIBLE);
+//            progressRl.setVisibility(View.GONE);
+//          }
+//
+//        }, 500);
+////        }
+//      }
+//    });
+
+    mViewModel.getCarOils(currentCar.getKey()).observe(this, new Observer<List<Oil>>() {
       @Override
       public void onChanged(@Nullable List<Oil> oilList) {
-
-//        mOilLiveData = appSharedHelper.getSaveOilListByCarKey(currentCar.getKey());
-
-        if (oilList != null) {
-          mOilList = oilList;
-          if (oilList.size() == 0) {
-            currentOil = new Oil();
-//                firstOil=currentOil;
-            setOilToUi(currentOil, true);
-          } else {
-            currentOil = oilList.get(oilList.size() - 1);
-            firstOil = oilList.get(0);
-            setOilToUi(currentOil, false);
-          }
-        } else {
-          mOilList.clear();
-//          OilDataDbHelper.getInstance()
-//              .getCarOils(currentCar.getKey(), new ResultListener<List<Oil>>() {
-//                @Override
-//                public void onSuccess(List<Oil> oils) {
-//                  if (oils.size() == 0) {
-//                    currentOil = new Oil();
-////                            firstOil=currentOil;
-//                    setOilToUi(currentOil, true);
-//                  } else {
-//                    mOilLiveData = oils;
-//                    currentOil = mOilLiveData.getAppNotification(mOilLiveData.size() - 1);
-//                    firstOil = mOilLiveData.getAppNotification(0);
-//                    setOilToUi(currentOil, false);
-//                  }
-//                }
-//
-//                @Override
-//                public void onFail(Exception e) {
-//                  ToastUtils.shortToast("onFail !!");
-//                }
-//              });
-
-        }
-
-//    hideProgress();
-//    DialogUtil.getInstance().dismissDialog();
-        appSharedHelper.saveSpinnerPosition(currentCar.getId());
-
-//        if (showProgress) {
-        new Handler().postDelayed(new Runnable() {
-
-          @Override
-          public void run() {
-//          DialogUtil.getInstance().dismissDialog();
-            contentLl.setVisibility(View.VISIBLE);
-            progressRl.setVisibility(View.GONE);
-          }
-
-        }, 500);
+        //        mOilLiveData = appSharedHelper.getSaveOilListByCarKey(currentCar.getKey());
+//        if (listResource != null) {
+//          switch (listResource.status) {
+//            case LOADING:
+////              ToastUtils.shortToast("LOADING !!");
+//              break;
+//            case SUCCESS:
+        swipeOils(oilList);
+//              break;
+//            case ERROR:
+//              ToastUtils.shortToast("ERROR !!");
+//              break;
+//          }
 //        }
       }
     });
+  }
 
+  private void swipeOils(@NonNull List<Oil> oilList) {
+//    List<Oil> oilList = listResource.data;
+    if (oilList != null) {
+      mOilList = oilList;
+      if (oilList.size() == 0) {
+        currentOil = new Oil();
+//                firstOil=currentOil;
+        setOilToUi(currentOil, true);
+      } else {
+        currentOil = oilList.get(oilList.size() - 1);
+        firstOil = oilList.get(0);
+        setOilToUi(currentOil, false);
+      }
+    } else {
+      mOilList.clear();
+    }
+
+    appSharedHelper.saveSpinnerPositionForCar(currentCar.getKey());
+
+//        if (showProgress) {
+    new Handler().postDelayed(new Runnable() {
+
+      @Override
+      public void run() {
+//          DialogUtil.getInstance().dismissDialog();
+        contentLl.setVisibility(View.VISIBLE);
+        progressRl.setVisibility(View.GONE);
+      }
+
+    }, 500);
+//        }
   }
 
   @Override
@@ -546,12 +647,18 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
 //          oilCompanyIdTv.setText(uiOil.getServiceCompanyId());
       oilCompanyIdTv.setText(
           String.format("+%s %s", phoneNumber.getCountryCode(), phoneNumber.getPhoneNumber()));
+      if (TextUtils.isEmpty(uiOil.getServiceOwnerName())) {
+        findViewById(R.id.tv_oil_company_owner_tr).setVisibility(View.GONE);
+      }else {
+        oilCompanyOwnerNameTv.setText(uiOil.getServiceOwnerName());
+        findViewById(R.id.tv_oil_company_owner_tr).setVisibility(View.VISIBLE);
+      }
     } else {
       findViewById(R.id.cv_company_id).setVisibility(View.GONE);
     }
 
     String notesText = appSharedHelper.getOilNotes(currentCar.getKey(), uiOil.getKey());
-    Logger.d("testt", "id: " + currentCar.getId() + "_" + uiOil.getId());
+    Logger.d("testt", "id: " + currentCar.getKey() + "_" + uiOil.getCarKey());
     Logger.d("testt", "notesText: " + notesText);
 
     if (notesText != null && !notesText.equals("")) {
@@ -561,10 +668,24 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
       findViewById(R.id.cv_notes).setVisibility(View.GONE);
     }
 
-    km1Tv.setText(currentCar.getDistanceUnit());
-    km2Tv.setText(currentCar.getDistanceUnit());
-    km3Tv.setText(currentCar.getDistanceUnit());
-    km4Tv.setText(currentCar.getDistanceUnit());
+    switch (currentCar.getDistanceUnit()){
+      case "Km":
+        km1Tv.setText(getString(R.string.km));
+        km2Tv.setText(getString(R.string.km));
+        km3Tv.setText(getString(R.string.km));
+        km4Tv.setText(getString(R.string.km));
+        break;
+      case "Mil":
+        km1Tv.setText(getString(R.string.mil));
+        km2Tv.setText(getString(R.string.mil));
+        km3Tv.setText(getString(R.string.mil));
+        km4Tv.setText(getString(R.string.mil));
+        break;
+    }
+//    km1Tv.setText(currentCar.getDistanceUnit());
+//    km2Tv.setText(currentCar.getDistanceUnit());
+//    km3Tv.setText(currentCar.getDistanceUnit());
+//    km4Tv.setText(currentCar.getDistanceUnit());
 
 //        showProgress = true;
 //      }
@@ -605,7 +726,8 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
                 SnackBarManager
                     .showWithAction(this, findViewById(R.id.root_main_activity),
                         getString(R.string.permission_denided),
-                        Snackbar.LENGTH_LONG, getString(R.string.snake_bar_action_msg_allow), new View.OnClickListener() {
+                        Snackbar.LENGTH_LONG, getString(R.string.snake_bar_action_msg_allow),
+                        new View.OnClickListener() {
                           @Override
                           public void onClick(View view) {
                             if (VersionUtils.isAfter23()) {
@@ -682,7 +804,6 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
 
         .show();
   }
-
 
   private void openScreen(Fragment fragment, boolean addToBackStack) {
     FragmentTransactionManager.displayFragment(

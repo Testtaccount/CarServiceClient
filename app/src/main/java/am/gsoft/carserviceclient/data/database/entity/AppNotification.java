@@ -26,9 +26,9 @@ public class AppNotification {
 
   private long lastTime;
 
-  private long carId;
+  private String carKey;
 
-  private long oilId;
+  private String oilKey;
 
   private String note;
 
@@ -42,7 +42,7 @@ public class AppNotification {
 //
 
   public AppNotification(int id, int year, int month, int day, int hour, int minute,long lastTime,
-      long carId, long oilId, String note, int type, boolean isEnabled) {
+      String carKey, String oilKey, String note, int type, boolean isEnabled) {
     this.id = id;
     this.year = year;
     this.month = month;
@@ -50,8 +50,8 @@ public class AppNotification {
     this.hour = hour;
     this.minute = minute;
     this.lastTime = lastTime;
-    this.carId = carId;
-    this.oilId = oilId;
+    this.carKey = carKey;
+    this.oilKey = oilKey;
     this.note = note;
     this.type = type;
     this.isEnabled = isEnabled;
@@ -59,15 +59,15 @@ public class AppNotification {
 
   @Ignore
   public AppNotification(int year, int month, int day, int hour, int minute,long lastTime,
-      long carId, long oilId, String note, int type, boolean isEnabled) {
+      String carKey, String oilKey, String note, int type, boolean isEnabled) {
     this.year = year;
     this.month = month;
     this.day = day;
     this.hour = hour;
     this.minute = minute;
     this.lastTime = lastTime;
-    this.carId = carId;
-    this.oilId = oilId;
+    this.carKey = carKey;
+    this.oilKey = oilKey;
     this.note = note;
     this.type = type;
     this.isEnabled = isEnabled;
@@ -130,20 +130,20 @@ public class AppNotification {
     this.lastTime = lastTime;
   }
 
-  public long getCarId() {
-    return carId;
+  public String getCarKey() {
+    return carKey;
   }
 
-  public void setCarId(long carId) {
-    this.carId = carId;
+  public void setCarKey(String carKey) {
+    this.carKey = carKey;
   }
 
-  public long getOilId() {
-    return oilId;
+  public String getOilKey() {
+    return oilKey;
   }
 
-  public void setOilId(long oilId) {
-    this.oilId = oilId;
+  public void setOilKey(String oilKey) {
+    this.oilKey = oilKey;
   }
 
   public String getNote() {
@@ -290,8 +290,8 @@ public class AppNotification {
         ", hour=" + hour +
         ", minute=" + minute +
         ", lastTime=" + lastTime +
-        ", carId=" + carId +
-        ", oilId=" + oilId +
+        ", carKey=" + carKey +
+        ", oilKey=" + oilKey +
         ", noteText='" + note + '\'' +
         ", type=" + type +
         ", isEnabled=" + isEnabled +

@@ -6,15 +6,15 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import java.util.Objects;
 
-@Entity(tableName = "car")
+@Entity(tableName = "car")//, indices = {@Index(value = {"key"}, unique = true)})
 public class Car implements Parcelable{
 
-  @PrimaryKey(autoGenerate = true)
-  private long id;
-
-  private String key = "-";
+  @NonNull
+  @PrimaryKey()
+  private String key;
 
   private int icon = R.drawable.ic_directions_car_black_24dp;
 
@@ -46,20 +46,6 @@ public class Car implements Parcelable{
     this.distanceUnit = "Km";
   }
 
-  @Ignore
-  public Car(long id, String key, int icon, int color, String carBrand, String model,
-      String year, String numbers, String vinCode, String distanceUnit) {
-    this.id = id;
-    this.key = key;
-    this.icon = icon;
-    this.color = color;
-    this.carBrand = carBrand;
-    this.model = model;
-    this.year = year;
-    this.numbers = numbers;
-    this.vinCode = vinCode;
-    this.distanceUnit = distanceUnit;
-  }
 
   public Car(String key, int icon, int color, String carBrand, String model,
       String year, String numbers, String vinCode, String distanceUnit) {
@@ -75,7 +61,6 @@ public class Car implements Parcelable{
   }
 
   protected Car(Parcel in) {
-    id = in.readLong();
     key = in.readString();
     icon = in.readInt();
     color = in.readInt();
@@ -99,13 +84,6 @@ public class Car implements Parcelable{
     }
   };
 
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
-  }
 
   public String getKey() {
     return key;
@@ -188,8 +166,7 @@ public class Car implements Parcelable{
       return false;
     }
     Car car = (Car) o;
-    return getId() == car.getId() &&
-        getIcon() == car.getIcon() &&
+    return  getIcon() == car.getIcon() &&
         getColor() == car.getColor() &&
         Objects.equals(getKey(), car.getKey()) &&
         Objects.equals(getCarBrand(), car.getCarBrand()) &&
@@ -204,17 +181,14 @@ public class Car implements Parcelable{
   public int hashCode() {
 
     return Objects
-        .hash(getId(), getKey(), getIcon(), getColor(), getCarBrand(), getModel(), getYear(),
+        .hash(getKey(), getIcon(), getColor(), getCarBrand(), getModel(), getYear(),
             getNumbers(), getVinCode(), getDistanceUnit());
   }
 
   @Override
   public String toString() {
     return "Car{" +
-        "id=" + id +
-        ", key='" + key + '\'' +
-        ", icon=" + icon +
-        ", color=" + color +
+        "  key='" + key + '\'' +
         ", carBrand='" + carBrand + '\'' +
         ", model='" + model + '\'' +
         ", year='" + year + '\'' +
@@ -231,7 +205,6 @@ public class Car implements Parcelable{
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
-    dest.writeLong(id);
     dest.writeString(key);
     dest.writeInt(icon);
     dest.writeInt(color);

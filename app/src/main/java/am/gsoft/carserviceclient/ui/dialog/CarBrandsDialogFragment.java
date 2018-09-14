@@ -69,7 +69,7 @@ public class CarBrandsDialogFragment extends DialogFragment implements BrandsAda
 // Get field from view
 
     // Fetch arguments from bundle and set title
-    String title = getArguments().getString("title", "Select One");
+    String title = getArguments().getString("title", getResources().getString(R.string.selectOne));
     getDialog().setTitle(title);
 
     sv =(SearchView) view.findViewById(R.id.search_brand);

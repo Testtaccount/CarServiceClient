@@ -14,10 +14,8 @@ public interface UserDao {
   @Query("SELECT * FROM user WHERE `key`=:key")
   User get(String key);
 
-  @Query("SELECT * FROM user WHERE id=:id")
-  User get(long id);
 
-  @Insert
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
   long insert(User user);
 
   @Update(onConflict = OnConflictStrategy.REPLACE)
@@ -26,6 +24,6 @@ public interface UserDao {
   @Delete
   void delete(User user);
 
-  @Query("DELETE FROM user WHERE id=:id")
-  void delete(long id);
+  @Query("DELETE FROM user WHERE `key`=:key")
+  void delete(String key);
 }

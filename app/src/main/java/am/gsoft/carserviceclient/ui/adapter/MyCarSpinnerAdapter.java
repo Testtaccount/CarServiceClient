@@ -93,6 +93,19 @@ public class MyCarSpinnerAdapter extends ArrayAdapter<Car> {
     return row;
   }
 
+  public void swapForecast(List<Car> cars) {
+    // If there was no forecast data, then recreate all of the list
+    if (carList == null) {
+      carList = cars;
+      notifyDataSetChanged();
+    } else {
+
+      carList.clear();
+      carList = cars;
+      notifyDataSetChanged();
+    }
+  }
+
 
   private static class MyCarViewHolder {
 

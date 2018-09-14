@@ -3,19 +3,22 @@ package am.gsoft.carserviceclient.ui.activity;
 import static am.gsoft.carserviceclient.util.Constant.Action.ACTION_CREATE_NEW_CAR_ACTIVITY;
 import static am.gsoft.carserviceclient.util.Constant.Action.ACTION_EDIT_CAR_ACTIVITY_INTENT;
 import static am.gsoft.carserviceclient.util.Constant.Action.ACTION_GARAGE_ACTIVITY_INTENT;
-import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_CURRENT_CAR;
+import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_CURRENT_CAR_KEY;
 
 import am.gsoft.carserviceclient.R;
 import am.gsoft.carserviceclient.data.AppRepository;
-import am.gsoft.carserviceclient.data.database.AppDatabase;
+import am.gsoft.carserviceclient.data.InjectorUtils;
+import am.gsoft.carserviceclient.data.Resource;
 import am.gsoft.carserviceclient.data.database.entity.Car;
-import am.gsoft.carserviceclient.ui.activity.base.BaseActivity;
+import am.gsoft.carserviceclient.data.viewmodel.GarageActivityViewModel;
+import am.gsoft.carserviceclient.data.viewmodel.ViewModelFactory;
 import am.gsoft.carserviceclient.ui.activity.main.MainActivity;
 import am.gsoft.carserviceclient.ui.adapter.MyCarSpinnerAdapter;
 import am.gsoft.carserviceclient.util.ToastUtils;
 import am.gsoft.carserviceclient.util.manager.DialogManager;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,7 +38,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GarageActivity extends BaseActivity implements OnClickListener,Spinner.OnItemSelectedListener {
+public class GarageActivity extends BaseActivity implements OnClickListener,
+    Spinner.OnItemSelectedListener {
 
   private static final String TAG = GarageActivity.class.getSimpleName();
 
@@ -55,6 +59,7 @@ public class GarageActivity extends BaseActivity implements OnClickListener,Spin
   private Space spaceView;
   private ProgressBar progressBar;
 
+  private GarageActivityViewModel mViewModel;
   private LiveData<List<Car>> mListLiveData;
   private List<Car> mCarList;
   private Car currentCar;
@@ -71,42 +76,82 @@ public class GarageActivity extends BaseActivity implements OnClickListener,Spin
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    ViewModelFactory factory = InjectorUtils.provideViewModelFactory(getApplicationContext());
+    mViewModel = ViewModelProviders.of(this, factory).get(GarageActivityViewModel.class);
     findViews();
     customizeActionBar();
     initFields();
 
-    mListLiveData = AppDatabase.getInstance(getApplicationContext()).mCarDao().getAll();
-    mListLiveData.observe(this, new Observer<List<Car>>() {
+    mViewModel.getCars().observe(this, new Observer<Resource<List<Car>>>() {
       @Override
-      public void onChanged(@Nullable List<Car> cars) {
-        if (cars == null || cars.size() == 0) {
-          ToastUtils.shortToast("Yo Don't Have Cars");
-          Intent intent = new Intent(GarageActivity.this, CreateNewCarActivity.class);
-          intent.setAction(ACTION_GARAGE_ACTIVITY_INTENT);
-          startActivity(intent);
-          finish();
-          overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        } else {
-          mCarList =cars;
-          initSpinner(cars);
-          setListeners();
-          spinner.setSelection(getPosition(cars,(long)appSharedHelper.getSpinnerPosition()), true);
-          if (getIntent() != null && getIntent().getAction() != null) {
-            if (getIntent().getAction().equals(ACTION_EDIT_CAR_ACTIVITY_INTENT) || getIntent()
-                .getAction().equals(ACTION_CREATE_NEW_CAR_ACTIVITY)) {
-              appBarLayout.setExpanded(false);
-//          scrollToView(nestedScrollView, spaceView);
-              focusOnView(nestedScrollView, spaceView);
+      public void onChanged(@Nullable Resource<List<Car>> listResource) {
+        switch (listResource.status) {
+          case LOADING:
+//            ToastUtils.shortToast("LOADING !!");
+            break;
+          case SUCCESS:
+            mCarList = listResource.data;
+            if (mCarList != null && mCarList.size() != 0) {
+
+              initSpinner(mCarList);
+              setListeners();
+
+              spinner.setSelection(getPosition(mCarList, appSharedHelper.getSpinnerPositionForCar()), true);
+              if (getIntent() != null && getIntent().getAction() != null) {
+                if (getIntent().getAction().equals(ACTION_EDIT_CAR_ACTIVITY_INTENT) || getIntent().getAction().equals(ACTION_CREATE_NEW_CAR_ACTIVITY)) {
+                  appBarLayout.setExpanded(false);
+                  focusOnView(nestedScrollView, spaceView);
+                }
+              }
             }
-          }
+//            else {
+//              ToastUtils.shortToast("Yo Don't Have Cars");
+//              Intent intent = new Intent(GarageActivity.this, CreateNewCarActivity.class);
+//              intent.setAction(ACTION_GARAGE_ACTIVITY_INTENT);
+//              startActivity(intent);
+//              finish();
+//              overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//            }
+            break;
+          case ERROR:
+            ToastUtils.shortToast("ERROR !!");
+            break;
         }
       }
     });
 
+//    mListLiveData = AppDatabase.getInstance(getApplicationContext()).mCarDao().getAll();
+//    mListLiveData.observe(this, new Observer<List<Car>>() {
+//      @Override
+//      public void onChanged(@Nullable List<Car> cars) {
+//        if (cars == null || cars.size() == 0) {
+//          ToastUtils.shortToast("Yo Don't Have Cars");
+//          Intent intent = new Intent(GarageActivity.this, CreateNewCarActivity.class);
+//          intent.setAction(ACTION_GARAGE_ACTIVITY_INTENT);
+//          startActivity(intent);
+//          finish();
+//          overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//        } else {
+//          mCarList =cars;
+//          initSpinner(cars);
+//          setListeners();
+//          spinner.setSelection(getPosition(cars,appSharedHelper.getSpinnerPositionForCar()), true);
+//          if (getIntent() != null && getIntent().getAction() != null) {
+//            if (getIntent().getAction().equals(ACTION_EDIT_CAR_ACTIVITY_INTENT) || getIntent()
+//                .getAction().equals(ACTION_CREATE_NEW_CAR_ACTIVITY)) {
+//              appBarLayout.setExpanded(false);
+////          scrollToView(nestedScrollView, spaceView);
+//              focusOnView(nestedScrollView, spaceView);
+//            }
+//          }
+//        }
+//      }
+//    });
+
   }
 
   private void findViews() {
-    appBarLayout=findViewById(R.id.appBar);
+    appBarLayout = findViewById(R.id.appBar);
     nestedScrollView = findViewById(R.id.nscw);
     spaceView = findViewById(R.id.space);
     contentLl = (LinearLayout) findViewById(R.id.ll_content);
@@ -114,12 +159,12 @@ public class GarageActivity extends BaseActivity implements OnClickListener,Spin
     spinner = (Spinner) findViewById(R.id.spinner);
     addCarBtnLl = (LinearLayout) findViewById(R.id.ll_add_car_btn);
     editCarBtnLl = (LinearLayout) findViewById(R.id.ll_edit_car_btn);
-    carBrandTv=(TextView)findViewById(R.id.tv_car_brand);
-    modelTv=(TextView)findViewById(R.id.tv_model);
-    yearTv=(TextView)findViewById(R.id.tv_year);
-    numbersTv=(TextView)findViewById(R.id.tv_numbers);
-    vinCodeTv=(TextView)findViewById(R.id.tv_vin_code);
-    progressBar=(ProgressBar)findViewById(R.id.progress_bar);
+    carBrandTv = (TextView) findViewById(R.id.tv_car_brand);
+    modelTv = (TextView) findViewById(R.id.tv_model);
+    yearTv = (TextView) findViewById(R.id.tv_year);
+    numbersTv = (TextView) findViewById(R.id.tv_numbers);
+    vinCodeTv = (TextView) findViewById(R.id.tv_vin_code);
+    progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
   }
 
@@ -133,13 +178,15 @@ public class GarageActivity extends BaseActivity implements OnClickListener,Spin
     contentLl.setVisibility(View.GONE);
     progressRl.setVisibility(View.VISIBLE);
 
-    showProgress =false;
+    showProgress = false;
     if (progressBar != null) {
-      progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorAccent2), android.graphics.PorterDuff.Mode.MULTIPLY);
+      progressBar.getIndeterminateDrawable()
+          .setColorFilter(getResources().getColor(R.color.colorAccent2),
+              android.graphics.PorterDuff.Mode.MULTIPLY);
     }
 
     mCarList = new ArrayList<>();
-    currentCar=null;
+    currentCar = null;
 
   }
 
@@ -153,7 +200,7 @@ public class GarageActivity extends BaseActivity implements OnClickListener,Spin
 
   private void initSpinner(List<Car> carList) {
 //    items= new ArrayList<Car>();
-    myCarSpinnerAdapter=new MyCarSpinnerAdapter(this, carList);//user.getUserCarList());
+    myCarSpinnerAdapter = new MyCarSpinnerAdapter(this, carList);//user.getUserCarList());
     spinner.setAdapter(myCarSpinnerAdapter);
 //    new OnItemSelectedListener(){
 //      @Override
@@ -170,10 +217,10 @@ public class GarageActivity extends BaseActivity implements OnClickListener,Spin
 //    });
   }
 
-  private int getPosition(List<Car> cars, long spinnerPosition) {
+  private int getPosition(List<Car> cars, String carKey) {
     int position = 0;
     for (int i = 0; i < cars.size(); i++) {
-      if (cars.get(i).getId() ==  spinnerPosition) {
+      if (cars.get(i).getKey().equals(carKey)) {
         position = i;
         break;  // uncomment to getAppNotification the first instance
       }
@@ -199,7 +246,7 @@ public class GarageActivity extends BaseActivity implements OnClickListener,Spin
         break;
       case R.id.ll_edit_car_btn:
         Intent intent1 = new Intent(GarageActivity.this, EditCarActivity.class);
-        intent1.putExtra(EXTRA_CURRENT_CAR,currentCar.getId());
+        intent1.putExtra(EXTRA_CURRENT_CAR_KEY, currentCar.getKey());
         startActivity(intent1);
         finish();
         overridePendingTransition(R.anim.down_slide_enter, R.anim.up_slide_exit);
@@ -222,7 +269,7 @@ public class GarageActivity extends BaseActivity implements OnClickListener,Spin
 
   @Override
   public void onBackPressed() {
-    Intent i = new Intent( GarageActivity.this,MainActivity.class);
+    Intent i = new Intent(GarageActivity.this, MainActivity.class);
     startActivity(i);
     finish();
     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
@@ -234,28 +281,28 @@ public class GarageActivity extends BaseActivity implements OnClickListener,Spin
 //    Toast.makeText(this, ((Car) parent.getItemAtPosition(position)).getCarBrand(), Toast.LENGTH_SHORT).show();
 
 //    if (showProgress) {
-      contentLl.setVisibility(View.GONE);
-      progressRl.setVisibility(View.VISIBLE);
+    contentLl.setVisibility(View.GONE);
+    progressRl.setVisibility(View.VISIBLE);
 //    }
 
-    this.currentCar=(Car) parent.getItemAtPosition(position);
+    this.currentCar = (Car) parent.getItemAtPosition(position);
     myCarSpinnerAdapter.setSelection(position);
-    appSharedHelper.saveSpinnerPosition(currentCar.getId());
+    appSharedHelper.saveSpinnerPositionForCar(currentCar.getKey());
 
     Car car = (Car) parent.getItemAtPosition(position);
     setCarToUi(car);
 
 //    if (showProgress) {
-      new Handler().postDelayed(new Runnable() {
+    new Handler().postDelayed(new Runnable() {
 
-        @Override
-        public void run() {
+      @Override
+      public void run() {
 //          DialogUtil.getInstance().dismissDialog();
-          contentLl.setVisibility(View.VISIBLE);
-          progressRl.setVisibility(View.GONE);
-        }
+        contentLl.setVisibility(View.VISIBLE);
+        progressRl.setVisibility(View.GONE);
+      }
 
-      }, 500);
+    }, 500);
 //    }
   }
 

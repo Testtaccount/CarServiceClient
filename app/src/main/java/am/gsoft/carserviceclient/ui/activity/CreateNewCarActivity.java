@@ -7,13 +7,10 @@ import static am.gsoft.carserviceclient.util.Constant.Action.ACTION_MAIN_ACTIVIT
 
 import am.gsoft.carserviceclient.R;
 import am.gsoft.carserviceclient.app.App;
-import am.gsoft.carserviceclient.app.AppExecutors;
-import am.gsoft.carserviceclient.data.AppRepository;
 import am.gsoft.carserviceclient.data.InjectorUtils;
-import am.gsoft.carserviceclient.data.ResultListener;
-import am.gsoft.carserviceclient.data.database.AppDatabase;
 import am.gsoft.carserviceclient.data.database.entity.Car;
-import am.gsoft.carserviceclient.ui.activity.base.BaseActivity;
+import am.gsoft.carserviceclient.data.viewmodel.CreateCarActivityViewModel;
+import am.gsoft.carserviceclient.data.viewmodel.ViewModelFactory;
 import am.gsoft.carserviceclient.ui.activity.main.MainActivity;
 import am.gsoft.carserviceclient.ui.adapter.BrandsSpinnerItem;
 import am.gsoft.carserviceclient.ui.adapter.CarBrandsSpinnerAdapter;
@@ -22,6 +19,7 @@ import am.gsoft.carserviceclient.ui.dialog.CarBrandsDialogFragment.BrandsDialogL
 import am.gsoft.carserviceclient.util.AppUtil;
 import am.gsoft.carserviceclient.util.ToastUtils;
 import am.gsoft.carserviceclient.util.manager.DialogManager;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -54,6 +52,7 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
 
   private static final String TAG = CreateNewCarActivity.class.getSimpleName();
 
+  private CreateCarActivityViewModel mViewModel;
   private AppBarLayout mAppBarLayout;
   private NestedScrollView nestedScrollView;
   private EditText modelEt;
@@ -66,7 +65,7 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
   private FloatingActionButton saveCarFab;
   private CarBrandsSpinnerAdapter brandsSpinnerAdapter;
   private String[] carYears;
-  private String[] carDencityUnits = {getString(R.string.km), getString(R.string.km)};
+  private String[] carDencityUnits = new String[2];
 
   private ImageView colorPickerImg;
   private int colorId;
@@ -77,8 +76,8 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
   private String[] names;
   private TypedArray icons;
   private ArrayList<BrandsSpinnerItem> items;
-  private AppRepository repository;
-  int c;
+//  private AppRepository repository;
+//  int carCount;
 
   @Override
   protected int layoutResId() {
@@ -88,6 +87,9 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+//    AndroidBug5497Workaround.assistActivity(this);
+    ViewModelFactory factory = InjectorUtils.provideViewModelFactory(getApplicationContext());
+    mViewModel = ViewModelProviders.of(this, factory).get(CreateCarActivityViewModel.class);
 
     findViews();
     customizeActionBar();
@@ -120,19 +122,23 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
   }
 
   private void initFields() {
-    repository = InjectorUtils.provideRepository(getApplicationContext());
-    AppExecutors.getInstance().diskIO().execute(new Runnable() {
-      @Override
-      public void run() {
-        c = AppDatabase.getInstance(getApplicationContext()).mCarDao().getCount();
+//    repository = InjectorUtils.provideRepository(getApplicationContext());
+//    AppExecutors.getInstance().diskIO().execute(new Runnable() {
+//      @Override
+//      public void run() {
+//        carCount = AppDatabase.getInstance(getApplicationContext()).mCarDao().getCount();
+//
+//      }
+//    });
 
-      }
-    });
     items = new ArrayList<>();
+    carDencityUnits[0] = getString(R.string.km);
+    carDencityUnits[1] = getString(R.string.mil);
     getBrandsList();
     carYears = getResources().getStringArray(R.array.years);
 //    brandsSpinnerAdapter=new CarBrandsSpinnerAdapter(this,items,R.color.color_0099FF);
-    ArrayAdapter<String> carYearsSpinnerAdapter = new ArrayAdapter<String>(App.getInstance(), R.layout.spinner_item, carYears) {
+    ArrayAdapter<String> carYearsSpinnerAdapter = new ArrayAdapter<String>(App.getInstance(),
+        R.layout.spinner_item, carYears) {
       @Override
       public boolean isEnabled(int position) {
         if (position == 0) {
@@ -156,7 +162,8 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
         }
 
         if (position == index) {
-          tv.setBackgroundColor(App.getInstance().getResources().getColor(R.color.color_background_E5E5E5));
+          tv.setBackgroundColor(
+              App.getInstance().getResources().getColor(R.color.color_background_E5E5E5));
         } else {
           tv.setBackgroundColor(Color.TRANSPARENT);
         }
@@ -167,7 +174,8 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
 //    carBrandsSpinner.setAdapter(brandsSpinnerAdapter);
     carYearsSpinner.setAdapter(carYearsSpinnerAdapter);
 
-    ArrayAdapter<String> carDencityUnitAdapter = new ArrayAdapter<String>(App.getInstance(), R.layout.spinner_item, carDencityUnits) {
+    ArrayAdapter<String> carDencityUnitAdapter = new ArrayAdapter<String>(App.getInstance(),
+        R.layout.spinner_item, carDencityUnits) {
 //      @Override
 //      public boolean isEnabled(int position) {
 //        if (position == 0) {
@@ -187,7 +195,7 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
 //          // Set the disable item text color
 //          tv.setTextColor(Color.GRAY);
 //        } else {
-          tv.setTextColor(Color.BLACK);
+        tv.setTextColor(Color.BLACK);
 //        }
 
 //        if (position == index) {
@@ -200,7 +208,6 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
     };
     carDencityUnitAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
     carDencityUnitSpinner.setAdapter(carDencityUnitAdapter);
-
 
 //    items = new ArrayList<>();
 
@@ -217,8 +224,6 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
 //    saveCarLlBtn.setOnClickListener(this);
     colorBackgroundRl.setOnClickListener(this);
     saveCarFab.setOnClickListener(this);
-
-//    configureFABReveal(fabRevealLayoutMain);
 
 //    carBrandsSpinner.setOnItemSelectedListener(this);
     carYearsSpinner.setOnItemSelectedListener(this);
@@ -387,51 +392,52 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
   @Override
   public void onBackPressed() {
 
+    mViewModel.getCarsCont().observe(this, carCount -> {
+      int animIdEnter = R.anim.slide_in_left;
+      int animIdExit = R.anim.slide_out_righ;
 
-    int animIdEnter = R.anim.slide_in_left;
-    int animIdExit = R.anim.slide_out_righ;
-
-    if (c != 0) {
-      Intent intent = null;
-      if (getIntent().getAction().equals(ACTION_MAIN_ACTIVITY_INTENT)) {
-        intent = new Intent(CreateNewCarActivity.this, MainActivity.class);
-        animIdEnter = R.anim.slide_in_left;
-        animIdExit = R.anim.slide_out_righ;
-      } else if (getIntent().getAction().equals(ACTION_GARAGE_ACTIVITY_INTENT)) {
-        intent = new Intent(CreateNewCarActivity.this, GarageActivity.class);
-        animIdEnter = R.anim.up_slide_enter;
-        animIdExit = R.anim.down_slide_exit;
-      }
-      intent.setAction(ACTION_CREATE_NEW_CAR_ACTIVITY);
-//    intent.putExtra(ACTION_CREATE_NEW_CAR_ACTIVITY, car);
-      startActivity(intent);
-      finish();
-      overridePendingTransition(R.anim.up_slide_enter, R.anim.down_slide_exit);
-
-      super.onBackPressed();
-    } else {
-      if (doubleBackToExitPressedOnce) {
-        finish();
-
-      }
-
-      this.doubleBackToExitPressedOnce = true;
-      if (appSharedHelper.getCarListToSave() != null
-          && appSharedHelper.getCarListToSave().size() != 0) {
-        ToastUtils.shortToast(R.string.click_again_txt);
-      } else {
-        ToastUtils.shortToast(R.string.click_again_or_add_car_txt);
-      }
-
-      new Handler().postDelayed(new Runnable() {
-
-        @Override
-        public void run() {
-          doubleBackToExitPressedOnce = false;
+      if (carCount != null && carCount != 0) {
+        Intent intent = null;
+        if (getIntent().getAction().equals(ACTION_MAIN_ACTIVITY_INTENT)) {
+          intent = new Intent(CreateNewCarActivity.this, MainActivity.class);
+          animIdEnter = R.anim.slide_in_left;
+          animIdExit = R.anim.slide_out_righ;
+        } else if (getIntent().getAction().equals(ACTION_GARAGE_ACTIVITY_INTENT)) {
+          intent = new Intent(CreateNewCarActivity.this, GarageActivity.class);
+          animIdEnter = R.anim.up_slide_enter;
+          animIdExit = R.anim.down_slide_exit;
         }
-      }, 2000);
-    }
+        intent.setAction(ACTION_CREATE_NEW_CAR_ACTIVITY);
+//    intent.putExtra(ACTION_CREATE_NEW_CAR_ACTIVITY, car);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.up_slide_enter, R.anim.down_slide_exit);
 
+        super.onBackPressed();
+      } else {
+        if (doubleBackToExitPressedOnce) {
+//           finish();
+          this.finishAffinity();
+
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        if (appSharedHelper.getCarListToSave() != null
+            && appSharedHelper.getCarListToSave().size() != 0) {
+          ToastUtils.shortToast(R.string.click_again_txt);
+        } else {
+          ToastUtils.shortToast(R.string.click_again_or_add_car_txt);
+        }
+
+        new Handler().postDelayed(new Runnable() {
+
+          @Override
+          public void run() {
+            doubleBackToExitPressedOnce = false;
+          }
+        }, 2000);
+      }
+    });
 
 
   }
@@ -443,13 +449,22 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
 //    car.setId(id);
     BrandsSpinnerItem brandsSpinnerItem = (BrandsSpinnerItem) carBrandsSpinner.getSelectedItem();
     car.setIcon(brandsSpinnerItem.getIcon());//2130837697
-    car.setColor(backgroundColor);//setColor(Color.WHITE);//-256
+    car.setColor(backgroundColor);//setLanguage(Color.WHITE);//-256
     car.setCarBrand(brandsSpinnerItem.getCarBrand());//setCarBrand(getString(R.string.none));
     car.setModel(modelEt.getText().toString());//setModel("X5");
     car.setYear(carYearsSpinner.getSelectedItem().toString());//setYear("1999");
     car.setNumbers(numbersEt.getText().toString());//setNumbers("00 oo 000");
-    car.setVinCode(vinCodeEt.getText().toString().length() == 0 ? "-" : vinCodeEt.getText().toString());//setVinCode("fjksdhfjkdsfkjdskjfk");
-    car.setDistanceUnit(carDencityUnitSpinner.getSelectedItem().toString());//setVinCode("fjksdhfjkdsfkjdskjfk");
+    car.setVinCode(vinCodeEt.getText().toString().length() == 0 ? "-"
+        : vinCodeEt.getText().toString());//setVinCode("fjksdhfjkdsfkjdskjfk");
+    switch (carDencityUnitSpinner.getSelectedItemPosition()) {
+      case 0:
+        car.setDistanceUnit("Km");
+        break;
+      case 1:
+        car.setDistanceUnit("Mil");
+        break;
+    }
+//    car.setDistanceUnit( carDencityUnitSpinner.getSelectedItemPosition() ?);//setVinCode("fjksdhfjkdsfkjdskjfk");
 //    car.setOil(new Oil());
     return car;
   }
@@ -469,50 +484,67 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
 
 //    CarDataDbHalper.getInstance().setResultListener();
 
-    repository.saveCar(car, new ResultListener<Car>() {
-      @Override
-      public void onLoad(Car car) {
-        runOnUiThread(new Runnable() {
-          @Override
-          public void run() {
-            if(car!=null){
-              ToastUtils.shortToast(R.string.msg_car_created);
-              Intent intent = null;
-              if (getIntent().getAction().equals(ACTION_MAIN_ACTIVITY_INTENT)) {
-                intent = new Intent(CreateNewCarActivity.this, MainActivity.class);
-              } else if (getIntent().getAction().equals(ACTION_GARAGE_ACTIVITY_INTENT)) {
-                intent = new Intent(CreateNewCarActivity.this, GarageActivity.class);
-              }
+    mViewModel.saveCar(car);
+    ToastUtils.shortToast(R.string.msg_car_created);
+    Intent intent = null;
+    if (getIntent().getAction().equals(ACTION_MAIN_ACTIVITY_INTENT)) {
+      intent = new Intent(CreateNewCarActivity.this, MainActivity.class);
+    } else if (getIntent().getAction().equals(ACTION_GARAGE_ACTIVITY_INTENT)) {
+      intent = new Intent(CreateNewCarActivity.this, GarageActivity.class);
+    }
 
 //    intent.putExtra(ACTION_CREATE_NEW_CAR_ACTIVITY, car);
 //        intent.setAction(ACTION_CREATE_NEW_CAR_ACTIVITY);
-              startActivity(intent);
-              finish();
-              if (getIntent().getAction().equals(ACTION_MAIN_ACTIVITY_INTENT)) {
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
-              } else if (getIntent().getAction().equals(ACTION_GARAGE_ACTIVITY_INTENT)) {
-                overridePendingTransition(R.anim.up_slide_enter, R.anim.down_slide_exit);
-              }
-            }else {
-              DialogManager.getInstance().dismissPreloader(this.getClass());
-              ToastUtils.shortToast(R.string.msg_car_not_created);
-            }
-          }
-        });
+    startActivity(intent);
+    finish();
+    if (getIntent().getAction().equals(ACTION_MAIN_ACTIVITY_INTENT)) {
+      overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
+    } else if (getIntent().getAction().equals(ACTION_GARAGE_ACTIVITY_INTENT)) {
+      overridePendingTransition(R.anim.up_slide_enter, R.anim.down_slide_exit);
+    }
 
+//    repository.saveCar(car, new ResultListener<Car>() {
+//      @Override
+//      public void onLoad(Car car) {
+//        runOnUiThread(new Runnable() {
+//          @Override
+//          public void run() {
+//            if(car!=null){
+//              ToastUtils.shortToast(R.string.msg_car_created);
+//              Intent intent = null;
+//              if (getIntent().getAction().equals(ACTION_MAIN_ACTIVITY_INTENT)) {
+//                intent = new Intent(CreateNewCarActivity.this, MainActivity.class);
+//              } else if (getIntent().getAction().equals(ACTION_GARAGE_ACTIVITY_INTENT)) {
+//                intent = new Intent(CreateNewCarActivity.this, GarageActivity.class);
+//              }
+//
+////    intent.putExtra(ACTION_CREATE_NEW_CAR_ACTIVITY, car);
+////        intent.setAction(ACTION_CREATE_NEW_CAR_ACTIVITY);
+//              startActivity(intent);
+//              finish();
+//              if (getIntent().getAction().equals(ACTION_MAIN_ACTIVITY_INTENT)) {
+//                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
+//              } else if (getIntent().getAction().equals(ACTION_GARAGE_ACTIVITY_INTENT)) {
+//                overridePendingTransition(R.anim.up_slide_enter, R.anim.down_slide_exit);
+//              }
+//            }else {
+//              DialogManager.getInstance().dismissPreloader(this.getClass());
+//              ToastUtils.shortToast(R.string.msg_car_not_created);
+//            }
+//          }
+//        });
 
+//      }
+//
+//      @Override
+//      public void onFail(String e) {
+//        ToastUtils.shortToast(R.string.msg_car_not_created);
+//      }
+//    });
 
-      }
-
-      @Override
-      public void onFail(String e) {
-        ToastUtils.shortToast(R.string.msg_car_not_created);
-      }
-    });
 //    CarDataDbHalper.getInstance().saveCar(user.getKey(), car, new ResultListener<Car>() {
 //      @Override
 //      public void onSuccess(Car obj) {
-
 
 //      }
 
@@ -529,7 +561,8 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
 
     if (carBrandsSpinner.getSelectedItemPosition() == 0) {
       focusOnView(nestedScrollView, carBrandsSpinner);
-      ((TextView) carBrandsSpinner.getChildAt(0)).setError(getString(R.string.err_msg_not_selected));
+      ((TextView) carBrandsSpinner.getChildAt(0))
+          .setError(getString(R.string.err_msg_not_selected));
       DialogManager.getInstance().dismissPreloader(this.getClass());
       return false;
     }

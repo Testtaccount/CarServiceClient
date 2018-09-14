@@ -5,7 +5,6 @@ import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_CURRENT_OIL_LI
 
 import am.gsoft.carserviceclient.R;
 import am.gsoft.carserviceclient.data.database.entity.Oil;
-import am.gsoft.carserviceclient.ui.activity.base.BaseActivity;
 import am.gsoft.carserviceclient.ui.activity.main.MainActivity;
 import am.gsoft.carserviceclient.ui.fragment.OilHistoryDetailFragment;
 import am.gsoft.carserviceclient.ui.fragment.OilHistoryListFragment;

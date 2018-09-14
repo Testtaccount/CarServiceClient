@@ -344,6 +344,7 @@
                   android:focusable="false"
                   android:foreground="?attr/selectableItemBackground">
                   <TextView
+                    android:textAllCaps="true"
                     android:id="@+id/tv_edit_doil_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -358,7 +359,7 @@
                     android:gravity="center"
                     android:text="@string/edit_btn_text"
                     android:textColor="@color/white"
-                    android:textSize="14dp" />
+                    android:textSize="@dimen/main_button_textsize" />
                 </FrameLayout>
 
               </LinearLayout>
@@ -377,6 +378,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                  android:textAllCaps="true"
                   android:id="@+id/tv_select_date_txt"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
@@ -391,7 +393,7 @@
                   android:gravity="center"
                   android:text="@string/add_btn_text"
                   android:textColor="@color/white"
-                  android:textSize="14dp" />
+                  android:textSize="@dimen/main_button_textsize" />
 
               </LinearLayout>
 

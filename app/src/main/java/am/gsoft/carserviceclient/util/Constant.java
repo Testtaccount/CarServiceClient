@@ -26,12 +26,12 @@ public class Constant {
     }
 
     public class Extra {
-        public static final String EXTRA_CURRENT_CAR="EXTRA_CURRENT_CAR";
+        public static final String EXTRA_CURRENT_CAR_KEY ="EXTRA_CURRENT_CAR_KEY";
         public static final String EXTRA_FIRST_OIL="EXTRA_FIRST_OIL";
         public static final String EXTRA_CURRENT_OIL="EXTRA_CURRENT_OIL";
         public static final String EXTRA_INDEX_OF_CURRENT_OIL="EXTRA_INDEX_OF_CURRENT_OIL";
         public static final String EXTRA_CURRENT_OIL_LIST="EXTRA_CURRENT_OIL_LIST";
-        public static final String EXTRA_NOTIFICATION_MESSAGE_CAR_ID = "EXTRA_NOTIFICATION_MESSAGE_CAR_ID";
+        public static final String EXTRA_NOTIFICATION_MESSAGE_CAR_KEY = "EXTRA_NOTIFICATION_MESSAGE_CAR_KEY";
         public static final String EXTRA_NOTIFICATION_MESSAGE_ID = "EXTRA_NOTIFICATION_MESSAGE_ID";
         public static final String EXTRA_APP_NOTIFICATION_ID = "EXTRA_APP_NOTIFICATION_ID";
         public static final String EXTRA_USER = "EXTRA_USER";

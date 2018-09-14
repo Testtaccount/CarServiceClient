@@ -16,15 +16,14 @@ public interface AppNotificationDao {
   @Query("SELECT * FROM notifications")
   List<AppNotification> getAll();
 
-  @Query("SELECT * FROM notifications WHERE carId=:carId AND oilId=:oilId")
-  AppNotification getByCarIdAndOilId(long carId,long oilId);
+  @Query("SELECT * FROM notifications WHERE carKey=:carKey AND oilKey=:oilKey")
+  AppNotification getByCarIdAndOilId(String carKey,String oilKey);
 
-  @Query("SELECT * FROM notifications WHERE carId=:carId AND oilId=:oilId AND type=:type")
-  AppNotification get(long carId,long oilId,int type);
+  @Query("SELECT * FROM notifications WHERE carKey=:carKey AND oilKey=:oilKey AND type=:type")
+  AppNotification get(String carKey,String oilKey,int type);
 
-  @Query("SELECT * FROM notifications WHERE carId=:carId")
-  LiveData<List<AppNotification>> getAllNotificationsByCarId(long carId);
-
+  @Query("SELECT * FROM notifications WHERE carKey=:carKey")
+  LiveData<List<AppNotification>> getAllNotificationsByCarKey(String carKey);
 
   @Query("SELECT * FROM notifications WHERE id=:id")
   AppNotification getAppNotification(int id);
@@ -47,9 +46,8 @@ public interface AppNotificationDao {
   @Query("UPDATE notifications SET isEnabled=:enabled  WHERE id = :id")
   int update(boolean enabled,long id);
 
-  @Query("UPDATE notifications SET year=:year,month=:month,day=:day,hour=:hour,minute=:minute,carId=:carId,oilId=:oilId,note=:noteText, type=:type,isEnabled=:enabled  WHERE id = :id")
-  int update(int year, int month, int day, int hour, int minute, long carId, long oilId, String noteText,int type, boolean enabled, long id);
-
+  @Query("UPDATE notifications SET year=:year,month=:month,day=:day,hour=:hour,minute=:minute,carKey=:carKey,oilKey=:oilKey,note=:noteText, type=:type,isEnabled=:enabled  WHERE id = :id")
+  int update(int year, int month, int day, int hour, int minute, String carKey, String oilKey, String noteText,int type, boolean enabled, long id);
 
   @Delete
   void delete(AppNotification notification);
@@ -57,7 +55,7 @@ public interface AppNotificationDao {
   @Query("DELETE FROM notifications WHERE id=:id")
   void delete(long id);
 
-  @Query("DELETE FROM notifications WHERE carId=:carId")
-  void deleteAllMonthNotificationsByCarId(long carId);
+  @Query("DELETE FROM notifications WHERE carKey=:carKey")
+  void deleteAllMonthNotificationsByCarId(String carKey);
 
 }

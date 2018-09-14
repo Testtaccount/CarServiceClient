@@ -17,6 +17,11 @@ public interface AppNetworkService {
   Call<HashMap<String, Car>> getCarList(
       @Path("userKey") String userKey);
 
+  @GET("cars/{userKey}.json")
+  Call<HashMap<String,Car>> getCarsResponse(
+      @Path("userKey") String userKey);
+
+
   @PUT("/cars/{userKey}/{carKey}.json")
   Call<Car> saveCar(
       // title configured as identifier for tasks
@@ -47,7 +52,12 @@ public interface AppNetworkService {
 
   @GET("oils/{carKey}.json")
   Call<HashMap<String, Oil>> getCarOils(
-      @Path("carKey") String userKey);
+      @Path("carKey") String carKey);
+
+  @GET("oils/{carKey}.json")
+  Call<HashMap<String,Oil>> getCarOilsResponse(
+      @Path("carKey") String carKey);
+
 
   @PATCH("/oils/{carKey}/{oilKey}.json")
   Call<Oil> updateOil(

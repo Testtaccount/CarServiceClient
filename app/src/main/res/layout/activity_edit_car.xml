@@ -535,6 +535,7 @@
           >
 
           <TextView
+            android:textAllCaps="true"
             android:fontFamily="sans-serif-medium"
             android:textSize="@dimen/main_button_textsize"
             android:id="@+id/tv_select_date_txt"
@@ -571,7 +572,7 @@
     android:elevation="6dp"
     android:src="@drawable/ic_done_white_24dp"
     android:tint="@color/white"
-    app:backgroundTint="@color/colorAccent2"
+    app:backgroundTint="@color/green_700"
     app:fabSize="normal"
     app:layout_anchor="@id/appBar"
     app:layout_anchorGravity="bottom|right|end"

@@ -5,29 +5,32 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import java.util.Objects;
 
 @Entity(tableName = "oil",
     foreignKeys = @ForeignKey(entity = Car.class,
-        parentColumns = "id",
-        childColumns = "carId",
-        onDelete = CASCADE)
-//    indices = {@Index(value = {"carId"},
-//        unique = true)}
+        parentColumns = "key",
+        childColumns = "carKey",
+        onDelete = CASCADE),
+    indices = {@Index(value = {"carKey"})}
+//    indices = {@Index(value = {"carKey"},unique = true)}
 )
 public class Oil implements Parcelable{
 
-  @PrimaryKey(autoGenerate = true)
-  private long id;
-
-  private long carId;
-
+  @NonNull
+  @PrimaryKey
   private String key;
 
+  private String carKey;
+
   private String serviceCompanyId="-";
+
+  private String serviceOwnerName ="";
 
   private long serviceDoneDate;
 
@@ -58,13 +61,14 @@ public class Oil implements Parcelable{
     this.volume = 0.0;
   }
 
-  public Oil(long carId,String key, String serviceCompanyId, long serviceDoneDate,
+  public Oil(String carKey,String key, String serviceCompanyId,String serviceOwnerName, long serviceDoneDate,
       long serviceNextDate,
       String brand, String type, double volume, long serviceDoneKm, long recomendedKm,
       long serviceNextKm, long middleMonthKm, int isFilterChanged) {
-    this.carId=carId;
+    this.carKey=carKey;
     this.key = key;
     this.serviceCompanyId = serviceCompanyId;
+    this.serviceOwnerName = serviceOwnerName;
     this.serviceDoneDate = serviceDoneDate;
     this.serviceNextDate = serviceNextDate;
     this.brand = brand;
@@ -74,34 +78,14 @@ public class Oil implements Parcelable{
     this.recomendedKm = recomendedKm;
     this.serviceNextKm = serviceNextKm;
     this.middleMonthKm = middleMonthKm;
-    this.isFilterChanged = isFilterChanged;
-  }
-
-  @Ignore
-  public Oil(long id,long carId, String key, String serviceCompanyId, long serviceDoneDate,
-      long serviceNextDate, String brand, String type, double volume, long serviceDoneKm,
-      long serviceNextKm, long middleMonthKm, long recomendedKm, int isFilterChanged) {
-    this.id = id;
-    this.carId = carId;
-    this.key = key;
-    this.serviceCompanyId = serviceCompanyId;
-    this.serviceDoneDate = serviceDoneDate;
-    this.serviceNextDate = serviceNextDate;
-    this.brand = brand;
-    this.type = type;
-    this.volume = volume;
-    this.serviceDoneKm = serviceDoneKm;
-    this.serviceNextKm = serviceNextKm;
-    this.middleMonthKm = middleMonthKm;
-    this.recomendedKm = recomendedKm;
     this.isFilterChanged = isFilterChanged;
   }
 
   protected Oil(Parcel in) {
-    id = in.readLong();
-    carId = in.readLong();
+    carKey = in.readString();
     key = in.readString();
     serviceCompanyId = in.readString();
+    serviceOwnerName = in.readString();
     serviceDoneDate = in.readLong();
     serviceNextDate = in.readLong();
     brand = in.readString();
@@ -116,10 +100,10 @@ public class Oil implements Parcelable{
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
-    dest.writeLong(id);
-    dest.writeLong(carId);
+    dest.writeString(carKey);
     dest.writeString(key);
     dest.writeString(serviceCompanyId);
+    dest.writeString(serviceOwnerName);
     dest.writeLong(serviceDoneDate);
     dest.writeLong(serviceNextDate);
     dest.writeString(brand);
@@ -149,20 +133,13 @@ public class Oil implements Parcelable{
     }
   };
 
-  public long getId() {
-    return id;
+
+  public String getCarKey() {
+    return carKey;
   }
 
-  public void setId(long id) {
-    this.id = id;
-  }
-
-  public long getCarId() {
-    return carId;
-  }
-
-  public void setCarId(long carId) {
-    this.carId = carId;
+  public void setCarKey(String carKey) {
+    this.carKey = carKey;
   }
 
   public String getKey() {
@@ -179,6 +156,14 @@ public class Oil implements Parcelable{
 
   public void setServiceCompanyId(String serviceCompanyId) {
     this.serviceCompanyId = serviceCompanyId;
+  }
+
+  public String getServiceOwnerName() {
+    return serviceOwnerName;
+  }
+
+  public void setServiceOwnerName(String serviceOwnerName) {
+    this.serviceOwnerName = serviceOwnerName;
   }
 
   public long getServiceDoneDate() {
@@ -270,8 +255,8 @@ public class Oil implements Parcelable{
       return false;
     }
     Oil oil = (Oil) o;
-    return getId() == oil.getId() &&
-        getCarId() == oil.getCarId() &&
+    return
+        Objects.equals(getCarKey(),oil.getCarKey()) &&
         getServiceDoneDate() == oil.getServiceDoneDate() &&
         getServiceNextDate() == oil.getServiceNextDate() &&
         Double.compare(oil.getVolume(), getVolume()) == 0 &&
@@ -282,6 +267,7 @@ public class Oil implements Parcelable{
         getIsFilterChanged() == oil.getIsFilterChanged() &&
         Objects.equals(getKey(), oil.getKey()) &&
         Objects.equals(getServiceCompanyId(), oil.getServiceCompanyId()) &&
+        Objects.equals(getServiceOwnerName(), oil.getServiceOwnerName()) &&
         Objects.equals(getBrand(), oil.getBrand()) &&
         Objects.equals(getType(), oil.getType());
   }
@@ -289,7 +275,7 @@ public class Oil implements Parcelable{
   @Override
   public int hashCode() {
 
-    return Objects.hash(getId(), getCarId(), getKey(), getServiceCompanyId(), getServiceDoneDate(),
+    return Objects.hash(getCarKey(), getKey(), getServiceCompanyId(), getServiceOwnerName(), getServiceDoneDate(),
         getServiceNextDate(), getBrand(), getType(), getVolume(), getServiceDoneKm(),
         getServiceNextKm(), getMiddleMonthKm(), getRecomendedKm(), getIsFilterChanged());
   }
@@ -297,12 +283,8 @@ public class Oil implements Parcelable{
   @Override
   public String toString() {
     return "Oil{" +
-        "id=" + id +
-        ", carId=" + carId +
+        ", carKey=" + carKey +
         ", key='" + key + '\'' +
-        ", serviceCompanyId='" + serviceCompanyId + '\'' +
-        ", serviceDoneDate=" + serviceDoneDate +
-        ", serviceNextDate=" + serviceNextDate +
         ", brand='" + brand + '\'' +
         ", type='" + type + '\'' +
         ", volume=" + volume +
@@ -310,7 +292,6 @@ public class Oil implements Parcelable{
         ", serviceNextKm=" + serviceNextKm +
         ", middleMonthKm=" + middleMonthKm +
         ", recomendedKm=" + recomendedKm +
-        ", isFilterChanged=" + isFilterChanged +
         '}';
   }
 }

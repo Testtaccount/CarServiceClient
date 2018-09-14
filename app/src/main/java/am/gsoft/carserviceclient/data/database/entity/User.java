@@ -3,12 +3,13 @@ package am.gsoft.carserviceclient.data.database.entity;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity(tableName = "user")
 public class User{
 
+  @NonNull
   @PrimaryKey
-  private long id;
   private String key;
   private String firstName;
   private String lastName;
@@ -20,31 +21,13 @@ public class User{
   public User() {
   }
 
-  public User(long id, String key, String firstName, String lastName, String phoneNumber,
+  public User(String key, String firstName, String lastName, String phoneNumber,
       String mail) {
-    this.id = id;
-    this.key = key;
+     this.key = key;
     this.firstName = firstName;
     this.lastName = lastName;
     this.phoneNumber = phoneNumber;
     this.mail = mail;
-  }
-
-  @Ignore
-  public User(String key, String firstName, String lastName, String phoneNumber, String mail) {
-    this.key = key;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.phoneNumber = phoneNumber;
-    this.mail = mail;
-  }
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
   }
 
   public String getKey() {
@@ -90,7 +73,6 @@ public class User{
   @Override
   public String toString() {
     return "User{" +
-        "id=" + id +
         ", key='" + key + '\'' +
         ", firstName='" + firstName + '\'' +
         ", lastName='" + lastName + '\'' +
