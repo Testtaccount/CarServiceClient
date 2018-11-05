@@ -14,6 +14,7 @@ import am.gsoft.carserviceclient.data.viewmodel.GarageActivityViewModel;
 import am.gsoft.carserviceclient.data.viewmodel.ViewModelFactory;
 import am.gsoft.carserviceclient.ui.activity.main.MainActivity;
 import am.gsoft.carserviceclient.ui.adapter.MyCarSpinnerAdapter;
+import am.gsoft.carserviceclient.util.AppUtil;
 import am.gsoft.carserviceclient.util.ToastUtils;
 import am.gsoft.carserviceclient.util.manager.DialogManager;
 import android.arch.lifecycle.LiveData;
@@ -177,6 +178,7 @@ public class GarageActivity extends BaseActivity implements OnClickListener,
   private void initFields() {
     contentLl.setVisibility(View.GONE);
     progressRl.setVisibility(View.VISIBLE);
+    AppUtil.setTextViewDrawableColor(findViewById(R.id.tv_select_date_txt), R.color.white);
 
     showProgress = false;
     if (progressBar != null) {

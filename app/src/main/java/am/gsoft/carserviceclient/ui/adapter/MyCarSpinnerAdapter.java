@@ -4,9 +4,9 @@ import am.gsoft.carserviceclient.R;
 import am.gsoft.carserviceclient.app.App;
 import am.gsoft.carserviceclient.data.database.entity.Car;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +41,9 @@ public class MyCarSpinnerAdapter extends ArrayAdapter<Car> {
           .inflate(R.layout.spinner_selected_item, null);
     }
     Car carForPosition=carList.get(position);
-    ((ImageView) convertView.findViewById(R.id.icon)).setImageDrawable(ContextCompat.getDrawable(App.getInstance(), carForPosition.getIcon()));//setBackgroundResource(carBrandsList.getAppNotification(position).getIcon());
+    Resources mResources = context.getResources();
+
+    ((ImageView) convertView.findViewById(R.id.icon)).setImageDrawable(mResources.getDrawable(mResources.getIdentifier(carForPosition.getIcon(), "drawable", "am.gsoft.carserviceclient")));//setBackgroundResource(carBrandsList.getAppNotification(position).getIcon());
     Typeface typeface = Typeface.createFromAsset(App.getInstance().getAssets(), "fonts/NotoSansArmenian-Regular.ttf");
     ((TextView) convertView.findViewById(R.id.tv_car_brand)).setText(carForPosition.getCarBrand());
     ((TextView) convertView.findViewById(R.id.tv_model)).setText(carForPosition.getModel());
@@ -79,7 +81,8 @@ public class MyCarSpinnerAdapter extends ArrayAdapter<Car> {
 
     //rellenamos el layout con los carBrandsList de la fila que se está procesando
     Car car = carList.get(position);
-    ((MyCarViewHolder) row.getTag()).getIcon().setImageResource(car.getIcon());
+    Resources mResources = context.getResources();
+    ((MyCarViewHolder) row.getTag()).getIcon().setImageDrawable(mResources.getDrawable(mResources.getIdentifier(car.getIcon(), "drawable", "am.gsoft.carserviceclient")));
     ((MyCarViewHolder) row.getTag()).getCarBrand().setText(car.getCarBrand());
     ((MyCarViewHolder) row.getTag()).getModel().setText(car.getModel());
     ((MyCarViewHolder) row.getTag()).getNumbers().setText(car.getNumbers());
@@ -105,7 +108,6 @@ public class MyCarSpinnerAdapter extends ArrayAdapter<Car> {
       notifyDataSetChanged();
     }
   }
-
 
   private static class MyCarViewHolder {
 

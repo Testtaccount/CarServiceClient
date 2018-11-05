@@ -129,6 +129,7 @@
   <string name="err_msg_incorrect_number_lenght">Incorrect Phone number length!</string>
   <string name="err_msg_enter_valid_phone_number">Enter valid phone number</string>
   <string name="err_msg_must_be_more">Curent Km must be more than the previous service km !</string>
+  <string name="err_msg_must_be_more_mileage">Current value must be more than the previous (%1$d) service value !</string>
   <string name="msg_permission_denided_phone">Permission Denied, You cannot write contacts</string>
   <string name="msg_car_edited">Car edited!</string>
   <string name="msg_car_not_edited">Car not edited!</string>
@@ -512,23 +513,23 @@
   <!-- ======================================================================================= -->
 
   <!-- Phone number auth -->
-  <string name="fui_verify_phone_number_title" translation_description="Phone number entry form title">Enter your phone number</string>
-  <string name="fui_invalid_phone_number" translation_description="Inline error when phone number entered is invalid">Enter a valid phone number</string>
-  <string name="fui_enter_confirmation_code" translation_description="Phone number verification code entry form title">Enter the 6-digit code we sent to</string>
-  <string name="fui_resend_code_in" translation_description="Countdown timer text that the user needs to wait for before attempting to resend verification sms">Resend code in 0:%02d</string>
-  <string name="fui_verify_your_phone_title" translation_description="Button text to complete phone number verification">Verify your phone number</string>
-  <string name="fui_verifying" translation_description="Progress dialog text while phone number is being verified">Verifying…</string>
-  <string name="fui_incorrect_code_dialog_body" translation_description="Inline error when incorrect sms verification code is being used to verify">Wrong code. Try again.</string>
-  <string name="fui_error_too_many_attempts" translation_description="Error message when the phone number has been used too many times">This phone number has been used too many times</string>
-  <string name="fui_error_quota_exceeded" translation_description="Error message when the Firebase project's quota has been exceeded.">There was a problem verifying your phone number</string>
-  <string name="fui_error_session_expired" translation_description="Error message when SMS confirmation code has expired.">This code is no longer valid</string>
-  <string name="fui_sign_in_with_phone_number" translation_description="Label for phone number input form">Sign in with phone number</string>
-  <string name="fui_auto_verified" translation_description="Popup informing the user that their phone number was automatically verified">Phone number automatically verified</string>
-  <string name="fui_resend_code" translation_description="Link text to resend verification sms">Resend Code</string>
-  <string name="fui_verify_phone_number" translation_description="Button text to submit confirmation code and complete phone verification">Verify Phone Number</string>
-  <string name="fui_continue_phone_login" translation_description="Button text to submit phone number and send sms">Continue</string>
-  <string name="fui_sms_terms_of_service" translation_description="Fine print warning displayed below Verify Phone Number button">By tapping “%1$s”, an SMS may be sent. Message &amp; data rates may apply.</string>
-  <string name="fui_sms_terms_of_service_and_privacy_policy_extended" translation_description="Fine print warning displayed below Verify Phone Number button">By tapping “%1$s”, you are indicating that you accept our <xliff:g example="https://google.com/terms" id="tos" translation_description="">%2$s</xliff:g> and <xliff:g example="https://google.com/privacy" id="pp" translation_description="">%3$s</xliff:g>. An SMS may be sent. Message &amp; data rates may apply.</string>
+  <!--<string name="fui_verify_phone_number_title" translation_description="Phone number entry form title">Enter your phone number</string>-->
+  <!--<string name="fui_invalid_phone_number" translation_description="Inline error when phone number entered is invalid">Enter a valid phone number</string>-->
+  <!--<string name="fui_enter_confirmation_code" translation_description="Phone number verification code entry form title">Enter the 6-digit code we sent to</string>-->
+  <!--<string name="fui_resend_code_in" translation_description="Countdown timer text that the user needs to wait for before attempting to resend verification sms">Resend code in 0:%02d</string>-->
+  <!--<string name="fui_verify_your_phone_title" translation_description="Button text to complete phone number verification">Verify your phone number</string>-->
+  <!--<string name="fui_verifying" translation_description="Progress dialog text while phone number is being verified">Verifying…</string>-->
+  <!--<string name="fui_incorrect_code_dialog_body" translation_description="Inline error when incorrect sms verification code is being used to verify">Wrong code. Try again.</string>-->
+  <!--<string name="fui_error_too_many_attempts" translation_description="Error message when the phone number has been used too many times">This phone number has been used too many times</string>-->
+  <!--<string name="fui_error_quota_exceeded" translation_description="Error message when the Firebase project's quota has been exceeded.">There was a problem verifying your phone number</string>-->
+  <!--<string name="fui_error_session_expired" translation_description="Error message when SMS confirmation code has expired.">This code is no longer valid</string>-->
+  <!--<string name="fui_sign_in_with_phone_number" translation_description="Label for phone number input form">Sign in with phone number</string>-->
+  <!--<string name="fui_auto_verified" translation_description="Popup informing the user that their phone number was automatically verified">Phone number automatically verified</string>-->
+  <!--<string name="fui_resend_code" translation_description="Link text to resend verification sms">Resend Code</string>-->
+  <!--<string name="fui_verify_phone_number" translation_description="Button text to submit confirmation code and complete phone verification">Verify Phone Number</string>-->
+  <!--<string name="fui_continue_phone_login" translation_description="Button text to submit phone number and send sms">Continue</string>-->
+  <!--<string name="fui_sms_terms_of_service" translation_description="Fine print warning displayed below Verify Phone Number button">By tapping “%1$s”, an SMS may be sent. Message &amp; data rates may apply.</string>-->
+  <!--<string name="fui_sms_terms_of_service_and_privacy_policy_extended" translation_description="Fine print warning displayed below Verify Phone Number button">By tapping “%1$s”, you are indicating that you accept our <xliff:g example="https://google.com/terms" id="tos" translation_description="">%2$s</xliff:g> and <xliff:g example="https://google.com/privacy" id="pp" translation_description="">%3$s</xliff:g>. An SMS may be sent. Message &amp; data rates may apply.</string>-->
 
   <!-- Label for the  preference -->
   <string name="pref_language_label">Language</string>

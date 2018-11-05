@@ -423,7 +423,8 @@
           <!--Km info-->
           <android.support.v7.widget.CardView
             android:id="@+id/cv_km_info"
-            style="@style/ItemCardViewStyle">
+            style="@style/ItemCardViewStyle"
+            android:visibility="gone">
 
             <LinearLayout
               style="@style/Widget.CardContent">
@@ -437,6 +438,7 @@
                   android:layout_height="wrap_content"
                   android:layout_marginTop="0dp">
                   <TextView
+                    android:layout_span="2"
                     android:text="@string/mileage_information"
                     android:textColor="@color/colorAccent"
                     style="@style/ItemCardHeaderTextStyle" />
@@ -775,7 +777,7 @@
           <android.support.v7.widget.CardView
             android:id="@+id/cv_company_id"
             style="@style/ItemCardViewStyle"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <LinearLayout
               style="@style/Widget.CardContent">
@@ -789,6 +791,7 @@
                   android:layout_marginTop="0dp">
 
                   <TextView
+                    android:layout_span="2"
                     android:text="@string/service_phone_number"
                     android:textColor="@color/colorAccent"
                     style="@style/ItemCardHeaderTextStyle" />

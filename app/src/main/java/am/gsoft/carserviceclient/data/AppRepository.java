@@ -23,7 +23,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import retrofit2.Call;
 
 public class AppRepository {
@@ -42,12 +44,12 @@ public class AppRepository {
   private boolean mInitialized = false;
 
   private AppRepository(AppDatabase appDatabase, AppNetworkService appNetworkService,
-      AppExecutors executors, FirebaseApi firebaseApi,SharedHelper sharedHelper) {
+      AppExecutors executors, FirebaseApi firebaseApi, SharedHelper sharedHelper) {
     mAppDatabase = appDatabase;
     mAppNetworkService = appNetworkService;
     mExecutors = executors;
     mFirebaseApi = firebaseApi;
-    mSharedHelper =sharedHelper;
+    mSharedHelper = sharedHelper;
     loadUser();
 
     // As long as the repository exists, observe the network LiveData.
@@ -69,10 +71,12 @@ public class AppRepository {
   }
 
   public synchronized static AppRepository getInstance(AppDatabase appDatabase,
-      AppNetworkService appNetworkService, AppExecutors executors, FirebaseApi firebaseApi,SharedHelper appSharedHelper) {
+      AppNetworkService appNetworkService, AppExecutors executors, FirebaseApi firebaseApi,
+      SharedHelper appSharedHelper) {
     if (sInstance == null) {
       synchronized (LOCK) {
-        sInstance = new AppRepository(appDatabase, appNetworkService, executors, firebaseApi, appSharedHelper);
+        sInstance = new AppRepository(appDatabase, appNetworkService, executors, firebaseApi,
+            appSharedHelper);
       }
     }
     return sInstance;
@@ -89,7 +93,7 @@ public class AppRepository {
               @Override
               public void run() {
                 mAppDatabase.mUserDao().insert(user);
-//        appSharedHelper.saveUser(user);
+                mSharedHelper.saveUserKey(user.getKey());
                 userResultListenerListener.onLoad(user);
               }
             });
@@ -110,16 +114,9 @@ public class AppRepository {
     mExecutors.diskIO().execute(new Runnable() {
       @Override
       public void run() {
-        if (App.getInstance().isSimulator) {
-          mUser = mAppDatabase.mUserDao().get("YwCS7MYdvwR2eXmCihCxcWjb2Xm1");
-        } else {
-          if (mFirebaseApi.getFirebaseUser() != null) {
-            mUser = mAppDatabase.mUserDao().get(mFirebaseApi.getFirebaseUser().getUid());
-          }
-        }
+          mUser = mAppDatabase.mUserDao().getUser();
       }
     });
-
   }
 
   ///////////////            CAR
@@ -326,10 +323,11 @@ public class AppRepository {
 
   public void saveCar(Car car) {
 
-    String carKey = mFirebaseApi.getCarDatabaseReference().child(mUser.getKey()).push().getKey();
+    String carKey = mFirebaseApi.getCarDatabaseReference().child(mSharedHelper.getUserKey()).push().getKey();
     car.setKey(carKey);
+    car.setUserKey(mSharedHelper.getUserKey());
 
-    mFirebaseApi.getCarDatabaseReference().child(mUser.getKey()).child(carKey)
+    mFirebaseApi.getCarDatabaseReference().child(mSharedHelper.getUserKey()).child(carKey)
         .addListenerForSingleValueEvent(
             new ValueEventListener() {
               @Override
@@ -350,13 +348,13 @@ public class AppRepository {
               }
             });
 
-    mFirebaseApi.getCarDatabaseReference().child(mUser.getKey()).child(carKey).setValue(car);
+    mFirebaseApi.getCarDatabaseReference().child(mSharedHelper.getUserKey()).child(carKey).setValue(car);
 
   }
 
 
   public void editCar(Car car) {
-    mFirebaseApi.getCarDatabaseReference().child(mUser.getKey()).child(car.getKey())
+    mFirebaseApi.getCarDatabaseReference().child(mSharedHelper.getUserKey()).child(car.getKey())
         .addListenerForSingleValueEvent(new ValueEventListener() {
           @Override
           public void onDataChange(DataSnapshot dataSnapshot) {
@@ -382,7 +380,7 @@ public class AppRepository {
 
         });
 
-    mFirebaseApi.getCarDatabaseReference().child(mUser.getKey()).child(car.getKey()).setValue(car);
+    mFirebaseApi.getCarDatabaseReference().child(mSharedHelper.getUserKey()).child(car.getKey()).setValue(car);
 
 //    mExecutors.diskIO().execute(new Runnable() {
 //      @Override
@@ -446,74 +444,92 @@ public class AppRepository {
 
   }
 
-  public void deleteCar(Car car, ResultListener<Car> carResultListenerListener) {
-    mExecutors.diskIO().execute(new Runnable() {
-      @Override
-      public void run() {
-        mAppDatabase.mCarDao().delete(car);
-
-//          car.setId(id);
-//          car.setKey(mUser.getKey() + "_" + id);
-        //Firebase
-
-        mFirebaseApi.getCarDatabaseReference().child(mUser.getKey()).child(car.getKey())
-            .addListenerForSingleValueEvent(new ValueEventListener() {
-              @Override
-              public void onDataChange(DataSnapshot dataSnapshot) {
-                mFirebaseApi.getDatabaseReference().child(Path.DELETED_CARS).child(car.getKey())
-                    .setValue(car);
-
-                //stay list in Firebase for car (not delete)
-//                deleteOils(car.getKey(),carResultListenerListener);
-                carResultListenerListener.onLoad(car);
-
-              }
-
-              @Override
-              public void onCancelled(DatabaseError databaseError) {
-                carResultListenerListener.onFail(null);
-              }
-
-            });
-
-        mFirebaseApi.getCarDatabaseReference().child(mUser.getKey()).child(car.getKey())
-            .removeValue();
-
-        //Retrofit
-//        mAppNetworkService.deleteCar(mUser.getKey(), car.getKey()).enqueue(new Callback<Car>() {
-//          @Override
-//          public void onResponse(Call<Car> call, Response<Car> response) {
-//            if (response.code() == 200) {
-//              Log.v(TAG, "Success" + call.toString());
-//              deleteOils(car.getKey(),carResultListenerListener);
-//            } else {
-//              Log.v(TAG, "feild" + call.toString());
-//              carResultListenerListener.onLoad(null);
-//            }
-//          }
+//  public void deleteCar(Car car, ResultListener<Car> carResultListenerListener) {
+//    mExecutors.diskIO().execute(new Runnable() {
+//      @Override
+//      public void run() {
+//        mAppDatabase.mCarDao().delete(car);
 //
-//          @Override
-//          public void onFailure(Call<Car> call, Throwable t) {
-//            carResultListenerListener.onFail(null);
-//          }
-//        });
-
-      }
-    });
-
-  }
+////          car.setId(id);
+////          car.setKey(mUser.getKey() + "_" + id);
+//        //Firebase
+//
+//        mFirebaseApi.getCarDatabaseReference().child(mSharedHelper.getUserKey()).child(car.getKey())
+//            .addListenerForSingleValueEvent(new ValueEventListener() {
+//              @Override
+//              public void onDataChange(DataSnapshot dataSnapshot) {
+//                mFirebaseApi.getDatabaseReference().child(Path.DELETED_CARS).child(car.getKey())
+//                    .setValue(car);
+//
+//                //stay list in Firebase for car (not delete)
+////                deleteOils(car.getKey(),carResultListenerListener);
+//                carResultListenerListener.onLoad(car);
+//
+//              }
+//
+//              @Override
+//              public void onCancelled(DatabaseError databaseError) {
+//                carResultListenerListener.onFail(null);
+//              }
+//
+//            });
+//
+//        mFirebaseApi.getCarDatabaseReference().child(mSharedHelper.getUserKey()).child(car.getKey())
+//            .removeValue();
+//
+//        //Retrofit
+////        mAppNetworkService.deleteCar(mUser.getKey(), car.getKey()).enqueue(new Callback<Car>() {
+////          @Override
+////          public void onResponse(Call<Car> call, Response<Car> response) {
+////            if (response.code() == 200) {
+////              Log.v(TAG, "Success" + call.toString());
+////              deleteOils(car.getKey(),carResultListenerListener);
+////            } else {
+////              Log.v(TAG, "feild" + call.toString());
+////              carResultListenerListener.onLoad(null);
+////            }
+////          }
+////
+////          @Override
+////          public void onFailure(Call<Car> call, Throwable t) {
+////            carResultListenerListener.onFail(null);
+////          }
+////        });
+//
+//      }
+//    });
+//
+//  }
 
   public void deleteCar(Car car) {
-    mFirebaseApi.getCarDatabaseReference().child(mUser.getKey()).child(car.getKey())
+    mFirebaseApi.getCarDatabaseReference().child(mSharedHelper.getUserKey()).child(car.getKey())
         .addListenerForSingleValueEvent(new ValueEventListener() {
           @Override
           public void onDataChange(DataSnapshot dataSnapshot) {
-            mFirebaseApi.getDatabaseReference().child(Path.DELETED_CARS).child(car.getKey())
-                .setValue(car);
+//            mFirebaseApi.getDatabaseReference().child(Path.DELETED_CARS).child(car.getKey()).setValue(car);
             mExecutors.diskIO().execute(new Runnable() {
               @Override
               public void run() {
+
+//                if(carKeys.size()==0){
+                List<String> serviceIds = mAppDatabase.mOilDao().getOilServices(car.getKey());
+                List<String> carKeys = mAppDatabase.mCarDao().getCarKeysWithoutCurrent(car.getKey());
+
                 mAppDatabase.mCarDao().delete(car);
+
+                updateServiceDate(new HashSet<>(serviceIds),carKeys);
+//                }else {
+//
+//                }
+
+
+
+//                List<String> serviceIds = mAppDatabase.mOilDao().getOilServices(car.getKey());
+//
+////                 mAppDatabase.mCarDao().delete(car);
+//                List<String> carKeys = mAppDatabase.mCarDao().getCarKeys();
+//                Set<String> stringSet = new HashSet<String>(serviceIds);
+//                updateServiceDate(stringSet,carKeys);
               }
             });
 
@@ -525,7 +541,7 @@ public class AppRepository {
 
         });
 
-    mFirebaseApi.getCarDatabaseReference().child(mUser.getKey()).child(car.getKey())
+    mFirebaseApi.getCarDatabaseReference().child(mSharedHelper.getUserKey()).child(car.getKey())
         .removeValue();
   }
 
@@ -635,13 +651,20 @@ public class AppRepository {
               public void run() {
                 mAppDatabase.mOilDao().insert(oil);
 //                resultListenerListener.onLoad(oil);
+                List<String> carKeys = mAppDatabase.mCarDao().getCarKeys( );
+                List<String> serviceIds = mAppDatabase.mOilDao().getOilServices(oil.getCarKey());
+
+                updateServiceDate(new HashSet<>(serviceIds),carKeys);
+
+//                mFirebaseApi.getUserDatabaseReference().child(mSharedHelper.getUserKey()).setValue(mUser);
+
               }
             });
           }
 
           @Override
           public void onCancelled(DatabaseError databaseError) {
-           }
+          }
 
         });
 
@@ -677,11 +700,109 @@ public class AppRepository {
 //          });
   }
 
-  public void saveOilPOMap( HashMap<String, String> map){
+  private void updateServiceDate(Oil oil) {
+//    mFirebaseApi.getUserServiceDatabeseReferance().child(mSharedHelper.getUserKey())
+//        .child(serviceCompanyId).setValue(serviceDoneDate);
+
+    if (oil!=null) {
+      mExecutors.diskIO().execute(new Runnable() {
+        @Override
+        public void run() {
+
+          long date = mAppDatabase.mOilDao().getMinServiceDateForCar(oil.getServiceCompanyId() ,oil.getServiceDoneDate());
+
+//          if(date>oil.getServiceDoneDate()){
+            mFirebaseApi.getServiceUserDatabeseReferance().child(oil.getServiceCompanyId())
+                .child(mSharedHelper.getUserKey()).setValue(oil.getServiceDoneDate());
+//          }else {
+//            mFirebaseApi.getServiceUserDatabeseReferance().child(oil.getServiceCompanyId())
+//                .child(mSharedHelper.getUserKey()).setValue(date);
+//          }
+
+        }
+      });
+    }
+
+
+  }
+
+  private void updateServiceDate(Set<String> serviceIds, List<String> carKeys) {
+
+    if (carKeys.size() != 0) {
+      mExecutors.diskIO().execute(new Runnable() {
+        @Override
+        public void run() {
+
+          HashMap<String ,Long> longHashMap =new HashMap<>();
+
+          for (String key : carKeys) {
+            for (String serviceid : serviceIds) {
+//              List<Long> list = new ArrayList<>();
+              long l = mAppDatabase.mOilDao().getMaxServiceDateByServiceIdAndCarKey(serviceid, key);
+
+              if (l!=0 && !longHashMap.containsKey(serviceid)) {
+                longHashMap.put(serviceid, l);
+              } else {
+                if ( l!=0 && l < longHashMap.get(serviceid)) {
+                  longHashMap.put(serviceid, l);
+                }
+              }
+
+            }
+          }
+
+
+//          if(longHashMap.isEmpty()){
+//            for(String s : serviceIds){
+//              mFirebaseApi.getServiceUserDatabeseReferance().child(s)
+//                  .child(mSharedHelper.getUserKey())
+//                  .setValue(null);
+//            }
+//          } else {
+          for (String s : serviceIds) {
+//            System.out.println("Key: " + entry.getKey() + " Value: " + entry.getValue());
+            Long l = longHashMap.get(s);
+//            if (l == null) {
+//              mFirebaseApi.getServiceUserDatabeseReferance().child(s)
+//                  .child(mSharedHelper.getUserKey())
+//                  .setValue(null);
+//            } else {
+              mFirebaseApi.getServiceUserDatabeseReferance().child(s)
+                  .child(mSharedHelper.getUserKey())
+                  .setValue(l == null || l == 0 ? null : l);
+//            }
+
+          }
+
+//          }
+
+
+
+//          if(date>oil.getServiceDoneDate()){
+//            mFirebaseApi.getServiceUserDatabeseReferance().child(oil.getServiceCompanyId())
+//                .child(mSharedHelper.getUserKey()).setValue(oil.getServiceDoneDate());
+//          }else {
+//            mFirebaseApi.getServiceUserDatabeseReferance().child(oil.getServiceCompanyId())
+//                .child(mSharedHelper.getUserKey()).setValue(date);
+//          }
+
+        }
+      });
+    } else {
+      for(String s:serviceIds){
+        mFirebaseApi.getServiceUserDatabeseReferance().child(s)
+            .child(mSharedHelper.getUserKey())
+            .setValue(null);
+      }
+    }
+
+  }
+
+    public void saveOilPOMap(HashMap<String, String> map) {
     mSharedHelper.saveMap(map);
   }
 
-  public HashMap<String, String> getOilPOMap(){
+  public HashMap<String, String> getOilPOMap() {
     return mSharedHelper.loadMap();
   }
 
@@ -797,7 +918,7 @@ public class AppRepository {
 //              });
   }
 
-  public void editOil(Oil oil ) {
+  public void editOil(Oil oil, String serviceCompanyId) {
     //Firebase
     mFirebaseApi.getOilDatabaseReference().child(oil.getCarKey())
         .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -807,7 +928,12 @@ public class AppRepository {
               @Override
               public void run() {
                 mAppDatabase.mOilDao().update(oil);
-               }
+//                updateServiceDate(oil);
+                List<String> carKeys = mAppDatabase.mCarDao().getCarKeys( );
+                List<String> serviceIds = mAppDatabase.mOilDao().getOilServices(oil.getCarKey());
+                serviceIds.add(serviceCompanyId);
+                updateServiceDate(new HashSet<>(serviceIds),carKeys);
+              }
             });
 //              List<Oil> list = appSharedHelper.getSaveOilListByCarKey(carKey);
 //
@@ -818,7 +944,7 @@ public class AppRepository {
 
           @Override
           public void onCancelled(DatabaseError databaseError) {
-           }
+          }
 
         });
 
@@ -926,12 +1052,12 @@ public class AppRepository {
       @NonNull
       @Override
       protected Call<HashMap<String, Car>> createCall() {
-        return mAppNetworkService.getCarsResponse(mUser.getKey());
+        return mAppNetworkService.getCarsResponse(mSharedHelper.getUserKey());
       }
 
       @Override
       protected Query getDatabaseReference() {
-        return mFirebaseApi.getCarDatabaseReference().child(mUser.getKey());
+        return mFirebaseApi.getCarDatabaseReference().child(mSharedHelper.getUserKey());
       }
     }.getAsLiveData();
   }
@@ -947,7 +1073,7 @@ public class AppRepository {
 
       @Override
       protected boolean shouldFetch(@Nullable List<Oil> data) {
-        return  data == null || data.isEmpty();
+        return data == null || data.isEmpty();
       }
 
       @Override
@@ -958,7 +1084,7 @@ public class AppRepository {
       @NonNull
       @Override
       protected LiveData<List<Oil>> loadFromDb() {
-         return mAppDatabase.mOilDao().getAllByCarKey(carKey);
+        return mAppDatabase.mOilDao().getAllByCarKey(carKey);
       }
 
       @NonNull
@@ -976,7 +1102,7 @@ public class AppRepository {
   }
 
 
-  public LiveData<List<Oil>> getOils(String carKey){
+  public LiveData<List<Oil>> getOils(String carKey) {
     return mAppDatabase.mOilDao().getAllByCarKey(carKey);
   }
 

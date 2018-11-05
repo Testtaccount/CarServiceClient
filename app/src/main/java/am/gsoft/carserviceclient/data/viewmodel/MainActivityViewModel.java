@@ -46,7 +46,7 @@ public class MainActivityViewModel extends ViewModel {
         return mCars;
     }
 
-    public LiveData< List<Oil>> getCarOils(String carKey) {
+    public LiveData<List<Oil>> getCarOils(String carKey) {
         if (carKey == null){
             return AbsentLiveData.create();
         }else {

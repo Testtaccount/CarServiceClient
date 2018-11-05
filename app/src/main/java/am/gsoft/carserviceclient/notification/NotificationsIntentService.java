@@ -204,7 +204,7 @@ public class NotificationsIntentService extends IntentService {
 //            .bigText(noteText==null?"Oil -  " + oil.getBrand() + " " + oil.getType():noteText ))
         .setSmallIcon(R.drawable.icon_2)
         .setLargeIcon(BitmapFactory
-            .decodeResource(App.getInstance().getApplicationContext().getResources(), car.getIcon()))
+            .decodeResource(App.getInstance().getApplicationContext().getResources(), getResources().getIdentifier(car.getIcon(), "drawable", "am.gsoft.carserviceclient")))
         .setColor(Color.YELLOW)
         .setPriority(Notification.PRIORITY_HIGH)
         .setContentTitle(String.format(getString(R.string.msg_check), car.getCarBrand()))
@@ -270,7 +270,7 @@ public class NotificationsIntentService extends IntentService {
 //            .bigText(noteText==null?"Oil -  " + oil.getBrand() + " " + oil.getType():noteText ))
         .setSmallIcon(R.drawable.icon_2)
         .setLargeIcon(BitmapFactory
-            .decodeResource(App.getInstance().getApplicationContext().getResources(), car.getIcon()))
+            .decodeResource(App.getInstance().getApplicationContext().getResources(), getResources().getIdentifier(car.getIcon(), "drawable", "am.gsoft.carserviceclient")))
         .setColor(Color.YELLOW)
         .setPriority(Notification.PRIORITY_HIGH)
         .setContentTitle("Check your " + car.getCarBrand() + " engine oil")

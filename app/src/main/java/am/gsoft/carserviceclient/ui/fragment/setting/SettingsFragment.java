@@ -3,6 +3,7 @@ package am.gsoft.carserviceclient.ui.fragment.setting;
 import am.gsoft.carserviceclient.R;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
@@ -16,6 +17,16 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
   public void onCreatePreferences(Bundle bundle, String s) {
     // Add 'general' preferences, defined in the XML file
     addPreferencesFromResource(R.xml.pref_general);
+
+//     Preference statisticsDeletePref = findPreference(getString(R.string.pref_language_key));
+//    statisticsDeletePref.setOnPreferenceClickListener(new  Preference.OnPreferenceClickListener() {
+//      @Override
+//      public boolean onPreferenceClick(Preference preference) {
+//        ToastUtils.longToast("s");
+//        return false;
+//      }
+//    });
+
     SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
     PreferenceScreen prefScreen = getPreferenceScreen();
     int count = prefScreen.getPreferenceCount();
@@ -26,6 +37,30 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         String value = sharedPreferences.getString(preference.getKey(), "");
         setSummary(preference, value);
       }
+    }
+
+  }
+
+  @Override
+  public void onDisplayPreferenceDialog(Preference preference) {
+
+    // Try if the preference is one of our custom Preferences
+    DialogFragment dialogFragment = null;
+    if (preference instanceof LanguagePreference) {
+      // Create a new instance of TimePreferenceDialogFragment with the key of the related
+      // Preference
+      dialogFragment = LanguagePreferenceDialogFragmentCompat.newInstance(preference.getKey());
+    }
+
+
+    if (dialogFragment != null) {
+      // The dialog was created (it was one of our custom Preferences), show the dialog for it
+      dialogFragment.setTargetFragment(this, 0);
+      dialogFragment.show(this.getFragmentManager(), "android.support.v7.preference" +
+          ".PreferenceFragment.DIALOG");
+    } else {
+      // Dialog creation could not be handled here. Try with the super method.
+      super.onDisplayPreferenceDialog(preference);
     }
 
   }

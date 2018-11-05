@@ -5,6 +5,7 @@ import static am.gsoft.carserviceclient.util.AppUtil.setTextViewDrawableColor;
 import am.gsoft.carserviceclient.app.App;
 import am.gsoft.carserviceclient.R;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ public class CarBrandsDialogAdapter extends ArrayAdapter<BrandsSpinnerItem> {
   private int color;
   List<BrandsSpinnerItem> carBrandsList = null;
   private ArrayList<BrandsSpinnerItem> arraylist;
+  Resources mResources;
 
   public CarBrandsDialogAdapter(Context context, List<BrandsSpinnerItem> carBrandsList,int color) {
     super(context, R.layout.spinner_brands_dropdown_item, carBrandsList);
@@ -32,6 +34,8 @@ public class CarBrandsDialogAdapter extends ArrayAdapter<BrandsSpinnerItem> {
     this.arraylist = new ArrayList<BrandsSpinnerItem>();
     this.arraylist.addAll(carBrandsList);
     this.color=color;
+    this.mResources=context.getResources();
+
   }
 
   public void setSelection(int position) {
@@ -77,7 +81,7 @@ public class CarBrandsDialogAdapter extends ArrayAdapter<BrandsSpinnerItem> {
 
 //rellenamos el layout con los carBrandsList de la fila que se está procesando
     BrandsSpinnerItem spinnerItem = carBrandsList.get(position);
-    ((BrandsSpinnerViewHolder) row.getTag()).getIcon().setImageResource(spinnerItem.getIcon());
+    ((BrandsSpinnerViewHolder) row.getTag()).getIcon().setImageDrawable(mResources.getDrawable(mResources.getIdentifier(spinnerItem.getIcon(), "drawable", "am.gsoft.carserviceclient")));
     ((BrandsSpinnerViewHolder) row.getTag()).getCarBrand().setText(spinnerItem.getCarBrand());
     Typeface typeface = Typeface.createFromAsset(App.getInstance().getAssets(), "fonts/NotoSansArmenian-Regular.ttf");
     ((BrandsSpinnerViewHolder) row.getTag()).getCarBrand().setTypeface(typeface);

@@ -1,34 +1,46 @@
 package am.gsoft.carserviceclient.data.database.entity;
 
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
 import am.gsoft.carserviceclient.R;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import java.util.Objects;
 
-@Entity(tableName = "car")//, indices = {@Index(value = {"key"}, unique = true)})
-public class Car implements Parcelable{
+@Entity(tableName = "car",
+    foreignKeys = @ForeignKey(entity = User.class,
+        parentColumns = "key",
+        childColumns = "userKey",
+        onDelete = CASCADE),
+    indices = {@Index(value = {"userKey"})}
+)//, indices = {@Index(value = {"key"}, unique = true)})
+public class Car implements Parcelable {
 
   @NonNull
   @PrimaryKey()
   private String key;
 
-  private int icon = R.drawable.ic_directions_car_black_24dp;
+  private String userKey;
 
-  private int color=R.color.white;
+  private String icon = "ic_directions_car_black_24dp";
 
-  private String carBrand= "-";
+  private int color = R.color.white;
 
-  private String model="-";
+  private String carBrand = "-";
 
-  private String year ="-";
+  private String model = "-";
 
-  private String numbers="-";
+  private String year = "-";
 
-  private String vinCode="-";
+  private String numbers = "-";
+
+  private String vinCode = "-";
 
   private String distanceUnit = "Km";
 
@@ -36,7 +48,7 @@ public class Car implements Parcelable{
   public Car() {
 //    this.key = "-";
 //    this.id = -1L;
-    this.icon= R.drawable.ic_directions_car_black_24dp;
+    this.icon = "ic_directions_car_black_24dp";
     this.color = R.color.white;
     this.carBrand = "-";
     this.model = "-";
@@ -47,8 +59,9 @@ public class Car implements Parcelable{
   }
 
 
-  public Car(String key, int icon, int color, String carBrand, String model,
+  public Car(String userKey,String key, String icon, int color, String carBrand, String model,
       String year, String numbers, String vinCode, String distanceUnit) {
+    this.userKey = userKey;
     this.key = key;
     this.icon = icon;
     this.color = color;
@@ -61,8 +74,9 @@ public class Car implements Parcelable{
   }
 
   protected Car(Parcel in) {
+    userKey = in.readString();
     key = in.readString();
-    icon = in.readInt();
+    icon = in.readString();
     color = in.readInt();
     carBrand = in.readString();
     model = in.readString();
@@ -84,6 +98,13 @@ public class Car implements Parcelable{
     }
   };
 
+  public String getUserKey() {
+    return userKey;
+  }
+
+  public void setUserKey(String userKey) {
+    this.userKey = userKey;
+  }
 
   public String getKey() {
     return key;
@@ -93,11 +114,11 @@ public class Car implements Parcelable{
     this.key = key;
   }
 
-  public int getIcon() {
+  public String getIcon() {
     return icon;
   }
 
-  public void setIcon(int icon) {
+  public void setIcon(String icon) {
     this.icon = icon;
   }
 
@@ -166,7 +187,8 @@ public class Car implements Parcelable{
       return false;
     }
     Car car = (Car) o;
-    return  getIcon() == car.getIcon() &&
+    return Objects.equals(getUserKey(), car.getUserKey()) &&
+        Objects.equals(getIcon(), car.getIcon()) &&
         getColor() == car.getColor() &&
         Objects.equals(getKey(), car.getKey()) &&
         Objects.equals(getCarBrand(), car.getCarBrand()) &&
@@ -181,13 +203,14 @@ public class Car implements Parcelable{
   public int hashCode() {
 
     return Objects
-        .hash(getKey(), getIcon(), getColor(), getCarBrand(), getModel(), getYear(),
+        .hash(getUserKey(), getKey(), getIcon(), getColor(), getCarBrand(), getModel(), getYear(),
             getNumbers(), getVinCode(), getDistanceUnit());
   }
 
   @Override
   public String toString() {
     return "Car{" +
+        "  userKey='" + userKey + '\'' +
         "  key='" + key + '\'' +
         ", carBrand='" + carBrand + '\'' +
         ", model='" + model + '\'' +
@@ -205,8 +228,9 @@ public class Car implements Parcelable{
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(userKey);
     dest.writeString(key);
-    dest.writeInt(icon);
+    dest.writeString(icon);
     dest.writeInt(color);
     dest.writeString(carBrand);
     dest.writeString(model);

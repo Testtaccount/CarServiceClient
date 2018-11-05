@@ -4,6 +4,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
+import java.util.Objects;
 
 @Entity(tableName = "user")
 public class User{
@@ -15,7 +16,7 @@ public class User{
   private String lastName;
   private String phoneNumber;
   private String mail;
-//  private List<String> carKeys;
+//  private HashMap<String,Long> serviceDateMap;
 
   @Ignore
   public User() {
@@ -28,6 +29,7 @@ public class User{
     this.lastName = lastName;
     this.phoneNumber = phoneNumber;
     this.mail = mail;
+//    this.serviceDateMap = new HashMap<String, Long>();
   }
 
   public String getKey() {
@@ -70,14 +72,48 @@ public class User{
     this.mail = mail;
   }
 
+//  public HashMap<String, Long> getServiceDateMap() {
+//    return serviceDateMap;
+//  }
+
+//  public void setServiceDateMap(HashMap<String, Long> serviceDateMap) {
+//    this.serviceDateMap = serviceDateMap;
+//  }
+
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof User)) {
+      return false;
+    }
+    User user = (User) o;
+    return Objects.equals(getKey(), user.getKey()) &&
+        Objects.equals(getFirstName(), user.getFirstName()) &&
+        Objects.equals(getLastName(), user.getLastName()) &&
+        Objects.equals(getPhoneNumber(), user.getPhoneNumber()) &&
+        Objects.equals(getMail(), user.getMail()) ;
+//        && Objects.equals(getServiceDateMap(), user.getServiceDateMap());
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(getKey(), getFirstName(), getLastName(), getPhoneNumber(), getMail());//,getServiceDateMap());
+  }
+
   @Override
   public String toString() {
     return "User{" +
-        ", key='" + key + '\'' +
+        "key='" + key + '\'' +
         ", firstName='" + firstName + '\'' +
         ", lastName='" + lastName + '\'' +
         ", phoneNumber='" + phoneNumber + '\'' +
         ", mail='" + mail + '\'' +
+//        ", serviceDateMap=" + serviceDateMap +
         '}';
   }
 }

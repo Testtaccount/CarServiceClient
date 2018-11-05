@@ -4,12 +4,16 @@ import static am.gsoft.carserviceclient.util.Constant.Action.ACTION_OIL_HISTORY_
 import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_CURRENT_OIL_LIST;
 
 import am.gsoft.carserviceclient.R;
+import am.gsoft.carserviceclient.data.InjectorUtils;
 import am.gsoft.carserviceclient.data.database.entity.Oil;
+import am.gsoft.carserviceclient.data.viewmodel.OilHistoryActivityViewModel;
+import am.gsoft.carserviceclient.data.viewmodel.ViewModelFactory;
 import am.gsoft.carserviceclient.ui.activity.main.MainActivity;
 import am.gsoft.carserviceclient.ui.fragment.OilHistoryDetailFragment;
 import am.gsoft.carserviceclient.ui.fragment.OilHistoryListFragment;
 import am.gsoft.carserviceclient.util.manager.DialogManager;
 import am.gsoft.carserviceclient.util.manager.FragmentTransactionManager;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -34,6 +38,8 @@ public class OilHistoryActivity extends BaseActivity implements View.OnClickList
   private boolean appBarIsExpanded = true;
 
   private ArrayList<Oil> oils;
+  private String carKey;
+  private OilHistoryActivityViewModel mViewModel;
 
   @Override
   protected int layoutResId() {
@@ -43,6 +49,8 @@ public class OilHistoryActivity extends BaseActivity implements View.OnClickList
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    ViewModelFactory factory = InjectorUtils.provideViewModelFactory(getApplicationContext());
+    mViewModel = ViewModelProviders.of(this, factory).get(OilHistoryActivityViewModel.class);
     findViews();
     customizeActionBar();
     getIntentData();
@@ -50,7 +58,7 @@ public class OilHistoryActivity extends BaseActivity implements View.OnClickList
     setListeners();
 
     openScreen(
-        OilHistoryListFragment.newInstance(oils),
+        OilHistoryListFragment.newInstance( ),
         false);
   }
 
@@ -68,11 +76,13 @@ public class OilHistoryActivity extends BaseActivity implements View.OnClickList
   }
 
   private void getIntentData() {
-    if (getIntent().getExtras() != null) {
-      oils = getIntent().getParcelableArrayListExtra(EXTRA_CURRENT_OIL_LIST);
-    } else {
-      oils = new ArrayList<>();
-    }
+//    if (getIntent().getExtras() != null) {
+//      oils = getIntent().getParcelableArrayListExtra(EXTRA_CURRENT_OIL_LIST);
+      carKey = getIntent().getStringExtra(EXTRA_CURRENT_OIL_LIST);
+      mViewModel.selectCar(carKey);
+//    } else {
+//      oils = new ArrayList<>();
+//    }
   }
 
   private void initFields() {
@@ -81,6 +91,7 @@ public class OilHistoryActivity extends BaseActivity implements View.OnClickList
 //      Oil spinnerItem = createNewOil(i);
 //      oils.add(spinnerItem);
 //    }
+    oils = new ArrayList<>();
 
     showSortItem = true;
 
@@ -152,12 +163,10 @@ public class OilHistoryActivity extends BaseActivity implements View.OnClickList
         onBackPressed();
         return true;
       case R.id.action_sort:
-        OilHistoryListFragment fragment = (OilHistoryListFragment) getSupportFragmentManager()
-            .findFragmentByTag(OilHistoryListFragment.TAG);
+        OilHistoryListFragment fragment = (OilHistoryListFragment) getSupportFragmentManager().findFragmentByTag(OilHistoryListFragment.TAG);
         if (fragment != null) {
-          fragment.sortData(fragment.ascending);
-          fragment.ascending = !fragment.ascending;
-        }
+          fragment.sortData();
+         }
         return true;
     }
     return super.onOptionsItemSelected(item);
@@ -212,9 +221,8 @@ public class OilHistoryActivity extends BaseActivity implements View.OnClickList
         OilHistoryListFragment fragment = (OilHistoryListFragment) getSupportFragmentManager()
             .findFragmentByTag(OilHistoryListFragment.TAG);
         if (fragment != null) {
-          fragment.sortData(fragment.ascending);
-          fragment.ascending = !fragment.ascending;
-        }
+          fragment.sortData();
+         }
         break;
       default:
     }

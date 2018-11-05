@@ -25,7 +25,6 @@ import am.gsoft.carserviceclient.data.database.entity.AppNotification;
 import am.gsoft.carserviceclient.util.Constant;
 import am.gsoft.carserviceclient.util.Constant.Action;
 import am.gsoft.carserviceclient.util.Constant.Extra;
-import am.gsoft.carserviceclient.util.ToastUtils;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -97,7 +96,7 @@ public final class NotificationsController {
       @Override
       public void run() {
         String message = context.getString(R.string.notification_set_for, DurationUtils.toString(context, notification.ringsIn() , false/*abbreviate*/));
-        ToastUtils.shortToast(message);
+//        ToastUtils.shortToast(message);
       }
     });
 

@@ -11,9 +11,11 @@ import am.gsoft.carserviceclient.data.database.entity.User;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
 @Database(entities = {User.class,Car.class, Oil.class,AppNotification.class}, version = 1, exportSchema = false)
+@TypeConverters({ListConverters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
   public static final String DATABASE_NAME = "carservice.db";

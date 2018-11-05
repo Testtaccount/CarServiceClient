@@ -32,8 +32,8 @@ public class EditOilActivityViewModel extends ViewModel {
     mRepository = repository;
   }
 
-  public void editOil(Oil editedOil) {
-    mRepository.editOil(editedOil);
+  public void editOil(Oil editedOil, String serviceCompanyId) {
+    mRepository.editOil(editedOil,serviceCompanyId);
     updatePO(editedOil);
   }
 

@@ -5,6 +5,7 @@ import static am.gsoft.carserviceclient.util.AppUtil.setTextViewDrawableColor;
 import am.gsoft.carserviceclient.app.App;
 import am.gsoft.carserviceclient.R;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -22,16 +23,20 @@ public class CarBrandsSpinnerAdapter extends ArrayAdapter<BrandsSpinnerItem> {
   private int color;
   List<BrandsSpinnerItem> carBrandsList = null;
 
-  public CarBrandsSpinnerAdapter(Context context, List<BrandsSpinnerItem> carBrandsList,int color) {
+  Resources mResources;
+
+  public CarBrandsSpinnerAdapter(Context context, List<BrandsSpinnerItem> carBrandsList,
+      int color) {
     //se debe indicar el layout para el item que seleccionado (el que se muestra sobre el botón del botón)
     super(context, R.layout.spinner_brands_dropdown_item, carBrandsList);
     this.context = context;
     this.carBrandsList = carBrandsList;
-    this.color=color;
+    this.color = color;
+    this.mResources=context.getResources();
   }
 
   public void setSelection(int position) {
-    mSelectedIndex =  position;
+    mSelectedIndex = position;
     notifyDataSetChanged();
   }
 
@@ -53,21 +58,23 @@ public class CarBrandsSpinnerAdapter extends ArrayAdapter<BrandsSpinnerItem> {
           .inflate(R.layout.spinner_brands_selected_item, null);
     }
 
-    BrandsSpinnerItem brandForPosition= carBrandsList.get(position);
-    ((TextView) convertView.findViewById(R.id.tv_item_car_brand)).setText(brandForPosition.getCarBrand());
+    BrandsSpinnerItem brandForPosition = carBrandsList.get(position);
+    ((TextView) convertView.findViewById(R.id.tv_item_car_brand))
+        .setText(brandForPosition.getCarBrand());
 
-    switch (color){
+    switch (color) {
       case R.color.red:
-        setTextViewDrawableColor(((TextView) convertView.findViewById(R.id.tv_item_car_brand)),R.color.red);
+        setTextViewDrawableColor(((TextView) convertView.findViewById(R.id.tv_item_car_brand)),
+            R.color.red);
         break;
       case R.color.colorAccent2:
-        setTextViewDrawableColor(((TextView) convertView.findViewById(R.id.tv_item_car_brand)),R.color.colorAccent2);
+        setTextViewDrawableColor(((TextView) convertView.findViewById(R.id.tv_item_car_brand)),
+            R.color.colorAccent2);
         break;
     }
 
     return convertView;
   }
-
 
   //управляет списком с помощью шаблона Holder Pattern. Эквивалент типичной реализации getView
   //адаптера из обычного ListView
@@ -77,7 +84,8 @@ public class CarBrandsSpinnerAdapter extends ArrayAdapter<BrandsSpinnerItem> {
   public View getDropDownView(int position, View convertView, ViewGroup parent) {
     View row = convertView;
     if (row == null) {
-      LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+      LayoutInflater layoutInflater = (LayoutInflater) context
+          .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
       row = layoutInflater.inflate(R.layout.spinner_brands_dropdown_item, parent, false);
     }
 
@@ -91,11 +99,13 @@ public class CarBrandsSpinnerAdapter extends ArrayAdapter<BrandsSpinnerItem> {
 
     //rellenamos el layout con los carBrandsList de la fila que se está procesando
     BrandsSpinnerItem spinnerItem = carBrandsList.get(position);
-    ((BrandsSpinnerViewHolder) row.getTag()).getIcon().setImageResource(spinnerItem.getIcon());
+    ((BrandsSpinnerViewHolder) row.getTag()).getIcon().setImageDrawable(mResources.getDrawable(mResources.getIdentifier(spinnerItem.getIcon(), "drawable", "am.gsoft.carserviceclient")));
     ((BrandsSpinnerViewHolder) row.getTag()).getCarBrand().setText(spinnerItem.getCarBrand());
-    Typeface typeface = Typeface.createFromAsset(App.getInstance().getAssets(), "fonts/NotoSansArmenian-Regular.ttf");
+    Typeface typeface = Typeface
+        .createFromAsset(App.getInstance().getAssets(), "fonts/NotoSansArmenian-Regular.ttf");
     ((BrandsSpinnerViewHolder) row.getTag()).getCarBrand().setTypeface(typeface);
-    setTextViewDrawableColor(((BrandsSpinnerViewHolder) row.getTag()).getCarBrand(),android.R.color.transparent);
+    setTextViewDrawableColor(((BrandsSpinnerViewHolder) row.getTag()).getCarBrand(),
+        android.R.color.transparent);
 
     if (position == 0) {
       // Set the disable item text color
@@ -107,7 +117,8 @@ public class CarBrandsSpinnerAdapter extends ArrayAdapter<BrandsSpinnerItem> {
     }
 
     if (position == mSelectedIndex) {
-      row.setBackgroundColor(App.getInstance().getResources().getColor(R.color.color_background_E5E5E5));
+      row.setBackgroundColor(
+          App.getInstance().getResources().getColor(R.color.color_background_E5E5E5));
     } else {
       row.setBackgroundColor(Color.TRANSPARENT);
     }

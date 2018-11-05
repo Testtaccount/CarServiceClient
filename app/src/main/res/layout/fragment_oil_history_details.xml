@@ -159,6 +159,7 @@
                                   android:layout_width="match_parent"
                                   android:layout_height="wrap_content">
                                     <TextView
+                                      android:layout_span="2"
                                       style="@style/ItemCardHeaderTextStyle"
                                       android:text="@string/oil_information"
                                       android:textColor="@color/colorAccent" />
@@ -275,6 +276,7 @@
                                   android:layout_height="wrap_content"
                                   android:layout_marginTop="0dp">
                                     <TextView
+                                      android:layout_span="2"
                                       android:text="@string/mileage_information"
                                       android:textColor="@color/colorAccent"
                                       style="@style/ItemCardHeaderTextStyle" />

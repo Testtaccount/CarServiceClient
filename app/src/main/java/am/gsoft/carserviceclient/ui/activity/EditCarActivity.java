@@ -22,6 +22,7 @@ import am.gsoft.carserviceclient.util.manager.DialogManager;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -412,15 +413,19 @@ public class EditCarActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected ArrayList<BrandsSpinnerItem> doInBackground(Void... voids) {
 
-      names = getResources().getStringArray(R.array.car_brands);
-      icons = getResources().obtainTypedArray(R.array.car_barands_icons);
+      Resources resources = getResources();
+      names = resources.getStringArray(R.array.car_brands);
+      icons = resources.obtainTypedArray(R.array.car_barands_icons);
 
       for (int i = 1; i < names.length; i++) {
-        items.add(new BrandsSpinnerItem(icons.getResourceId(i, 0), names[i]));
+        int ii = icons.getResourceId(i, 0);
+        String name = resources.getResourceEntryName(ii);
+
+        items.add(new BrandsSpinnerItem(name, names[i]));
       }
 
-      BrandsSpinnerItem b = new BrandsSpinnerItem(icons.getResourceId(0, 0), names[0]);
-      icons.recycle();
+      BrandsSpinnerItem b = new BrandsSpinnerItem(resources.getResourceEntryName(icons.getResourceId(0, 0)), names[0]);
+//      icons.recycle();
       adapterList.add(0, b);
       adapterList.addAll(items);
 
@@ -541,7 +546,7 @@ public class EditCarActivity extends BaseActivity implements View.OnClickListene
 //    car.setId(currentCar.getId());
 
     BrandsSpinnerItem brandsSpinnerItem = (BrandsSpinnerItem) carBrandsSpinner.getSelectedItem();
-    currentCar.setIcon(brandsSpinnerItem.getIcon());//2130837697
+    currentCar.setIcon(brandsSpinnerItem.getIcon());;//2130837697
     currentCar.setColor(backgroundColor);//setLanguage(Color.WHITE);//-256
     currentCar.setCarBrand(brandsSpinnerItem.getCarBrand());//setCarBrand(getString(R.string.none));
     currentCar.setModel(modelEt.getText().toString());//setModel("X5");

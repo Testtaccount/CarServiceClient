@@ -12,10 +12,13 @@ public class FirebaseApi {
 
   public class Path {
     public static final String USERS = "users";
+    public static final String SERVICE_DATE = "service_date";
     public static final String CARS = "cars";
     public static final String DELETED_CARS = "deleted_cars";
     public static final String CARS_PLATE_NUMBERS = "cars_plate_numbers";
     public static final String OILS = "oils";
+    public static final String USER_SERVICE = "user_service";
+    public static final String SERVICE_USER = "service_user";
 
   }
 
@@ -31,7 +34,6 @@ public class FirebaseApi {
     return sInstance;
   }
 
-
   /**
    * firebase property
    */
@@ -40,8 +42,11 @@ public class FirebaseApi {
 //  private FirebaseDatabase mFirebaseDb;
   private DatabaseReference databaseReference;
   private DatabaseReference userDatabaseReference;
+  private DatabaseReference serviceDateReference;
   private DatabaseReference carDatabaseReference;
   private DatabaseReference oilDatabaseReference;
+  private DatabaseReference userServiceDatabeseReferance;
+  private DatabaseReference serviceUserDatabeseReferance;
 
   private FirebaseApi() {
 
@@ -51,8 +56,11 @@ public class FirebaseApi {
 //    mFirebaseDb.setPersistenceEnabled(true);
     databaseReference = FirebaseDbUtil.getDatabase().getReference();
     userDatabaseReference = getChildDbReferance(Path.USERS);
+    serviceDateReference = getChildDbReferance(Path.SERVICE_DATE);
     carDatabaseReference = getChildDbReferance(Path.CARS);
     oilDatabaseReference = getChildDbReferance(Path.OILS);
+    userServiceDatabeseReferance = getChildDbReferance(Path.USER_SERVICE);
+    serviceUserDatabeseReferance = getChildDbReferance(Path.SERVICE_USER);
 //    storage = FirebaseStorage.getInstance();
 //    bookStorageRef = storage.getReference().child(BOOKS);
 
@@ -67,7 +75,7 @@ public class FirebaseApi {
   }
 
   public FirebaseUser getFirebaseUser() {
-    return mFirebaseUser;
+    return  mFirebaseAuth.getCurrentUser();
   }
 
 //  public FirebaseDatabase getFirebaseDb() {
@@ -82,6 +90,10 @@ public class FirebaseApi {
     return userDatabaseReference;
   }
 
+  public DatabaseReference getServiceDateReference() {
+    return serviceDateReference;
+  }
+
   public DatabaseReference getCarDatabaseReference() {
 //    carDatabaseReference.keepSynced(true);
     return carDatabaseReference;
@@ -90,5 +102,13 @@ public class FirebaseApi {
   public DatabaseReference getOilDatabaseReference() {
     oilDatabaseReference.keepSynced(true);
     return oilDatabaseReference;
+  }
+
+  public DatabaseReference getUserServiceDatabeseReferance() {
+     return userServiceDatabeseReferance;
+  }
+
+  public DatabaseReference getServiceUserDatabeseReferance() {
+     return serviceUserDatabeseReferance;
   }
 }

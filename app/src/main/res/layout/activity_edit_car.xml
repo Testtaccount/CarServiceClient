@@ -89,6 +89,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                   style="@style/ItemCardHeaderTextStyle"
+                  android:layout_span="2"
                   android:text="@string/car_information"
                   android:textColor="@color/colorAccent2" />
               </TableRow>

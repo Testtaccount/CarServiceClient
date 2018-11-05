@@ -245,7 +245,7 @@ public class CreateNewOilActivity extends BaseActivity implements View.OnClickLi
     oilVolumeEt = (EditText) findViewById(R.id.et_oil_volume);
 //    oilVolumeSp=(Spinner) findViewById(R.id.spinner_oil_volume);
 //    serviceDoneKmTv=(TextView) findViewById(R.id.et_service_done_km);
-    oilBrandEt = (AutoCompleteTextView ) findViewById(R.id.et_oil_brand);
+    oilBrandEt = (AutoCompleteTextView) findViewById(R.id.et_oil_brand);
     serviceDoneKmEt = (EditText) findViewById(R.id.et_service_done_km);
     nextServiceKmEt = (EditText) findViewById(R.id.et_next_service_km);
     recomendedKmEt = (EditText) findViewById(R.id.et_recomended_km);
@@ -465,7 +465,8 @@ public class CreateNewOilActivity extends BaseActivity implements View.OnClickLi
 
     String[] strings = getResources().getStringArray(R.array.oil_brands);
     String[] oilBrands = Arrays.copyOfRange(strings, 1, strings.length);
-    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, oilBrands);
+    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        android.R.layout.simple_list_item_1, oilBrands);
     oilBrandEt.setAdapter(adapter);
 
     t1 = new TextWatcher() {
@@ -948,8 +949,7 @@ public class CreateNewOilActivity extends BaseActivity implements View.OnClickLi
       addPhoneNumberToContactList(newOil.getServiceCompanyId(), phoneNameEt.getText().toString());
     }
 
-    appSharedHelper
-        .saveOilNotes(currentCar.getKey(), newOil.getKey(), notesTv.getText().toString());
+    appSharedHelper.saveOilNotes(currentCar.getKey(), newOil.getKey(), notesTv.getText().toString());
     setNotification(newOil);
 
     ToastUtils.shortToast("Oil changed!");
@@ -1104,7 +1104,7 @@ public class CreateNewOilActivity extends BaseActivity implements View.OnClickLi
 
 //    oil.setServiceCompanyId(oilCompanyIdEt.getText().toString());
     oil.setServiceCompanyId(phoneNumber);
-    oil.setServiceOwnerName(phoneNameEt.getText()==null?"":phoneNameEt.getText().toString());
+    oil.setServiceOwnerName(phoneNameEt.getText() == null ? "" : phoneNameEt.getText().toString());
     oil.setServiceDoneDate(serviceDoneDate);
     oil.setServiceNextDate(serviceNextDate);
     oil.setBrand(oilBrandEt.getText().toString());

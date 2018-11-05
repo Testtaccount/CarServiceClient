@@ -229,12 +229,6 @@ public class AppNotification {
     }
 
 
-
-
-
-
-
-
 //    long reminderTime = snoozingUntil();
 //
 //    if(isSnoozed()){

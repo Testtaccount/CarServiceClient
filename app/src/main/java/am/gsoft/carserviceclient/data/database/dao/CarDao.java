@@ -43,4 +43,14 @@ public interface CarDao {
   @Query("SELECT count(*) FROM car")
   LiveData<Integer> getCountL();
 
+
+  @Query("SELECT `key` FROM car")
+  List<String> getCarKeys();
+
+
+  @Query("DELETE FROM car")
+  void nukeTable();
+
+  @Query("SELECT `key` FROM car WHERE NOT `key`=:key")
+  List<String> getCarKeysWithoutCurrent(String key);
 }

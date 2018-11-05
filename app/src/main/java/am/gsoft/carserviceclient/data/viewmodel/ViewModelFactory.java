@@ -31,6 +31,8 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new CreateNewOilActivityViewModel(mRepository);
         }else if (modelClass.isAssignableFrom(EditOilActivityViewModel.class)) {
             return (T) new EditOilActivityViewModel(mRepository);
+        }else if (modelClass.isAssignableFrom(OilHistoryActivityViewModel.class)) {
+            return (T) new OilHistoryActivityViewModel(mRepository);
         }
 
         throw new IllegalArgumentException(

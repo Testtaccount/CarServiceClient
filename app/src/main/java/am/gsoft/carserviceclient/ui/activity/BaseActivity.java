@@ -36,6 +36,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import java.util.Locale;
 
 public abstract class BaseActivity extends AppCompatActivity implements ActionBarBridge,
@@ -43,6 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ActionBa
     SharedPreferences.OnSharedPreferenceChangeListener {
 
   private static final String TAG = BaseActivity.class.getSimpleName();
+  private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
   protected App app;
   private boolean isUIDisabled;
@@ -362,6 +365,22 @@ public abstract class BaseActivity extends AppCompatActivity implements ActionBa
     }
 //      changeLanguages(sharedPreferences);
     // Register the listener
+  }
+
+  public boolean checkPlayServices() {
+    GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+    int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+    if (resultCode != ConnectionResult.SUCCESS) {
+      if (apiAvailability.isUserResolvableError(resultCode)) {
+        apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+            .show();
+      } else {
+        Log.i(TAG, "This device is not supported.");
+        finish();
+      }
+      return false;
+    }
+    return true;
   }
 
 }

@@ -58,4 +58,6 @@ public interface AppNotificationDao {
   @Query("DELETE FROM notifications WHERE carKey=:carKey")
   void deleteAllMonthNotificationsByCarId(String carKey);
 
+  @Query("DELETE FROM notifications")
+  void nukeTable();
 }

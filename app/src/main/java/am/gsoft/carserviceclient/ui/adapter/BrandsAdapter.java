@@ -2,9 +2,10 @@ package am.gsoft.carserviceclient.ui.adapter;
 
 import static am.gsoft.carserviceclient.util.AppUtil.setTextViewDrawableColor;
 
-import am.gsoft.carserviceclient.app.App;
 import am.gsoft.carserviceclient.R;
+import am.gsoft.carserviceclient.app.App;
 import am.gsoft.carserviceclient.ui.adapter.BrandsAdapter.BrandsViewHolder;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -155,6 +156,7 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsViewHolder> implem
     private ImageView icon;
     private TextView carBrand;
 
+    Resources mResources;
     public BrandsSpinnerItem spinnerItem;
 
     private OnBrandItemClickListener itemClickListener;
@@ -163,6 +165,7 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsViewHolder> implem
     public BrandsViewHolder(View itemView, OnBrandItemClickListener itemClickListener) {
       super(itemView);
       this.itemClickListener = itemClickListener;
+      this.mResources=App.getInstance().getApplicationContext().getResources();
       findViews(itemView);
     }
 
@@ -176,7 +179,7 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsViewHolder> implem
     public void bindData(BrandsSpinnerItem spinnerItem) {
 
       this.spinnerItem = spinnerItem;
-      icon.setImageResource(spinnerItem.getIcon());
+      icon.setImageDrawable(mResources.getDrawable(mResources.getIdentifier(spinnerItem.getIcon(), "drawable", "am.gsoft.carserviceclient")));
       carBrand.setText(spinnerItem.getCarBrand());
       Typeface typeface = Typeface.createFromAsset(App.getInstance().getAssets(), "fonts/NotoSansArmenian-Regular.ttf");
       carBrand.setTypeface(typeface);

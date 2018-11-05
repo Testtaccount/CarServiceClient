@@ -3,7 +3,7 @@
 
   <!-- ==================================== MENU ==================================== -->
 
-  <string name="action_about">About</string>
+  <string name="action_about">Մեր մասին</string>
   <string name="action_settings">Կարգավորումներ</string>
   <string name="action_log_out">Ելք</string>
 
@@ -57,7 +57,7 @@
   <string name="contact_name">Անուն</string>
 
   <!-- ==================================== GARAGE ACTIVITY ==================================== -->
-  <string name="garage_activity_title">Ավտոմեքենաների Ցանկ</string>
+  <string name="garage_activity_title">Ավտոմեքենաներ</string>
   <string name="edit_car_activity_title">Խմբագրել մեքենայի տվյալները</string>
   <string name="add_new_car_activity_title">Ավելացնել նոր ավտոմեքենա</string>
 
@@ -74,72 +74,73 @@
   <string name="enter_vin_code_optional">Մուտքագրեք վին կոդը</string>
 
   <!-- ==================================== NOTIFICATION ACTIONS ACTIVITY ==================================== -->
-  <string name="choose_your_action">Choose your action \nfor notification</string>
-  <string name="select_reminder_date_btn_text">SELECT REMINDER DATE</string>
-  <string name="set_mileage_btn_text">SET MILEAGE</string>
+  <string name="choose_your_action">Ընտրեք ձեր գործողությունը</string>
+  <string name="select_reminder_date_btn_text">ԸՆՏՐԵԼ ՀԻՇԵՑՄԱՆ ՕՐ</string>
+  <string name="set_mileage_btn_text">ՄՈՒՏՔԱԳՐԵԼ ՎԱԶՔԸ</string>
 
-  <string name="current_mileage">Current Mileage</string>
-  <string name="the_next_reminder_date_is_set">The next reminder date is set</string>
+  <string name="current_mileage">Ընթացիք վազքը</string>
+  <string name="the_next_reminder_date_is_set">Հաջորդ հիշեցման ամսաթիվը սահմանված է</string>
 
   <!--Dialog-->
-  <string name="dlg_logout_title">Are you sure you want to log out?</string>
-  <string name="dlg_make_call_title">Make call?</string>
+  <string name="dlg_logout_title">Վստահ ե՞ք, որ ցանկանում եք դուրս գալ</string>
+  <string name="dlg_make_call_title">"Ցանկանում եք զանգել? "</string>
   <string name="dlg_ok">OK</string>
-  <string name="dlg_yes">Yes</string>
-  <string name="dlg_set">Set</string>
-  <string name="dlg_call_via">Call via</string>
-  <string name="dlg_call">Call</string>
-  <string name="dlg_cancel">Cancel</string>
-  <string name="dlg_enable_autostart_title">Enable AutoStart</string>
-  <string name="dlg_pls_allow">Please allow</string>
-  <string name="dlg_pls_allow_txt">to always run in the background,else our services can\'t be accessed.</string>
-  <string name="dlg_info_title">Info</string>
-  <string name="dlg_delete_car_title">Are you sure you want to delete this car?</string>
-  <string name="dlg_delete">Delete</string>
+  <string name="dlg_yes">Այո</string>
+  <string name="dlg_set">Սահմանել</string>
+  <string name="dlg_call_via">Զանգի եղանակը</string>
+  <string name="dlg_call">Զանգ</string>
+  <string name="dlg_cancel">Չեղարկել</string>
+  <string name="dlg_enable_autostart_title">Միացնել ավտոմատ մեկնարկը</string>
+  <string name="dlg_pls_allow">Խնդրում ենք թույլ տալ</string>
+  <string name="dlg_pls_allow_txt">միշտ աշխատել ֆոնային ռեժումում, հակառակ դեպքում մեր ծառայությունները կլինեն անհասնելի</string>
+  <string name="dlg_info_title">Տեղեկատվություն</string>
+  <string name="dlg_delete_car_title">Վստահ ե՞ք, որ ցանկանում եք հեռացնել այս մեքենան</string>
+  <string name="dlg_delete">Հեռացնել</string>
 
-  <string name="dlg_wait_please">Please, wait</string>
-  <string name="dlg_fail_connection">Sorry, connection lost. Please check your network connection.</string>
-  <string name="dlg_internet_connection_error">Something went wrong. Please, verify your internet connection and try again</string>
-  <string name="permission_denided">Permission Denied, You cannot call</string>
-  <string name="snake_bar_action_msg_allow">ALLOW</string>
+  <string name="dlg_wait_please">Խնդրում ենք սպասել</string>
+  <string name="dlg_fail_connection">Ներեցեք կապը ընթատվեց: Խնդրում ենք ստուգել ձեր ցանցային կապը:</string>
+  <string name="dlg_internet_connection_error">Ինչ որ բան այնպես չէ. Խնդրում ենք ստուգել ձեր ինտերնետային կապը և կրկին փորձեք</string>
+  <string name="permission_denided">Իրավասությունը փակ է: Դուք չեք կարող զանգահարել</string>
+  <string name="snake_bar_action_msg_allow">Թույլատրել</string>
 
-  <string name="dlg_info_content_for_current">current km info here</string>
+  <string name="dlg_info_content_for_current">Տեղեկություն ընթացիկ վազքը</string>
   <string name="dlg_info_content_for_recommended">recommended km info here</string>
   <string name="dlg_info_content_for_next">next km info here</string>
   <string name="dlg_info_content_for_middle">middle month km info here</string>
 
   <!--Util-->
   <string name="channel_name">Oil notifications</string>
-  <string name="channel_description">Oils check reminder notifications</string>
-  <string name="click_again_txt">Please click BACK again to exit</string>
-  <string name="click_again_or_add_car_txt">Add new car, or click BACK again to exit</string>
-  <string name="msg_network_connection_error">No Internet connection</string>
-  <string name="msg_page_not_found">404 Page not found</string>
-  <string name="msg_unknown_error">Unknown error</string>
-  <string name="msg_bad_request">Bad request</string>
-  <string name="msg_not_authorized">User not authorized</string>
-  <string name="msg_connection_error">Connection error</string>
+  <string name="channel_description">Յուղի ստուգման մասին ծանուցումներ</string>
+  <string name="click_again_txt">Խնդրում ենք սեղմել կրկին, դուրս գալու համար</string>
+  <string name="click_again_or_add_car_txt">Ավելացրեք նոր մեքենա կամ սեղմեք BACK կրկին դուրս գալու համար</string>
+  <string name="msg_network_connection_error">"Ինտերնետ կապի բացակայութուն "</string>
+  <string name="msg_page_not_found">404 էջ չի գտնվել</string>
+  <string name="msg_unknown_error">Անհայտ սխալ</string>
+  <string name="msg_bad_request">Սխալ հարցում</string>
+  <string name="msg_not_authorized">Օգտվողը գրանցված չէ</string>
+  <string name="msg_connection_error">Միացման սխալ</string>
   <string name="msg_navigation_drawer_open">Open navigation drawer</string>
   <string name="msg_navigation_drawer_close">Close navigation drawer</string>
-  <string name="msg_car_created">Car created!</string>
-  <string name="msg_car_not_created">Car not created!</string>
-  <string name="err_msg_not_selected">Not Selected</string>
-  <string name="err_msg_empty">Can Not Be Empty!</string>
-  <string name="err_msg_current_less">Curent Km must be more than the previous service km !</string>
-  <string name="err_msg_incorrect_number_lenght">Incorrect Phone number length!</string>
-  <string name="err_msg_enter_valid_phone_number">Enter valid phone number</string>
-  <string name="err_msg_must_be_more">Curent Km must be more than the previous service km !</string>
-  <string name="msg_permission_denided_phone">Permission Denied, You cannot write contacts</string>
-  <string name="msg_car_edited">Car edited!</string>
-  <string name="msg_car_not_edited">Car not edited!</string>
-  <string name="msg_car_deleted">Car deleted!</string>
-  <string name="msg_car_not_deleted">Car not deleted!</string>
-  <string name="msg_no_cars">Yo Don\'t Have Cars</string>
-  <string name="msg_something_wrong">Something wrong</string>
-  <string name="msg_time_to_change_oil">Time To Change Oil</string>
-  <string name="msg_oil_changed">Oil changed!</string>
-  <string name="msg_oil_not_changed">Oil not changed!</string>
-  <string name="msg_check">Check your %s engine oil</string>
+  <string name="msg_car_created">Ավտոմեքենան ստեղծվել է</string>
+  <string name="msg_car_not_created">Ավտոմեքենան չի ստեղծվել</string>
+  <string name="err_msg_not_selected">Ընտրված չէ</string>
+  <string name="err_msg_empty">Չի կարող դատարկ լինել</string>
+  <string name="err_msg_current_less">Ընթացիկ արժեքը պետք է լինի ավելի մեծ, քան նախորդ ծառայություն ժամանակ</string>
+  <string name="err_msg_incorrect_number_lenght">Սխալ հեռախոսահարի երկարություն</string>
+  <string name="err_msg_enter_valid_phone_number">Մուտքագրեք ճիշտ հեռախոսահամար</string>
+  <string name="err_msg_must_be_more">Ընթացիկ արժեքը պետք է լինի ավելի մեծ, քան նախորդ ծառայություն ժամանակ</string>
+  <string name="err_msg_must_be_more_mileage">Ընթացիկ արժեքը պետք է լինի ավելի մեծ, քան նախորդ (%1$d) ծառայություն ժամանակ !</string>
+  <string name="msg_permission_denided_phone">Թույլտվության բացակայություն: Դուք չեք կարող գրել կոնտակտներ</string>
+  <string name="msg_car_edited">Ավտոմեքենան խմբագրվել է</string>
+  <string name="msg_car_not_edited">Ավտոմեքենան չի խմբագրվել</string>
+  <string name="msg_car_deleted">Ավտոմեքենան հեռացված է</string>
+  <string name="msg_car_not_deleted">Ավտոմեքենան չի հեռացվել</string>
+  <string name="msg_no_cars">Դուք ավտոմեքենա չունեք</string>
+  <string name="msg_something_wrong">Ինչ - որ բան սխալ է</string>
+  <string name="msg_time_to_change_oil">Ժամանակն է փոխել յուղը</string>
+  <string name="msg_oil_changed">Յուղի փոխված է</string>
+  <string name="msg_oil_not_changed">Յուղի փոխված չէ</string>
+  <string name="msg_check">Ստուգեք ձեր %s շարժիչի յուղի</string>
 
   <string name="start_top">M 20.7 7 C 21.1 6.6 21.1 6 20.7 5.6 L 18.4 3.3 C 18 2.9 17.4 2.9 17 3.3 L 15.2 5.1 L 19 8.9</string>
   <string name="end_top">M 19.6 8 C 20 7.6 20 7 19.6 6.6 L 17.3 4.3 C 16.9 3.9 16.3 3.9 15.9 4.3 L 14.1 6.1 L 17.9 9.9</string>
@@ -471,34 +472,34 @@
   <string name="Zotye">Zotye</string>
 
   <!-- ==================================== TOASTS ==================================== -->
-  <string name="notification_set_for">Notification set for %1$s from now.</string>
-  <string name="day_hour_and_minute">1 day, 1 hour, and 1 minute</string>
-  <string name="days_hour_and_minute">%1$d days, 1 hour, and 1 minute</string>
-  <string name="days_hours_and_minute">%1$d days, %2$d hours, and 1 minute</string>
-  <string name="days_hour_and_minutes">%1$d days, 1 hours, and %3$d minutes</string>
-  <string name="days_hours_and_minutes">%1$d days, %2$d hours, and %3$d minutes</string>
-  <string name="day_hours_and_minute">1 day, %2$d hours, and 1 minute</string>
-  <string name="day_hours_and_minutes">1 day, %2$d hours, and %3$d minutes</string>
-  <string name="day_hour_and_minutes">1 day, 1 hour, and %3$d minutes</string>
-  <string name="day_and_hour">1 day and 1 hour</string>
-  <string name="days_and_hour">%1$d days and 1 hour</string>
-  <string name="day_and_hours">1 day and %2$d hours</string>
-  <string name="days_and_hours">%1$d days and %2$d hours</string>
-  <string name="day_and_minute">1 day and 1 minute</string>
-  <string name="days_and_minute">%1$d days and 1 minute</string>
-  <string name="day_and_minutes">1 day and %3$d minutes</string>
-  <string name="days_and_minutes">%1$d days and %3$d minutes</string>
-  <string name="hour_and_minute">1 hour and 1 minute</string>
-  <string name="hour_and_minutes">1 hour and %3$d minutes</string>
-  <string name="hours_and_minute">%2$d hours and 1 minute</string>
-  <string name="hours_and_minutes">%2$d hours and %3$d minutes</string>
-  <string name="day">1 day</string>
-  <string name="days">%1$d days</string>
-  <string name="hour">1 hour</string>
-  <string name="hours">%2$d hours</string>
-  <string name="minute">1 minute</string>
-  <string name="minutes">%3$d minutes</string>
-  <string name="less_than_one_minute">less than 1 minute</string>
+  <string name="notification_set_for">Ծանուցումը սահմանված է %1$sից</string>
+  <string name="day_hour_and_minute">1 օր, 1 ժամ, 1 րոպե</string>
+  <string name="days_hour_and_minute">%1$d օր, 1 ժամ, 1 րոպե</string>
+  <string name="days_hours_and_minute">%1$d օր, %2$d ժամ, և 1 րոպե</string>
+  <string name="days_hour_and_minutes">%1$d օր,  1 ժամ, %3$d րոպե</string>
+  <string name="days_hours_and_minutes">%1$d օր,  %2$d ժամ, 3$d րոպե</string>
+  <string name="day_hours_and_minute">1 օր, %2$d ժամ, և 1 րոպե</string>
+  <string name="day_hours_and_minutes">1 օր, %2$d ժամ, և %3$d րոպե</string>
+  <string name="day_hour_and_minutes">1 օր, 1 ժամ, և %3$d րոպե</string>
+  <string name="day_and_hour">1 օր և 1 ժամ</string>
+  <string name="days_and_hour">%1$d օր և 1 ժամ</string>
+  <string name="day_and_hours">1 օր և %2$d ժամ</string>
+  <string name="days_and_hours">%1$d օր և %2$d ժամ</string>
+  <string name="day_and_minute">1 օր և 1 րոպե</string>
+  <string name="days_and_minute">%1$d օր և 1 րոպե</string>
+  <string name="day_and_minutes">1 օր և %3$d րոպե</string>
+  <string name="days_and_minutes">%1$d օր և %3$d րոպե</string>
+  <string name="hour_and_minute">1 ժամ և 1 րոպե</string>
+  <string name="hour_and_minutes">1 ժամ և %3$d րոպե</string>
+  <string name="hours_and_minute">%2$d ժամ և 1 րոպե</string>
+  <string name="hours_and_minutes">%2$d ժամ և %3$d րոպե</string>
+  <string name="day">1 օր</string>
+  <string name="days">%1$d օր</string>
+  <string name="hour">1 ժամ</string>
+  <string name="hours">%2$d ժամ</string>
+  <string name="minute">1 րոպե</string>
+  <string name="minutes">%3$d րոպե</string>
+  <string name="less_than_one_minute">1 րոպեից պակաս</string>
 
   <string name="abbrev_days_hours_and_minutes">%1$dd %2$dh %3$dm</string>
   <string name="abbrev_days_and_hours">%1$dd %2$dh</string>
@@ -512,31 +513,31 @@
   <!-- ======================================================================================= -->
 
   <!-- Phone number auth -->
-  <string name="fui_verify_phone_number_title" translation_description="Phone number entry form title">Enter your phone number</string>
-  <string name="fui_invalid_phone_number" translation_description="Inline error when phone number entered is invalid">Enter a valid phone number</string>
-  <string name="fui_enter_confirmation_code" translation_description="Phone number verification code entry form title">Enter the 6-digit code we sent to</string>
-  <string name="fui_resend_code_in" translation_description="Countdown timer text that the user needs to wait for before attempting to resend verification sms">Resend code in 0:%02d</string>
-  <string name="fui_verify_your_phone_title" translation_description="Button text to complete phone number verification">Verify your phone number</string>
-  <string name="fui_verifying" translation_description="Progress dialog text while phone number is being verified">Verifying…</string>
-  <string name="fui_incorrect_code_dialog_body" translation_description="Inline error when incorrect sms verification code is being used to verify">Wrong code. Try again.</string>
-  <string name="fui_error_too_many_attempts" translation_description="Error message when the phone number has been used too many times">This phone number has been used too many times</string>
-  <string name="fui_error_quota_exceeded" translation_description="Error message when the Firebase project's quota has been exceeded.">There was a problem verifying your phone number</string>
-  <string name="fui_error_session_expired" translation_description="Error message when SMS confirmation code has expired.">This code is no longer valid</string>
-  <string name="fui_sign_in_with_phone_number" translation_description="Label for phone number input form">Sign in with phone number</string>
-  <string name="fui_auto_verified" translation_description="Popup informing the user that their phone number was automatically verified">Phone number automatically verified</string>
-  <string name="fui_resend_code" translation_description="Link text to resend verification sms">Resend Code</string>
-  <string name="fui_verify_phone_number" translation_description="Button text to submit confirmation code and complete phone verification">Verify Phone Number</string>
-  <string name="fui_continue_phone_login" translation_description="Button text to submit phone number and send sms">Continue</string>
-  <string name="fui_sms_terms_of_service" translation_description="Fine print warning displayed below Verify Phone Number button">By tapping “%1$s”, an SMS may be sent. Message &amp; data rates may apply.</string>
-  <string name="fui_sms_terms_of_service_and_privacy_policy_extended" translation_description="Fine print warning displayed below Verify Phone Number button">By tapping “%1$s”, you are indicating that you accept our <xliff:g example="https://google.com/terms" id="tos" translation_description="">%2$s</xliff:g> and <xliff:g example="https://google.com/privacy" id="pp" translation_description="">%3$s</xliff:g>. An SMS may be sent. Message &amp; data rates may apply.</string>
+  <!--<string name="fui_verify_phone_number_title" translation_description="Phone number entry form title">Մուտքագրեք ձեր հեռախոսահամարը</string>-->
+  <!--<string name="fui_invalid_phone_number" translation_description="Inline error when phone number entered is invalid">Մուտքագրեք վավեր հեռախոսահամար</string>-->
+  <!--<string name="fui_enter_confirmation_code" translation_description="Phone number verification code entry form title">Մուտքագրեք 6 նիշանոց կոդը, որը մենք ուղարկեցինք</string>-->
+  <!--<string name="fui_resend_code_in" translation_description="Countdown timer text that the user needs to wait for before attempting to resend verification sms">Վերաուղարկել կոդը 0:%02d</string>-->
+  <!--<string name="fui_verify_your_phone_title" translation_description="Button text to complete phone number verification">Ստուգեք ձեր հեռախոսահամարը</string>-->
+  <!--<string name="fui_verifying" translation_description="Progress dialog text while phone number is being verified">Ստուգում …</string>-->
+  <!--<string name="fui_incorrect_code_dialog_body" translation_description="Inline error when incorrect sms verification code is being used to verify">Սխալ կոդ. Կրկին փորձեք</string>-->
+  <!--<string name="fui_error_too_many_attempts" translation_description="Error message when the phone number has been used too many times">"Այս հեռախոսահամարը շատ անգամ է օգտագործվել "</string>-->
+  <!--<string name="fui_error_quota_exceeded" translation_description="Error message when the Firebase project's quota has been exceeded.">Հնարավոր չէ ստուգել ձեր հեռախոսահամարը</string>-->
+  <!--<string name="fui_error_session_expired" translation_description="Error message when SMS confirmation code has expired.">Այս կոդը վավեր չէ</string>-->
+  <!--<string name="fui_sign_in_with_phone_number" translation_description="Label for phone number input form">Մուտք գործեք հեռախոսահամարի միջոցով</string>-->
+  <!--<string name="fui_auto_verified" translation_description="Popup informing the user that their phone number was automatically verified">Հեռախոսահամարը անտոմատ կերպով ստուգված է</string>-->
+  <!--<string name="fui_resend_code" translation_description="Link text to resend verification sms">"Վերաուղարկել կոդը</string>-->
+  <!--<string name="fui_verify_phone_number" translation_description="Button text to submit confirmation code and complete phone verification">"Ստուգեք հեռախոսահամարը "</string>-->
+  <!--<string name="fui_continue_phone_login" translation_description="Button text to submit phone number and send sms">Շարունակել</string>-->
+  <!--<string name="fui_sms_terms_of_service" translation_description="Fine print warning displayed below Verify Phone Number button">By tapping “%1$s”, an SMS may be sent. Message &amp; data rates may apply.</string>-->
+  <!--<string name="fui_sms_terms_of_service_and_privacy_policy_extended" translation_description="Fine print warning displayed below Verify Phone Number button">By tapping “%1$s”, you are indicating that you accept our <xliff:g example="https://google.com/terms" id="tos" translation_description="">%2$s</xliff:g> and <xliff:g example="https://google.com/privacy" id="pp" translation_description="">%3$s</xliff:g>. An SMS may be sent. Message &amp; data rates may apply.</string>-->
 
   <!-- Label for the  preference -->
-  <string name="pref_language_label">Language</string>
+  <string name="pref_language_label">Ընտրեք լեզուն</string>
 
   <!-- Label for preference -->
-  <string name="pref_language_label_en">English</string>
-  <string name="pref_language_label_ru">Russian</string>
-  <string name="pref_language_label_hy">Armenian</string>
+  <string name="pref_language_label_en">Անգլերեն</string>
+  <string name="pref_language_label_ru">Ռուսերեն</string>
+  <string name="pref_language_label_hy">Հայերեն</string>
 
   <string name="pref_language_key" translatable="false">language</string>
 

@@ -961,9 +961,10 @@ private EditOilActivityViewModel mViewModel;
   }
 
   private void saveEditedOilData() {
+    String serviceCompanyId = currentOil.getServiceCompanyId();
     Oil oil = getEditedOil();
 
-    mViewModel.editOil(oil);
+    mViewModel.editOil(oil, serviceCompanyId);
     if (phoneNameSwitch.isChecked()) {
       addPhoneNumberToContactList(oil.getServiceCompanyId(),
           phoneNameEt.getText().toString());

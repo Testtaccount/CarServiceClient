@@ -1,6 +1,7 @@
 package am.gsoft.carserviceclient.ui.activity;
 
 import static am.gsoft.carserviceclient.util.Constant.Action.ACTION_MAIN_ACTIVITY_INTENT;
+import static am.gsoft.carserviceclient.util.manager.ShortcutManager.addShortcutIcon;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
@@ -19,11 +20,13 @@ import am.gsoft.carserviceclient.data.viewmodel.ViewModelFactory;
 import am.gsoft.carserviceclient.firebase.FirebaseAuthHelper;
 import am.gsoft.carserviceclient.notification.NotificationsRepository;
 import am.gsoft.carserviceclient.ui.activity.main.MainActivity;
+import am.gsoft.carserviceclient.ui.activity.setting.SettingsActivity;
 import am.gsoft.carserviceclient.util.Logger;
 import am.gsoft.carserviceclient.util.ToastUtils;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -36,6 +39,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -43,6 +47,7 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -67,6 +72,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
   private ProgressBar buttonProgBar;
   private ProgressBar progBar;
   private View revealV;
+  private Button settingsBtn;
   private TextView appVersionTextView;
 
   private FirebaseAuthCallback firebaseAuthCallback;
@@ -77,6 +83,21 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    if (!getSharedPreferences("APP_PREFERENCE", Activity.MODE_PRIVATE).getBoolean("IS_ICON_CREATED", false)) {
+      getSharedPreferences("APP_PREFERENCE", Activity.MODE_PRIVATE).edit().putBoolean("IS_ICON_CREATED", true).apply();
+
+      if (VERSION.SDK_INT >= VERSION_CODES.O) {
+        Intent serviceIntent = new Intent(this, ShortcutService.class);
+        ContextCompat.startForegroundService(this, serviceIntent);
+        } else {
+        addShortcutIcon(getApplicationContext());
+      }
+    }
+
+
+
+
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       Window window = getWindow();
       window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -89,7 +110,6 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
     findViews();
     initFields();
     setListeners();
-
 
   }
 
@@ -104,6 +124,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
     buttonProgBar = (ProgressBar) findViewById(R.id.progress_bar_button);
     progBar = (ProgressBar) findViewById(R.id.progress);
     revealV = (View) findViewById(R.id.reveal);
+    settingsBtn = (Button) findViewById(R.id.btn_settings_landing_activity);
 //    appVersionTextView = (TextView) findViewById(R.id.app_version_textview);
   }
 
@@ -118,6 +139,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
   private void setListeners() {
     phoneNumberConnectButton.setOnClickListener(this);
+    settingsBtn.setOnClickListener(this);
   }
 
   @Override
@@ -134,6 +156,10 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
           load();
 //          }
         }
+        break;
+      case  R.id.btn_settings_landing_activity:
+        Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
+        startActivity(startSettingsActivity);
         break;
     }
   }
@@ -296,7 +322,35 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
 
     // Successfully signed in
     if (resultCode == RESULT_OK) {
-      FirebaseAuthHelper.getIdTokenForCurrentUser(firebaseAuthCallback);
+//      FirebaseAuthHelper.getIdTokenForCurrentUser(firebaseAuthCallback);
+
+      showProgressDialog();
+
+      repository.saveUser(createUser(), new ResultListener<User>() {
+        @Override
+        public void onLoad(User user1) {
+//          appSharedHelper.saveAuthToken(authToken);
+          appSharedHelper.saveFirstAuth(false);
+          appSharedHelper.saveSavedRememberMe(true);
+
+          runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+              performLoginSuccessAction();
+            }
+          });
+
+        }
+
+        @Override
+        public void onFail(String e) {
+          ToastUtils.shortToast("Fail " + e);
+
+        }
+      });
+
+
+
       return;
     } else {
       //Sign in failed
@@ -329,21 +383,21 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
   private User createUser() {
     User user = new User();
     if (App.getInstance().isSimulator) {
-      String phoneNumber = "+37477939777";
+      String phoneNumber = "+37491566167";
       ;//firebaseUser.getPhoneNumber(); //"+37477939733";  //firebaseUser.getPhoneNumber()    //Phone number
 
-      phoneNumber = phoneNumber.replace("+", "");
+//      phoneNumber = phoneNumber.replace("+", "");
       phoneNumber = phoneNumber.replace(" ", "");
 
       // FirebaseDbUtil.getmFirebaseDb().getReference(USERS).push().getKey();
 
-      user.setKey(
-          "YwCS7MYdvwR2eXmCihCxcWjb2Xm1");//(F5gYIqvaHJDaklUr3I56H9H15t5)//setKey(firebaseUser.getUid());//setKey("YwCS7MYdvwR2eXmCihCxcWjb2Xm1");//setKey(firebaseUser.getUid());
+      user.setKey("iJps9hOY3SZdQdAuskxJKFfO7cr1");//(F5gYIqvaHJDaklUr3I56H9H15t5)//setKey(firebaseUser.getUid());//setKey("YwCS7MYdvwR2eXmCihCxcWjb2Xm1");//setKey(firebaseUser.getUid());
 //      user.setId(IdGenerator.getId()); // TODO increment id
       user.setFirstName("fName");
       user.setLastName("lName");
       user.setMail("eMail");//setMail(firebaseUser.getUid());
       user.setPhoneNumber(phoneNumber);//setPhoneNumber(firebaseUser.getPhoneNumber());
+//      user.setServiceDateMap(new HashMap<>());
 //        user.setUserCars(new ArrayList<Car>());
 
       return user;
@@ -351,7 +405,7 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
       FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
       String phoneNumber = firebaseUser
           .getPhoneNumber(); //"+37477939733";  //firebaseUser.getPhoneNumber()    //Phone number
-      phoneNumber = phoneNumber.replace("+", "");
+//      phoneNumber = phoneNumber.replace("+", "");
       phoneNumber = phoneNumber.replace(" ", "");
 
       // FirebaseDbUtil.getmFirebaseDb().getReference(USERS).push().getKey();
@@ -362,6 +416,8 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
       user.setLastName("lName");
       user.setMail("eMail");//setMail(firebaseUser.getUid());
       user.setPhoneNumber(phoneNumber);//setPhoneNumber(firebaseUser.getPhoneNumber());
+//      user.setServiceDateMap(new HashMap<>());
+
 //       user.setUserCars(new ArrayList<Car>());
 
       return user;
@@ -541,30 +597,30 @@ public class LandingActivity extends BaseActivity implements View.OnClickListene
     public void onSuccess(String authToken) {
       Log.d(TAG, "FirebaseAuthCallback onSuccess()");
 
-      showProgressDialog();
-
-      repository.saveUser(createUser(), new ResultListener<User>() {
-        @Override
-        public void onLoad(User user1) {
-          appSharedHelper.saveAuthToken(authToken);
-          appSharedHelper.saveFirstAuth(false);
-          appSharedHelper.saveSavedRememberMe(true);
-
-          runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-              performLoginSuccessAction();
-            }
-          });
-
-        }
-
-        @Override
-        public void onFail(String e) {
-          ToastUtils.shortToast("Fail " + e);
-
-        }
-      });
+//      showProgressDialog();
+//
+//      repository.saveUser(createUser(), new ResultListener<User>() {
+//        @Override
+//        public void onLoad(User user1) {
+//          appSharedHelper.saveAuthToken(authToken);
+//          appSharedHelper.saveFirstAuth(false);
+//          appSharedHelper.saveSavedRememberMe(true);
+//
+//          runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//              performLoginSuccessAction();
+//            }
+//          });
+//
+//        }
+//
+//        @Override
+//        public void onFail(String e) {
+//          ToastUtils.shortToast("Fail " + e);
+//
+//        }
+//      });
 
     }
 

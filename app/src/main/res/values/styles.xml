@@ -208,6 +208,18 @@
 
   //no usage
 
+  <!-- Style for a custom Preference Entry -->
+  <style name="AppPreference">
+    <item name="android:layout">@layout/preference_material</item>
+  </style>
+
+  <!-- Style for a DialogPreference Entry -->
+  <style name="AppPreference.DialogPreference">
+
+    <item name="positiveButtonText">@string/dlg_ok</item>
+    <item name="negativeButtonText">@string/dlg_cancel</item>
+  </style>
+
   <style name="DialogNoBorder">
     <item name="android:windowIsFloating">true</item>
     <item name="android:windowBackground">@android:color/transparent</item>

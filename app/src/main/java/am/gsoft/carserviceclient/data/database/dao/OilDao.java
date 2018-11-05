@@ -36,4 +36,21 @@ public interface OilDao {
 
   @Query("DELETE FROM oil WHERE `key`=:key")
   void delete(String key);
+
+  @Query("DELETE FROM oil")
+  void nukeTable();
+
+  @Query("SELECT MAX(serviceDoneDate) FROM oil WHERE serviceCompanyId=:serviceCompanyId AND NOT serviceDoneDate=:doneDate")
+  long getMinServiceDateForCar(String serviceCompanyId,long doneDate);
+
+  @Query("SELECT serviceCompanyId FROM oil WHERE carKey=:carKey")
+  List<String> getOilServices(String carKey);
+
+//  @Query("SELECT serviceCompanyId FROM oil")
+//  Set<String> getServiceDates();
+
+  @Query("SELECT MAX(serviceDoneDate) FROM oil WHERE serviceCompanyId=:serviceId AND carKey=:carKey")
+  long getMaxServiceDateByServiceIdAndCarKey(String serviceId,String carKey);
+
+
 }

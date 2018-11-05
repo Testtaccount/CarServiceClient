@@ -32,6 +32,23 @@
               android:paddingTop="28dp"
               android:orientation="vertical"
               app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                <RelativeLayout
+                  android:id="@+id/rl_progress_users"
+                  android:layout_width="match_parent"
+                  android:layout_height="110dp"
+                  android:layout_gravity="center"
+                  android:gravity="center"
+                  android:orientation="vertical"
+                  android:visibility="gone">
+
+                    <ProgressBar
+                      android:id="@+id/progress_bar_user"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_centerInParent="true"
+                      android:layout_gravity="center" />
+
+                </RelativeLayout>
 
                 <android.support.v7.widget.RecyclerView
                   app:layout_behavior="@string/appbar_scrolling_view_behavior"

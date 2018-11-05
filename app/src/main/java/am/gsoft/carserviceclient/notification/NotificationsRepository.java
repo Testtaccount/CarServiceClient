@@ -111,7 +111,6 @@ public class NotificationsRepository {
         }
       }
     });
-
   }
 
   public void deleteAllNotificationsByCarKey(String key) {

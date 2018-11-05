@@ -14,19 +14,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class OilHistoryAdapter extends RecyclerView.Adapter<OilHistoryViewHolder> {
 
   private ArrayList<Oil> mOilArrayList;
   private OnOilHistoryItemClickListener itemClickListener;
-  private int counterNumber;
+//  private int counterNumber;
   boolean asc;
 
-  public OilHistoryAdapter(ArrayList<Oil> oilArrayList,
-      OnOilHistoryItemClickListener itemClickListener) {
-    this.mOilArrayList = oilArrayList;
+  public OilHistoryAdapter( OnOilHistoryItemClickListener itemClickListener) {
+    this.mOilArrayList = new ArrayList<>();
     this.itemClickListener = itemClickListener;
-    counterNumber = mOilArrayList.size();
+//    counterNumber = mOilArrayList.size();
     asc=false;
   }
 
@@ -73,19 +74,28 @@ public class OilHistoryAdapter extends RecyclerView.Adapter<OilHistoryViewHolder
   @Override
   public void onBindViewHolder(OilHistoryViewHolder holder, int position) {
 
-    holder.bindData(mOilArrayList.get(position));
+    holder.bindData(position);
 
 //    holder.itemView.setTag(mOilArrayList.getAppNotification(position).getPlaceId());
 
   }
 
-  public void swapPlaces(ArrayList<Oil> oils) {
-    mOilArrayList = oils;
-    if (mOilArrayList != null) {
-      // Force the RecyclerView to refresh
-      this.notifyDataSetChanged();
+  public void setOilList(List<Oil> oils) {
+    if (oils == null ) {
+      return;
+    }else if(oils.size()==0){
+      return;
     }
+
+    if (mOilArrayList != null) {
+      mOilArrayList.clear();
+    }
+
+    mOilArrayList.addAll(oils);
+    notifyDataSetChanged();
+
   }
+
 
   @Override
   public void onAttachedToRecyclerView(RecyclerView recyclerView) {
@@ -100,13 +110,19 @@ public class OilHistoryAdapter extends RecyclerView.Adapter<OilHistoryViewHolder
     return mOilArrayList.size();
   }
 
-  public void setCounterNumber(int number) {
-    if(number!=1){
-      asc=false;
-    }else {
-      asc=true;
-    }
-    this.counterNumber = number;
+//  public void setCounterNumber(int number) {
+//    if(number!=1){
+//      asc=false;
+//    }else {
+//      asc=true;
+//    }
+//    this.counterNumber = number;
+//  }
+
+  public void sort() {
+    asc=!asc;
+    Collections.reverse(mOilArrayList);
+    notifyDataSetChanged();
   }
 
   /**
@@ -142,19 +158,20 @@ public class OilHistoryAdapter extends RecyclerView.Adapter<OilHistoryViewHolder
       numberItemTv = (TextView) view.findViewById(R.id.tv_item_number);
     }
 
-    public void bindData(Oil oil) {
+    public void bindData(int position) {
 
-      this.oil = oil;
+      this.oil = mOilArrayList.get(position);
 
       oilBrandItemTv.setText(oilBrandItemTv != null ? String.valueOf(oil.getBrand()) : "");
       oilTypeItemTv.setText(oilTypeItemTv != null ? String.valueOf(oil.getType()) : "");
-      oilServiceDoneDateItemTv.setText(oilTypeItemTv != null ?oil.getServiceDoneDate() == 0 ? "-"
-          : longToString(oil.getServiceDoneDate(), getDateFormat(DateType.DMY)): "");
+      oilServiceDoneDateItemTv.setText(oilTypeItemTv != null ? oil.getServiceDoneDate() == 0 ? "-"
+          : longToString(oil.getServiceDoneDate(), getDateFormat(DateType.DMY)) : "");
       oilVolumeItemTv.setText(oilVolumeItemTv != null ? String.valueOf(oil.getVolume() + "L") : "");
+
       if (asc) {
-        numberItemTv.setText(Integer.toString(counterNumber++));
+        numberItemTv.setText(Integer.toString(position+1));
       } else {
-        numberItemTv.setText(Integer.toString(counterNumber--));
+        numberItemTv.setText(Integer.toString(mOilArrayList.size()-position));
       }
     }
 

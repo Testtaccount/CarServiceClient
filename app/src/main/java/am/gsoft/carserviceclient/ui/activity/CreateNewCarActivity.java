@@ -21,6 +21,7 @@ import am.gsoft.carserviceclient.util.ToastUtils;
 import am.gsoft.carserviceclient.util.manager.DialogManager;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -345,15 +346,18 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected ArrayList<BrandsSpinnerItem> doInBackground(Void... voids) {
-
-      names = getResources().getStringArray(R.array.car_brands);
-      icons = getResources().obtainTypedArray(R.array.car_barands_icons);
+      Resources resources = getResources();
+      names = resources.getStringArray(R.array.car_brands);
+      icons = resources.obtainTypedArray(R.array.car_barands_icons);
 
       for (int i = 1; i < names.length; i++) {
-        items.add(new BrandsSpinnerItem(icons.getResourceId(i, 0), names[i]));
+        int ii = icons.getResourceId(i, 0);
+        String name = resources.getResourceEntryName(ii);
+
+        items.add(new BrandsSpinnerItem(name, names[i]));
       }
 
-      BrandsSpinnerItem b = new BrandsSpinnerItem(icons.getResourceId(0, 0), names[0]);
+      BrandsSpinnerItem b = new BrandsSpinnerItem(resources.getResourceEntryName(icons.getResourceId(0, 0)), names[0]);
 //      icons.recycle();
       adapterList.add(0, b);
       adapterList.addAll(items);
@@ -448,14 +452,13 @@ public class CreateNewCarActivity extends BaseActivity implements View.OnClickLi
 //    car.setKey(user.getKey() + "_" + id);
 //    car.setId(id);
     BrandsSpinnerItem brandsSpinnerItem = (BrandsSpinnerItem) carBrandsSpinner.getSelectedItem();
-    car.setIcon(brandsSpinnerItem.getIcon());//2130837697
+    car.setIcon(brandsSpinnerItem.getIcon());;//2130837697
     car.setColor(backgroundColor);//setLanguage(Color.WHITE);//-256
     car.setCarBrand(brandsSpinnerItem.getCarBrand());//setCarBrand(getString(R.string.none));
     car.setModel(modelEt.getText().toString());//setModel("X5");
     car.setYear(carYearsSpinner.getSelectedItem().toString());//setYear("1999");
     car.setNumbers(numbersEt.getText().toString());//setNumbers("00 oo 000");
-    car.setVinCode(vinCodeEt.getText().toString().length() == 0 ? "-"
-        : vinCodeEt.getText().toString());//setVinCode("fjksdhfjkdsfkjdskjfk");
+    car.setVinCode(vinCodeEt.getText().toString().length() == 0 ? "-" : vinCodeEt.getText().toString());//setVinCode("fjksdhfjkdsfkjdskjfk");
     switch (carDencityUnitSpinner.getSelectedItemPosition()) {
       case 0:
         car.setDistanceUnit("Km");

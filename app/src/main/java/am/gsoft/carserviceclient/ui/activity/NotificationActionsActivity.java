@@ -5,7 +5,6 @@ import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_NOTIFICATION_M
 import static am.gsoft.carserviceclient.util.DateUtils.getDateFormat;
 
 import am.gsoft.carserviceclient.R;
-import am.gsoft.carserviceclient.app.App;
 import am.gsoft.carserviceclient.app.AppExecutors;
 import am.gsoft.carserviceclient.data.InjectorUtils;
 import am.gsoft.carserviceclient.data.database.AppDatabase;
@@ -28,9 +27,9 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -164,8 +163,9 @@ public class NotificationActionsActivity extends BaseActivity implements View.On
               runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                  carIconIv.setImageDrawable(ContextCompat.getDrawable(App.getInstance(),
-                      mCar.getIcon()));//setBackgroundResource(carBrandsList.getAppNotification(position).getIcon());
+                  Resources resources = getResources();
+
+                  carIconIv.setImageDrawable(resources.getDrawable(resources.getIdentifier(mCar.getIcon(), "drawable", "am.gsoft.carserviceclient")));//setBackgroundResource(carBrandsList.getAppNotification(position).getIcon());
                   carBrandTv.setText(mCar.getCarBrand());
                   carModelTv.setText(mCar.getModel());
                   oilBrandTv.setText(mOil.getBrand());
@@ -396,9 +396,8 @@ public class NotificationActionsActivity extends BaseActivity implements View.On
 
     if (Long.valueOf(enteredValue) <= mOil.getServiceDoneKm()) {
       if (fragment != null) {
-        fragment.setError(
-            "Current " + mCar.getDistanceUnit() + " must be more than the previous (" + mOil
-                .getServiceDoneKm() + ") service " + mCar.getDistanceUnit() + " !");
+        fragment.setError(getString(R.string.err_msg_must_be_more_mileage,mOil.getServiceDoneKm()));
+//        fragment.setError( "Current " + mCar.getDistanceUnit() + " must be more than the previous (" +  + ") service " + mCar.getDistanceUnit() + " !");
       }
       DialogManager.getInstance().dismissPreloader(this.getClass());
       return false;

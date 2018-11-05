@@ -1,6 +1,6 @@
 package am.gsoft.carserviceclient.ui.activity.main;
 
- import static am.gsoft.carserviceclient.util.AppUtil.setTextViewDrawableColor;
+import static am.gsoft.carserviceclient.util.AppUtil.setTextViewDrawableColor;
 import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_CURRENT_CAR_KEY;
 import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_CURRENT_OIL;
 import static am.gsoft.carserviceclient.util.Constant.Extra.EXTRA_CURRENT_OIL_LIST;
@@ -57,8 +57,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.CardView;
- import android.text.TextUtils;
- import android.view.Menu;
+import android.text.TextUtils;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -196,6 +196,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
             setListeners();
             spinner.setSelection(getPosition(mCarList, appSharedHelper.getSpinnerPositionForCar()),
                 true);
+//            ShortcutBadger.applyCount(getApplicationContext(), mCarList.size());
             break;
           case ERROR:
             ToastUtils.shortToast("ERROR !!");
@@ -381,7 +382,8 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnIte
       }
       case R.id.ll_oil_history_btn: {
         Intent i = new Intent(MainActivity.this, OilHistoryActivity.class);
-        i.putParcelableArrayListExtra(EXTRA_CURRENT_OIL_LIST, (ArrayList<Oil>) mOilList);
+//        i.putParcelableArrayListExtra(EXTRA_CURRENT_OIL_LIST, (ArrayList<Oil>) mOilList);
+        i.putExtra(EXTRA_CURRENT_OIL_LIST, currentCar.getKey());
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();

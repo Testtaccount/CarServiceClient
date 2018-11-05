@@ -3,7 +3,7 @@
 
   <!-- ==================================== MENU ==================================== -->
 
-  <string name="action_about">About</string>
+  <string name="action_about">О нас</string>
   <string name="action_settings">Настройки</string>
   <string name="action_log_out">Выход</string>
 
@@ -25,13 +25,13 @@
   <string name="km">Км</string>
   <string name="mil">Маил</string>
   <string name="current">Начальный\nпробег</string>
-  <string name="recommended">Rекамендиационны\nпробег</string>
+  <string name="recommended">Рекамендиационны\nпробег</string>
   <string name="next">Окончательный\nпробег</string>
   <string name="middle_month">Срединный месячный\nпробег</string>
 
   <string name="date_information">Даты для замены масла</string>
   <string name="done_date">Дата замены\nмасла</string>
-  <string name="next_date">Окончательны срок\nзамены масла</string>
+  <string name="next_date">Следующая дата\nзамены масла</string>
 
   <string name="service_phone_number">Номер сервиса обслуживания</string>
 
@@ -49,7 +49,7 @@
 
   <string name="fill_oil_information">Заполните информацию о замене масла</string>
   <string name="fill_mileage_information">Заполнить информацию о пробеге</string>
-  <string name="middle_month_set_manually_km">Средний месячный пробег к/м </string>
+  <string name="middle_month_set_manually_km">Средний месячный пробег км </string>
   <string name="middle_month_set_manually_mil">Средний месячный пробег маил </string>
   <string name="select_date">Сведения о дате замены</string>
   <string name="phone_number">Номер телефона сервиз центра</string>
@@ -57,13 +57,13 @@
   <string name="contact_name">Имя</string>
 
   <!-- ==================================== GARAGE ACTIVITY ==================================== -->
-  <string name="garage_activity_title">Список Автомобилей</string>
+  <string name="garage_activity_title">Автомобили</string>
   <string name="edit_car_activity_title">Редактировать данные автомобиля</string>
   <string name="add_new_car_activity_title">Добавить новый автомобиль</string>
 
   <string name="car_information">Данные автомобиля</string>
-  <string name="car_brand">Производитель</string>
-  <string name="car_model">Марка</string>
+  <string name="car_brand">Марка</string>
+  <string name="car_model">Модель</string>
   <string name="car_year">Год выпуска</string>
 
   <string name="car_license_plate">Гос номер автомобиля</string>
@@ -71,75 +71,76 @@
   <string name="car_vin_code">Код производителя /вин/</string>
   <string name="car_model_name">Название</string>
   <string name="car_distance_unit">Единица измерения</string>
-  <string name="enter_vin_code_optional">Напишите вин код</string>
+  <string name="enter_vin_code_optional">Вин код автомобиля</string>
 
   <!-- ==================================== NOTIFICATION ACTIONS ACTIVITY ==================================== -->
-  <string name="choose_your_action">Choose your action \nfor notification</string>
-  <string name="select_reminder_date_btn_text">SELECT REMINDER DATE</string>
-  <string name="set_mileage_btn_text">SET MILEAGE</string>
+  <string name="choose_your_action">Выберите ваше действие</string>
+  <string name="select_reminder_date_btn_text">ВЫБЕРИТЕ ДАТУ НАПОМИНАНИЯ</string>
+  <string name="set_mileage_btn_text">УСТАНОВИТЬ ПРОБЕГ</string>
 
-  <string name="current_mileage">Current Mileage</string>
-  <string name="the_next_reminder_date_is_set">The next reminder date is set</string>
+  <string name="current_mileage">Текущий пробег</string>
+  <string name="the_next_reminder_date_is_set">Следующая дата напоминания установлена</string>
 
   <!--Dialog-->
-  <string name="dlg_logout_title">Are you sure you want to log out?</string>
-  <string name="dlg_make_call_title">Make call?</string>
+  <string name="dlg_logout_title">Вы действительно хотите выйти?</string>
+  <string name="dlg_make_call_title">Сделать звонок?</string>
   <string name="dlg_ok">OK</string>
-  <string name="dlg_yes">Yes</string>
-  <string name="dlg_set">Set</string>
-  <string name="dlg_call_via">Call via</string>
-  <string name="dlg_call">Call</string>
-  <string name="dlg_cancel">Cancel</string>
-  <string name="dlg_enable_autostart_title">Enable AutoStart</string>
-  <string name="dlg_pls_allow">Please allow</string>
-  <string name="dlg_pls_allow_txt">to always run in the background,else our services can\'t be accessed.</string>
-  <string name="dlg_info_title">Info</string>
-  <string name="dlg_delete_car_title">Are you sure you want to delete this car?</string>
-  <string name="dlg_delete">Delete</string>
+  <string name="dlg_yes">Да</string>
+  <string name="dlg_set">Установить</string>
+  <string name="dlg_call_via">Позвонить с помощью</string>
+  <string name="dlg_call">Звонок</string>
+  <string name="dlg_cancel">Отменить</string>
+  <string name="dlg_enable_autostart_title">Включить автозапуск</string>
+  <string name="dlg_pls_allow">Пожалуйста позвольте</string>
+  <string name="dlg_pls_allow_txt">всегда работать в фоновом режиме, иначе наши сервисы не доступны.</string>
+  <string name="dlg_info_title">Информация</string>
+  <string name="dlg_delete_car_title">Вы уверены, что хотите удалить этот автомобиль?</string>
+  <string name="dlg_delete">Удалить</string>
 
-  <string name="dlg_wait_please">Please, wait</string>
-  <string name="dlg_fail_connection">Sorry, connection lost. Please check your network connection.</string>
-  <string name="dlg_internet_connection_error">Something went wrong. Please, verify your internet connection and try again</string>
-  <string name="permission_denided">Permission Denied, You cannot call</string>
-  <string name="snake_bar_action_msg_allow">ALLOW</string>
+  <string name="dlg_wait_please">Пожалуйста, подождите</string>
+  <string name="dlg_fail_connection">Извините, соединение потеряно. Проверьте подключение к сети</string>
+  <string name="dlg_internet_connection_error">Что-то пошло не так. Проверьте подключение к Интернету и повторите попытку.</string>
+  <string name="permission_denided">Доступ закрыт, вы не можете позвонить</string>
+  <string name="snake_bar_action_msg_allow">Разрешить</string>
 
-  <string name="dlg_info_content_for_current">current km info here</string>
+  <string name="dlg_info_content_for_current">Текущий пробег info</string>
   <string name="dlg_info_content_for_recommended">recommended km info here</string>
   <string name="dlg_info_content_for_next">next km info here</string>
   <string name="dlg_info_content_for_middle">middle month km info here</string>
 
   <!--Util-->
   <string name="channel_name">Oil notifications</string>
-  <string name="channel_description">Oils check reminder notifications</string>
-  <string name="click_again_txt">Please click BACK again to exit</string>
-  <string name="click_again_or_add_car_txt">Add new car, or click BACK again to exit</string>
-  <string name="msg_network_connection_error">No Internet connection</string>
-  <string name="msg_page_not_found">404 Page not found</string>
-  <string name="msg_unknown_error">Unknown error</string>
-  <string name="msg_bad_request">Bad request</string>
-  <string name="msg_not_authorized">User not authorized</string>
-  <string name="msg_connection_error">Connection error</string>
+  <string name="channel_description">"Уведомление о проверке масла "</string>
+  <string name="click_again_txt">Нажмите кнопку BACK еще раз, чтобы выйти</string>
+  <string name="click_again_or_add_car_txt">Добавьте новый автомобиль или нажмите BACK еще раз, чтобы выйти</string>
+  <string name="msg_network_connection_error">Нет соединения с интернетом</string>
+  <string name="msg_page_not_found">404 Страница не найдена</string>
+  <string name="msg_unknown_error">неизвестная ошибка</string>
+  <string name="msg_bad_request">Неверный запрос</string>
+  <string name="msg_not_authorized">Пользователь не авторизовался</string>
+  <string name="msg_connection_error">Ошибка подключения</string>
   <string name="msg_navigation_drawer_open">Open navigation drawer</string>
   <string name="msg_navigation_drawer_close">Close navigation drawer</string>
-  <string name="msg_car_created">Car created!</string>
-  <string name="msg_car_not_created">Car not created!</string>
-  <string name="err_msg_not_selected">Not Selected</string>
-  <string name="err_msg_empty">Can Not Be Empty!</string>
-  <string name="err_msg_current_less">Curent Km must be more than the previous service km !</string>
-  <string name="err_msg_incorrect_number_lenght">Incorrect Phone number length!</string>
-  <string name="err_msg_enter_valid_phone_number">Enter valid phone number</string>
-  <string name="err_msg_must_be_more">Curent Km must be more than the previous service km !</string>
-  <string name="msg_permission_denided_phone">Permission Denied, You cannot write contacts</string>
-  <string name="msg_car_edited">Car edited!</string>
-  <string name="msg_car_not_edited">Car not edited!</string>
-  <string name="msg_car_deleted">Car deleted!</string>
-  <string name="msg_car_not_deleted">Car not deleted!</string>
-  <string name="msg_no_cars">Yo Don\'t Have Cars</string>
-  <string name="msg_something_wrong">Something wrong</string>
-  <string name="msg_time_to_change_oil">Time To Change Oil</string>
-  <string name="msg_oil_changed">Oil changed!</string>
-  <string name="msg_oil_not_changed">Oil not changed!</string>
-  <string name="msg_check">Check your %s engine oil</string>
+  <string name="msg_car_created">Автомобиль создан</string>
+  <string name="msg_car_not_created">Автомобиль не создан</string>
+  <string name="err_msg_not_selected">Не выбран</string>
+  <string name="err_msg_empty">Не может быть пустым!</string>
+  <string name="err_msg_current_less">Текущий значение должен быть больше, чем предыдущий</string>
+  <string name="err_msg_incorrect_number_lenght">Неверная длина номера телефона</string>
+  <string name="err_msg_enter_valid_phone_number">Введите действительный номер телефона</string>
+  <string name="err_msg_must_be_more">Текущий значение должен быть больше, чем предыдущий</string>
+  <string name="err_msg_must_be_more_mileage">Текущий значение должен быть больше, чем предыдущий (%1$d)!</string>
+  <string name="msg_permission_denided_phone">Разрешение запрещено, вы не можете писать контакты</string>
+  <string name="msg_car_edited">Автомобиль отредактирован</string>
+  <string name="msg_car_not_edited">Автомобиль не отредактирован</string>
+  <string name="msg_car_deleted">Автомобиль удален</string>
+  <string name="msg_car_not_deleted">Автомобиль не удален</string>
+  <string name="msg_no_cars">У вас нет автомобилей</string>
+  <string name="msg_something_wrong">Что-то не так</string>
+  <string name="msg_time_to_change_oil">Время менять масло</string>
+  <string name="msg_oil_changed">Замена масла</string>
+  <string name="msg_oil_not_changed">Mаслo не заменено</string>
+  <string name="msg_check">Проверьте  %s моторное масло</string>
 
   <string name="start_top">M 20.7 7 C 21.1 6.6 21.1 6 20.7 5.6 L 18.4 3.3 C 18 2.9 17.4 2.9 17 3.3 L 15.2 5.1 L 19 8.9</string>
   <string name="end_top">M 19.6 8 C 20 7.6 20 7 19.6 6.6 L 17.3 4.3 C 16.9 3.9 16.3 3.9 15.9 4.3 L 14.1 6.1 L 17.9 9.9</string>
@@ -471,34 +472,34 @@
   <string name="Zotye">Zotye</string>
 
   <!-- ==================================== TOASTS ==================================== -->
-  <string name="notification_set_for">Notification set for %1$s from now.</string>
-  <string name="day_hour_and_minute">1 day, 1 hour, and 1 minute</string>
-  <string name="days_hour_and_minute">%1$d days, 1 hour, and 1 minute</string>
-  <string name="days_hours_and_minute">%1$d days, %2$d hours, and 1 minute</string>
-  <string name="days_hour_and_minutes">%1$d days, 1 hours, and %3$d minutes</string>
-  <string name="days_hours_and_minutes">%1$d days, %2$d hours, and %3$d minutes</string>
-  <string name="day_hours_and_minute">1 day, %2$d hours, and 1 minute</string>
-  <string name="day_hours_and_minutes">1 day, %2$d hours, and %3$d minutes</string>
-  <string name="day_hour_and_minutes">1 day, 1 hour, and %3$d minutes</string>
-  <string name="day_and_hour">1 day and 1 hour</string>
-  <string name="days_and_hour">%1$d days and 1 hour</string>
-  <string name="day_and_hours">1 day and %2$d hours</string>
-  <string name="days_and_hours">%1$d days and %2$d hours</string>
-  <string name="day_and_minute">1 day and 1 minute</string>
-  <string name="days_and_minute">%1$d days and 1 minute</string>
-  <string name="day_and_minutes">1 day and %3$d minutes</string>
-  <string name="days_and_minutes">%1$d days and %3$d minutes</string>
-  <string name="hour_and_minute">1 hour and 1 minute</string>
-  <string name="hour_and_minutes">1 hour and %3$d minutes</string>
-  <string name="hours_and_minute">%2$d hours and 1 minute</string>
-  <string name="hours_and_minutes">%2$d hours and %3$d minutes</string>
-  <string name="day">1 day</string>
-  <string name="days">%1$d days</string>
-  <string name="hour">1 hour</string>
-  <string name="hours">%2$d hours</string>
-  <string name="minute">1 minute</string>
-  <string name="minutes">%3$d minutes</string>
-  <string name="less_than_one_minute">less than 1 minute</string>
+  <string name="notification_set_for">"Уведомление установленно через %1$s "</string>
+  <string name="day_hour_and_minute">" 1 день, 1 час и 1 минутa"</string>
+  <string name="days_hour_and_minute">%1$d дней, 1 час и 1 минутa</string>
+  <string name="days_hours_and_minute">%1$d дней, %2$d часов, и 1 минутa</string>
+  <string name="days_hour_and_minutes">%1$d дней, 1 час, и %3$d минут</string>
+  <string name="days_hours_and_minutes">%1$d дней, %2$d часов, и %3$d минут</string>
+  <string name="day_hours_and_minute">1 день, %2$d часов, и 1 минут</string>
+  <string name="day_hours_and_minutes">1 день, %2$d часов, и %3$d минут</string>
+  <string name="day_hour_and_minutes">1 день, 1 час, и %3$d минут</string>
+  <string name="day_and_hour">1 день и 1 час</string>
+  <string name="days_and_hour">%1$d дней и 1 час</string>
+  <string name="day_and_hours">1 день и %2$d часов</string>
+  <string name="days_and_hours">%1$d дней и %2$d часов</string>
+  <string name="day_and_minute">1 день и 1 минут</string>
+  <string name="days_and_minute">%1$d дней и 1 минут</string>
+  <string name="day_and_minutes">1 день и %3$d минут</string>
+  <string name="days_and_minutes">%1$d дней и %3$d минут</string>
+  <string name="hour_and_minute">1 час и 1 минут</string>
+  <string name="hour_and_minutes">1 час и %3$d минут</string>
+  <string name="hours_and_minute">%2$d часов и 1 минут</string>
+  <string name="hours_and_minutes">%2$d часов и %3$d минут</string>
+  <string name="day">1 день</string>
+  <string name="days">%1$d дней</string>
+  <string name="hour">1 час</string>
+  <string name="hours">%2$d часов</string>
+  <string name="minute">1 минут</string>
+  <string name="minutes">%3$d минут</string>
+  <string name="less_than_one_minute">менее 1 минуты</string>
 
   <string name="abbrev_days_hours_and_minutes">%1$dd %2$dh %3$dm</string>
   <string name="abbrev_days_and_hours">%1$dd %2$dh</string>
@@ -512,31 +513,31 @@
   <!-- ======================================================================================= -->
 
   <!-- Phone number auth -->
-  <string name="fui_verify_phone_number_title" translation_description="Phone number entry form title">Enter your phone number</string>
-  <string name="fui_invalid_phone_number" translation_description="Inline error when phone number entered is invalid">Enter a valid phone number</string>
-  <string name="fui_enter_confirmation_code" translation_description="Phone number verification code entry form title">Enter the 6-digit code we sent to</string>
-  <string name="fui_resend_code_in" translation_description="Countdown timer text that the user needs to wait for before attempting to resend verification sms">Resend code in 0:%02d</string>
-  <string name="fui_verify_your_phone_title" translation_description="Button text to complete phone number verification">Verify your phone number</string>
-  <string name="fui_verifying" translation_description="Progress dialog text while phone number is being verified">Verifying…</string>
-  <string name="fui_incorrect_code_dialog_body" translation_description="Inline error when incorrect sms verification code is being used to verify">Wrong code. Try again.</string>
-  <string name="fui_error_too_many_attempts" translation_description="Error message when the phone number has been used too many times">This phone number has been used too many times</string>
-  <string name="fui_error_quota_exceeded" translation_description="Error message when the Firebase project's quota has been exceeded.">There was a problem verifying your phone number</string>
-  <string name="fui_error_session_expired" translation_description="Error message when SMS confirmation code has expired.">This code is no longer valid</string>
-  <string name="fui_sign_in_with_phone_number" translation_description="Label for phone number input form">Sign in with phone number</string>
-  <string name="fui_auto_verified" translation_description="Popup informing the user that their phone number was automatically verified">Phone number automatically verified</string>
-  <string name="fui_resend_code" translation_description="Link text to resend verification sms">Resend Code</string>
-  <string name="fui_verify_phone_number" translation_description="Button text to submit confirmation code and complete phone verification">Verify Phone Number</string>
-  <string name="fui_continue_phone_login" translation_description="Button text to submit phone number and send sms">Continue</string>
-  <string name="fui_sms_terms_of_service" translation_description="Fine print warning displayed below Verify Phone Number button">By tapping “%1$s”, an SMS may be sent. Message &amp; data rates may apply.</string>
-  <string name="fui_sms_terms_of_service_and_privacy_policy_extended" translation_description="Fine print warning displayed below Verify Phone Number button">By tapping “%1$s”, you are indicating that you accept our <xliff:g example="https://google.com/terms" id="tos" translation_description="">%2$s</xliff:g> and <xliff:g example="https://google.com/privacy" id="pp" translation_description="">%3$s</xliff:g>. An SMS may be sent. Message &amp; data rates may apply.</string>
+  <!--<string name="fui_verify_phone_number_title" translation_description="Phone number entry form title">Введите свой номер телефона</string>-->
+  <!--<string name="fui_invalid_phone_number" translation_description="Inline error when phone number entered is invalid">Введите действительный номер телефона</string>-->
+  <!--<string name="fui_enter_confirmation_code" translation_description="Phone number verification code entry form title">Введите 6-значный код, который мы отправили</string>-->
+  <!--<string name="fui_resend_code_in" translation_description="Countdown timer text that the user needs to wait for before attempting to resend verification sms">Повторить запрос 0:%02d</string>-->
+  <!--<string name="fui_verify_your_phone_title" translation_description="Button text to complete phone number verification">Проверьте свой номер телефона</string>-->
+  <!--<string name="fui_verifying" translation_description="Progress dialog text while phone number is being verified">проверка …</string>-->
+  <!--<string name="fui_incorrect_code_dialog_body" translation_description="Inline error when incorrect sms verification code is being used to verify">Неверный код. Попробуй еще раз</string>-->
+  <!--<string name="fui_error_too_many_attempts" translation_description="Error message when the phone number has been used too many times">Этот номер телефона использовался  много раз</string>-->
+  <!--<string name="fui_error_quota_exceeded" translation_description="Error message when the Firebase project's quota has been exceeded.">Не удалось проверить номер вашего телефона</string>-->
+  <!--<string name="fui_error_session_expired" translation_description="Error message when SMS confirmation code has expired.">Этот код больше не действителен</string>-->
+  <!--<string name="fui_sign_in_with_phone_number" translation_description="Label for phone number input form">Войти по номеру телефона</string>-->
+  <!--<string name="fui_auto_verified" translation_description="Popup informing the user that their phone number was automatically verified">Номер телефона автоматически подтвержден</string>-->
+  <!--<string name="fui_resend_code" translation_description="Link text to resend verification sms">Повторить запрос</string>-->
+  <!--<string name="fui_verify_phone_number" translation_description="Button text to submit confirmation code and complete phone verification">Проверить номер телефона</string>-->
+  <!--<string name="fui_continue_phone_login" translation_description="Button text to submit phone number and send sms">Продолжать</string>-->
+  <!--<string name="fui_sms_terms_of_service" translation_description="Fine print warning displayed below Verify Phone Number button">By tapping “%1$s”, an SMS may be sent. Message &amp; data rates may apply.</string>-->
+  <!--<string name="fui_sms_terms_of_service_and_privacy_policy_extended" translation_description="Fine print warning displayed below Verify Phone Number button">By tapping “%1$s”, you are indicating that you accept our <xliff:g example="https://google.com/terms" id="tos" translation_description="">%2$s</xliff:g> and <xliff:g example="https://google.com/privacy" id="pp" translation_description="">%3$s</xliff:g>. An SMS may be sent. Message &amp; data rates may apply.</string>-->
 
   <!-- Label for the  preference -->
-  <string name="pref_language_label">Language</string>
+  <string name="pref_language_label">Выберите язык</string>
 
   <!-- Label for preference -->
-  <string name="pref_language_label_en">English</string>
-  <string name="pref_language_label_ru">Russian</string>
-  <string name="pref_language_label_hy">Armenian</string>
+  <string name="pref_language_label_en">Английский</string>
+  <string name="pref_language_label_ru">Русский</string>
+  <string name="pref_language_label_hy">Армянский</string>
 
   <string name="pref_language_key" translatable="false">language</string>
 
